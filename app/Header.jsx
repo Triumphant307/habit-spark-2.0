@@ -1,12 +1,11 @@
-'use client'
+"use client";
 import Style from "@/app/Styles/Header.module.css";
 import ThemeToggle from "@/app/ThemeToggle";
-// import { NavLink } from "react-router-dom";
 import Link from "next/link";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 const Header = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -76,7 +75,9 @@ const Header = () => {
           <li className={Style.header__nav__item}>
             <Link
               href="/"
-              className={`${Style.header__nav__link} ${pathname === '/' ? Style.active: ''}`}
+              className={`${Style.header__nav__link} ${
+                pathname === "/" ? Style.active : ""
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               Home
@@ -85,7 +86,9 @@ const Header = () => {
           <li className={Style.header__nav__item}>
             <Link
               href="/suggestions"
-              className={`${Style.header__nav__link} ${pathname === '/suggestions' ? Style.active: ''}`}
+              className={`${Style.header__nav__link} ${
+                pathname === "/suggestions" ? Style.active : ""
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               Suggestions
@@ -94,7 +97,9 @@ const Header = () => {
           <li className={Style.header__nav__item}>
             <Link
               href="/completed"
-              className={`${Style.header__nav__link} ${pathname === '/completed' ? Style.active: ''}`}
+              className={`${Style.header__nav__link} ${
+                pathname === "/completed" ? Style.active : ""
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               Completed
@@ -103,7 +108,9 @@ const Header = () => {
           <li className={Style.header__nav__item}>
             <Link
               href="/tracker"
-              className={`${Style.header__nav__link} ${pathname === '/tracker' ? Style.active: ''}`}
+              className={`${Style.header__nav__link} ${
+                pathname === "/tracker" ? Style.active : ""
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               Tracker
