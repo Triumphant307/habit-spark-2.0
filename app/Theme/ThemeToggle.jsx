@@ -1,19 +1,33 @@
 "use client";
+
 import { FaSun, FaMoon } from "react-icons/fa";
 import style from "@/app/Styles/ThemeToggle.module.css";
 import useLocalStorage from "@/app/Hooks/useLocalStorage";
-import {  useEffect } from "react";
+import { useEffect, useState } from "react";
+
 const ThemeToggle = () => {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [isDark, setIsDark] = useLocalStorage("theme", prefersDark);
+  const [isDark, setIsDark] = useLocalStorage("theme", false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    document.body.classList.toggle("dark", isDark);
-  }, [isDark]);
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    setIsDark((prev) => (prev === undefined ? prefersDark : prev));
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      document.body.classList.toggle("dark", isDark);
+    }
+  }, [isDark, mounted]);
 
   const toggleTheme = () => {
     setIsDark((prev) => !prev);
   };
+
+  if (!mounted) return null; // prevent hydration mismatch
 
   return (
     <button className={style.themeToggle} onClick={toggleTheme}>
