@@ -2,8 +2,11 @@
 import Style from "@/app/Styles/Header.module.css";
 import ThemeToggle from "@/app/ThemeToggle";
 // import { NavLink } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from "react";
 const Header = () => {
+  const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -71,48 +74,40 @@ const Header = () => {
       >
         <ul className={Style.header__navlist}>
           <li className={Style.header__nav__item}>
-            {/* <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `${Style.header__nav__link} ${isActive ? Style.active : ""}`
-              }
+            <Link
+              href="/"
+              className={`${Style.header__nav__link} ${pathname === '/' ? Style.active: ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Home
-            </NavLink> */}
+            </Link>
           </li>
           <li className={Style.header__nav__item}>
-            {/* <NavLink
-              to="/suggestions"
-              className={({ isActive }) =>
-                `${Style.header__nav__link} ${isActive ? Style.active : ""}`
-              }
+            <Link
+              href="/suggestions"
+              className={`${Style.header__nav__link} ${pathname === '/suggestions' ? Style.active: ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Suggestions
-            </NavLink> */}
+            </Link>
           </li>
           <li className={Style.header__nav__item}>
-            {/* <NavLink
-              to="/completed"
-              className={({ isActive }) =>
-                `${Style.header__nav__link} ${isActive ? Style.active : ""}`
-              }
+            <Link
+              href="/completed"
+              className={`${Style.header__nav__link} ${pathname === '/completed' ? Style.active: ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Completed
-            </NavLink> */}
+            </Link>
           </li>
           <li className={Style.header__nav__item}>
-            {/* <NavLink
-              to="/tracker"
-              className={({ isActive }) =>
-                `${Style.header__nav__link} ${isActive ? Style.active : ""}`
-              }
+            <Link
+              href="/tracker"
+              className={`${Style.header__nav__link} ${pathname === '/tracker' ? Style.active: ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Tracker
-            </NavLink> */}
+            </Link>
           </li>
           <li
             className={Style.header__nav__item}

@@ -1,6 +1,8 @@
+"use client"
 import styles from "../Styles/Tracker/Tracker.module.css";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Link from "next/link";
 import TrackerCard from "@/app/Tracker/TrackerCard";
 import { useHabits } from "@/app/context/HabitContext";
 import Search from "@/app/suggestion/Search";
@@ -48,7 +50,7 @@ const Tracker = () => {
             {searchQuery ? (
               ""
             ) : (
-              <Link to="/suggestions" className={styles.goSuggestBtn}>
+              <Link href="/suggestions" className={styles.goSuggestBtn}>
                 Browse Suggestions
               </Link>
             )}
