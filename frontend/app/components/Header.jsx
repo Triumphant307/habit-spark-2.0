@@ -85,7 +85,7 @@ const Header = () => {
           </li>
           <li className={Style.header__nav__item}>
             <Link
-              href="/suggestions"
+              href="/suggestion"
               className={`${Style.header__nav__link} ${
                 pathname === "/suggestions" ? Style.active : ""
               }`}

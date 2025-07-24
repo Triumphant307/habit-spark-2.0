@@ -5,7 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import { useHabits } from "../../context/HabitContext";
 import styles from "../../Styles/Suggestion/suggestionCard.module.css";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const AnimatedTipCard = ({ tip, favorites, setFavorites, viewMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
