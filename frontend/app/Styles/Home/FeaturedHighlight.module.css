@@ -1,7 +1,10 @@
 .featuresSection {
-  padding: 2rem;
-  max-width: 800px;
-  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-height: 100%;
+  padding: 50px;
 }
 
 .featuresTitle {
@@ -9,7 +12,6 @@
   font-size: 2rem;
   color: var(--text-primary);
 }
-
 
 .heading {
   font-size: 1.8rem;
@@ -28,7 +30,8 @@
 .featureCard {
   background: var(--bg-card);
   border-radius: 10px;
-  padding: 1.25rem;
+  max-width: 550px;
+  padding: 1rem;
   margin: 1.25rem;
   text-align: center;
   box-shadow: var(--box-shadow);
@@ -52,9 +55,20 @@
   box-shadow: 0 1px 4px rgb(0, 0, 0);
 }
 
-.featureIcon {
+/* .featureIcon {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 0.75rem;
+} */
+
+.featureDescription {
+  color: var(--text-secondary);
+  font-size: 18px;
+  /* margin-bottom: 20px; */
 }
 
+.featureTitle {
+  font-weight: normal;
+  margin: 0;
+  font-size: calc(1.3rem + 0.6vw);
+}
