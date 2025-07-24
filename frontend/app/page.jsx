@@ -74,7 +74,7 @@ const Home = () => {
             suggestions, and celebrate your achievements.
           </p>
           <div className={styles.home__cta}>
-            <Link href="/suggestions" className={styles.home__button_link}>
+            <Link href="/suggestion" className={styles.home__button_link}>
               <button className={styles.home__button}>Get Started</button>
             </Link>
           </div>

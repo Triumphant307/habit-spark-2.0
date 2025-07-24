@@ -1,27 +1,34 @@
+"use client";
 import { useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import style from "../../Styles/Tracker/HabitDetails.module.css";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import HabitHistory from "./HabitHistory";
-import HabitAction from "./HabitAction";
-import HabitStat from "./HabitStat";
-import DeleteDialog from "./DeleteDialog";
-import EditDialog from "./EditDialog";
+import { useParams, useRouter } from "next/navigation";
+import HabitHistory from "../../components/Tracker/HabitHistory";
+import HabitAction from "../../components/Tracker/HabitAction";
+import HabitStat from "../../components/Tracker/HabitStat";
+import DeleteDialog from "../../components/Tracker/DeleteDialog";
+import EditDialog from "../../components/Tracker/EditDialog";
 import { useHabits } from "../../context/HabitContext";
 import { toast } from "react-toastify";
 import confetti from "canvas-confetti";
+import Link from "next/link";
 
 const HabitDetails = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const id = Number(params?.id);
+  const router = useRouter();
+
   const { habits, updateHabit, deleteHabit, resetHabit } = useHabits();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const navigate = useNavigate();
 
   const habit = habits.find((habit) => habit.id === Number(id));
 
   useEffect(() => {
-    if (habit && habit.streak === habit.target) {
+    if (!habit) return;
+
+    const alreadyCongratulated = habit.streak > habit.target;
+    if (habit.streak === habit.target && !alreadyCongratulated) {
       confetti({
         particleCount: 100,
         spread: 70,
@@ -29,7 +36,7 @@ const HabitDetails = () => {
       });
       toast.success("🎉 Congratulations! You've reached your target!");
     }
-  }, [habit?.streak]);
+  }, [habit]);
 
   if (!habit) {
     return <p className={style.noFound}>Habit not found</p>;
@@ -70,13 +77,13 @@ const HabitDetails = () => {
 
     deleteHabit(habit.id);
     toast.success("Habit deleted successfully! 🗑️");
-    navigate("/tracker");
+    router.push("/tracker");
   };
 
   return (
     <>
       <section className={style.details}>
-        <Link to="/tracker" className={style.backBtn} title="Back to Tracker">
+        <Link href="/tracker" className={style.backBtn} title="Back to Tracker">
           ← Back to Tracker
         </Link>
         <div className={style.card}>

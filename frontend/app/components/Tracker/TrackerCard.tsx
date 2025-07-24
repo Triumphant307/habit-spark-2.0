@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import ProgressTrack from "../ProgressTracker";
 import style from "../../Styles/Tracker/TrackerCard.module.css";
@@ -28,7 +28,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
             >
               <span className={style.emptyIcon}>📭</span>
               <p className={style.emptyText}>No habits added yet.</p>
-              <Link to="/suggestions" className={style.goSuggestBtn}>
+              <Link href="/suggestion" className={style.goSuggestBtn}>
                 Browse Suggestions
               </Link>
             </motion.div>
@@ -40,7 +40,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                 );
                 return (
                   <Link
-                    to={`/habit/${habit.id}`}
+                    href={`/habit/${habit.id}`}
                     className={style.cardLink}
                     key={habit.id || habit.title}
                     title="Click for more details"
