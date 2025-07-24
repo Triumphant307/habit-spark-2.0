@@ -1,3 +1,4 @@
+"use client";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
@@ -5,7 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import { useHabits } from "../../context/HabitContext";
 import styles from "../../Styles/Suggestion/suggestionCard.module.css";
 import { toast } from "react-toastify";
-// import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const AnimatedTipCard = ({ tip, favorites, setFavorites, viewMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
@@ -32,7 +33,7 @@ const AnimatedTipCard = ({ tip, favorites, setFavorites, viewMode }) => {
       <span>
         {`${tip.title.trim()} ${tip.icon} added! `}
         <Link
-          to="/tracker"
+          href="/tracker"
           style={{ color: "#4caf50", textDecoration: "underline" }}
         >
           Go to Tracker

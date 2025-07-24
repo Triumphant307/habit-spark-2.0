@@ -1,15 +1,14 @@
+"use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { getTipsByCategory } from "@/app/data/tips.json";
+import { getTipsByCategory } from "../../utils/getTipsByCatergory";
 import Search from "@/app/components/suggestion/Search.tsx";
 import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
-import AnimatedTipCard from "./AnimatedTipCard.jsx";
+import AnimatedTipCard from "./AnimatedTipCard";
 import { MdGridView, MdViewList } from "react-icons/md";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import { useState, useRef } from "react";
 
 const SuggestionCard = () => {
-
-
   const [filter, setFilter] = useLocalStorage("habitFilter", "All");
   const [favorites, setFavorites] = useLocalStorage("habitFavorites", []);
 
