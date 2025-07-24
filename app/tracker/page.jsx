@@ -3,7 +3,7 @@ import styles from "../Styles/Tracker/Tracker.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 // import { Link } from "react-router-dom";
 import Link from "next/link";
-import TrackerCard from "@/app/Tracker/TrackerCard";
+import TrackerCard from "../components/Tracker/TrackerCard";
 import { useHabits } from "@/app/context/HabitContext";
 import Search from "@/app/components/suggestion/Search";
 import { useState, useRef } from "react";

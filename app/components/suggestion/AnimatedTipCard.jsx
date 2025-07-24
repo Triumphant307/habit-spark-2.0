@@ -18,8 +18,8 @@ const AnimatedTipCard = ({ tip, favorites, setFavorites, viewMode }) => {
   useEffect(() => {
     const found = habits.some((h) => h.id === tip.id);
 
-    console.log("TIP", found);
-    console.log("habits", habits);
+    // console.log("TIP", found);
+    // console.log("habits", habits);
   }, [habits, tip.id]);
 
   const handleAdd = () => {

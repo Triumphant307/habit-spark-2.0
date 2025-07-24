@@ -87,7 +87,7 @@ const Header = () => {
             <Link
               href="/suggestion"
               className={`${Style.header__nav__link} ${
-                pathname === "/suggestions" ? Style.active : ""
+                pathname === "/suggestion" ? Style.active : ""
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
