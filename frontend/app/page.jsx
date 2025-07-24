@@ -1,9 +1,9 @@
 'use client'
 import styles from "@/app/Styles/Home/Home.module.css";
-import FeaturedHighlight from "@/app/Home/FeaturedHighlight";
-import QuotesMotivation from "@/app/Home/QuotesMotivation";
-import CompletedPreview from "@/app/Home/CompletedPreview";
-import LottieAnimation from "@/app/Home/LottieAniamtion";
+import FeaturedHighlight from "@/app/components/Home/FeaturedHighlight";
+import QuotesMotivation from "@/app/components/Home/QuotesMotivation";
+import CompletedPreview from "@/app/components/Home/CompletedPreview";
+import LottieAnimation from "@/app/components/Home/LottieAniamtion";
 import { FaBullseye, FaDumbbell, FaStar, FaFlag } from "react-icons/fa";
 // import { Link } from "react-router-dom";
 import Link from "next/link";

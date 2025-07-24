@@ -20,7 +20,8 @@
 }
 
 .home__button {
-  padding: 10px 20px;
+  padding: 15px 25px;
+  font-size: bold;
   outline: none;
   border: none;
   background-color: var(--btn-primary-bg);
@@ -35,6 +36,12 @@
 
 .typed {
   animation: blink 0.7s steps(1) infinite;
+}
+
+.home__description {
+  color: var(--text-secondary);
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
 @keyframes blink {

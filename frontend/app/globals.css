@@ -61,6 +61,10 @@ main{
   padding-top: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 .Toastify__toast {
   min-width: 100%;
   /* font-size: 1.2rem; */
