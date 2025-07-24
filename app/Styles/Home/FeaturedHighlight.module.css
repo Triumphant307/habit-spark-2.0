@@ -1,11 +1,15 @@
 .featuresSection {
-  padding: 2000rem;
-  background-color: var(--bg-card);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
   max-width: 800px;
   margin: 2rem auto;
 }
+
+.featuresTitle {
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
 
 .heading {
   font-size: 1.8rem;
@@ -48,14 +52,9 @@
   box-shadow: 0 1px 4px rgb(0, 0, 0);
 }
 
-.icon {
+.featureIcon {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 0.75rem;
 }
 
-.featuresTitle {
-  font-weight: 600;
-  font-size: 2rem;
-  color: var(--text-primary);
-}

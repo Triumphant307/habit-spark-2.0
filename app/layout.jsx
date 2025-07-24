@@ -2,9 +2,9 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Header from "@/app/Header";
-import Footer from "@/app/Footer";
-import BackToTop from "@/app/BackToTop";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
+import BackToTop from "@/app/components/BackToTop";
 
 import "./globals.css";
 

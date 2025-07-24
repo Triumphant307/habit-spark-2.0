@@ -1,4 +1,5 @@
 import styles from "@/app/Styles/Footer.module.css";
+import Link from "next/link";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
@@ -8,16 +9,16 @@ const Footer = () => {
 
       <ul className={styles.navLinks}>
         <li>
-          {/* <NavLink to="/">Home</NavLink> */}
+          <Link href="/">Home</Link>
         </li>
         <li>
-          {/* <NavLink to="/suggestions">Suggestions</NavLink> */}
+          <Link href="/suggestions">Suggestions</Link>
         </li>
         <li>
-          {/* <NavLink to="/completed">Completed</NavLink> */}
+          <Link href="/completed">Completed</Link>
         </li>
         <li>
-          {/* <NavLink to="/tracker">Tracker</NavLink> */}
+          <Link href="/tracker">Tracker</Link>
         </li>
       </ul>
 

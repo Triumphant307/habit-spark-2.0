@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import styles from "../Styles/Tracker/Tracker.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 // import { Link } from "react-router-dom";
 import Link from "next/link";
 import TrackerCard from "@/app/Tracker/TrackerCard";
 import { useHabits } from "@/app/context/HabitContext";
-import Search from "@/app/suggestion/Search";
+import Search from "@/app/components/suggestion/Search";
 import { useState, useRef } from "react";
 
 const Tracker = () => {
@@ -17,7 +17,7 @@ const Tracker = () => {
     habit.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const resultRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef < HTMLDivElement > null;
   return (
     <section className={styles.tracker}>
       <div className="tracker-page">

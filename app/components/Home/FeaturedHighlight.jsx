@@ -1,9 +1,10 @@
+"use client";
 import styles from "@/app/Styles/Home/FeaturedHighlight.module.css";
 import { useEffect } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import Link from "next/link";
-// import { Link } from "react-router-dom";
+
 const FeaturedHighlight = () => {
   // This component highlights the features of the HabitSpark app
   // Array of features to be displayed
@@ -41,11 +42,11 @@ const FeaturedHighlight = () => {
   // Render the features section
   // Each feature is displayed as a card with an icon, title, and description
   return (
-    <section className={styles.festuresSection}>
+    <section className={styles.featuresSection}>
       <h2 className={styles.featuresTitle}>Features</h2>
       <div className={styles.featuresContainer}>
-        {/* {feature.map((item, index) => (
-          <Link key={item.id} to={item.href} className={styles.featureLink}>
+        {feature.map((item, index) => (
+          <Link key={item.id} href={item.href} className={styles.featureLink}>
             <div
               key={index}
               className={styles.featureCard}
@@ -57,7 +58,7 @@ const FeaturedHighlight = () => {
               <p className={styles.featureDescription}>{item.description}</p>
             </div>
           </Link>
-        ))} */}
+        ))}
       </div>
     </section>
   );
