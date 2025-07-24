@@ -1,11 +1,11 @@
-'use client'
+"use client";
 import { useEffect, useRef, useState } from "react";
 import styles from "../../Styles/Suggestion/SuggestionForm.module.css";
 import { useHabits } from "../../context/HabitContext";
 import { toast } from "react-toastify";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-// import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const SuggestionForm = () => {
   const { addHabit } = useHabits();
@@ -65,7 +65,7 @@ const SuggestionForm = () => {
       <span>
         {`${title.trim()} ${icon} added to your habits!`}
         <Link
-          to="/tracker"
+          href="/tracker"
           style={{ color: "#4caf50", textDecoration: "underline" }}
         >
           Go to Tracker
@@ -82,7 +82,7 @@ const SuggestionForm = () => {
   };
 
   return (
-    <form onSubmit={handleAddHabit} style={styles.form}>
+    <form onSubmit={handleAddHabit} className={styles.form}>
       <div className={styles.floatingInput}>
         <input
           id="habit-title"

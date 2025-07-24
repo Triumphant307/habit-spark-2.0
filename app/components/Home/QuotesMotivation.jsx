@@ -1,3 +1,4 @@
+'use Client'
 import { useEffect, useState } from "react";
 import Aos from "aos";
 import styles from "@/app/Styles/Home/QuotesMotivation.module.css";
