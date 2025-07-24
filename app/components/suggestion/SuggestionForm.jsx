@@ -1,10 +1,11 @@
+'use client'
 import { useEffect, useRef, useState } from "react";
 import styles from "../../Styles/Suggestion/SuggestionForm.module.css";
 import { useHabits } from "../../context/HabitContext";
 import { toast } from "react-toastify";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const SuggestionForm = () => {
   const { addHabit } = useHabits();
@@ -81,7 +82,7 @@ const SuggestionForm = () => {
   };
 
   return (
-    <form onSubmit={handleAddHabit}>
+    <form onSubmit={handleAddHabit} style={styles.form}>
       <div className={styles.floatingInput}>
         <input
           id="habit-title"

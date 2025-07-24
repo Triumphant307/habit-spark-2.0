@@ -1,3 +1,4 @@
+"use client";
 import styles from "@/app/Styles/Home/CompletedPreview.module.css";
 import Aos from "aos";
 import { useEffect } from "react";
@@ -25,7 +26,7 @@ const CompletedPreview = () => {
               <div className={styles.icon}>{habit.icon}</div>
               <h3 className={styles.habitTitle}>{habit.title}</h3>
               <p className={styles.streak}>{habit.streak} days</p>
-              <ProgressTrack radius={40} stroke={5} progress={progress} />
+              <ProgressTrack radius={65} stroke={8} progress={progress} />
             </div>
           );
         })}

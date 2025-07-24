@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { getTipsByCategory } from "../../utils/getTipsByCatergory";
-import Search from "./Search.jsx";
-import styles from "../../Styles/Suggestion/suggestionCard.module.css";
+import { getTipsByCategory } from "@/app/data/tips.json";
+import Search from "@/app/components/suggestion/Search.tsx";
+import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
 import AnimatedTipCard from "./AnimatedTipCard.jsx";
 import { MdGridView, MdViewList } from "react-icons/md";
 import useLocalStorage from "../../Hooks/useLocalStorage";
