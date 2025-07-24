@@ -2,6 +2,7 @@ import styles from "@/app/Styles/Home/FeaturedHighlight.module.css";
 import { useEffect } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Link from "next/link";
 // import { Link } from "react-router-dom";
 const FeaturedHighlight = () => {
   // This component highlights the features of the HabitSpark app
@@ -13,7 +14,7 @@ const FeaturedHighlight = () => {
       title: "Track Daily Progress",
       description:
         "Easily monitor your daily habits and see how you're improving over time.",
-      link: "/tracker",
+      href: "/tracker",
     },
     {
       id: 2,
@@ -21,7 +22,7 @@ const FeaturedHighlight = () => {
       title: "Get Personalized Suggestions",
       description:
         "Receive tailored recommendations to help you build better habits.",
-      link: "/suggestions",
+      href: "/suggestions",
     },
     {
       id: 3,
@@ -29,7 +30,7 @@ const FeaturedHighlight = () => {
       title: "View Your Progress",
       description:
         "Visualize your achievements with insightful graphs and statistics.",
-      link: "/completed",
+      href: "/completed",
     },
   ];
   // Initialize AOS (Animate On Scroll) for animations
@@ -44,7 +45,7 @@ const FeaturedHighlight = () => {
       <h2 className={styles.featuresTitle}>Features</h2>
       <div className={styles.featuresContainer}>
         {/* {feature.map((item, index) => (
-          <Link key={item.id} to={item.link} className={styles.featureLink}>
+          <Link key={item.id} to={item.href} className={styles.featureLink}>
             <div
               key={index}
               className={styles.featureCard}

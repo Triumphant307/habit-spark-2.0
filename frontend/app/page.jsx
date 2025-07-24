@@ -6,6 +6,7 @@ import CompletedPreview from "@/app/Home/CompletedPreview";
 import LottieAnimation from "@/app/Home/LottieAniamtion";
 import { FaBullseye, FaDumbbell, FaStar, FaFlag } from "react-icons/fa";
 // import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Home = () => {
@@ -73,9 +74,9 @@ const Home = () => {
             suggestions, and celebrate your achievements.
           </p>
           <div className={styles.home__cta}>
-            {/* <Link to="/suggestions" className={styles.home__button_link}>
+            <Link href="/suggestions" className={styles.home__button_link}>
               <button className={styles.home__button}>Get Started</button>
-            </Link> */}
+            </Link>
           </div>
         </div>
         <FeaturedHighlight />

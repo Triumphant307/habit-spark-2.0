@@ -1,3 +1,4 @@
+'use client'
 import styles from "../Styles/Suggestion/Suggestion.module.css";
 import SuggestionCard from "../components/suggestion/SuggestionCard";
 import SuggestionForm from "../components/suggestion/SuggestionForm";
