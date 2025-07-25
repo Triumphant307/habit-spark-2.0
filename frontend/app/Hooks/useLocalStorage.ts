@@ -1,28 +1,35 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 
 const useLocalStorage = <T>(
   key: string,
   initialValue: T
 ): [T, React.Dispatch<React.SetStateAction<T>>] => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const value = localStorage.getItem(key);
-      return value ? JSON.parse(value) : initialValue;
-    } catch (err) {
-      console.error("Error reading from from localstorage", err);
-      return initialValue;
-    }
-  });
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     try {
-      localStorage.setItem(key, JSON.stringify(storedValue));
-    } catch (err) {
-      console.error("Error saving to localStorage", err);
+      const item = window.localStorage.getItem(key);
+      if (item !== null) {
+        setStoredValue(JSON.parse(item));
+      }
+    } catch (error) {
+      console.error("Error reading from localStorage", error);
     }
-  }, [key, storedValue]);
+  }, [key]);
+
+  useEffect(() => {
+    if (!isClient) return;
+    try {
+      window.localStorage.setItem(key, JSON.stringify(storedValue));
+    } catch (error) {
+      console.error("Error writing to localStorage", error);
+    }
+  }, [key, storedValue, isClient]);
 
   return [storedValue, setStoredValue];
 };
+
 export default useLocalStorage;

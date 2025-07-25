@@ -16,12 +16,15 @@ const Search: React.FC<SearchProps> = ({
   const handleClear = () => setSearchQuery("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      inputRef?.current?.blur();
-      resultRef?.current?.scrollIntoView({ behavior: "smooth" });
+ const handleKeyDown = (e: React.KeyboardEvent) => {
+  if (e.key === "Enter") {
+    inputRef?.current?.blur();
+
+    if (typeof window !== "undefined" && resultRef?.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }
+};
 
   return (
     <div className={style.searchWrapper}>
