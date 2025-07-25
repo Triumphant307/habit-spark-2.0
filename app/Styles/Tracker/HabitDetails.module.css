@@ -1,9 +1,8 @@
-.details {
+/* .details {
   max-width: 500px;
   margin: auto;
   text-align: center;
   padding: 2rem;
-  margin-top: -100px;
 }
 
 .backBtn {
@@ -44,6 +43,7 @@
   font-size: 1.8rem;
   font-weight: bold;
   margin: 1rem 0;
+  color: var(--text-primary);
 }
 
 .icon {
@@ -84,6 +84,11 @@
   border-radius: 8px;
 }
 
+.stats p {
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
 @media (max-width: 600px) {
   .details {
     padding: 1rem;
@@ -96,5 +101,148 @@
 
   .actions button {
     padding: 0.4rem 0.8rem;
+  }
+} */
+
+
+.details {
+  max-width: 540px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease-in-out;
+}
+
+.backBtn {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.backBtn:hover {
+  color: var(--btn-primary-bg);
+}
+
+.card {
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: var(--bg-card);
+  box-shadow: var(--box-shadow);
+}
+
+.deleteActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.deleteBtn {
+  background-color: var(--status-error);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+}
+
+.deleteBtn:hover {
+  background-color: var(--status-error-hover);
+  transform: scale(1.03);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1.5rem 0 1rem;
+  color: var(--text-primary);
+}
+
+.icon {
+  font-size: 2.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.actions {
+  margin-top: 1.5rem;
+}
+
+.actions button {
+  margin: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--btn-primary-bg);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actions button:hover {
+  background-color: var(--btn-primary-hover-bg);
+  transform: scale(1.03);
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+}
+
+.historyTitle {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.highlight {
+  background-color: #d1fae5;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+  display: inline-block;
+}
+
+.stats p {
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .details {
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .actions button {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .deleteActions {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }

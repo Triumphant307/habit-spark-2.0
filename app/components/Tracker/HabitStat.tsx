@@ -1,10 +1,5 @@
 import ProgressTrack from "../ProgressTracker";
 
-// interface styleProps {
-//   stats?: string;
-//   style: Record<string, string>;
-// }
-
 interface Habit {
   target: number;
   streak: number;
