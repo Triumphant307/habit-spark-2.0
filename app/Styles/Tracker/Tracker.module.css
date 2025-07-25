@@ -1,39 +1,69 @@
 .tracker {
-  margin-top: -100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-height: 100%;
+  padding: 50px;
 }
 
 .title {
   font-size: 2rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .noResults {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 2.5rem 1.5rem;
   color: var(--text-primary);
   border-radius: 1rem;
   background-color: var(--bg-card);
-  max-width: 400px;
-  margin: 2rem auto;
+  max-width: 500px;
+  margin: 3rem auto;
   box-shadow: var(--box-shadow);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.noResults:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 .goSuggestBtn {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.25rem;
   background-color: var(--btn-primary-bg);
   color: #fff;
-  border-radius: 6px;
+  border-radius: 8px;
   text-decoration: none;
-  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.goSuggestBtn:hover {
+  background-color: var(
+    --btn-primary-bg-hover,
+    #4f46e5
+  ); /* Fallback if var not set */
+  transform: scale(1.03);
 }
 
 @media (max-width: 600px) {
-  .tracker {
-    margin-top: -50px;
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .noResults {
+    padding: 2rem 1rem;
+    margin: 2rem 1rem;
+  }
+
+  .goSuggestBtn {
+    width: 100%;
+    text-align: center;
   }
 }
