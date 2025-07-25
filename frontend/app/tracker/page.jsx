@@ -52,7 +52,7 @@ const resultRef = useRef(null);
             {searchQuery ? (
               ""
             ) : (
-              <Link href="/suggestions" className={styles.goSuggestBtn}>
+              <Link href="/suggestion" className={styles.goSuggestBtn}>
                 Browse Suggestions
               </Link>
             )}
