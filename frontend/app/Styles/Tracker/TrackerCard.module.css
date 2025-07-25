@@ -47,6 +47,14 @@
   color: inherit;
 }
 
+.habitTarget {
+  color: var(--text-primary);
+}
+
+.habitStreak {
+  color: var(--text-primary);
+}
+
 .emptyState {
   text-align: center;
   padding: 2rem;
