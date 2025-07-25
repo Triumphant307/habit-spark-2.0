@@ -17,7 +17,9 @@ const Tracker = () => {
     habit.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const resultRef = useRef < HTMLDivElement > null;
+const resultRef = useRef(null);
+
+
   return (
     <section className={styles.tracker}>
       <div className="tracker-page">
