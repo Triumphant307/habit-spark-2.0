@@ -24,7 +24,7 @@ const FeaturedHighlight = () => {
       title: "Get Personalized Suggestions",
       description:
         "Receive tailored recommendations to help you build better habits.",
-      href: "/suggestions",
+      href: "/suggestion",
     },
     {
       id: 3,
