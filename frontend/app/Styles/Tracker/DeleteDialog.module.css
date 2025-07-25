@@ -1,4 +1,8 @@
 .dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* This centers it */
   padding: 20px;
   border: none;
   border-radius: 10px;
@@ -6,6 +10,15 @@
   width: 90%;
   background-color: var(--bg-card);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.dialog h2 {
+  color: var(--text-primary);
+  margin: 10px;
+}
+
+.dialog p {
+  color: var(--text-secondary);
 }
 
 .dialog::backdrop {
@@ -43,4 +56,6 @@
   cursor: pointer;
   color: white;
   transition: background-color 0.3s ease;
-}
+} 
+
+
