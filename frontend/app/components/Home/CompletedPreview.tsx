@@ -5,8 +5,16 @@ import Aos from "aos";
 import { useEffect } from "react";
 import ProgressTrack from "../ProgressTracker";
 
-const CompletedPreview = () => {
-  const habits = [
+
+interface Habit {
+  icon: string;
+  title: string;
+  streak: number;
+  target: number;
+}
+
+const CompletedPreview: React.FC = () => {
+  const habits : Habit[] = [
     { icon: "💧", title: "Drink Water", streak: 30, target: 30 },
     { icon: "📚", title: "Read Book", streak: 3, target: 30 },
     { icon: "🏃", title: "Exercise", streak: 5, target: 30 },
