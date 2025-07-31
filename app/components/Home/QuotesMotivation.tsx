@@ -1,9 +1,15 @@
-'use Client'
-import { useEffect, useState } from "react";
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
 import Aos from "aos";
 import styles from "@/app/Styles/Home/QuotesMotivation.module.css";
 
-const fallBackQuote = [
+type Quote = {
+  q: string;
+  a: string;
+};
+
+const fallBackQuote: Quote[] = [
   { q: "Believe you can and you're halfway there.", a: "Theodore Roosevelt" },
   {
     q: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
@@ -20,11 +26,11 @@ const fallBackQuote = [
 ];
 
 const QuotesMotivation = () => {
-  const [quote, setQuote] = useState(fallBackQuote[0]);
-  const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [quote, setQuote] = useState<Quote>(fallBackQuote[0]);
+  const [index, setIndex] = useState<number>(0);
+  const [visible, setVisible] = useState<boolean>(true);
 
-  const fetchQuote = async () => {
+  const fetchQuote = useCallback(async (): Promise<void> => {
     try {
       const response = await fetch(
         "https://corsproxy.io/?https://zenquotes.io/api/random"
@@ -40,7 +46,7 @@ const QuotesMotivation = () => {
       console.error("Error fetching quote:", error);
       setQuote(fallBackQuote[index]);
     }
-  };
+  }, [index]);
 
   useEffect(() => {
     fetchQuote();
@@ -48,7 +54,7 @@ const QuotesMotivation = () => {
       setIndex((prevIndex) => prevIndex + 1);
     }, 10000);
     return () => clearInterval(interval);
-  }, [index]);
+  }, [fetchQuote]);
 
   useEffect(() => {
     setVisible(false);
@@ -56,13 +62,12 @@ const QuotesMotivation = () => {
       fetchQuote();
       setVisible(true);
     }, 500);
-
     return () => clearTimeout(timer);
-  }, [index]);
+  }, [fetchQuote]);
 
   useEffect(() => {
-    Aos.refresh({ duration: 1000 });
-  }, [quote]);
+    Aos.init({ duration: 1000 });
+  }, []);
 
   return (
     <section
@@ -75,7 +80,8 @@ const QuotesMotivation = () => {
         className={styles.quotes}
         style={{ opacity: visible ? 1 : 0 }}
       >
-        "{quote.q}"<footer className={styles.author}>- {quote.a}</footer>
+        {quote.q}
+        <footer className={styles.author}>- {quote.a}</footer>
       </blockquote>
     </section>
   );
