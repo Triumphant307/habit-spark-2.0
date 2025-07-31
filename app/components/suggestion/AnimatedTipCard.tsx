@@ -1,6 +1,6 @@
 "use client";
+
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { useHabits } from "../../context/HabitContext";
@@ -8,19 +8,30 @@ import styles from "../../Styles/Suggestion/suggestionCard.module.css";
 import { toast } from "react-toastify";
 import Link from "next/link";
 
-const AnimatedTipCard = ({ tip, favorites, setFavorites, viewMode }) => {
+interface tip {
+  id: number;
+  icon: string;
+  title: string;
+}
+
+interface AnimatedTipCardProps {
+  tip: tip;
+  favorites: number[];
+  setFavorites: React.Dispatch<React.SetStateAction<number[]>>;
+  viewMode: "list" | "grid";
+}
+
+const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
+  tip,
+  favorites,
+  setFavorites,
+  viewMode,
+}) => {
   const { ref, inView } = useInView({ triggerOnce: true });
 
   const { habits, addHabit, deleteHabit } = useHabits();
 
   const alreadyAdded = habits.some((h) => h.id === tip.id);
-
-  useEffect(() => {
-    const found = habits.some((h) => h.id === tip.id);
-
-    // console.log("TIP", found);
-    // console.log("habits", habits);
-  }, [habits, tip.id]);
 
   const handleAdd = () => {
     const newHabit = { ...tip, target: 30, streak: 0 };
@@ -57,7 +68,7 @@ const AnimatedTipCard = ({ tip, favorites, setFavorites, viewMode }) => {
     );
   };
 
-  const handleUndo = (id) => {
+  const handleUndo = (id: number) => {
     deleteHabit(id);
 
     toast.info(`${tip.title.trim()} ${tip.icon} removed!`);
@@ -71,7 +82,8 @@ const AnimatedTipCard = ({ tip, favorites, setFavorites, viewMode }) => {
     toast[isFavorite ? "info" : "success"](
       `${tip.title} ${tip.icon} ${
         isFavorite ? "removed from" : "added to"
-      } Favorites!`
+      } Favorites!`,
+      { toastId: `fav-${tip.id}` }
     );
   };
 
