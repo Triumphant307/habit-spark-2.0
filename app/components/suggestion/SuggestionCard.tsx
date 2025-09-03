@@ -1,19 +1,34 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { getTipsByCategory } from "../../utils/getTipsByCatergory";
-import Search from "@/app/components/suggestion/Search.tsx";
+import Search from "@/app/components/suggestion/Search";
 import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
 import AnimatedTipCard from "./AnimatedTipCard";
 import { MdGridView, MdViewList } from "react-icons/md";
 import useLocalStorage from "../../Hooks/useLocalStorage";
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 
-const SuggestionCard = () => {
-  const [filter, setFilter] = useLocalStorage("habitFilter", "All");
-  const [favorites, setFavorites] = useLocalStorage("habitFavorites", []);
+export interface Tip {
+  id?: string | number;
+  title: string;
+  category?: string; // matches data/tips.json
+  icon?: string;
+  history?: string[];
+  [key: string]: unknown;
+}
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useLocalStorage("viewMode", "grid");
+const SuggestionCard: React.FC = () => {
+  const [filter, setFilter] = useLocalStorage<string>("habitFilter", "All");
+  const [favorites, setFavorites] = useLocalStorage<Tip[]>(
+    "habitFavorites",
+    []
+  );
+
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [viewMode, setViewMode] = useLocalStorage<"grid" | "list">(
+    "viewMode",
+    "grid"
+  );
 
   const resultRef = useRef(null);
 
