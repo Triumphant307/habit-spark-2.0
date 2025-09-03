@@ -80,7 +80,7 @@ const QuotesMotivation = () => {
         className={styles.quotes}
         style={{ opacity: visible ? 1 : 0 }}
       >
-        {quote.q}
+        {`"${quote.q}"`}
         <footer className={styles.author}>- {quote.a}</footer>
       </blockquote>
     </section>
