@@ -5,7 +5,6 @@ import QuotesMotivation from "@/app/components/Home/QuotesMotivation";
 import CompletedPreview from "@/app/components/Home/CompletedPreview";
 import LottieAnimation from "@/app/components/Home/LottieAniamtion";
 import { FaBullseye, FaDumbbell, FaStar, FaFlag } from "react-icons/fa";
-// import { Link } from "react-router-dom";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
