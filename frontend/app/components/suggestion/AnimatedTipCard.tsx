@@ -1,6 +1,7 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
+import { Tip } from "./SuggestionCard";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { useHabits } from "../../context/HabitContext";
@@ -8,16 +9,10 @@ import styles from "../../Styles/Suggestion/suggestionCard.module.css";
 import { toast } from "react-toastify";
 import Link from "next/link";
 
-interface tip {
-  id: number;
-  icon: string;
-  title: string;
-}
-
 interface AnimatedTipCardProps {
-  tip: tip;
-  favorites: number[];
-  setFavorites: React.Dispatch<React.SetStateAction<number[]>>;
+  tip: Tip;
+  favorites: Tip[];
+  setFavorites: React.Dispatch<React.SetStateAction<Tip[]>>;
   viewMode: "list" | "grid";
 }
 
@@ -31,10 +26,32 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
 
   const { habits, addHabit, deleteHabit } = useHabits();
 
-  const alreadyAdded = habits.some((h) => h.id === tip.id);
+  // tip.id comes from the shared `Tip` type and may be string | number | undefined.
+  // Coerce/normalize to a number when comparing with Habit.id (which is a number).
+  const tipIdRaw = tip.id;
+  const tipId =
+    tipIdRaw == null
+      ? undefined
+      : typeof tipIdRaw === "number"
+      ? tipIdRaw
+      : parseInt(String(tipIdRaw), 10);
+
+  const alreadyAdded = tipId != null && habits.some((h) => h.id === tipId);
+
+  const displayIcon =
+    typeof tip.icon === "string" ? tip.icon : String(tip.icon ?? "");
+  const displayTitle =
+    typeof tip.title === "string" ? tip.title : String(tip.title ?? "");
 
   const handleAdd = () => {
-    const newHabit = { ...tip, target: 30, streak: 0 };
+    const newHabit = {
+      id: tipId ?? Date.now(),
+      title: displayTitle,
+      icon: displayIcon,
+      target: 30,
+      streak: 0,
+      history: (tip.history as string[]) ?? [],
+    };
 
     if (!habits.some((h) => h.id === newHabit.id)) {
       addHabit(newHabit);
@@ -42,7 +59,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
 
     toast.success(
       <span>
-        {`${tip.title.trim()} ${tip.icon} added! `}
+        {`${displayTitle.trim()} ${displayIcon} added! `}
         <Link
           href="/tracker"
           style={{ color: "#4caf50", textDecoration: "underline" }}
@@ -68,19 +85,22 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
     );
   };
 
-  const handleUndo = (id: number) => {
-    deleteHabit(id);
+  const handleUndo = (id?: string | number) => {
+    if (id == null) return;
+    const numId = typeof id === "number" ? id : parseInt(String(id), 10);
+    if (Number.isNaN(numId)) return;
+    deleteHabit(numId);
 
-    toast.info(`${tip.title.trim()} ${tip.icon} removed!`);
+    toast.info(`${displayTitle.trim()} ${displayIcon} removed!`);
   };
 
   const toggleFavorite = () => {
-    const isFavorite = favorites.includes(tip.id);
+    const isFavorite = favorites.some((fav) => fav.id === tip.id);
     setFavorites((prev) =>
-      isFavorite ? prev.filter((id) => id !== tip.id) : [...prev, tip.id]
+      isFavorite ? prev.filter((fav) => fav.id !== tip.id) : [...prev, tip]
     );
     toast[isFavorite ? "info" : "success"](
-      `${tip.title} ${tip.icon} ${
+      `${displayTitle} ${displayIcon} ${
         isFavorite ? "removed from" : "added to"
       } Favorites!`,
       { toastId: `fav-${tip.id}` }
@@ -102,14 +122,16 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
       <button className={styles.btnHeart} onClick={toggleFavorite}>
-        <FaHeart color={favorites.includes(tip.id) ? "red" : "gray"} />
+        <FaHeart
+          color={favorites.some((fav) => fav.id === tip.id) ? "red" : "gray"}
+        />
       </button>
 
       <span className={styles.icon} style={{ fontSize: "2rem" }}>
-        {tip.icon}
+        {displayIcon}
       </span>
 
-      <h3>{tip.title}</h3>
+      <h3>{displayTitle}</h3>
 
       <button
         className={styles.btn}
