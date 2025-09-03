@@ -1,11 +1,16 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../../Styles/Suggestion/SuggestionForm.module.css";
 import { useHabits } from "../../context/HabitContext";
 import { toast } from "react-toastify";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import Link from "next/link";
+
+interface Emoji {
+  native: string;
+  [key: string]: unknown;
+}
 
 const SuggestionForm = () => {
   const { addHabit } = useHabits();
@@ -15,11 +20,14 @@ const SuggestionForm = () => {
   const [target, setTarget] = useState(30);
   const [error, setError] = useState("");
   const [showPicker, setShowPicker] = useState(false);
-  const pickerRef = useRef(null);
+  const pickerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (pickerRef.current && !pickerRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        pickerRef.current &&
+        !pickerRef.current.contains(event.target as Node)
+      ) {
         setShowPicker(false);
       }
     };
@@ -30,12 +38,12 @@ const SuggestionForm = () => {
     };
   }, [showPicker]);
 
-  const handleEmojiSelect = (emoji) => {
+  const handleEmojiSelect = (emoji: Emoji) => {
     setIcon(emoji.native); // Set the selected emoji as the icon
     setShowPicker(false); // Optionally close the picker
   };
 
-  const handleAddHabit = (e) => {
+  const handleAddHabit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Validate input fields
     // Ensure title, icon, and target are not empty or invalid
@@ -123,12 +131,7 @@ const SuggestionForm = () => {
         <label htmlFor="">Habit Target</label>
       </div>
 
-      <button
-        className={styles.btn}
-        type="submit"
-        onClick={handleAddHabit}
-        title="Add new Habits"
-      >
+      <button className={styles.btn} type="submit" title="Add new Habits">
         Add New Habit
       </button>
       {error && <div className={styles.error}>{error}</div>}
