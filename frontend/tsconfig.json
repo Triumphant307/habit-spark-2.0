@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/tracker/page.jsx",
+    "app/tracker/page.tsx",
     "app/layout.jsx",
     "app/page.jsx"
   ],
