@@ -2,7 +2,7 @@ import styles from "@/app/Styles/Footer.module.css";
 import Link from "next/link";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 
-const Footer = () => {
+const Footer : React.FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.brand}>HabitSpark © 2025</div>
