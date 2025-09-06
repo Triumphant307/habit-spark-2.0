@@ -3,8 +3,8 @@ import Style from "@/app/Styles/Header.module.css";
 import ThemeToggle from "@/app/Theme/ThemeToggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
-const Header = () => {
+import React, { useState, useEffect, useRef } from "react";
+const Header : React.FC = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,8 +21,8 @@ const Header = () => {
     };
   }, []);
 
-  const navRef = useRef(null);
-  const hamburgerRef = useRef(null);
+  const navRef = useRef<HTMLDivElement | null>(null);
+  const hamburgerRef = useRef<HTMLButtonElement | null >(null);
 
   // Function to toggle the menu open/close state
   const toggleMenu = () => {
@@ -31,13 +31,13 @@ const Header = () => {
 
   // Close the menu when clicking outside of it
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event : MouseEvent) => {
       if (
         isMenuOpen &&
         navRef.current &&
-        !navRef.current.contains(event.target) &&
+        !navRef.current.contains(event.target as Node) &&
         hamburgerRef.current &&
-        !hamburgerRef.current.contains(event.target)
+        !hamburgerRef.current.contains(event.target as Node)
       ) {
         setIsMenuOpen(false);
       }
