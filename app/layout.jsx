@@ -25,6 +25,8 @@ export default function RootLayout({ children }) {
           speed={500}
           easing="ease"
           shadow={true}
+          crawl= {true}
+          crawlSpeed={200}
         />
         <HabitProvider>
           <Header />
