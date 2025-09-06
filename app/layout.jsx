@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
           showSpinner={false}
           speed={500}
           easing="ease"
+          shadow={true}
         />
         <HabitProvider>
           <Header />
