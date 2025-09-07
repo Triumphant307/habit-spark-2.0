@@ -30,11 +30,21 @@ const HabitDetails = () => {
     const alreadyCongratulated = habit.streak > habit.target;
     if (habit.streak === habit.target && !alreadyCongratulated) {
       confetti({
-        particleCount: 100,
-        spread: 70,
+        particleCount: 200,
+        spread: 100,
         origin: { y: 0.6 },
       });
       toast.success("🎉 Congratulations! You've reached your target!");
+    }
+
+    const milestoneStreak = [7, 30, 100];
+    if (milestoneStreak.includes(habit.streak) && !alreadyCongratulated) {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 },
+      });
+      toast.success(`🎉 Amazing! You've hit a ${habit.streak}-day streak!`);
     }
   }, [habit]);
 
