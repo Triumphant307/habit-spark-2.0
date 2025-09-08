@@ -4,214 +4,215 @@
     "icon": "💧",
     "title": "Drink water regularly",
     "category": "Health",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 2,
     "icon": "🏃",
     "title": "Exercise daily",
     "category": "Health",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 3,
     "icon": "🛌",
     "title": "Get enough sleep",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 4,
     "icon": "🥗",
     "title": "Eat healthy meals",
     "category": "Health",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 5,
     "icon": "🧘",
     "title": "Practice mindfulness",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 6,
     "icon": "📝",
     "title": "Journal your thoughts",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 7,
     "icon": "🌱",
     "title": "Learn something new",
     "category": "Learning",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 8,
     "icon": "🚶",
     "title": "Take daily walks",
     "category": "Health",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 9,
     "icon": "🧹",
     "title": "Declutter your space",
     "category": "Productivity",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 10,
     "icon": "🎨",
     "title": "Engage in a hobby",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 11,
     "icon": "🧹",
     "title": "Clean your room weekly",
     "category": "Productivity",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 12,
     "icon": "🧘",
     "title": "Practice deep breathing",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 13,
     "icon": "📝",
     "title": "Write down 3 goals",
     "category": "Productivity",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 14,
     "icon": "🌙",
     "title": "Sleep before 11 PM",
     "category": "Health",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 15,
     "icon": "🔌",
     "title": "Take screen breaks",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 16,
     "icon": "🧠",
     "title": "Learn a new word",
     "category": "Learning",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 17,
     "icon": "🤝",
     "title": "Help someone today",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 18,
     "icon": "📅",
     "title": "Plan your day",
     "category": "Productivity",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 19,
     "icon": "🍵",
     "title": "Have a mindful tea/coffee",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 20,
     "icon": "🎯",
     "title": "Set a daily focus",
     "category": "Productivity",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 21,
     "icon": "📵",
     "title": "Limit screen time",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 22,
     "icon": "🧴",
     "title": "Maintain skincare routine",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 23,
     "icon": "💤",
     "title": "Set a consistent sleep schedule",
     "category": "Health",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 24,
     "icon": "💻",
     "title": "Take regular screen breaks",
     "category": "Productivity",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 25,
     "icon": "🎧",
     "title": "Listen to an educational podcast",
     "category": "Learning",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 26,
     "icon": "🧮",
     "title": "Practice mental math",
     "category": "Learning",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
-
   {
     "id": 27,
     "icon": "📖",
     "title": "Read 10 pages of a book",
     "category": "Learning",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -219,6 +220,7 @@
     "icon": "🦷",
     "title": "Floss your teeth",
     "category": "Health",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -226,6 +228,7 @@
     "icon": "🥦",
     "title": "Eat a serving of vegetables",
     "category": "Health",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -233,6 +236,7 @@
     "icon": "📓",
     "title": "Reflect on your day",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -240,6 +244,7 @@
     "icon": "🧑‍💻",
     "title": "Practice coding",
     "category": "Learning",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -247,6 +252,7 @@
     "icon": "📅",
     "title": "Review your calendar",
     "category": "Productivity",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -254,6 +260,7 @@
     "icon": "🧺",
     "title": "Do a load of laundry",
     "category": "Productivity",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -261,6 +268,7 @@
     "icon": "🧂",
     "title": "Cook a homemade meal",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -268,6 +276,7 @@
     "icon": "🧑‍🎨",
     "title": "Draw or doodle",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   },
   {
@@ -275,6 +284,7 @@
     "icon": "🧑‍🤝‍🧑",
     "title": "Connect with a friend",
     "category": "Wellness",
+    "startDate": "Mon Jul 15 2024",
     "history": ["Mon Jul 15 2024", "Tue Jul 16 2024"]
   }
 ]

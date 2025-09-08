@@ -4,6 +4,7 @@ import FeaturedHighlight from "@/app/components/Home/FeaturedHighlight";
 import QuotesMotivation from "@/app/components/Home/QuotesMotivation";
 import CompletedPreview from "@/app/components/Home/CompletedPreview";
 import LottieAnimation from "@/app/components/Home/LottieAniamtion";
+import Ripple from "./components/Ripple";
 import { FaBullseye, FaDumbbell, FaStar, FaFlag } from "react-icons/fa";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -73,9 +74,13 @@ const Home = () => {
             suggestions, and celebrate your achievements.
           </p>
           <div className={styles.home__cta}>
+            <Ripple>
             <Link href="/suggestion" className={styles.home__button_link}>
+            
               <button className={styles.home__button}>Get Started</button>
+              
             </Link>
+            </Ripple>
           </div>
         </div>
         <FeaturedHighlight />

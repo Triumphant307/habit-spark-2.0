@@ -41,9 +41,14 @@ const SuggestionCard: React.FC = () => {
     "Favorites",
   ];
 
-  const filteredTips = getTipsByCategory(filter, favorites).filter((tip) =>
-    tip.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+const filteredTips =
+  filter === "Favorites"
+    ? favorites.filter((tip) =>
+        tip.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : getTipsByCategory(filter, favorites).filter((tip) =>
+        tip.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
 
   const toogleViewMode = () => {
     setViewMode((prev) => (prev === "grid" ? "list" : "grid"));
