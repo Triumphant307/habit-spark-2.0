@@ -8,6 +8,7 @@ export interface Habit {
   icon: string;
   target: number;
   streak: number;
+  startDate: string;
   history: string[];
 }
 
