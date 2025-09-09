@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, ReactNode, useContext } from "react";
-import useLocalStorage from "../Hooks/useLocalStorage";
+import useLocalStorage from "@/app/Hooks/useLocalStorage";
 
 export interface Habit {
   id: number;
