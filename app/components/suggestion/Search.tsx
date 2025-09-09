@@ -1,5 +1,5 @@
 "use client";
-import style from "../../Styles/Suggestion/SearchBar.module.css";
+import style from "@/app/Styles/Suggestion/SearchBar.module.css";
 import React, { useRef } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 

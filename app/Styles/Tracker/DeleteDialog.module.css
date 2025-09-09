@@ -50,6 +50,8 @@
 }
 
 .dialogActions button {
+  position: relative;
+  overflow: hidden;
   padding: 10px 13px;
   border-radius: 10px;
   border: none;

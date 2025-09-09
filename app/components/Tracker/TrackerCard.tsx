@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
-import ProgressTrack from "../ProgressTracker";
-import style from "../../Styles/Tracker/TrackerCard.module.css";
+import ProgressTrack from "@/app/components/ProgressTracker";
+import style from "@/app/Styles/Tracker/TrackerCard.module.css";
+import { useRipple } from "@/app/Hooks/useRipple";
 import React from "react";
 
 interface Habits {
@@ -16,6 +17,8 @@ interface TrackerCardProps {
   habits: Habits[];
 }
 const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
+  const createRipple = useRipple();
+
   return (
     <>
       <section>
@@ -47,6 +50,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                   >
                     <motion.div
                       className={style.card}
+                      onPointerDown={(e) => createRipple(e)}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3 }}

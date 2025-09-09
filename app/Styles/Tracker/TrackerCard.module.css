@@ -20,6 +20,8 @@
 }
 
 .card {
+  position: relative;
+  overflow: hidden;
   background-color: var(--bg-card);
   backdrop-filter: blur(8px);
   border-radius: 12px;

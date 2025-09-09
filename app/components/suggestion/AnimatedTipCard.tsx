@@ -1,11 +1,12 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
-import { Tip } from "./SuggestionCard";
+import { Tip } from "@/app/components/suggestion/SuggestionCard";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
-import { useHabits } from "../../context/HabitContext";
-import styles from "../../Styles/Suggestion/suggestionCard.module.css";
+import { useHabits } from "@/app/context/HabitContext";
+import { useRipple } from "@/app/Hooks/useRipple";
+import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
 import { toast } from "react-toastify";
 import Link from "next/link";
 
@@ -25,6 +26,8 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
   const { ref, inView } = useInView({ triggerOnce: true });
 
   const { habits, addHabit, deleteHabit } = useHabits();
+
+  const createRipple = useRipple();
 
   // tip.id comes from the shared `Tip` type and may be string | number | undefined.
   // Coerce/normalize to a number when comparing with Habit.id (which is a number).
@@ -77,6 +80,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
             padding: 0,
             fontSize: "inherit",
           }}
+          onPointerDown={(e) => createRipple(e)}
           onClick={() => handleUndo(tip.id)}
         >
           Undo
@@ -137,6 +141,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
         className={styles.btn}
         onClick={handleAdd}
         disabled={alreadyAdded}
+        onPointerDown={(e) => createRipple(e)}
         title={alreadyAdded ? "Already added" : "Add to habits"}
       >
         {alreadyAdded ? "Added ✅" : "Add Habit"}

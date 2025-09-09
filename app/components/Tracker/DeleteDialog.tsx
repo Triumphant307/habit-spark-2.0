@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import styles from "../../Styles/Tracker/DeleteDialog.module.css";
+import styles from "@/app/Styles/Tracker/DeleteDialog.module.css";
+import { useRipple } from "@/app/Hooks/useRipple";
 
 interface DeleteDialogProp {
   isOpen: boolean;
@@ -16,6 +17,7 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
   onConfirm,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const createRipple = useRipple();
 
   useEffect(() => {
     if (isOpen && dialogRef.current) {
@@ -51,6 +53,7 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
           <div className={styles.dialogActions}>
             <button
               onClick={onClose}
+              onPointerDown={(e) => createRipple(e)}
               className={styles.cancelBtn}
               title="Cancel habit"
             >
@@ -58,6 +61,7 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
             </button>
             <button
               className={styles.deleteBtn}
+              onPointerDown={(e) => createRipple(e)}
               onClick={onConfirm}
               title="Delete habit"
             >

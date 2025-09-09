@@ -86,9 +86,11 @@
 
 .dialogAction button,
 .btn {
+  position: relative;
+  overflow: hidden;
   padding: 0.5rem 1rem;
   background-color: var(--btn-primary-bg);
-  color: var(--text-primary);
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -110,8 +112,6 @@
   box-shadow: var(--box-shadow);
   animation: fadeIn 0.15s ease-in-out;
 }
-
-
 
 .inputs {
   padding: 0.5rem 1rem;

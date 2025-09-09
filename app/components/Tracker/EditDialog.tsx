@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import styles from "../../Styles/Tracker/EditDialog.module.css";
+import styles from "@/app/Styles/Tracker/EditDialog.module.css";
+import { useRipple } from "@/app/Hooks/useRipple";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
@@ -29,6 +30,8 @@ const EditDialog: React.FC<EditDialogProps> = ({
   const [error, setError] = useState("");
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef<HTMLDivElement | null>(null);
+
+  const createRipple = useRipple();
 
   useEffect(() => {
     if (isOpen && dialogRef?.current) {
@@ -146,6 +149,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     <button
                       className={styles.btn}
                       type="button"
+                      onPointerDown={(e) => createRipple(e)}
                       onClick={() => setShowPicker(!showPicker)}
                       title={icon ? `Selected: ${icon}` : "Show Emoji"}
                     >
@@ -164,12 +168,17 @@ const EditDialog: React.FC<EditDialogProps> = ({
                   <button
                     type="button"
                     onClick={onClose}
+                    onPointerDown={(e) => createRipple(e)}
                     title="Cancel Edit"
                   >
                     Cancel
                   </button>
 
-                  <button type="submit" title="Save Edit">
+                  <button
+                    onPointerDown={(e) => createRipple(e)}
+                    type="submit"
+                    title="Save Edit"
+                  >
                     Save
                   </button>
                 </div>

@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import styles from "../../Styles/Suggestion/SuggestionForm.module.css";
-import { useHabits } from "../../context/HabitContext";
+import styles from "@/app/Styles/Suggestion/SuggestionForm.module.css";
+import { useHabits } from "@/app/context/HabitContext";
+import { useRipple } from "@/app/Hooks/useRipple";
 import { toast } from "react-toastify";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -21,6 +22,8 @@ const SuggestionForm = () => {
   const [error, setError] = useState("");
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef<HTMLDivElement | null>(null);
+
+  const createRipple = useRipple();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -106,6 +109,7 @@ const SuggestionForm = () => {
       <div className={styles.pickerContainer}>
         <button
           className={styles.btn}
+          onPointerDown={(e) => createRipple(e)}
           type="button"
           onClick={() => setShowPicker(!showPicker)}
           title={icon ? `Selected: ${icon}` : "Show Emoji"}
@@ -131,7 +135,12 @@ const SuggestionForm = () => {
         <label htmlFor="">Habit Target</label>
       </div>
 
-      <button className={styles.btn} type="submit" title="Add new Habits">
+      <button
+        className={styles.btn}
+        onPointerDown={(e) => createRipple(e)}
+        type="submit"
+        title="Add new Habits"
+      >
         Add New Habit
       </button>
       {error && <div className={styles.error}>{error}</div>}

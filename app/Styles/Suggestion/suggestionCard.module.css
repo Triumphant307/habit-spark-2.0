@@ -27,6 +27,8 @@
 }
 
 .btn {
+  position: relative;
+  overflow: hidden;
   padding: 0.5rem 1rem;
   background-color: var(--btn-primary-bg);
   color: var(--text-primary);

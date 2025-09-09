@@ -9,6 +9,7 @@ import Link from "next/link";
 const FeaturedHighlight = () => {
   // This component highlights the features of the HabitSpark app
   // Array of features to be displayed
+
   const feature = [
     {
       id: 1,

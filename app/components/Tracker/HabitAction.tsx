@@ -1,5 +1,5 @@
 import { FaCheck, FaUndoAlt, FaTrash, FaEdit } from "react-icons/fa";
-
+import { useRipple } from "@/app/Hooks/useRipple";
 interface Habit {
   streak: number;
   target: number;
@@ -21,21 +21,34 @@ const HabitAction: React.FC<HabitActionProps> = ({
   handleEditClick,
   style,
 }: HabitActionProps) => {
+  const createRipple = useRipple();
+
   return (
     <>
       <div className={style.actions}>
         {habit.streak < habit.target && (
-          <button type="button" onClick={handleDone} title="Done">
+          <button
+            type="button"
+            onPointerDown={(e) => createRipple(e)}
+            onClick={handleDone}
+            title="Done"
+          >
             <FaCheck /> Done
           </button>
         )}
-        <button type="button" onClick={handleReset} title="Reset Streak">
+        <button
+          type="button"
+          onPointerDown={(e) => createRipple(e)}
+          onClick={handleReset}
+          title="Reset Streak"
+        >
           <FaUndoAlt /> Reset
         </button>
 
         <button
           type="button"
           className={style.editBtn}
+          onPointerDown={(e) => createRipple(e)}
           onClick={handleEditClick}
           title="Edit Habit"
         >
@@ -47,6 +60,7 @@ const HabitAction: React.FC<HabitActionProps> = ({
           type="button"
           className={style.deleteBtn}
           onClick={handleDeleteClick}
+          onPointerDown={(e) => createRipple(e)}
         >
           <FaTrash /> Delete
         </button>
