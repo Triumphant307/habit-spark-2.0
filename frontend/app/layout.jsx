@@ -1,11 +1,10 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import BackToTop from "@/app/components/BackToTop";
 import NextTopLoader from "nextjs-toploader";
-import { HabitProvider } from "../app/context/HabitContext";
+import { HabitProvider } from "@/app/context/HabitContext";
 
 import "./globals.css";
 
@@ -25,7 +24,7 @@ export default function RootLayout({ children }) {
           speed={500}
           easing="ease"
           shadow={true}
-          crawl= {true}
+          crawl={true}
           crawlSpeed={200}
         />
         <HabitProvider>
