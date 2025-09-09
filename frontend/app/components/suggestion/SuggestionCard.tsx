@@ -1,11 +1,12 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { getTipsByCategory } from "../../utils/getTipsByCatergory";
+import { getTipsByCategory } from "@/app/utils/getTipsByCatergory";
 import Search from "@/app/components/suggestion/Search";
 import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
-import AnimatedTipCard from "./AnimatedTipCard";
+import AnimatedTipCard from "@/app/components/suggestion/AnimatedTipCard";
 import { MdGridView, MdViewList } from "react-icons/md";
-import useLocalStorage from "../../Hooks/useLocalStorage";
+import useLocalStorage from "@/app/Hooks/useLocalStorage";
+import { useRipple } from "@/app/Hooks/useRipple";
 import React, { useState, useRef } from "react";
 
 export interface Tip {
@@ -32,6 +33,8 @@ const SuggestionCard: React.FC = () => {
 
   const resultRef = useRef(null);
 
+  const createRipple = useRipple();
+
   const categories = [
     "All",
     "Health",
@@ -41,14 +44,14 @@ const SuggestionCard: React.FC = () => {
     "Favorites",
   ];
 
-const filteredTips =
-  filter === "Favorites"
-    ? favorites.filter((tip) =>
-        tip.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : getTipsByCategory(filter, favorites).filter((tip) =>
-        tip.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+  const filteredTips =
+    filter === "Favorites"
+      ? favorites.filter((tip) =>
+          tip.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : getTipsByCategory(filter, favorites).filter((tip) =>
+          tip.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
 
   const toogleViewMode = () => {
     setViewMode((prev) => (prev === "grid" ? "list" : "grid"));
@@ -65,6 +68,7 @@ const filteredTips =
         <button
           className={viewMode === "grid" ? styles.active : ""}
           onClick={toogleViewMode}
+          onPointerDown={(e) => createRipple(e)}
           aria-label="Grid View"
           title="Toogle grid"
         >
@@ -73,6 +77,7 @@ const filteredTips =
         <button
           className={viewMode === "list" ? styles.active : ""}
           onClick={() => setViewMode("list")}
+          onPointerDown={(e) => createRipple(e)}
           aria-label="List View"
           title="Toogle List"
         >
@@ -87,6 +92,7 @@ const filteredTips =
             key={catergory}
             type="button"
             onClick={() => setFilter(catergory)}
+            onPointerDown={(e) => createRipple(e)}
             className={filter === catergory ? styles.active : ""}
             aria-pressed={filter === catergory}
           >

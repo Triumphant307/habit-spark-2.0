@@ -19,6 +19,8 @@
 }
 
 .home__button {
+  position: relative;
+  overflow: hidden;
   padding: 15px 25px;
   font-size: bold;
   outline: none;

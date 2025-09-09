@@ -1,0 +1,46 @@
+:where(*:has(> .ripple-container)) {
+  --ripple-expand-scale: 2.05;
+  position: relative;
+}
+
+.ripple-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+}
+
+.ripple.hold {
+  animation: ripple-expand 350ms ease-out forwards;
+}
+
+.ripple.fade {
+  animation: ripple-fade 350ms ease-in forwards;
+}
+
+@keyframes ripple-expand {
+  50% {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(var(--ripple-expand-scale));
+  }
+}
+
+@keyframes ripple-fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 0;
+  }
+}

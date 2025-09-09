@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import styles from "@/app/Styles/Home/Home.module.css";
 import FeaturedHighlight from "@/app/components/Home/FeaturedHighlight";
 import QuotesMotivation from "@/app/components/Home/QuotesMotivation";
 import CompletedPreview from "@/app/components/Home/CompletedPreview";
 import LottieAnimation from "@/app/components/Home/LottieAniamtion";
-import Ripple from "./components/Ripple";
+import { useRipple } from "@/app/Hooks/useRipple";
 import { FaBullseye, FaDumbbell, FaStar, FaFlag } from "react-icons/fa";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -17,6 +17,9 @@ const Home = () => {
     { label: "Success", icon: <FaStar style={{ color: "gold" }} /> },
     { label: "Goals", icon: <FaFlag style={{ color: "green" }} /> },
   ];
+
+  const createRipple = useRipple();
+
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -74,20 +77,23 @@ const Home = () => {
             suggestions, and celebrate your achievements.
           </p>
           <div className={styles.home__cta}>
-            <Ripple>
             <Link href="/suggestion" className={styles.home__button_link}>
-            
-              <button className={styles.home__button}>Get Started</button>
-              
+              <button
+                onPointerDown={(e) => createRipple(e)}
+                className={styles.home__button}
+              >
+                Get Started
+              </button>
             </Link>
-            </Ripple>
           </div>
         </div>
         <FeaturedHighlight />
 
         <div style={{ textAlign: "center", padding: "2rem" }}>
           <h2 className={styles.h2}>Stay Consistent, Stay Motivated</h2>
-          <p className={styles.p}>Join us in building better habits and achieving your goals.</p>
+          <p className={styles.p}>
+            Join us in building better habits and achieving your goals.
+          </p>
           <LottieAnimation />
         </div>
 

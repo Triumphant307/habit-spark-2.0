@@ -104,7 +104,6 @@
   }
 } */
 
-
 .details {
   max-width: 540px;
   margin: 3rem auto;
@@ -177,6 +176,8 @@
 }
 
 .actions button {
+  position: relative;
+  overflow: hidden;
   margin: 0.5rem;
   padding: 0.6rem 1.2rem;
   background-color: var(--btn-primary-bg);
