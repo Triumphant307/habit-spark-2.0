@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import "@/app/styles/hooks/ripple.css";
 
 export function useRipple() {
   return useCallback(
