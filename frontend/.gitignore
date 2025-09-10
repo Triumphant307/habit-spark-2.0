@@ -44,4 +44,3 @@ next-env.d.ts
 git-save.sh
 
 .vscode
-app/components/Tracker/HabitHistory.tsx

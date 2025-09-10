@@ -125,6 +125,7 @@ button {
   display: none;
 }
 
+
 @media (max-width: 600px) {
   .Toastify__toast {
     min-width: 90vw;

@@ -1,4 +1,4 @@
-import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
+import styles from "@/app/Styles/Suggestion/Suggestion.module.css";
 import SuggestionCard from "@/app/components/suggestion/SuggestionCard";
 import SuggestionForm from "@/app/components/suggestion/SuggestionForm";
 
