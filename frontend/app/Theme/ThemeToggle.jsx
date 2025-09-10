@@ -5,6 +5,30 @@ import style from "@/app/Styles/ThemeToggle.module.css";
 import useLocalStorage from "@/app/Hooks/useLocalStorage";
 import { useEffect, useState } from "react";
 
+// View transition with bi-directional horizontal sweep animation for switching states in the document, eg. theme
+export function toggleWithSweep(
+  toggle = () => {},
+  sweepForwards = true,
+  transition = true,
+) {
+  if (!document.startViewTransition || !transition) return toggle();
+  document.startViewTransition(toggle).ready.then(() => {
+    document.documentElement.animate(
+      {
+        clipPath: [
+          sweepForwards ? `inset(0 99.9% 0 0)` : `inset(0 0 0 99.9%)`,
+          `inset(0 0 0 0)`,
+        ],
+      },
+      {
+        duration: 350,
+        easing: "ease-in-out",
+        pseudoElement: "::view-transition-new(root)",
+      },
+    );
+  });
+}
+
 const ThemeToggle = () => {
   const [isDark, setIsDark] = useLocalStorage("theme", false);
   const [mounted, setMounted] = useState(false);
@@ -30,7 +54,7 @@ const ThemeToggle = () => {
   if (!mounted) return null; // prevent hydration mismatch
 
   return (
-    <button className={style.themeToggle} onClick={toggleTheme}>
+    <button className={style.themeToggle} onClick={() => toggleWithSweep(toggleTheme, !isDark, mounted)}>
       {isDark ? (
         <FaMoon
           size={24}

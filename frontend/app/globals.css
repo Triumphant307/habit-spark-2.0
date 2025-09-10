@@ -5,6 +5,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* overrides for view transition */
+::view-transition-new(root),
+::view-transition-old(root) {
+  animation: none !important;
+}
+
 :root {
   /* Backgrounds */
   --bg-page: #f5f7fa;
