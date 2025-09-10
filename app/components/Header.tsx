@@ -3,11 +3,14 @@ import Style from "@/app/Styles/Header.module.css";
 import ThemeToggle from "@/app/Theme/ThemeToggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRipple } from "@/app/Hooks/useRipple";
 import React, { useState, useEffect, useRef } from "react";
-const Header : React.FC = () => {
+const Header: React.FC = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const createRipple = useRipple();
 
   // Effect to handle scroll event and change header styl
   useEffect(() => {
@@ -22,7 +25,7 @@ const Header : React.FC = () => {
   }, []);
 
   const navRef = useRef<HTMLDivElement | null>(null);
-  const hamburgerRef = useRef<HTMLButtonElement | null >(null);
+  const hamburgerRef = useRef<HTMLButtonElement | null>(null);
 
   // Function to toggle the menu open/close state
   const toggleMenu = () => {
@@ -31,7 +34,7 @@ const Header : React.FC = () => {
 
   // Close the menu when clicking outside of it
   useEffect(() => {
-    const handleClickOutside = (event : MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         isMenuOpen &&
         navRef.current &&

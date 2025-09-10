@@ -2,8 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-   -webkit-tap-highlight-color: transparent;
-
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -126,7 +125,6 @@ button {
 #nprogress .spinner {
   display: none;
 }
-
 
 @media (max-width: 600px) {
   .Toastify__toast {
