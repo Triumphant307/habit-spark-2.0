@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 export function toggleWithSweep(
   toggle = () => {},
   sweepForwards = true,
-  transition = true,
+  transition = true
 ) {
   if (!document.startViewTransition || !transition) return toggle();
   document.startViewTransition(toggle).ready.then(() => {
@@ -24,7 +24,7 @@ export function toggleWithSweep(
         duration: 350,
         easing: "ease-in-out",
         pseudoElement: "::view-transition-new(root)",
-      },
+      }
     );
   });
 }
@@ -54,7 +54,10 @@ const ThemeToggle = () => {
   if (!mounted) return null; // prevent hydration mismatch
 
   return (
-    <button className={style.themeToggle} onClick={() => toggleWithSweep(toggleTheme, !isDark, mounted)}>
+    <button
+      className={style.themeToggle}
+      onClick={() => toggleWithSweep(toggleTheme, !isDark, mounted)}
+    >
       {isDark ? (
         <FaMoon
           size={24}
