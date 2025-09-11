@@ -33,11 +33,17 @@ const QuotesMotivation = () => {
   const fetchQuote = useCallback(async (): Promise<void> => {
     try {
       const response = await fetch(
-        "https://corsproxy.io/?https://zenquotes.io/api/random"
+        `https://api.allorigins.win/get?url=${encodeURIComponent(
+          "https://zenquotes.io/api/random"
+        )}`
       );
       const data = await response.json();
-      if (Array.isArray(data) && data[0]?.q) {
-        setQuote({ q: data[0].q, a: data[0].a });
+
+      
+      const quotes = JSON.parse(data.contents);
+
+      if (Array.isArray(quotes) && quotes[0]?.q) {
+        setQuote({ q: quotes[0].q, a: quotes[0].a });
       } else {
         console.error("Invalid quote format:", data);
         setQuote(fallBackQuote[index]);
