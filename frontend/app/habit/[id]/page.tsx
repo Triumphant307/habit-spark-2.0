@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import "react-calendar/dist/Calendar.css";
 import style from "@/app/Styles/Tracker/HabitDetails.module.css";
 import { useParams, useRouter } from "next/navigation";
 import HabitHistory from "@/app/components/Tracker/HabitHistory";
