@@ -53,7 +53,7 @@ const HabitDetails = () => {
 
   const progress = Math.round((habit.streak / habit.target) * 100);
 
-  const handleDone = () => {
+  const handleDone = async () => {
     const today = new Date().toDateString();
     if (habit.history?.includes(today)) {
       toast.info("Already done for today.");
@@ -66,6 +66,27 @@ const HabitDetails = () => {
         history: [...(habit.history || []), today],
       });
       toast.success("Streak increased 🔥");
+
+      if ("Notification" in window) {
+        if (Notification.permission === "granted") {
+          new Notification("HabitSpark", {
+            body: `Great job! You've increased your streak for "${
+              habit.title
+            }" to ${habit.streak + 1}🔥. Keep it up!`,
+            icon: "🔥",
+          });
+        } else if (Notification.permission !== "denied") {
+          const permission = await Notification.requestPermission();
+          if (permission === "granted") {
+            new Notification("HabitSpark", {
+              body: `Great job! You've increased your streak for "${
+                habit.title
+              }" to ${habit.streak + 1}🔥. Keep it up!`,
+              icon: "🔥",
+            });
+          }
+        }
+      }
     } else {
       toast.info("Target reached!");
     }
