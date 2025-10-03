@@ -8,6 +8,7 @@ import HabitStat from "@/app/components/Tracker/HabitStat";
 import DeleteDialog from "@/app/components/Tracker/DeleteDialog";
 import EditDialog from "@/app/components/Tracker/EditDialog";
 import { useHabits } from "@/app/context/HabitContext";
+import OneSignal from "react-onesignal";
 import { toast } from "react-toastify";
 import confetti from "canvas-confetti";
 import Link from "next/link";
@@ -91,6 +92,8 @@ const HabitDetails = () => {
       toast.info("Target reached!");
     }
   };
+
+
 
   const handleReset = () => {
     resetHabit(habit.id);
