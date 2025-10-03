@@ -5,6 +5,7 @@ import Footer from "@/app/components/Footer";
 import BackToTop from "@/app/components/BackToTop";
 import NextTopLoader from "nextjs-toploader";
 import { HabitProvider } from "@/app/context/HabitContext";
+import NotificationInitializer from "@/app/components/NotificationInitializer";
 
 import "./globals.css";
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <NotificationInitializer/>
         <NextTopLoader
           color="#22c55e;"
           height={3}
