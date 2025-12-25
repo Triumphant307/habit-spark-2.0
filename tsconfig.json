@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -11,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -19,9 +23,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
-    "types": ["react"]
+    "types": [
+      "react"
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -30,7 +38,11 @@
     ".next/types/**/*.ts",
     "app/tracker/page.tsx",
     "app/layout.jsx",
-    "app/page.jsx"
-, "app/components/Ripple.tsx"  ],
-  "exclude": ["node_modules"]
+    "app/page.jsx",
+    "app/components/Ripple.tsx",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
