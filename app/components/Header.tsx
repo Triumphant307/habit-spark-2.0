@@ -50,14 +50,16 @@ const Header: React.FC = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto"
+  }, [isMenuOpen])
+
   // This component renders the header with a title and a responsive navigation menu
   return (
     <header
       className={`${Style.header} ${isScrolled ? Style.headerScrolled : ""}`}
     >
-      <h1 className={Style.header__title}>HabitSpark</h1>
-
-      <button
+       <button
         className={`${Style.hamburger} ${isMenuOpen ? Style.open : ""}`}
         onClick={toggleMenu}
         aria-label="Toggle Menu"
@@ -67,6 +69,9 @@ const Header: React.FC = () => {
         <span className={Style.bar} />
         <span className={Style.bar} />
       </button>
+      <h1 className={Style.header__title}>HabitSpark</h1>
+
+     
 
       <nav
         className={`${Style.headerNav} ${isMenuOpen ? Style.open : ""}`}
@@ -121,9 +126,9 @@ const Header: React.FC = () => {
             className={Style.header__nav__item}
             onClick={() => setIsMenuOpen(false)}
           >
-            <ThemeToggle />
           </li>
         </ul>
+        <ThemeToggle />
       </nav>
     </header>
   );
