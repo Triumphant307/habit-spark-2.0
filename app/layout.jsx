@@ -27,6 +27,7 @@ export default function RootLayout({ children }) {
           easing="ease"
           shadow={true}
           crawl={true}
+          zIndex={9999}
           crawlSpeed={200}
         />
         <HabitProvider>
