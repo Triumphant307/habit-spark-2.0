@@ -138,3 +138,7 @@
     display: flex;
   }
 }
+
+html, body {
+  overscroll-behavior: contain; 
+}
