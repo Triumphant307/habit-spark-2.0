@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import style from "@/app/Styles/ThemeToggle.module.css";
 import useLocalStorage from "@/app/Hooks/useLocalStorage";
@@ -29,7 +29,7 @@ export function toggleWithSweep(
   });
 }
 
-const ThemeToggle = () => {
+const ThemeToggle = React.memo(() => {
   const [isDark, setIsDark] = useLocalStorage("theme", false);
   const [mounted, setMounted] = useState(false);
 
@@ -74,6 +74,6 @@ const ThemeToggle = () => {
       </span>
     </button>
   );
-};
+});
 
 export default ThemeToggle;
