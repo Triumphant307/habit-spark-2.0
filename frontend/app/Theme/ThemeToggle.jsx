@@ -54,25 +54,35 @@ const ThemeToggle = () => {
   if (!mounted) return null; // prevent hydration mismatch
 
   return (
+    // <button
+    //   className={style.themeToggle}
+    //   onClick={() => toggleWithSweep(toggleTheme, !isDark, mounted)}
+    // >
+    //   {isDark ? (
+    //     <FaMoon
+    //       size={24}
+    //       color="#fff"
+    //       className={style.iconTransition}
+    //       style={{ transform: "rotate(-360deg)", opacity: 1 }}
+    //     />
+    //   ) : (
+    //     <FaSun
+    //       size={24}
+    //       color="#facc15"
+    //       className={style.iconTransition}
+    //       style={{ transform: "rotate(360deg)", opacity: 1 }}
+    //     />
+    //   )}
+
+      
+    // </button>
     <button
-      className={style.themeToggle}
+      className={`${style.themeToggle} ${isDark ? style.dark : style.light}`}
       onClick={() => toggleWithSweep(toggleTheme, !isDark, mounted)}
     >
-      {isDark ? (
-        <FaMoon
-          size={24}
-          color="#fff"
-          className={style.iconTransition}
-          style={{ transform: "rotate(-360deg)", opacity: 1 }}
-        />
-      ) : (
-        <FaSun
-          size={24}
-          color="#facc15"
-          className={style.iconTransition}
-          style={{ transform: "rotate(360deg)", opacity: 1 }}
-        />
-      )}
+      <span className={style.knob}>
+        {/* <span className={style.knobIcon}>{isDark ? "🌙" : "☀️"}</span> */}
+      </span>
     </button>
   );
 };

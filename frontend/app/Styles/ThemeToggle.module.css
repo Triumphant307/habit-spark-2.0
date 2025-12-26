@@ -1,11 +1,15 @@
 .themeToggle {
-  background: none;
+  width: 56px;
+  height: 30px;
+  border-radius: 999px;
   border: none;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
   position: relative;
+  background: var(--toggle-bg);
+  transition: background 0.35s ease;
+  isolation: isolate;
 }
+
 .icon {
   width: 24px;
   height: 24px;
@@ -29,4 +33,69 @@
   box-shadow: -5px 0 0 0 #fff, 0 0 10px #fff;
   border-radius: 50%;
   transform: translateX(5px) scale(0.9);
+}
+
+.knob {
+  align-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transition:
+    transform 0.35s ease,
+    width 0.25s ease,
+    border-radius 0.25s ease;
+}
+
+
+/* LIGHT MODE */
+.light {
+  --toggle-bg: #e5e7eb;
+}
+
+/* DARK MODE */
+.dark {
+  --toggle-bg: #1f2937;
+}
+
+/* Morphing motion */
+.dark .knob {
+  transform: translateX(26px);
+  width: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(129, 140, 248, 0.6);
+}
+
+.knobIcon {
+
+    font-size: 12px;
+  line-height: 1;
+  transition:
+    transform 0.35s ease,
+    opacity 0.25s ease,
+    filter 0.35s ease;
+}
+
+.light .knobIcon {
+  filter: drop-shadow(0 0 4px rgba(250, 204, 21, 0.6));
+}
+
+.dark .knobIcon {
+  filter: drop-shadow(0 0 4px rgba(129, 140, 248, 0.8));
+}
+
+/* Hover micro-interaction */
+.themeToggle:hover .knobIcon {
+  transform: scale(1.15);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .knob,
+  .knobIcon {
+    transition: none;
+  }
 }
