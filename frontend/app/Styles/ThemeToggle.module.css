@@ -8,35 +8,36 @@
   background: var(--toggle-bg);
   transition: background 0.35s ease;
   isolation: isolate;
+  overflow: hidden;
 }
 
-.icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  transition: all 0.5s ease;
-  position: relative;
+.light {
+  --toggle-bg: #e5e7eb;
 }
 
-.iconTransition {
-  transition: transform 0.5s cubic-bezier(0.4, 2, 0.6, 1), opacity 0.4s;
-  display: inline-block;
+.dark {
+  --toggle-bg: #111827;
 }
 
-.sun {
-  background: #facc15;
-  box-shadow: 0 0 0 3px #facc15, 0 0 10px #facc15;
+.bgIcon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0.55;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
 }
 
-.moon {
-  background: #fff;
-  box-shadow: -5px 0 0 0 #fff, 0 0 10px #fff;
-  border-radius: 50%;
-  transform: translateX(5px) scale(0.9);
+.dark .bgIcon {
+  transform: translateX(-12px) scale(0.9);
+}
+
+.light .bgIcon {
+  transform: translateX(12px) scale(0.9);
 }
 
 .knob {
-  align-items: center;
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -44,58 +45,35 @@
   position: absolute;
   top: 4px;
   left: 4px;
-  transition:
-    transform 0.35s ease,
-    width 0.25s ease,
-    border-radius 0.25s ease;
+  display: grid;
+  place-items: center;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  z-index: 1;
 }
 
-
-/* LIGHT MODE */
-.light {
-  --toggle-bg: #e5e7eb;
-}
-
-/* DARK MODE */
-.dark {
-  --toggle-bg: #1f2937;
-}
-
-/* Morphing motion */
 .dark .knob {
   transform: translateX(26px);
-  width: 24px;
-  border-radius: 12px;
   box-shadow: 0 0 10px rgba(129, 140, 248, 0.6);
 }
 
 .knobIcon {
-
-    font-size: 12px;
-  line-height: 1;
-  transition:
-    transform 0.35s ease,
-    opacity 0.25s ease,
-    filter 0.35s ease;
+  display: grid;
+  place-items: center;
+  transition: transform 0.35s ease, opacity 0.25s ease;
 }
 
 .light .knobIcon {
-  filter: drop-shadow(0 0 4px rgba(250, 204, 21, 0.6));
+  transform: scale(1);
 }
 
 .dark .knobIcon {
-  filter: drop-shadow(0 0 4px rgba(129, 140, 248, 0.8));
+  transform: scale(1.05);
 }
 
-/* Hover micro-interaction */
-.themeToggle:hover .knobIcon {
-  transform: scale(1.15);
-}
-
-/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .knob,
-  .knobIcon {
+  .knobIcon,
+  .bgIcon {
     transition: none;
   }
 }
