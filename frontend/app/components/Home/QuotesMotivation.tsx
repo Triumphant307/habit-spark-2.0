@@ -37,16 +37,24 @@ const QuotesMotivation = () => {
           "https://zenquotes.io/api/random"
         )}`
       );
+
+      if (response.ok) {
+        throw new Error("Network response not ok");
+      }
       const data = await response.json();
 
-      
+      if (!data?.contents) {
+        throw new Error("Invalid proxy response");
+      }
+
       const quotes = JSON.parse(data.contents);
 
       if (Array.isArray(quotes) && quotes[0]?.q) {
         setQuote({ q: quotes[0].q, a: quotes[0].a });
       } else {
         console.error("Invalid quote format:", data);
-        setQuote(fallBackQuote[index]);
+        const safeIndex = index % fallBackQuote.length;
+        setQuote(fallBackQuote[safeIndex]);
       }
     } catch (error) {
       console.error("Error fetching quote:", error);
