@@ -9,6 +9,7 @@ import NotificationInitializer from "@/app/components/NotificationInitializer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import "./globals.css";
+import "aos/dist/aos.css";
 
 export const metadata = {
   title: "HabitSpark",
