@@ -27,10 +27,10 @@ const fallBackQuote: Quote[] = [
 
 const QuotesMotivation = () => {
   const [quote, setQuote] = useState<Quote>(fallBackQuote[0]);
-  const [index, setIndex] = useState<number>(0);
-  const [visible, setVisible] = useState<boolean>(true);
+  const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
 
-  const fetchQuote = useCallback(async (): Promise<void> => {
+  const fetchQuote = useCallback(async () => {
     try {
       const response = await fetch(
         `https://api.allorigins.win/get?url=${encodeURIComponent(
@@ -38,45 +38,36 @@ const QuotesMotivation = () => {
         )}`
       );
 
-      if (response.ok) {
-        throw new Error("Network response not ok");
-      }
+      if (!response.ok) throw new Error("Network error");
+
       const data = await response.json();
-
-      if (!data?.contents) {
-        throw new Error("Invalid proxy response");
-      }
-
       const quotes = JSON.parse(data.contents);
 
       if (Array.isArray(quotes) && quotes[0]?.q) {
         setQuote({ q: quotes[0].q, a: quotes[0].a });
       } else {
-        console.error("Invalid quote format:", data);
-        const safeIndex = index % fallBackQuote.length;
-        setQuote(fallBackQuote[safeIndex]);
+        throw new Error("Invalid API format");
       }
-    } catch (error) {
-      console.error("Error fetching quote:", error);
-      setQuote(fallBackQuote[index]);
+    } catch {
+      const safeIndex = index % fallBackQuote.length;
+      setQuote(fallBackQuote[safeIndex]);
     }
   }, [index]);
 
   useEffect(() => {
     fetchQuote();
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => prevIndex + 1);
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [fetchQuote]);
 
-  useEffect(() => {
-    setVisible(false);
-    const timer = setTimeout(() => {
-      fetchQuote();
-      setVisible(true);
-    }, 500);
-    return () => clearTimeout(timer);
+    const interval = setInterval(() => {
+      setVisible(false);
+
+      setTimeout(() => {
+        setIndex((prev) => prev + 1);
+        fetchQuote();
+        setVisible(true);
+      }, 500);
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, [fetchQuote]);
 
   useEffect(() => {
@@ -90,12 +81,13 @@ const QuotesMotivation = () => {
       data-aos-delay="200"
     >
       <h2 className={styles.title}>💭 Daily Motivational Quote</h2>
+
       <blockquote
         className={styles.quotes}
         style={{ opacity: visible ? 1 : 0 }}
       >
-        {`"${quote.q}"`}
-        <footer className={styles.author}>- {quote.a}</footer>
+        “{quote.q}”
+        <footer className={styles.author}>— {quote.a}</footer>
       </blockquote>
     </section>
   );
