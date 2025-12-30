@@ -3,7 +3,6 @@
 import styles from "@/app/Styles/Home/FeaturedHighlight.module.css";
 import { useEffect } from "react";
 import Aos from "aos";
-import "aos/dist/aos.css";
 import Link from "next/link";
 
 const FeaturedHighlight = () => {
