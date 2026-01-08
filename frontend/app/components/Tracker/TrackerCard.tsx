@@ -25,6 +25,8 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
     e.preventDefault(); // Prevent navigating to the detail page
     e.stopPropagation();
 
+    const milestoneStreaks = [7, 30, 100];
+
     const isCompletedToday = habit.history.includes(today);
 
     if (isCompletedToday) {
@@ -43,16 +45,20 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
     toast.success(`Great job! ${habit.title} completed.`);
 
     // Fire confetti from the button's position
+if (milestoneStreaks.includes(newStreak)) {
     const rect = (e.target as HTMLElement).getBoundingClientRect();
     const x = (rect.left + rect.width / 2) / window.innerWidth;
     const y = (rect.top + rect.height / 2) / window.innerHeight;
 
     confetti({
       origin: { x, y },
-      particleCount: 50,
-      spread: 60,
+      particleCount: 100,
+      spread: 80,
       colors: ["#10B981", "#3B82F6", "#F59E0B"],
     });
+
+    toast.success(`🎉 Amazing! You've hit a ${newStreak}-day streak!`);
+  }
   };
 
   return (

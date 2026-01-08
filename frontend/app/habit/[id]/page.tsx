@@ -12,6 +12,7 @@ import OneSignal from "react-onesignal";
 import { toast } from "react-toastify";
 import confetti from "canvas-confetti";
 import Link from "next/link";
+import dayjs from "dayjs";
 
 const HabitDetails = () => {
   const params = useParams();
@@ -55,7 +56,7 @@ const HabitDetails = () => {
   const progress = Math.round((habit.streak / habit.target) * 100);
 
   const handleDone = async () => {
-    const today = new Date().toDateString();
+    const today = dayjs().format("YYYY-MM-DD");
     if (habit.history?.includes(today)) {
       toast.info("Already done for today.");
       return;
