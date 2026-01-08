@@ -81,6 +81,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                     isCompletedToday ? style.completedBtn : ""
                   }`}
                   onClick={(e) => handleQuickComplete(e, habit)}
+                  onPointerDown={(e) => createRipple(e)}
                   title={isCompletedToday ? "Completed today" : "Mark as complete"}
                 >
                   <FaCheck />
