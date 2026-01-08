@@ -1,8 +1,8 @@
 .tipCard {
   display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Horizontal layout on desktop */
   align-items: center;
   text-align: center;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
   margin-top: 30px;
   cursor: pointer;
@@ -119,11 +119,10 @@
   background-color: #059669;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .tipCard {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: 1fr; /* Vertical layout on mobile */
+    gap: 15px;
     margin-top: 1.5rem;
   }
   .card {
