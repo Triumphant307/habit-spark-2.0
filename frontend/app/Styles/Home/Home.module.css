@@ -35,39 +35,10 @@
   background-color: var(--btn-primary-hover-bg);
 }
 
-.typed {
-  animation: blink 0.7s steps(1) infinite;
-}
-
 .home__description {
   color: var(--text-secondary);
   font-size: 18px;
   margin-bottom: 20px;
-}
-
-@keyframes blink {
-  50% {
-    border-radius: transparent;
-  }
-}
-
-.cursor {
-  display: inline-block;
-  margin-left: 2px;
-  color: var(--text-primary);
-  animation: cursor_blink 0.8s step(1) infinite;
-}
-
-@keyframes cursor_blink {
-  0%,
-  50%,
-  100% {
-    opacity: 1;
-  }
-  25%,
-  75% {
-    opacity: 0;
-  }
 }
 
 .h2 {
@@ -84,10 +55,6 @@
   margin-bottom: 20px;
 }
 
-.icon {
-  margin-left: 8px;
-  vertical-align: middle;
-}
 
 @media (max-width: 500px) {
   .home__title {
