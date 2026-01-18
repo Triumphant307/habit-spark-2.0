@@ -7,8 +7,13 @@ import HabitAction from "@/app/components/Tracker/HabitAction";
 import HabitStat from "@/app/components/Tracker/HabitStat";
 import DeleteDialog from "@/app/components/Tracker/DeleteDialog";
 import EditDialog from "@/app/components/Tracker/EditDialog";
-import { useHabits } from "@/app/context/HabitContext";
-import OneSignal from "react-onesignal";
+import {
+  resetHabitIntent,
+  updateHabitIntent,
+  deleteHabitIntent,
+} from "@/core/intent/habitIntents";
+import { useReactor } from "@/app/Hooks/useReactor";
+import { Habit } from "@/core/types/habit";
 import { toast } from "react-toastify";
 import confetti from "canvas-confetti";
 import Link from "next/link";
@@ -19,9 +24,10 @@ const HabitDetails = () => {
   const id = Number(params?.id);
   const router = useRouter();
 
-  const { habits, updateHabit, deleteHabit, resetHabit } = useHabits();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
+
+  const habits = useReactor<Habit[]>("habits") || [];
 
   const habit = habits.find((habit) => habit.id === Number(id));
 
@@ -63,7 +69,7 @@ const HabitDetails = () => {
     }
 
     if (habit.streak < habit.target) {
-      updateHabit(habit.id, {
+      updateHabitIntent(habit.id, {
         streak: habit.streak + 1,
         history: [...(habit.history || []), today],
       });
@@ -94,10 +100,8 @@ const HabitDetails = () => {
     }
   };
 
-
-
   const handleReset = () => {
-    resetHabit(habit.id);
+    resetHabitIntent(habit.id);
 
     toast.info("Streak reset to 0. Keep going! 💪");
   };
@@ -109,7 +113,7 @@ const HabitDetails = () => {
   const handleDelete = () => {
     setIsDialogOpen(false);
 
-    deleteHabit(habit.id);
+    deleteHabitIntent(habit.id);
     toast.success("Habit deleted successfully! 🗑️");
     router.push("/tracker");
   };
@@ -147,7 +151,7 @@ const HabitDetails = () => {
           isOpen={isEditOpen}
           onClose={() => setIsEditOpen(false)}
           onSave={(updatedData) => {
-            updateHabit(habit.id, updatedData);
+            updateHabitIntent(habit.id, updatedData);
             toast.success("Habit updated successfully");
           }}
         />

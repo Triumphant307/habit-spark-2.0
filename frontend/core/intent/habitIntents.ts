@@ -8,11 +8,14 @@ import dayjs from "dayjs";
 export const addHabitIntent = (habit: Partial<Habit>) => {
   try {
     const habits = appState.get("habits") || [];
-    const newHabit = {
-      ...habit,
+    const newHabit: Habit = {
       id: habit.id ?? Date.now(),
+      title: habit.title ?? "New Habit",
+      icon: habit.icon ?? "📝",
+      target: habit.target ?? 30,
       streak: habit.streak ?? 0,
       history: habit.history ?? [],
+      startDate: habit.startDate ?? dayjs().format("YYYY-MM-DD"),
     };
     appState.set("habits", [...habits, newHabit]);
   } catch (e) {

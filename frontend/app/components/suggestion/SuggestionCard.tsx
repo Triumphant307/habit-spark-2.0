@@ -22,13 +22,13 @@ const SuggestionCard: React.FC = () => {
   const [filter, setFilter] = useLocalStorage<string>("habitFilter", "All");
   const [favorites, setFavorites] = useLocalStorage<Tip[]>(
     "habitFavorites",
-    []
+    [],
   );
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [viewMode, setViewMode] = useLocalStorage<"grid" | "list">(
     "viewMode",
-    "grid"
+    "grid",
   );
 
   const resultRef = useRef(null);
@@ -47,10 +47,10 @@ const SuggestionCard: React.FC = () => {
   const filteredTips =
     filter === "Favorites"
       ? favorites.filter((tip) =>
-          tip.title.toLowerCase().includes(searchQuery.toLowerCase())
+          tip.title.toLowerCase().includes(searchQuery.toLowerCase()),
         )
       : getTipsByCategory(filter, favorites).filter((tip) =>
-          tip.title.toLowerCase().includes(searchQuery.toLowerCase())
+          tip.title.toLowerCase().includes(searchQuery.toLowerCase()),
         );
 
   const toogleViewMode = () => {
