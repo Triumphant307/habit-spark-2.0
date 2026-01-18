@@ -4,6 +4,8 @@ const defaultState = {
   user: {
     visitedHome: false,
   },
+
+  habits: []
 };
 
 // 1️⃣ Read previous state from localStorage (Safe for SSR)
