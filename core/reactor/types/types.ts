@@ -1,10 +1,10 @@
-import type { Reactor } from "./reactor";
+import type { Reactor } from "../reactor";
 
 // ------------------------------------------------------------------
 // TYPES & INTERFACES
 // ------------------------------------------------------------------
 
-export type Primitive =                                                     
+export type Primitive =
   | string
   | number
   | boolean
@@ -17,30 +17,32 @@ export type Primitive =
 export type WCPaths<T> = "*" | Paths<T, ".">;
 
 // Recursive type for paths in an object or array
-export type Paths<T, S extends string = "."> =
-  T extends Primitive
-    ? never
-    : T extends readonly (infer U)[]
-      ? | `${Extract<keyof T, number>}`
+export type Paths<T, S extends string = "."> = T extends Primitive
+  ? never
+  : T extends readonly (infer U)[]
+    ?
+        | `${Extract<keyof T, number>}`
         | `${Extract<keyof T, number>}${S}${Paths<U, S>}`
-      : {
-          [K in keyof T & (string | number)]:
-            T[K] extends Primitive
-              ? `${K}`
-              : `${K}` | `${K}${S}${Paths<T[K], S>}`;
-        }[keyof T & (string | number)];
-
+    : {
+        [K in keyof T & (string | number)]: T[K] extends Primitive
+          ? `${K}`
+          : `${K}` | `${K}${S}${Paths<T[K], S>}`;
+      }[keyof T & (string | number)];
 
 // Get the value type at a given path
-export type PathValue<T, P extends string, S extends string | number | bigint | boolean | null | undefined = "."> = P extends "*"
+export type PathValue<
+  T,
+  P extends string,
+  S extends string | number | bigint | boolean | null | undefined = ".",
+> = P extends "*"
   ? T
   : P extends `${infer K}${S}${infer Rest}`
-  ? K extends keyof T
-    ? PathValue<T[K], Rest, S>
-    : never
-  : P extends keyof T
-  ? T[P]
-  : never;
+    ? K extends keyof T
+      ? PathValue<T[K], Rest, S>
+      : never
+    : P extends keyof T
+      ? T[P]
+      : never;
 
 // Readonly version of paths
 export type ReadonlyPaths<T> = Paths<{
@@ -76,12 +78,12 @@ export interface Payload<T, P extends WCPaths<T> = WCPaths<T>> {
 export type Mediator<T, P extends Paths<T> = Paths<T>> = (
   value: PathValue<T, P> | undefined,
   terminated: boolean,
-  payload: Payload<T, P>
+  payload: Payload<T, P>,
 ) => PathValue<T, P> | typeof TERMINATOR;
 
 // Listener function type
 export type Listener<T, P extends WCPaths<T> = WCPaths<T>> = (
-  event: Payload<T, P>
+  event: Payload<T, P>,
 ) => void;
 
 // Listener options

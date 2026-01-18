@@ -1,5 +1,5 @@
 import { Reactor } from "./reactor";
-import type { API, ReactorOptions } from "./types";
+import type { API, ReactorOptions } from "./types/types";
 
 // Helper to attach Reactor API to a plain object
 export function reactify<T extends object>(

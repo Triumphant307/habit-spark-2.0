@@ -1,4 +1,4 @@
-import { WCPaths, Payload, Target } from "./types";
+import { WCPaths, Payload, Target } from "./types/types";
 import { getTrailPaths } from "./utils";
 
 // ------------------------------------------------------------------
