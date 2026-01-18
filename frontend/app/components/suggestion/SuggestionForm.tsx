@@ -4,6 +4,7 @@ import styles from "@/app/Styles/Suggestion/SuggestionForm.module.css";
 import { useHabits } from "@/app/context/HabitContext";
 import { useRipple } from "@/app/Hooks/useRipple";
 import { toast } from "react-toastify";
+import { addHabitIntent } from "@/core/intent/addHabitIntent";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import Link from "next/link";
@@ -63,7 +64,9 @@ const SuggestionForm = () => {
       setError("Target must be at least 1.");
       return;
     }
-    addHabit({
+
+    // Uses Intent from the reactor core
+    addHabitIntent({
       title: title.trim(),
       icon,
       target,
