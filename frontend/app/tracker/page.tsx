@@ -3,12 +3,12 @@ import styles from "@/app/Styles/Tracker/Tracker.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import TrackerCard from "../components/Tracker/TrackerCard";
-import { useHabits } from "@/app/context/HabitContext";
 import Search from "@/app/components/suggestion/Search";
 import { useState, useRef } from "react";
+import { useReactor } from "../Hooks/useReactor";
 
 const Tracker = () => {
-  const { habits } = useHabits();
+  const habits = useReactor<any[]>("habits") || [];
 
   const [searchQuery, setSearchQuery] = useState("");
 

@@ -4,11 +4,13 @@ import { useInView } from "react-intersection-observer";
 import { Tip } from "@/app/components/suggestion/SuggestionCard";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
-import { useHabits } from "@/app/context/HabitContext";
+import { useReactor } from "@/app/Hooks/useReactor";
+import { addHabitIntent, deleteHabitIntent } from "@/core/intent/habitIntents";
 import { useRipple } from "@/app/Hooks/useRipple";
 import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { Habit } from "@/core/types/habit";
 
 interface AnimatedTipCardProps {
   tip: Tip;
@@ -25,7 +27,8 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
 }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
 
-  const { habits, addHabit, deleteHabit } = useHabits();
+  const habits = useReactor<Habit[]>("habits") || [];
+  
 
   const createRipple = useRipple();
 
@@ -57,7 +60,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
     };
 
     if (!habits.some((h) => h.id === newHabit.id)) {
-      addHabit(newHabit);
+      addHabitIntent(newHabit);
     }
 
     toast.success(
@@ -93,7 +96,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
     if (id == null) return;
     const numId = typeof id === "number" ? id : parseInt(String(id), 10);
     if (Number.isNaN(numId)) return;
-    deleteHabit(numId);
+    deleteHabitIntent(numId);
 
     toast.info(`${displayTitle.trim()} ${displayIcon} removed!`);
   };

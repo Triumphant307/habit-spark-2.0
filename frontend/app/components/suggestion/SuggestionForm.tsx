@@ -4,7 +4,7 @@ import styles from "@/app/Styles/Suggestion/SuggestionForm.module.css";
 import { useHabits } from "@/app/context/HabitContext";
 import { useRipple } from "@/app/Hooks/useRipple";
 import { toast } from "react-toastify";
-import { addHabitIntent } from "@/core/intent/addHabitIntent";
+import { addHabitIntent } from "@/core/intent/habitIntents";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import Link from "next/link";

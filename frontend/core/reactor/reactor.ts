@@ -5,7 +5,7 @@ import {
   Listener,
   ListenerRecord,
   ReactorOptions,
-} from "./types";
+} from "./types/types";
 import { getTrailRecord, assignAny } from "./utils";
 import { Event } from "./event";
 
