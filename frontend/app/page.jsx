@@ -7,9 +7,18 @@ import LottieAnimation from "@/app/components/Home/LottieAniamtion";
 import { useRipple } from "@/app/Hooks/useRipple";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { trackHomeVisit } from "@/core/intent/homeIntent";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const createRipple = useRipple();
+  const [isReturning, setIsReturning] = useState(false);
+
+  useEffect(() => {
+    const returning =  trackHomeVisit();
+    setIsReturning(returning);
+  }, []);
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,10 +59,12 @@ const Home = () => {
           animate="visible"
         >
           <motion.h1 className={styles.home__title} variants={itemVariants}>
-            Welcome to <br />
+            Welcome to {isReturning ? "Back" : ""} <br />
+            
             <span
               style={{
-                background: "linear-gradient(45deg, var(--btn-primary-bg), var(--status-success))",
+                background:
+                  "linear-gradient(45deg, var(--btn-primary-bg), var(--status-success))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 display: "inline-block",
@@ -62,9 +73,12 @@ const Home = () => {
               HabitSpark
             </span>
           </motion.h1>
-          <motion.p className={styles.home__description} variants={itemVariants}>
-            Your journey to better habits starts here. Track your progress, get
-            suggestions, and celebrate your achievements.
+          <motion.p
+            className={styles.home__description}
+            variants={itemVariants}
+          >
+
+            {isReturning ? "We are glad to see you again!" : "Your journey to better habits starts here. Track your progress, get suggestions, and celebrate your achievements."}
           </motion.p>
           <motion.div className={styles.home__cta} variants={itemVariants}>
             <Link href="/suggestion" className={styles.home__button_link}>
@@ -72,16 +86,17 @@ const Home = () => {
                 onPointerDown={(e) => createRipple(e)}
                 className={styles.home__button}
               >
-                Get Started
+                {/* Get Started */}
+                {isReturning ? "Continue" : "Explore Now"}
               </button>
             </Link>
           </motion.div>
         </motion.div>
 
         <motion.div
-           initial="hidden"
-           whileInView="visible"
-           viewport={{ once: true, amount: 0.2 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
           <FeaturedHighlight />
         </motion.div>
@@ -106,9 +121,9 @@ const Home = () => {
           viewport={{ once: true, amount: 0.2 }}
           variants={fadeInUpVariants}
         >
-           <QuotesMotivation />
+          <QuotesMotivation />
         </motion.div>
-       
+
         <motion.div
           initial="hidden"
           whileInView="visible"
