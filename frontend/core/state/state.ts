@@ -13,7 +13,17 @@ const getInitialState = () => {
   if (typeof window === "undefined") return defaultState;
   try {
     const storedState = localStorage.getItem("appState");
-    return storedState ? JSON.parse(storedState) : defaultState;
+    const parsedState = storedState ? JSON.parse(storedState) : defaultState;
+
+    // Sanitize: Ensure all habits have an ID
+    if (Array.isArray(parsedState.habits)) {
+      parsedState.habits = parsedState.habits.map((h: any, i: number) => ({
+        ...h,
+        id: h.id ?? Date.now() + i, // Assign ID if missing
+      }));
+    }
+
+    return parsedState;
   } catch (e) {
     console.error("Failed to load state", e);
     return defaultState;

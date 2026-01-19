@@ -1,11 +1,11 @@
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ProgressTrack from "@/app/components/ProgressTracker";
 import style from "@/app/Styles/Tracker/TrackerCard.module.css";
 import { useRipple } from "@/app/Hooks/useRipple";
 import React from "react";
-import { Habit, useHabits } from "@/app/context/HabitContext";
+import { Habit } from "@/core/types/habit";
+import { completeHabitIntent } from "@/core/intent/habitIntents";
 import { FaCheck } from "react-icons/fa";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
@@ -17,8 +17,7 @@ interface TrackerCardProps {
 
 const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
   const createRipple = useRipple();
-  const { updateHabit } = useHabits();
-  const router = useRouter()
+  const router = useRouter();
   const today = dayjs().format("YYYY-MM-DD");
 
   const handleQuickComplete = (e: React.MouseEvent, habit: Habit) => {
@@ -26,7 +25,6 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
     e.stopPropagation();
 
     const milestoneStreaks = [7, 30, 100];
-
     const isCompletedToday = habit.history.includes(today);
 
     if (isCompletedToday) {
@@ -34,47 +32,53 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
       return;
     }
 
-    const newStreak = habit.streak + 1;
-    const newHistory = [...habit.history, today];
+    // Use the Intent to update state
+    const success = completeHabitIntent(habit.id);
 
-    updateHabit(habit.id, {
-      streak: newStreak,
-      history: newHistory,
-    });
+    if (success) {
+      toast.success(`Great job! ${habit.title} completed.`);
 
-    toast.success(`Great job! ${habit.title} completed.`);
+      const newStreak = habit.streak + 1; // Calculate locally for visual feedback if needed immediately, though reactor will update prop
 
-    // Fire confetti from the button's position
-if (milestoneStreaks.includes(newStreak)) {
-    const rect = (e.target as HTMLElement).getBoundingClientRect();
-    const x = (rect.left + rect.width / 2) / window.innerWidth;
-    const y = (rect.top + rect.height / 2) / window.innerHeight;
+      // Fire confetti from the button's position
+      if (milestoneStreaks.includes(newStreak)) {
+        const rect = (e.target as HTMLElement).getBoundingClientRect();
+        const x = (rect.left + rect.width / 2) / window.innerWidth;
+        const y = (rect.top + rect.height / 2) / window.innerHeight;
 
-    confetti({
-      origin: { x, y },
-      particleCount: 100,
-      spread: 80,
-      colors: ["#10B981", "#3B82F6", "#F59E0B"],
-    });
+        confetti({
+          origin: { x, y },
+          particleCount: 100,
+          spread: 80,
+          colors: ["#10B981", "#3B82F6", "#F59E0B"],
+        });
 
-    toast.success(`🎉 Amazing! You've hit a ${newStreak}-day streak!`);
-  }
+        toast.success(`🎉 Amazing! You've hit a ${newStreak}-day streak!`);
+      }
+    }
   };
 
   return (
     <section>
       <div className={style.tipCard}>
-        {habits.map((habit) => {
-          const progress = Math.round((habit.streak / habit.target) * 100);
-          const isCompletedToday = habit.history.includes(today);
+        <AnimatePresence>
+          {habits.map((habit, index) => {
+            const progress = Math.round((habit.streak / habit.target) * 100);
 
-          return (
-          
+            const isCompletedToday = habit.history.includes(today);
+
+            return (
               <motion.div
                 layout
                 className={style.card}
-                key={habit.id}
-                onClick={() => router.push(`/habit/${habit.id}`)}
+                key={habit.id || `habit-${index}`}
+                onClick={() => {
+                  if (habit.id) {
+                    router.push(`/habit/${habit.id}`);
+                  } else {
+                    console.error("Habit ID is missing", habit);
+                  }
+                }}
                 onPointerDown={(e) => createRipple(e)}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -88,7 +92,9 @@ if (milestoneStreaks.includes(newStreak)) {
                   }`}
                   onClick={(e) => handleQuickComplete(e, habit)}
                   onPointerDown={(e) => createRipple(e)}
-                  title={isCompletedToday ? "Completed today" : "Mark as complete"}
+                  title={
+                    isCompletedToday ? "Completed today" : "Mark as complete"
+                  }
                 >
                   <FaCheck />
                 </button>
@@ -99,9 +105,9 @@ if (milestoneStreaks.includes(newStreak)) {
                 <p className={style.habitStreak}>Streak: {habit.streak}</p>
                 <ProgressTrack radius={50} stroke={5} progress={progress} />
               </motion.div>
-            
-          );
-        })}
+            );
+          })}
+        </AnimatePresence>
       </div>
     </section>
   );

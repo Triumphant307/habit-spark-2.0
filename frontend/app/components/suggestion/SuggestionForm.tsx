@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/app/Styles/Suggestion/SuggestionForm.module.css";
-import { useHabits } from "@/app/context/HabitContext";
 import { useRipple } from "@/app/Hooks/useRipple";
 import { toast } from "react-toastify";
 import { addHabitIntent } from "@/core/intent/habitIntents";
@@ -15,8 +14,6 @@ interface Emoji {
 }
 
 const SuggestionForm = () => {
-  const { addHabit } = useHabits();
-
   const [title, setTitle] = useState("");
   const [icon, setIcon] = useState("");
   const [target, setTarget] = useState(30);
