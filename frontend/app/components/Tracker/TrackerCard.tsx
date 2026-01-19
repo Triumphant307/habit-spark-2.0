@@ -62,8 +62,10 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
     <section>
       <div className={style.tipCard}>
         <AnimatePresence>
-          {habits.map((habit, index) => {
-            const progress = Math.round((habit.streak / habit.target) * 100);
+          {[...habits]
+            .sort((a, b) => b.id - a.id)
+            .map((habit, index) => {
+              const progress = Math.round((habit.streak / habit.target) * 100);
 
             const isCompletedToday = habit.history.includes(today);
 
