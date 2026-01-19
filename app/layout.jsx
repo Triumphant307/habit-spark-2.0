@@ -4,7 +4,6 @@ import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import BackToTop from "@/app/components/BackToTop";
 import NextTopLoader from "nextjs-toploader";
-import { HabitProvider } from "@/app/context/HabitContext";
 import NotificationInitializer from "@/app/components/NotificationInitializer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -33,7 +32,6 @@ export default function RootLayout({ children }) {
           zIndex={9999}
           crawlSpeed={200}
         />
-        <HabitProvider>
           <Header />
           <main>
             <ToastContainer
@@ -50,7 +48,6 @@ export default function RootLayout({ children }) {
           </main>
           <Footer />
           <BackToTop />
-        </HabitProvider>
       </body>
     </html>
   );

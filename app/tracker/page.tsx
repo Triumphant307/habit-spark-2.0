@@ -30,6 +30,7 @@ const Tracker = () => {
       />
       {filteredHabits.length === 0 ? (
         <motion.div
+          key="no-habits"
           className={styles.noResults}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -57,9 +58,7 @@ const Tracker = () => {
           </div>
         </motion.div>
       ) : (
-        <AnimatePresence>
-          <TrackerCard habits={filteredHabits} />
-        </AnimatePresence>
+        <TrackerCard habits={filteredHabits} />
       )}
     </section>
   );
