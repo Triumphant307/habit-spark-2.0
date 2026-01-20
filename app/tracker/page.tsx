@@ -4,11 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import TrackerCard from "../components/Tracker/TrackerCard";
 import Search from "@/app/components/suggestion/Search";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useReactor } from "../Hooks/useReactor";
 
 const Tracker = () => {
   const habits = useReactor<any[]>("habits") || [];
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -17,6 +22,18 @@ const Tracker = () => {
   );
 
   const resultRef = useRef(null);
+
+  if (!isMounted) {
+    return (
+      <section className={styles.tracker}>
+        <div className="tracker-page">
+          <h2 className={styles.title}>🎯 Your Habits</h2>
+        </div>
+        {/* Render a skeleton or empty state that matches server output to avoid layout shift if possible, 
+            but for now, returning the basic structure is safer than a mismatch. */}
+      </section>
+    );
+  }
 
   return (
     <section className={styles.tracker}>
