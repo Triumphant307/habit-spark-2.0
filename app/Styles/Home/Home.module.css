@@ -21,14 +21,16 @@
 .home__button {
   position: relative;
   overflow: hidden;
-  padding: 15px 25px;
-  font-size: bold;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 1rem;
   outline: none;
   border: none;
   background-color: var(--btn-primary-bg);
-  border-radius: 10px;
-  color: var(--text-primary);
-  transition: background-color 0.5s ease-in-out;
+  border-radius: 8px;
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .home__button:hover {
@@ -64,7 +66,7 @@
     padding: 20px;
   }
   .home__button {
-    padding: 8px 16px;
+    padding: 10px 20px;
   }
 
   .home {
