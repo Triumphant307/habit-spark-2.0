@@ -6,4 +6,5 @@ export interface Habit {
   streak: number;
   history: string[];
   startDate: string;
+  trackingStartDate?: string;
 }

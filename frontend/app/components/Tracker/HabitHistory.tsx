@@ -4,12 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay";
 import dayjs, { Dayjs } from "dayjs";
-
-interface Habit {
-  history: string[];
-  startDate: string;
-  trackingStartDate?: string;
-}
+import { Habit } from "@/core/types/habit";
 
 interface HabitHistoryProps {
   habit: Habit;
@@ -24,17 +19,20 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
     _selectedDates: Array<Dayjs | null>,
     pickersDayProps: PickersDayProps
   ) => {
-    const dateStr = date.format("ddd MMM DD YYYY");
+    const dateStr = date.format("YYYY-MM-DD");
     const isFuture = date.isAfter(today, "day");
     const isAfterStart =
       date.isAfter(dayjs(habit.startDate)) ||
       date.isSame(dayjs(habit.startDate), "day");
 
     const hasStartedTracking = habit.history.length > 0;
+    
+    // Logic: Use trackingStartDate if available, otherwise assume tracking started on the day of the first completion.
+    // If no history and no explicit start date, we can't really show "missed" days accurately.
     const trackingStart = habit.trackingStartDate
       ? dayjs(habit.trackingStartDate)
       : hasStartedTracking
-      ? dayjs(habit.history[0]).subtract(0, "day")
+      ? dayjs(habit.history[0]) 
       : null;
 
     const isAfterTrackingStart = trackingStart
