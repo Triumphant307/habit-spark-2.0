@@ -88,3 +88,18 @@ export const completeHabitIntent = (id: number): boolean => {
     return false;
   }
 };
+
+  /* 
+  Reorder intent
+  */
+  export const reorderHabitIntent = (habitIds: number[]) => {
+    try {
+      const habits: Habit[] = appState.get("habits") || [];
+      const reorderedHabits = habitIds
+        .map((id) => habits.find((h) => h.id === id))
+        .filter((h): h is Habit => h !== undefined);
+      appState.set("habits", reorderedHabits);
+    } catch (e) {
+      console.error("Failed to reorder habits", e);
+    }
+  };
