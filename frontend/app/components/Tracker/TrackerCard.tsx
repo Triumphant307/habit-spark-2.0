@@ -5,7 +5,10 @@ import style from "@/app/Styles/Tracker/TrackerCard.module.css";
 import { useRipple } from "@/app/Hooks/useRipple";
 import React, { useState, useRef, useEffect } from "react";
 import { Habit } from "@/core/types/habit";
-import { completeHabitIntent, reorderHabitIntent } from "@/core/intent/habitIntents";
+import {
+  completeHabitIntent,
+  reorderHabitIntent,
+} from "@/core/intent/habitIntents";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
@@ -95,7 +98,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
       <div className={style.tipCard} onDragEnd={handleDragEnd}>
         <AnimatePresence>
           {habits.map((habit, index) => {
-              const progress = Math.round((habit.streak / habit.target) * 100);
+            const progress = Math.round((habit.streak / habit.target) * 100);
 
             const isCompletedToday = habit.history.includes(today);
 
@@ -108,7 +111,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                 key={habit.id || `habit-${index}`}
                 onClick={() => {
                   if (habit.id) {
-                    router.push(`/habit/${habit.id}`);
+                    router.push(`/habit/${habit.slug}`);
                   } else {
                     console.error("Habit ID is missing", habit);
                   }

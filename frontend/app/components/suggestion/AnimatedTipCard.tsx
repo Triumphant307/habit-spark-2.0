@@ -11,6 +11,9 @@ import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { Habit } from "@/core/types/habit";
+import { slugify } from "@/app/utils/slugify";
+import { generateId } from "@/app/utils/generateId";
+import { useRef } from "react";
 
 interface AnimatedTipCardProps {
   tip: Tip;
@@ -26,42 +29,30 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
   viewMode,
 }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
+  const lastAddedHabitId = useRef<string | null>(null);
 
   const habits = useReactor<Habit[]>("habits") || [];
-  
 
   const createRipple = useRipple();
-
-  // tip.id comes from the shared `Tip` type and may be string | number | undefined.
-  // Coerce/normalize to a number when comparing with Habit.id (which is a number).
-  const tipIdRaw = tip.id;
-  const tipId =
-    tipIdRaw == null
-      ? undefined
-      : typeof tipIdRaw === "number"
-      ? tipIdRaw
-      : parseInt(String(tipIdRaw), 10);
-
-  const alreadyAdded = tipId != null && habits.some((h) => h.id === tipId);
 
   const displayIcon =
     typeof tip.icon === "string" ? tip.icon : String(tip.icon ?? "");
   const displayTitle =
     typeof tip.title === "string" ? tip.title : String(tip.title ?? "");
 
+  const alreadyAdded = habits.some(
+    (h) => h.title.toLowerCase() === displayTitle.toLowerCase(),
+  );
+
   const handleAdd = () => {
-    const newHabit = {
-      id: tipId ?? Date.now(),
+    const createdHabit = addHabitIntent({
       title: displayTitle,
       icon: displayIcon,
       target: 30,
-      streak: 0,
       history: (tip.history as string[]) ?? [],
-    };
+    });
 
-    if (!habits.some((h) => h.id === newHabit.id)) {
-      addHabitIntent(newHabit);
-    }
+    lastAddedHabitId.current = createdHabit.id;
 
     toast.success(
       <span>
@@ -84,33 +75,33 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
             fontSize: "inherit",
           }}
           onPointerDown={(e) => createRipple(e)}
-          onClick={() => handleUndo(tip.id)}
+          onClick={() => handleUndo(createdHabit.id)}
         >
           Undo
         </button>
-      </span>
+      </span>,
     );
   };
 
-  const handleUndo = (id?: string | number) => {
-    if (id == null) return;
-    const numId = typeof id === "number" ? id : parseInt(String(id), 10);
-    if (Number.isNaN(numId)) return;
-    deleteHabitIntent(numId);
+  const handleUndo = (habitId?: string | null) => {
+    if (!habitId) return;
+
+    deleteHabitIntent(habitId);
 
     toast.info(`${displayTitle.trim()} ${displayIcon} removed!`);
+    lastAddedHabitId.current = null; // clear it
   };
 
   const toggleFavorite = () => {
     const isFavorite = favorites.some((fav) => fav.id === tip.id);
     setFavorites((prev) =>
-      isFavorite ? prev.filter((fav) => fav.id !== tip.id) : [...prev, tip]
+      isFavorite ? prev.filter((fav) => fav.id !== tip.id) : [...prev, tip],
     );
     toast[isFavorite ? "info" : "success"](
       `${displayTitle} ${displayIcon} ${
         isFavorite ? "removed from" : "added to"
       } Favorites!`,
-      { toastId: `fav-${tip.id}` }
+      { toastId: `fav-${tip.id}` },
     );
   };
 
