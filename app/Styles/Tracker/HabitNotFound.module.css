@@ -9,7 +9,8 @@
   border-radius: 16px;
   box-shadow: var(--box-shadow);
   max-width: 540px;
-  margin: 3rem auto;
+  width: 90%;
+  margin: 2rem auto;
   height: 70vh;
 }
 
