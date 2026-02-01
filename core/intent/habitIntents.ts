@@ -1,16 +1,20 @@
 import { appState } from "../state/state";
 import type { Habit } from "../types/habit";
+import { generateId } from "@/app/utils/generateId";
+import { slugify } from "@/app/utils/slugify";
 import dayjs from "dayjs";
 
 /**
  * Adds a new habit to the state.
+ * Returns the newly created habit (with id + slug)
  */
-export const addHabitIntent = (habit: Partial<Habit>) => {
+export const addHabitIntent = (habit: Partial<Habit>): Habit => {
   try {
     const habits = appState.get("habits") || [];
     const newHabit: Habit = {
-      id: habit.id ?? Date.now(),
+      id: generateId(), // internal unique ID
       title: habit.title ?? "New Habit",
+      slug: `${slugify(habit.title ?? "New Habit")}-${Date.now()}`, // for URLs
       icon: habit.icon ?? "📝",
       target: habit.target ?? 30,
       streak: habit.streak ?? 0,
@@ -18,16 +22,18 @@ export const addHabitIntent = (habit: Partial<Habit>) => {
       startDate: habit.startDate ?? dayjs().format("YYYY-MM-DD"),
     };
     appState.set("habits", [...habits, newHabit]);
+    return newHabit;
   } catch (e) {
     console.error("Failed to add habit", e);
+    throw e;
   }
 };
 
 /**
- * Updates an existing habit by ID.
+ * Updates an existing habit by ID (internal)
  */
 export const updateHabitIntent = (
-  id: number,
+  id: string,
   updatedFields: Partial<Habit>,
 ) => {
   try {
@@ -42,9 +48,9 @@ export const updateHabitIntent = (
 };
 
 /**
- * Deletes a habit by ID.
+ * Deletes a habit by ID (internal)
  */
-export const deleteHabitIntent = (id: number) => {
+export const deleteHabitIntent = (id: string) => {
   try {
     const habits: Habit[] = appState.get("habits") || [];
     const newHabits = habits.filter((h) => h.id !== id);
@@ -55,9 +61,9 @@ export const deleteHabitIntent = (id: number) => {
 };
 
 /**
- * Resets a habit's progress.
+ * Resets a habit's progress by ID
  */
-export const resetHabitIntent = (id: number) => {
+export const resetHabitIntent = (id: string) => {
   try {
     updateHabitIntent(id, { streak: 0, history: [] });
   } catch (e) {
@@ -66,21 +72,19 @@ export const resetHabitIntent = (id: number) => {
 };
 
 /**
- * Marks a habit as completed for today.
+ * Marks a habit as completed for today (by ID)
  */
-export const completeHabitIntent = (id: number): boolean => {
+export const completeHabitIntent = (id: string): boolean => {
   try {
     const habits: Habit[] = appState.get("habits") || [];
     const habit = habits.find((h) => h.id === id);
-
     if (!habit) return false;
 
     const today = dayjs().format("YYYY-MM-DD");
-    if (habit.history.includes(today)) return false; // Already completed
+    if (habit.history.includes(today)) return false; // Already done
 
     const newStreak = habit.streak + 1;
     const newHistory = [...habit.history, today];
-
     updateHabitIntent(id, { streak: newStreak, history: newHistory });
     return true;
   } catch (e) {
@@ -89,17 +93,25 @@ export const completeHabitIntent = (id: number): boolean => {
   }
 };
 
-  /* 
-  Reorder intent
-  */
-  export const reorderHabitIntent = (habitIds: number[]) => {
-    try {
-      const habits: Habit[] = appState.get("habits") || [];
-      const reorderedHabits = habitIds
-        .map((id) => habits.find((h) => h.id === id))
-        .filter((h): h is Habit => h !== undefined);
-      appState.set("habits", reorderedHabits);
-    } catch (e) {
-      console.error("Failed to reorder habits", e);
-    }
-  };
+/**
+ * Reorder habits by ID array
+ */
+export const reorderHabitIntent = (habitIds: string[]) => {
+  try {
+    const habits: Habit[] = appState.get("habits") || [];
+    const reorderedHabits = habitIds
+      .map((id) => habits.find((h) => h.id === id))
+      .filter((h): h is Habit => h !== undefined);
+    appState.set("habits", reorderedHabits);
+  } catch (e) {
+    console.error("Failed to reorder habits", e);
+  }
+};
+
+/**
+ * Helper to find a habit by slug (for URLs)
+ */
+export const findHabitBySlug = (slug: string): Habit | undefined => {
+  const habits: Habit[] = appState.get("habits") || [];
+  return habits.find((h) => h.slug === slug);
+};
