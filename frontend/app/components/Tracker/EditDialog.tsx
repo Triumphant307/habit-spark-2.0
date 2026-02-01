@@ -116,7 +116,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <form onSubmit={handleSubmit} className={styles.dialogForm}>
-                <h2>Edit Habit</h2>
+                <h2 className={styles.dialogTitle}>Edit Habit</h2>
 
                 <div className={styles.floatingInput}>
                   <input

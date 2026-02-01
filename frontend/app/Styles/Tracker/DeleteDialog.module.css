@@ -2,7 +2,7 @@
   position: fixed;
   top: 40%;
   left: 35%;
-  transform: translate(-50%, -50%); /* This centers it */
+  transform: translate(-50%, -50%); 
   padding: 20px;
   border: none;
   border-radius: 10px;
@@ -23,7 +23,7 @@
 
 .dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(20px);
 }
 
 .dialogActions {
