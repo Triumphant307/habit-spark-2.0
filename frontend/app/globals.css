@@ -157,6 +157,8 @@ button {
 
   .react-calendar {
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    transform: scale(0.9);
+    transform-origin: top center;
   }
 }

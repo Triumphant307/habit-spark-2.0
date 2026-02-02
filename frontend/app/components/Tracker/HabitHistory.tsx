@@ -17,7 +17,7 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
   const renderDay = (
     date: Dayjs,
     _selectedDates: Array<Dayjs | null>,
-    pickersDayProps: PickersDayProps
+    pickersDayProps: PickersDayProps,
   ) => {
     const dateStr = date.format("YYYY-MM-DD");
     const isFuture = date.isAfter(today, "day");
@@ -26,14 +26,14 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
       date.isSame(dayjs(habit.startDate), "day");
 
     const hasStartedTracking = habit.history.length > 0;
-    
+
     // Logic: Use trackingStartDate if available, otherwise assume tracking started on the day of the first completion.
     // If no history and no explicit start date, we can't really show "missed" days accurately.
     const trackingStart = habit.trackingStartDate
       ? dayjs(habit.trackingStartDate)
       : hasStartedTracking
-      ? dayjs(habit.history[0]) 
-      : null;
+        ? dayjs(habit.history[0])
+        : null;
 
     const isAfterTrackingStart = trackingStart
       ? date.isAfter(trackingStart) || date.isSame(trackingStart, "day")
@@ -119,6 +119,11 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
             color: "var(--text-primary)",
             borderRadius: "16px",
             padding: "1rem",
+            margin: "0 auto",
+            width: "100%",
+            maxWidth: "350px",
+            transform: "scale(0.95)",
+            transformOrigin: "top center",
 
             "& .MuiPickersCalendarHeader-root .MuiIconButton-root": {
               color: "var(--text-primary)",
@@ -149,6 +154,29 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
 
             "& .Mui-disabled": {
               color: "rgba(0,0,0,0.26)",
+            },
+
+            // Mobile-only styles
+            "@media (max-width: 768px)": {
+              transform: "scale(1.0)",
+              transformOrigin: "top center",
+              padding: "0.5rem",
+
+              "& .MuiPickersDay-root": {
+                fontSize: "1rem",
+                width: "28px",
+                height: "28px",
+              },
+
+              "& .MuiDayCalendar-weekDayLabel": {
+                fontSize: "1rem",
+                width: "28px",
+                height: "28px",
+              },
+
+              "& .MuiPickersCalendarHeader-label": {
+                fontSize: "1rem",
+              },
             },
           }}
           slots={{ day: (props) => renderDay(props.day, [], props) }}

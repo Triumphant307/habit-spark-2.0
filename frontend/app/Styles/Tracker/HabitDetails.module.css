@@ -233,10 +233,11 @@
 
 .history {
   flex: 1;
-  min-width: 0;
+  min-width: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   padding: 1.25rem;
   background: var(--bg-card);
   backdrop-filter: blur(20px);
@@ -372,6 +373,7 @@
   .history {
     padding: 1.5rem;
     border-radius: 16px;
+    align-items: center;
   }
 
   .historyTitle {
