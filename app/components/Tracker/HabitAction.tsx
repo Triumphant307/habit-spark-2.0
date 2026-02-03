@@ -32,8 +32,9 @@ const HabitAction: React.FC<HabitActionProps> = ({
             onPointerDown={(e) => createRipple(e)}
             onClick={handleDone}
             title="Done"
+            aria-label="Mark habit as complete for today"
           >
-            <FaCheck /> Done
+            <FaCheck aria-hidden="true" /> Done
           </button>
         )}
         <button
@@ -41,8 +42,9 @@ const HabitAction: React.FC<HabitActionProps> = ({
           onPointerDown={(e) => createRipple(e)}
           onClick={handleReset}
           title="Reset Streak"
+          aria-label="Reset habit streak to zero"
         >
-          <FaUndoAlt /> Reset
+          <FaUndoAlt aria-hidden="true" /> Reset
         </button>
 
         <button
@@ -51,8 +53,9 @@ const HabitAction: React.FC<HabitActionProps> = ({
           onPointerDown={(e) => createRipple(e)}
           onClick={handleEditClick}
           title="Edit Habit"
+          aria-label="Edit habit details"
         >
-          <FaEdit /> Edit
+          <FaEdit aria-hidden="true" /> Edit
         </button>
       </div>
       <div className={style.deleteActions}>
@@ -61,8 +64,9 @@ const HabitAction: React.FC<HabitActionProps> = ({
           className={style.deleteBtn}
           onClick={handleDeleteClick}
           onPointerDown={(e) => createRipple(e)}
+          aria-label="Delete this habit permanently"
         >
-          <FaTrash /> Delete
+          <FaTrash aria-hidden="true" /> Delete
         </button>
       </div>
     </>
