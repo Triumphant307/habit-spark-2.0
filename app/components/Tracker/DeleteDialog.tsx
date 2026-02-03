@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "@/app/Styles/Tracker/DeleteDialog.module.css";
 import { useRipple } from "@/app/Hooks/useRipple";
+import { FaExclamationTriangle, FaTrash, FaTimes } from "react-icons/fa";
 
 interface DeleteDialogProp {
   isOpen: boolean;
@@ -43,25 +44,29 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
           initial={{ opacity: 0, scale: 0.8, y: -30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 30 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
           role="alertdialog"
           aria-labelledby="delete-dialog-title"
           aria-describedby="delete-dialog-description"
         >
-          <h2 id="delete-dialog-title">Delete Habit</h2>
+          <div className={styles.warningHeader}>
+            <FaExclamationTriangle className={styles.warningIcon} />
+            <h2 id="delete-dialog-title">Delete Habit</h2>
+          </div>
           <p id="delete-dialog-description">
             Are you sure you want to delete this habit? This action cannot be
             undone.
           </p>
           <div className={styles.dialogActions}>
             <button
+              autoFocus
               onClick={onClose}
               onPointerDown={(e) => createRipple(e)}
               className={styles.cancelBtn}
               title="Cancel habit"
               aria-label="Cancel and close dialog"
             >
-              Cancel
+              <FaTimes /> Cancel
             </button>
             <button
               className={styles.deleteBtn}
@@ -70,7 +75,7 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
               title="Delete habit"
               aria-label="Confirm delete habit"
             >
-              Delete
+              <FaTrash /> Delete
             </button>
           </div>
         </MotionDialog>

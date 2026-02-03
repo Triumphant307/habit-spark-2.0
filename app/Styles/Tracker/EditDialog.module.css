@@ -17,6 +17,23 @@
 
 .dialogTitle {
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.titleIcon {
+  color: var(--btn-primary-bg);
+}
+
+.cancelBtn,
+.saveBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .dialogForm {
