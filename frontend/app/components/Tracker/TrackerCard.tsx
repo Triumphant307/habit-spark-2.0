@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import ProgressTrack from "@/app/components/ProgressTracker";
 import style from "@/app/Styles/Tracker/TrackerCard.module.css";
@@ -24,7 +24,6 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
   const draggedItem = useRef<Habit | null>(null);
   const draggedIdx = useRef<number | null>(null);
   const createRipple = useRipple();
-  const router = useRouter();
   const today = dayjs().format("YYYY-MM-DD");
 
   useEffect(() => {
@@ -104,24 +103,15 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
 
             return (
               <motion.div
+                key={habit.id || `habit-${index}`}
+                className={`${style.card} ${isDragging ? style.dragging : ""}`}
                 draggable
                 onDragStart={() => handleDragStart(index)}
                 onDragOver={() => handleDragOver(index)}
-                className={`${style.card} ${isDragging ? style.dragging : ""}`}
-                key={habit.id || `habit-${index}`}
-                onClick={() => {
-                  if (habit.id) {
-                    router.push(`/habit/${habit.slug}`);
-                  } else {
-                    console.error("Habit ID is missing", habit);
-                  }
-                }}
-                onPointerDown={(e) => createRipple(e)}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.2 }}
-                title="Click for more details"
                 role="listitem"
                 aria-label={`${habit.title}, streak: ${habit.streak} days, target: ${habit.target} days`}
               >
@@ -135,8 +125,15 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                   className={`${style.quickCompleteBtn} ${
                     isCompletedToday ? style.completedBtn : ""
                   }`}
-                  onClick={(e) => handleQuickComplete(e, habit)}
-                  onPointerDown={(e) => createRipple(e)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleQuickComplete(e, habit);
+                  }}
+                  onPointerDown={(e) => {
+                    e.stopPropagation();
+                    createRipple(e);
+                  }}
                   title={
                     isCompletedToday ? "Completed today" : "Mark as complete"
                   }
@@ -149,11 +146,20 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                   <FaCheck aria-hidden="true" />
                 </button>
 
-                <span className={style.habitIcon}>{habit.icon}</span>
-                <h3 className={style.habitTitle}>{habit.title}</h3>
-                <p className={style.habitTarget}>Target: {habit.target} days</p>
-                <p className={style.habitStreak}>Streak: {habit.streak}</p>
-                <ProgressTrack radius={50} stroke={5} progress={progress} />
+                <Link
+                  href={habit.id ? `/habit/${habit.slug}` : "#"}
+                  className={style.cardLink}
+                  onPointerDown={(e) => createRipple(e)}
+                  title="Click for more details"
+                >
+                  <span className={style.habitIcon}>{habit.icon}</span>
+                  <h3 className={style.habitTitle}>{habit.title}</h3>
+                  <p className={style.habitTarget}>
+                    Target: {habit.target} days
+                  </p>
+                  <p className={style.habitStreak}>Streak: {habit.streak}</p>
+                  <ProgressTrack radius={50} stroke={5} progress={progress} />
+                </Link>
               </motion.div>
             );
           })}
