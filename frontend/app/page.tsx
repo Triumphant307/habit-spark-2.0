@@ -6,21 +6,20 @@ import CompletedPreview from "@/app/components/Home/CompletedPreview";
 import LottieAnimation from "@/app/components/Home/LottieAniamtion";
 import { useRipple } from "@/app/Hooks/useRipple";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { trackHomeVisit } from "@/core/intent/homeIntent";
 import { useEffect, useState } from "react";
 
-const Home = () => {
+const Home: React.FC = () => {
   const createRipple = useRipple();
-  const [isReturning, setIsReturning] = useState(false);
+  const [isReturning, setIsReturning] = useState<boolean>(false);
 
   useEffect(() => {
-    const returning =  trackHomeVisit();
+    const returning = trackHomeVisit();
     setIsReturning(returning);
   }, []);
 
-
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -31,7 +30,7 @@ const Home = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
@@ -40,7 +39,7 @@ const Home = () => {
     },
   };
 
-  const fadeInUpVariants = {
+  const fadeInUpVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
@@ -60,7 +59,6 @@ const Home = () => {
         >
           <motion.h1 className={styles.home__title} variants={itemVariants}>
             Welcome to {isReturning ? "Back" : ""} <br />
-            
             <span
               style={{
                 background:
@@ -77,8 +75,9 @@ const Home = () => {
             className={styles.home__description}
             variants={itemVariants}
           >
-
-            {isReturning ? "We are glad to see you again!" : "Your journey to better habits starts here. Track your progress, get suggestions, and celebrate your achievements."}
+            {isReturning
+              ? "We are glad to see you again!"
+              : "Your journey to better habits starts here. Track your progress, get suggestions, and celebrate your achievements."}
           </motion.p>
           <motion.div className={styles.home__cta} variants={itemVariants}>
             <Link href="/suggestion" className={styles.home__button_link}>

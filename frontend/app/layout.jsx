@@ -5,7 +5,7 @@ import Footer from "@/app/components/Footer";
 import BackToTop from "@/app/components/BackToTop";
 import NextTopLoader from "nextjs-toploader";
 import NotificationInitializer from "@/app/components/NotificationInitializer";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 import "aos/dist/aos.css";
@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <SpeedInsights />
-        <NotificationInitializer/>
+        <NotificationInitializer />
         <NextTopLoader
           color="#22c55e;"
           height={3}
@@ -32,22 +32,22 @@ export default function RootLayout({ children }) {
           zIndex={9999}
           crawlSpeed={200}
         />
-          <Header />
-          <main>
-            <ToastContainer
-              position="top-right"
-              autoClose={2000}
-              hideProgressBar={false}
-              closeOnClick
-              pauseOnHover
-              draggable
-              limit={2}
-              containerClassName="custom-toast-container"
-            />
-            {children}
-          </main>
-          <Footer />
-          <BackToTop />
+        <Header />
+        <main>
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnHover
+            draggable
+            limit={2}
+            containerClassName="custom-toast-container"
+          />
+          {children}
+        </main>
+        <Footer />
+        <BackToTop />
       </body>
     </html>
   );
