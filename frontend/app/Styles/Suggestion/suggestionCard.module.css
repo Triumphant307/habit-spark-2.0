@@ -29,25 +29,67 @@
 .btn {
   position: relative;
   overflow: hidden;
-  padding: 0.5rem 1rem;
-  background-color: var(--btn-primary-bg);
-  color: var(--text-primary);
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 12px rgba(59, 130, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
 }
 
 .btn:disabled {
-  background-color: #9ca3af;
+  background: #9ca3af;
   cursor: not-allowed;
   opacity: 0.6;
   pointer-events: none;
+  box-shadow: none;
 }
 
 .btn:disabled:hover {
-  background-color: none;
+  transform: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 8px 20px rgba(59, 130, 246, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--box-shadow-focus);
 }
 
 .filterButtons {
@@ -59,27 +101,32 @@
 }
 
 .filterButtons button {
-  padding: 8px 16px;
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  color: var(--text-primary);
-  font-weight: bold;
-  background-color: var(--btn-primary-bg);
-  transition: 0.3s ease-in-out;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
 }
 
 .filterButtons button:hover {
-  background-color: var(--btn-primary-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+}
+
+.filterButtons button:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .filterButtons .active {
-  background-color: blue;
-  color: #fff;
-}
-
-.btn:hover {
-  background-color: var(--btn-primary-hover-bg);
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
 }
 
 .icon {
@@ -118,7 +165,9 @@
   justify-content: center;
   padding: 0.4rem;
   border-radius: 50%;
-  transition: background 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
   box-shadow: none;
 }
 
@@ -158,23 +207,31 @@
 }
 
 .viewToggle button {
-  background: var(--btn-primary-bg);
-  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
+  color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
 }
 
 .viewToggle button.active {
-  background: var(--btn-primary-hover-bg);
-  color: #fff;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
 }
 
 .viewToggle button:hover:not(.active) {
-  background: var(--btn-primary-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+}
+
+.viewToggle button:active {
+  transform: translateY(0) scale(0.98);
 }
 
 @media (max-width: 600px) {
