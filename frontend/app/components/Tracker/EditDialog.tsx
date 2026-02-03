@@ -4,6 +4,7 @@ import styles from "@/app/Styles/Tracker/EditDialog.module.css";
 import { useRipple } from "@/app/Hooks/useRipple";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { FaCheck, FaTimes, FaEdit } from "react-icons/fa";
 
 interface Habit {
   title: string;
@@ -118,7 +119,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
             >
               <form onSubmit={handleSubmit} className={styles.dialogForm}>
                 <h2 id="edit-dialog-title" className={styles.dialogTitle}>
-                  Edit Habit
+                  <FaEdit className={styles.titleIcon} /> Edit Habit
                 </h2>
 
                 <div className={styles.floatingInput}>
@@ -129,6 +130,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     onChange={(e) => setTitle(e.target.value)}
                     required
                     placeholder=" "
+                    autoFocus
                   />
                   <label htmlFor="title">Habit Title</label>
                 </div>
@@ -178,8 +180,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     onPointerDown={(e) => createRipple(e)}
                     title="Cancel Edit"
                     aria-label="Cancel editing and close dialog"
+                    className={styles.cancelBtn}
                   >
-                    Cancel
+                    <FaTimes /> Cancel
                   </button>
 
                   <button
@@ -187,8 +190,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     type="submit"
                     title="Save Edit"
                     aria-label="Save changes to habit"
+                    className={styles.saveBtn}
                   >
-                    Save
+                    <FaCheck /> Save
                   </button>
                 </div>
               </form>

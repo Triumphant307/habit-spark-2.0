@@ -2,23 +2,56 @@
   position: fixed;
   top: 40%;
   left: 35%;
-  transform: translate(-50%, -50%); 
-  padding: 20px;
+  transform: translate(-50%, -50%);
+  padding: 24px;
   border: none;
-  border-radius: 10px;
+  border-radius: 16px;
   max-width: 400px;
   width: 90%;
   background-color: var(--bg-card);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.warningHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.warningIcon {
+  font-size: 3rem;
+  color: #f1c40f;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .dialog h2 {
   color: var(--text-primary);
-  margin: 10px;
+  margin: 0;
+  font-size: 1.5rem;
 }
 
 .dialog p {
   color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 24px;
 }
 
 .dialog::backdrop {
@@ -29,42 +62,62 @@
 .dialogActions {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.cancelBtn {
-  background-color: var(--btn-primary-bg);
-}
-
-.cancelBtn:hover {
-  background-color: var(--btn-primary-hover-bg);
-}
-
-.deleteBtn {
-  background-color: #e74c3c;
-}
-
-.deleteBtn:hover {
-  background-color: #c0392b;
+  gap: 12px;
 }
 
 .dialogActions button {
   position: relative;
   overflow: hidden;
-  padding: 10px 13px;
-  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
   color: white;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cancelBtn {
+  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.cancelBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+.deleteBtn {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.deleteBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+}
+
+.dialogActions button:active {
+  transform: translateY(0) scale(0.95);
 }
 
 @media (max-width: 600px) {
   .dialog {
     top: 35%;
-    left: 5%;
-    transform: translate(-50%, -50%);
-    width: 90%;
+    left: 3%;
+    width: 95%;
+    padding: 20px;
+  }
+
+  .dialogActions {
+    flex-direction: column-reverse;
+  }
+
+  .dialogActions button {
+    width: 100%;
+    justify-content: center;
   }
 }
