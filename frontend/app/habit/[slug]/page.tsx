@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import style from "@/app/Styles/Tracker/HabitDetails.module.css";
 import { useParams, useRouter } from "next/navigation";
 import HabitHistory from "@/app/components/Tracker/HabitHistory";
@@ -80,13 +81,40 @@ const HabitDetails = () => {
     router.push("/tracker");
   };
 
-  return (
-    <section className={style.details}>
-      <Link href="/tracker" className={style.backBtn} title="Back to Tracker">
-        ← Back to Tracker
-      </Link>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.05,
+      },
+    },
+  };
 
-      <div className={style.card}>
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" as const },
+    },
+  };
+
+  return (
+    <motion.section
+      className={style.details}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div variants={itemVariants}>
+        <Link href="/tracker" className={style.backBtn} title="Back to Tracker">
+          ← Back to Tracker
+        </Link>
+      </motion.div>
+
+      <motion.div className={style.card} variants={itemVariants}>
         <span className={style.icon}>{habit.icon}</span>
         <h2 className={style.title}>{habit.title}</h2>
 
@@ -99,9 +127,11 @@ const HabitDetails = () => {
           handleEditClick={() => setIsEditOpen(true)}
           style={style}
         />
-      </div>
+      </motion.div>
 
-      <HabitHistory habit={habit} style={style} />
+      <motion.div variants={itemVariants}>
+        <HabitHistory habit={habit} style={style} />
+      </motion.div>
 
       <DeleteDialog
         isOpen={isDialogOpen}
@@ -118,7 +148,7 @@ const HabitDetails = () => {
           toast.success("Habit updated successfully");
         }}
       />
-    </section>
+    </motion.section>
   );
 };
 

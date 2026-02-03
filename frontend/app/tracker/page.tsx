@@ -18,7 +18,7 @@ const Tracker = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredHabits = habits.filter((habit) =>
-    habit.title.toLowerCase().includes(searchQuery.toLowerCase())
+    habit.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const resultRef = useRef(null);
@@ -35,22 +35,48 @@ const Tracker = () => {
     );
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" as const },
+    },
+  };
+
   return (
-    <section className={styles.tracker}>
-      <div className="tracker-page">
+    <motion.section
+      className={styles.tracker}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div className="tracker-page" variants={itemVariants}>
         <h2 className={styles.title}>🎯 Your Habits</h2>
-      </div>
-      <Search
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        resultRef={resultRef}
-      />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <Search
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          resultRef={resultRef}
+        />
+      </motion.div>
       {filteredHabits.length === 0 ? (
         <motion.div
           key="no-habits"
           className={styles.noResults}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          variants={itemVariants}
         >
           <span style={{ fontSize: "2rem" }}>📭</span>
           <p>
@@ -75,9 +101,11 @@ const Tracker = () => {
           </div>
         </motion.div>
       ) : (
-        <TrackerCard habits={filteredHabits} />
+        <motion.div variants={itemVariants}>
+          <TrackerCard habits={filteredHabits} />
+        </motion.div>
       )}
-    </section>
+    </motion.section>
   );
 };
 
