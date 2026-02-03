@@ -44,9 +44,12 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 30 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
+          role="alertdialog"
+          aria-labelledby="delete-dialog-title"
+          aria-describedby="delete-dialog-description"
         >
-          <h2>Delete Habit</h2>
-          <p>
+          <h2 id="delete-dialog-title">Delete Habit</h2>
+          <p id="delete-dialog-description">
             Are you sure you want to delete this habit? This action cannot be
             undone.
           </p>
@@ -56,6 +59,7 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
               onPointerDown={(e) => createRipple(e)}
               className={styles.cancelBtn}
               title="Cancel habit"
+              aria-label="Cancel and close dialog"
             >
               Cancel
             </button>
@@ -64,6 +68,7 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
               onPointerDown={(e) => createRipple(e)}
               onClick={onConfirm}
               title="Delete habit"
+              aria-label="Confirm delete habit"
             >
               Delete
             </button>

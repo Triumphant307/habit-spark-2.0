@@ -81,7 +81,7 @@ const SuggestionForm = () => {
         >
           Go to Tracker
         </Link>
-      </span>
+      </span>,
     );
 
     // Reset form fields after adding habit
@@ -113,6 +113,12 @@ const SuggestionForm = () => {
           type="button"
           onClick={() => setShowPicker(!showPicker)}
           title={icon ? `Selected: ${icon}` : "Show Emoji"}
+          aria-label={
+            icon
+              ? `Selected emoji: ${icon}. Click to change`
+              : "Choose an emoji icon"
+          }
+          aria-expanded={showPicker}
         >
           {icon ? `Selected: ${icon}` : "Show Emoji"}
         </button>
@@ -125,14 +131,16 @@ const SuggestionForm = () => {
 
       <div className={styles.floatingInput}>
         <input
+          id="habit-target"
           className={styles.TargetInput}
           type="number"
           value={target}
           onChange={(e) => setTarget(Number(e.target.value))}
           placeholder=" "
+          aria-label="Habit target in days"
         />
 
-        <label htmlFor="">Habit Target</label>
+        <label htmlFor="habit-target">Habit Target</label>
       </div>
 
       <button
@@ -140,10 +148,15 @@ const SuggestionForm = () => {
         onPointerDown={(e) => createRipple(e)}
         type="submit"
         title="Add new Habits"
+        aria-label="Add new habit to your tracker"
       >
         Add New Habit
       </button>
-      {error && <div className={styles.error}>{error}</div>}
+      {error && (
+        <div className={styles.error} role="alert">
+          {error}
+        </div>
+      )}
     </form>
   );
 };

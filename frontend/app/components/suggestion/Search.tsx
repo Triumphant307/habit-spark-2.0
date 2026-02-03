@@ -16,19 +16,19 @@ const Search: React.FC<SearchProps> = ({
   const handleClear = () => setSearchQuery("");
   const inputRef = useRef<HTMLInputElement>(null);
 
- const handleKeyDown = (e: React.KeyboardEvent) => {
-  if (e.key === "Enter") {
-    inputRef?.current?.blur();
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      inputRef?.current?.blur();
 
-    if (typeof window !== "undefined" && resultRef?.current) {
-      resultRef.current.scrollIntoView({ behavior: "smooth" });
+      if (typeof window !== "undefined" && resultRef?.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth" });
+      }
     }
-  }
-};
+  };
 
   return (
     <div className={style.searchWrapper}>
-      <FaSearch className={style.iconLeft} />
+      <FaSearch className={style.iconLeft} aria-hidden="true" />
       <input
         type="text"
         ref={inputRef}
@@ -37,10 +37,15 @@ const Search: React.FC<SearchProps> = ({
         className={style.searchBar}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        aria-label="Search habits"
       />
       {searchQuery && (
-        <button onClick={handleClear} className={style.clearButton}>
-          <FaTimes title="clear" />
+        <button
+          onClick={handleClear}
+          className={style.clearButton}
+          aria-label="Clear search"
+        >
+          <FaTimes title="clear" aria-hidden="true" />
         </button>
       )}
     </div>

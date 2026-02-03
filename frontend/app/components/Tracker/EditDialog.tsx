@@ -106,6 +106,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
         onClose={onClose}
         onCancel={onClose}
         ref={dialogRef}
+        aria-labelledby="edit-dialog-title"
       >
         <AnimatePresence>
           {isOpen && (
@@ -116,7 +117,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <form onSubmit={handleSubmit} className={styles.dialogForm}>
-                <h2 className={styles.dialogTitle}>Edit Habit</h2>
+                <h2 id="edit-dialog-title" className={styles.dialogTitle}>
+                  Edit Habit
+                </h2>
 
                 <div className={styles.floatingInput}>
                   <input
@@ -144,25 +147,29 @@ const EditDialog: React.FC<EditDialogProps> = ({
                   <label htmlFor="target">Habit Target:</label>
                 </div>
 
-                <label htmlFor="">
-                  <div className={styles.pickerContainer}>
-                    <button
-                      className={styles.btn}
-                      type="button"
-                      onPointerDown={(e) => createRipple(e)}
-                      onClick={() => setShowPicker(!showPicker)}
-                      title={icon ? `Selected: ${icon}` : "Show Emoji"}
-                    >
-                      {/* {icon ? `Selected: ${icon}` : "Show Emoji"} */}
-                      {icon || "😀 Choose Emoji"}
-                    </button>
-                    {showPicker && (
-                      <div className={styles.pickerWrapper} ref={pickerRef}>
-                        <Picker data={data} onEmojiSelect={handleEmojiSelect} />
-                      </div>
-                    )}
-                  </div>
-                </label>
+                <div className={styles.pickerContainer}>
+                  <button
+                    className={styles.btn}
+                    type="button"
+                    onPointerDown={(e) => createRipple(e)}
+                    onClick={() => setShowPicker(!showPicker)}
+                    title={icon ? `Selected: ${icon}` : "Show Emoji"}
+                    aria-label={
+                      icon
+                        ? `Selected emoji: ${icon}. Click to change`
+                        : "Choose an emoji icon"
+                    }
+                    aria-expanded={showPicker}
+                  >
+                    {/* {icon ? `Selected: ${icon}` : "Show Emoji"} */}
+                    {icon || "😀 Choose Emoji"}
+                  </button>
+                  {showPicker && (
+                    <div className={styles.pickerWrapper} ref={pickerRef}>
+                      <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+                    </div>
+                  )}
+                </div>
                 {error && <div className={styles.error}>{error}</div>}
                 <div className={styles.dialogAction}>
                   <button
@@ -170,6 +177,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     onClick={onClose}
                     onPointerDown={(e) => createRipple(e)}
                     title="Cancel Edit"
+                    aria-label="Cancel editing and close dialog"
                   >
                     Cancel
                   </button>
@@ -178,6 +186,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     onPointerDown={(e) => createRipple(e)}
                     type="submit"
                     title="Save Edit"
+                    aria-label="Save changes to habit"
                   >
                     Save
                   </button>

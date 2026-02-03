@@ -94,8 +94,8 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
   };
 
   return (
-    <section>
-      <div className={style.tipCard} onDragEnd={handleDragEnd}>
+    <section aria-label="Your habits list">
+      <div className={style.tipCard} onDragEnd={handleDragEnd} role="list">
         <AnimatePresence>
           {habits.map((habit, index) => {
             const progress = Math.round((habit.streak / habit.target) * 100);
@@ -122,9 +122,14 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.2 }}
                 title="Click for more details"
+                role="listitem"
+                aria-label={`${habit.title}, streak: ${habit.streak} days, target: ${habit.target} days`}
               >
-                <div className={style.dragHandle}>
-                  <FaGripVertical />
+                <div
+                  className={style.dragHandle}
+                  aria-label="Drag to reorder habit"
+                >
+                  <FaGripVertical aria-hidden="true" />
                 </div>
                 <button
                   className={`${style.quickCompleteBtn} ${
@@ -135,8 +140,13 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                   title={
                     isCompletedToday ? "Completed today" : "Mark as complete"
                   }
+                  aria-label={
+                    isCompletedToday
+                      ? `${habit.title} already completed today`
+                      : `Mark ${habit.title} as complete`
+                  }
                 >
-                  <FaCheck />
+                  <FaCheck aria-hidden="true" />
                 </button>
 
                 <span className={style.habitIcon}>{habit.icon}</span>
