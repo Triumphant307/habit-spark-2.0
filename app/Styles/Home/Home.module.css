@@ -21,20 +21,56 @@
 .home__button {
   position: relative;
   overflow: hidden;
-  padding: 12px 24px;
-  font-weight: bold;
+  padding: 0.85rem 1.75rem;
+  font-weight: 600;
   font-size: 1rem;
+  letter-spacing: 0.02em;
   outline: none;
   border: none;
-  background-color: var(--btn-primary-bg);
-  border-radius: 8px;
-  color: #ffffff;
-  transition: all 0.3s ease-in-out;
+  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
+  border-radius: 12px;
+  color: #fff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  box-shadow:
+    0 4px 14px rgba(59, 130, 246, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.home__button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
 }
 
 .home__button:hover {
-  background-color: var(--btn-primary-hover-bg);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 10px 24px rgba(59, 130, 246, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.home__button:hover::before {
+  left: 100%;
+}
+
+.home__button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.home__button:focus-visible {
+  outline: none;
+  box-shadow: var(--box-shadow-focus);
 }
 
 .home__description {
@@ -56,7 +92,6 @@
   font-size: 18px;
   margin-bottom: 20px;
 }
-
 
 @media (max-width: 500px) {
   .home__title {
