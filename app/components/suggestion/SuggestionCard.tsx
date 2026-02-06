@@ -123,17 +123,23 @@ const SuggestionCard: React.FC = () => {
               className={styles.noResults}
             >
               <span style={{ fontSize: "2rem" }}>
-                {filter === "Favorites" ? "⭐" : "🔍"}
+                {filter === "Favorites" ? "💔" : searchQuery ? "🔎" : "📋"}
               </span>
               <p>
                 {filter === "Favorites"
-                  ? "No favorites yet"
-                  : "No suggestions found"}
+                  ? "Your favorites list is empty"
+                  : searchQuery
+                    ? `No results for "${searchQuery}"`
+                    : `No ${filter === "All" ? "suggestions" : filter.toLowerCase() + " habits"} available`}
               </p>
               <small>
                 {filter === "Favorites"
-                  ? "Try favoriting a suggestion by clicking the heart icon ❤️"
-                  : "Try a different keyword or browse categories above."}
+                  ? "Tap the ❤️ heart icon on any suggestion to save it here"
+                  : searchQuery
+                    ? "Try checking your spelling or using different keywords"
+                    : filter !== "All"
+                      ? `Browse other categories or check back soon for ${filter.toLowerCase()} habits`
+                      : "New suggestions are added regularly. Check back soon!"}
               </small>
             </motion.div>
           </>
