@@ -78,21 +78,27 @@ const Tracker = () => {
           className={styles.noResults}
           variants={itemVariants}
         >
-          <span style={{ fontSize: "2rem" }}>📭</span>
+          <span style={{ fontSize: "2rem" }}>{searchQuery ? "🔎" : "🌱"}</span>
           <p>
             {searchQuery
-              ? "No habits match your search."
-              : "No habits added yet."}
+              ? `No habits matching "${searchQuery}"`
+              : "Start your habit journey!"}
           </p>
           <small>
             {searchQuery
-              ? "Try a different keyword."
-              : "Browse suggestions to start tracking habits."}
+              ? "Try a shorter keyword or check the spelling"
+              : "Add your first habit from our suggestions to begin tracking"}
           </small>
           <br />
           <div>
             {searchQuery ? (
-              ""
+              <button
+                className={styles.goSuggestBtn}
+                onClick={() => setSearchQuery("")}
+                style={{ marginTop: "10px", border: "none" }}
+              >
+                Clear Search
+              </button>
             ) : (
               <Link href="/suggestion" className={styles.goSuggestBtn}>
                 Browse Suggestions
