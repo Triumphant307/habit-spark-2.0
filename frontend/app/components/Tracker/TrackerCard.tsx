@@ -11,7 +11,7 @@ import {
 } from "@/core/intent/habitIntents";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
 import dayjs from "dayjs";
-import { toast } from "react-toastify";
+import toast from "@/app/utils/toast";
 import confetti from "canvas-confetti";
 
 interface TrackerCardProps {

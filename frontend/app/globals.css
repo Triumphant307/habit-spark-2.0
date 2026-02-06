@@ -27,21 +27,24 @@
   --btn-primary-hover-bg: #1549f3d3;
 
   /* Status colors */
-  --status-success: #10b981; 
-  --status-warning: #f59e0b; 
-  --status-error: #ef4444; 
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-error: #ef4444;
   --status-error-hover: #dc2626;
 
   /* box shadow */
-  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --box-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --box-shadow-hover:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --box-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.5);
-  --box-shadow-header: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --box-shadow-header:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 
   --blur-background: rgba(255, 255, 255, 0.6);
-  
+
   /* Modern Gradient Background (Light) */
-  --bg-gradient: 
+  --bg-gradient:
     radial-gradient(at 0% 0%, hsla(210, 100%, 96%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 0%, hsla(220, 100%, 96%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 100%, hsla(150, 100%, 96%, 1) 0px, transparent 50%),
@@ -56,15 +59,17 @@ body.dark {
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
 
-  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --box-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --box-shadow-hover:
+    0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
   --box-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.5);
   --box-shadow-header: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
 
   --blur-background: rgba(15, 23, 42, 0.6);
 
   /* Modern Gradient Background (Dark) */
-  --bg-gradient: 
+  --bg-gradient:
     radial-gradient(at 0% 0%, hsla(222, 47%, 11%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 0%, hsla(240, 50%, 15%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 100%, hsla(260, 50%, 15%, 1) 0px, transparent 50%),
@@ -76,7 +81,15 @@ body.dark {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--bg-page);
@@ -92,29 +105,72 @@ main {
 button {
   cursor: pointer;
 }
-
-.Toastify__toast {
-  min-width: 100%;
-  /* font-size: 1.2rem; */
-  box-shadow: var(--box-shadow);
-  padding: 10px;
+/* ===== React-Toastify Custom Styles ===== */
+.custom-toast {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px);
+  padding: 14px 16px !important;
+  font-weight: 500;
 }
 
-.Toastify__toast--dark {
-  background-color: var(--bg-card);
-  color: var(--text-primary);
+.custom-toast .Toastify__toast-body {
+  padding: 0;
 }
 
-.custom-toast-container {
-  padding: 0 !important;
-  margin: 0 !important;
+.custom-toast .Toastify__close-button {
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
-.Toastify__toast--light {
-  --bg-card: #1e1e1e;
-  --text-primary: #ffffff;
-  background-color: var(--bg-card);
-  color: var(--text-primary);
+.custom-toast .Toastify__close-button:hover {
+  opacity: 1;
+}
+
+/* Progress bar gradients based on type */
+.Toastify__progress-bar--success {
+  background: linear-gradient(90deg, #22c55e 0%, #10b981 100%) !important;
+}
+
+.Toastify__progress-bar--error {
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%) !important;
+}
+
+.Toastify__progress-bar--info {
+  background: linear-gradient(
+    90deg,
+    var(--btn-primary-bg) 0%,
+    #6366f1 100%
+  ) !important;
+}
+
+.Toastify__progress-bar--warning {
+  background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+/* Toast type icons */
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: #22c55e;
+}
+
+.Toastify__toast--error .Toastify__toast-icon svg {
+  fill: #ef4444;
+}
+
+.Toastify__toast--info .Toastify__toast-icon svg {
+  fill: var(--btn-primary-bg);
+}
+
+.Toastify__toast--warning .Toastify__toast-icon svg {
+  fill: #f59e0b;
+}
+
+/* Toast enter/exit animations */
+.Toastify__toast-container {
+  padding: 8px !important;
 }
 
 .react-calendar__tile.highlight {
@@ -150,9 +206,9 @@ button {
 }
 
 @media (max-width: 600px) {
-  .Toastify__toast {
-    min-width: 90vw;
-    font-size: 1rem;
+  .custom-toast {
+    min-width: 90vw !important;
+    font-size: 0.95rem;
   }
 
   .react-calendar {
