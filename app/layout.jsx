@@ -1,4 +1,4 @@
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
@@ -36,13 +36,17 @@ export default function RootLayout({ children }) {
         <main>
           <ToastContainer
             position="top-right"
-            autoClose={2000}
+            autoClose={3000}
             hideProgressBar={false}
             closeOnClick
             pauseOnHover
             draggable
-            limit={2}
-            containerClassName="custom-toast-container"
+            limit={3}
+            newestOnTop
+            theme="dark"
+            transition={Slide}
+            toastClassName="custom-toast"
+            progressClassName="custom-progress"
           />
           {children}
         </main>

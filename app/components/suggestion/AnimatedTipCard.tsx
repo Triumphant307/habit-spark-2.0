@@ -8,7 +8,7 @@ import { useReactor } from "@/app/Hooks/useReactor";
 import { addHabitIntent, deleteHabitIntent } from "@/core/intent/habitIntents";
 import { useRipple } from "@/app/Hooks/useRipple";
 import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
-import { toast } from "react-toastify";
+import toast from "@/app/utils/toast";
 import Link from "next/link";
 import { Habit } from "@/core/types/habit";
 import { slugify } from "@/app/utils/slugify";

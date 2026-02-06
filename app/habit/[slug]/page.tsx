@@ -18,7 +18,7 @@ import {
 } from "@/core/intent/habitIntents";
 import { findHabitBySlug } from "@/core/intent/habitIntents";
 import { useReactor } from "@/app/Hooks/useReactor";
-import { toast } from "react-toastify";
+import toast from "@/app/utils/toast";
 import confetti from "canvas-confetti";
 import Link from "next/link";
 import dayjs from "dayjs";

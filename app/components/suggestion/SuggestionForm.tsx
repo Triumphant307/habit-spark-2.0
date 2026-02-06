@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/app/Styles/Suggestion/SuggestionForm.module.css";
 import { useRipple } from "@/app/Hooks/useRipple";
-import { toast } from "react-toastify";
+import toast from "@/app/utils/toast";
 import { addHabitIntent } from "@/core/intent/habitIntents";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
