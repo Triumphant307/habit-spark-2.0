@@ -7,7 +7,7 @@ import { addHabitIntent } from "@/core/intent/habitIntents";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import Link from "next/link";
-import { FaSmile } from "react-icons/fa";
+import { FaSmile, FaExclamationCircle } from "react-icons/fa";
 
 interface Emoji {
   native: string;
@@ -47,19 +47,28 @@ const SuggestionForm = () => {
 
   const handleAddHabit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Validate input fields
-    // Ensure title, icon, and target are not empty or invalid
-    if (title.trim() === "" || icon.trim() === "") {
-      setError("Please enter a title and select an icon.");
+
+    const trimmedTitle = title.trim();
+
+    // Validate title
+    if (!trimmedTitle) {
+      setError("Please enter a habit title.");
       return;
-    } else if (title.length < 3) {
+    }
+    if (trimmedTitle.length < 3) {
       setError("Title must be at least 3 characters long.");
       return;
-    } else if (icon.length < 1) {
-      setError("Please select an icon.");
+    }
+
+    // Validate icon
+    if (!icon) {
+      setError("Please select an icon for your habit.");
       return;
-    } else if (target < 1) {
-      setError("Target must be at least 1.");
+    }
+
+    // Validate target
+    if (target < 1) {
+      setError("Target must be at least 1 day.");
       return;
     }
 
@@ -163,7 +172,8 @@ const SuggestionForm = () => {
       </button>
       {error && (
         <div className={styles.error} role="alert">
-          {error}
+          <FaExclamationCircle />
+          <span>{error}</span>
         </div>
       )}
     </form>
