@@ -7,6 +7,7 @@ import { addHabitIntent } from "@/core/intent/habitIntents";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import Link from "next/link";
+import { FaSmile } from "react-icons/fa";
 
 interface Emoji {
   native: string;
@@ -107,20 +108,28 @@ const SuggestionForm = () => {
       </div>
 
       <div className={styles.pickerContainer}>
+        <label className={styles.inputLabel}>Habit Icon</label>
         <button
-          className={styles.btn}
+          className={styles.iconPreviewBtn}
           onPointerDown={(e) => createRipple(e)}
           type="button"
           onClick={() => setShowPicker(!showPicker)}
-          title={icon ? `Selected: ${icon}` : "Show Emoji"}
+          title={icon ? `Selected: ${icon}` : "Choose Habit Icon"}
           aria-label={
             icon
               ? `Selected emoji: ${icon}. Click to change`
-              : "Choose an emoji icon"
+              : "Choose an emoji icon for your habit"
           }
           aria-expanded={showPicker}
         >
-          {icon ? `Selected: ${icon}` : "Show Emoji"}
+          {icon ? (
+            <span className={styles.selectedEmoji}>{icon}</span>
+          ) : (
+            <div className={styles.placeholderIcon}>
+              <FaSmile />
+              <small>Add Icon</small>
+            </div>
+          )}
         </button>
         {showPicker && (
           <div className={styles.pickerWrapper} ref={pickerRef}>
