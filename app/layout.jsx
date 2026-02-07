@@ -7,6 +7,7 @@ import NextTopLoader from "nextjs-toploader";
 import NotificationInitializer from "@/app/components/NotificationInitializer";
 import ServiceWorkerRegister from "@/app/components/ServiceWorkerRegister";
 import UpdatePrompt from "@/app/components/UpdatePrompt";
+import ErrorBoundary from "@/app/components/ErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
@@ -74,7 +75,7 @@ export default function RootLayout({ children }) {
             toastClassName="custom-toast"
             progressClassName="custom-progress"
           />
-          {children}
+          <ErrorBoundary>{children}</ErrorBoundary>
         </main>
         <Footer />
         <BackToTop />
