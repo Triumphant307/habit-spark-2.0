@@ -73,8 +73,8 @@ async function generateIcons() {
       let pipeline;
 
       if (icon.maskable) {
-        // Maskable icons need 20% padding (safe zone is 80% center)
-        const padding = Math.floor(icon.size * 0.1);
+        // Maskable icons need 25% padding for safe zone (better for circular icons)
+        const padding = Math.floor(icon.size * 0.125);
         const innerSize = icon.size - padding * 2;
 
         // First resize the icon smaller
@@ -85,7 +85,7 @@ async function generateIcons() {
           })
           .toBuffer();
 
-        // Then extend with padding
+        // Then extend with padding and solid background
         pipeline = sharp(resized).extend({
           top: padding,
           bottom: padding,
