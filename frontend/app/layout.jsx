@@ -5,14 +5,37 @@ import Footer from "@/app/components/Footer";
 import BackToTop from "@/app/components/BackToTop";
 import NextTopLoader from "nextjs-toploader";
 import NotificationInitializer from "@/app/components/NotificationInitializer";
+import ServiceWorkerRegister from "@/app/components/ServiceWorkerRegister";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 import "aos/dist/aos.css";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#3b82f6",
+};
+
 export const metadata = {
-  title: "HabitSpark",
-  description: "Your smart habit tracker",
+  title: "HabitSpark - Smart Habit Tracker",
+  description:
+    "Build better habits with daily tracking, personalized suggestions, and progress insights.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "HabitSpark",
+  },
+  icons: {
+    icon: "/icons/icon-192x192.png",
+    apple: "/icons/apple-touch-icon.png",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -20,6 +43,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <SpeedInsights />
+        <ServiceWorkerRegister />
         <NotificationInitializer />
         <NextTopLoader
           color="#22c55e;"
