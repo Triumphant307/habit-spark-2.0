@@ -9,6 +9,7 @@ import { addHabitIntent, deleteHabitIntent } from "@/core/intent/habitIntents";
 import { useRipple } from "@/app/Hooks/useRipple";
 import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
 import toast from "@/app/utils/toast";
+import logger from "@/app/utils/logger";
 import Link from "next/link";
 import { Habit } from "@/core/types/habit";
 import { slugify } from "@/app/utils/slugify";
@@ -45,6 +46,10 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
   );
 
   const handleAdd = () => {
+    logger.info("Adding habit from suggestion", {
+      title: displayTitle,
+      icon: displayIcon,
+    });
     const createdHabit = addHabitIntent({
       title: displayTitle,
       icon: displayIcon,

@@ -13,6 +13,7 @@ import { FaCheck, FaGripVertical } from "react-icons/fa";
 import dayjs from "dayjs";
 import toast from "@/app/utils/toast";
 import confetti from "canvas-confetti";
+import logger from "@/app/utils/logger";
 
 interface TrackerCardProps {
   habits: Habit[];
@@ -48,6 +49,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
   };
 
   const handleDragEnd = () => {
+    logger.info("Habits reordered", { count: habits.length });
     reorderHabitIntent(habits.map((h) => h.id));
     draggedItem.current = null;
     draggedIdx.current = null;
@@ -70,6 +72,11 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
     const success = completeHabitIntent(habit.id);
 
     if (success) {
+      logger.info("Habit completed", {
+        id: habit.id,
+        title: habit.title,
+        streak: habit.streak + 1,
+      });
       toast.success(`Great job! ${habit.title} completed.`);
 
       const newStreak = habit.streak + 1; // Calculate locally for visual feedback if needed immediately, though reactor will update prop
