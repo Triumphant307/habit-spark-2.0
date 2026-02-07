@@ -19,6 +19,7 @@ import {
 import { findHabitBySlug } from "@/core/intent/habitIntents";
 import { useReactor } from "@/app/Hooks/useReactor";
 import toast from "@/app/utils/toast";
+import logger from "@/app/utils/logger";
 import confetti from "canvas-confetti";
 import Link from "next/link";
 import dayjs from "dayjs";
@@ -65,17 +66,20 @@ const HabitDetails = () => {
       return;
     }
 
+    logger.info("Marking habit done", { id: habit.id, title: habit.title });
     completeHabitIntent(habit.id);
     toast.success("Streak increased 🔥");
   };
 
   const handleReset = () => {
+    logger.info("Resetting habit streak", { id: habit.id, title: habit.title });
     resetHabitIntent(habit.id);
     toast.info("Streak reset to 0. Keep going! 💪");
   };
 
   const handleDeleteClick = () => setIsDialogOpen(true);
   const handleDelete = () => {
+    logger.info("Deleting habit", { id: habit.id, title: habit.title });
     deleteHabitIntent(habit.id);
     toast.success("Habit deleted successfully! 🗑️");
     router.push("/tracker");

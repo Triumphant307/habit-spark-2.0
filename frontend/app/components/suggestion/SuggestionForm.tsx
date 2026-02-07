@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "@/app/Styles/Suggestion/SuggestionForm.module.css";
 import { useRipple } from "@/app/Hooks/useRipple";
 import toast from "@/app/utils/toast";
+import logger from "@/app/utils/logger";
 import { addHabitIntent } from "@/core/intent/habitIntents";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -73,6 +74,7 @@ const SuggestionForm = () => {
     }
 
     // Uses Intent from the reactor core
+    logger.info("Creating new habit", { title: trimmedTitle, icon, target });
     addHabitIntent({
       title: title.trim(),
       icon,
