@@ -6,6 +6,7 @@ import BackToTop from "@/app/components/BackToTop";
 import NextTopLoader from "nextjs-toploader";
 import NotificationInitializer from "@/app/components/NotificationInitializer";
 import ServiceWorkerRegister from "@/app/components/ServiceWorkerRegister";
+import UpdatePrompt from "@/app/components/UpdatePrompt";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
@@ -45,6 +46,7 @@ export default function RootLayout({ children }) {
         <SpeedInsights />
         <ServiceWorkerRegister />
         <NotificationInitializer />
+        <UpdatePrompt />
         <NextTopLoader
           color="#22c55e;"
           height={3}
