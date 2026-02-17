@@ -24,7 +24,9 @@
   max-width: 500px;
   margin: 3rem auto;
   box-shadow: var(--box-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .noResults:hover {
@@ -41,7 +43,9 @@
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .goSuggestBtn:hover {
@@ -65,5 +69,87 @@
   .goSuggestBtn {
     width: 100%;
     text-align: center;
+  }
+}
+
+/* ===== Skeleton Loading Styles ===== */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.searchSkeleton,
+.cardSkeleton {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--box-shadow);
+}
+
+.searchSkeleton {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto 1.5rem;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.skeletonBar,
+.skeletonTitle,
+.skeletonText {
+  background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+  background-size: 2000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 6px;
+}
+
+.skeletonBar {
+  height: 48px;
+  width: 100%;
+}
+
+.skeletonTitle {
+  height: 24px;
+  width: 70%;
+  margin-bottom: 0.75rem;
+}
+
+.skeletonText {
+  height: 16px;
+  width: 90%;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonText:last-child {
+  width: 60%;
+}
+
+/* Dark mode skeleton styles */
+body.dark .skeletonBar,
+body.dark .skeletonTitle,
+body.dark .skeletonText {
+  background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+  background-size: 2000px 100%;
+}
+
+@media (max-width: 600px) {
+  .skeletonGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .searchSkeleton {
+    margin-bottom: 1rem;
   }
 }
