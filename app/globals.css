@@ -5,6 +5,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Prevent flashbang on hard reload — sets bg on <html> before JS runs */
+html {
+  background-color: #f5f7fa; /* light default */
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: #0f172a; /* dark default */
+  }
+}
+
 /* overrides for view transition */
 ::view-transition-new(root),
 ::view-transition-old(root) {
@@ -51,7 +62,7 @@
     radial-gradient(at 0% 100%, hsla(200, 100%, 96%, 1) 0px, transparent 50%);
 }
 
-body.dark {
+html.dark body {
   --bg-page: #0f172a;
   --bg-card: rgba(30, 41, 59, 0.7); /* Semi-transparent dark */
   --bg-hover: #334155;
