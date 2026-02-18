@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 export function toggleWithSweep(
   toggle = () => {},
   sweepForwards = true,
-  transition = true
+  transition = true,
 ) {
   if (!document.startViewTransition || !transition) return toggle();
   document.startViewTransition(toggle).ready.then(() => {
@@ -24,7 +24,7 @@ export function toggleWithSweep(
         duration: 350,
         easing: "ease-in-out",
         pseudoElement: "::view-transition-new(root)",
-      }
+      },
     );
   });
 }
@@ -35,7 +35,7 @@ const ThemeToggle = React.memo(() => {
 
   useEffect(() => {
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
     setIsDark((prev) => (prev === undefined ? prefersDark : prev));
     setMounted(true);
@@ -43,7 +43,7 @@ const ThemeToggle = React.memo(() => {
 
   useEffect(() => {
     if (mounted) {
-      document.body.classList.toggle("dark", isDark);
+      document.documentElement.classList.toggle("dark", isDark);
     }
   }, [isDark, mounted]);
 
