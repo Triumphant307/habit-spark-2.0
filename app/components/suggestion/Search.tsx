@@ -30,6 +30,8 @@ const Search: React.FC<SearchProps> = ({
     <div className={style.searchWrapper}>
       <FaSearch className={style.iconLeft} aria-hidden="true" />
       <input
+        id="habit-search"
+        name="habit-search"
         type="text"
         ref={inputRef}
         onKeyDown={handleKeyDown}
@@ -38,6 +40,7 @@ const Search: React.FC<SearchProps> = ({
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         aria-label="Search habits"
+        autoComplete="off"
       />
       {searchQuery && (
         <button
