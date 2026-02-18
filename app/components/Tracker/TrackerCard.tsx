@@ -10,6 +10,7 @@ import {
   reorderHabitIntent,
 } from "@/core/intent/habitIntents";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
+import { notificationService } from "@/app/services/notificationService";
 import dayjs from "dayjs";
 import toast from "@/app/utils/toast";
 import confetti from "canvas-confetti";
@@ -95,6 +96,8 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
         });
 
         toast.success(`🎉 Amazing! You've hit a ${newStreak}-day streak!`);
+
+        notificationService.showStreakMilestone(habit.title, habit.icon, newStreak);
       }
     }
   };

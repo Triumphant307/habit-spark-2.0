@@ -21,6 +21,7 @@ import { useReactor } from "@/app/Hooks/useReactor";
 import toast from "@/app/utils/toast";
 import logger from "@/app/utils/logger";
 import confetti from "canvas-confetti";
+import { notificationService } from "@/app/services/notificationService";
 import Link from "next/link";
 import dayjs from "dayjs";
 
@@ -52,6 +53,11 @@ const HabitDetails = () => {
     if (milestoneStreak.includes(habit.streak) && !alreadyCongratulated) {
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
       toast.success(`🎉 Amazing! You've hit a ${habit.streak}-day streak!`);
+      notificationService.showStreakMilestone(
+        habit.title,
+        habit.icon,
+        habit.streak,
+      );
     }
   }, [habit]);
 

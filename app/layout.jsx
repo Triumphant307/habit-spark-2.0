@@ -5,6 +5,7 @@ import Footer from "@/app/components/Footer";
 import BackToTop from "@/app/components/BackToTop";
 import NextTopLoader from "nextjs-toploader";
 import NotificationInitializer from "@/app/components/NotificationInitializer";
+import NotificationSettings from "@/app/components/NotificationSettings";
 import ServiceWorkerRegister from "@/app/components/ServiceWorkerRegister";
 import UpdatePrompt from "@/app/components/UpdatePrompt";
 import ErrorBoundary from "@/app/components/ErrorBoundary";
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
         <ServiceWorkerRegister />
         <NotificationInitializer />
         <UpdatePrompt />
+        <NotificationSettings />
         <NextTopLoader
           color="#22c55e;"
           height={3}

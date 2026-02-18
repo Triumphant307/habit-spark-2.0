@@ -1,0 +1,236 @@
+/* Notification Settings Styles */
+
+.statusIndicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.iconEnabled {
+  font-size: 1.5rem;
+  color: var(--success-color, #10b981);
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.3));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.iconDisabled {
+  font-size: 1.5rem;
+  color: var(--text-secondary, #999);
+  opacity: 0.6;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Permission Prompt */
+
+.promptOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 1rem;
+}
+
+.promptCard {
+  background: var(--bg-card, white);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-secondary, #999);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--bg-hover, #f0f0f0);
+  color: var(--text-primary, #333);
+}
+
+.iconWrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.bell Icon {
+  font-size: 2.5rem;
+  color: white;
+  animation: bellRing 2s ease-in-out infinite;
+}
+
+@keyframes bellRing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: rotate(-10deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary, #333);
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--text-secondary, #666);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.featureList li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  background: var(--bg-hover, #f8f9fa);
+  font-size: 0.95rem;
+  color: var(--text-primary, #333);
+}
+
+.featureList li svg {
+  color: var(--success-color, #10b981);
+  font-size: 1.1rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.enableBtn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.enableBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.enableBtn:active {
+  transform: translateY(0);
+}
+
+.laterBtn {
+  background: transparent;
+  color: var(--text-secondary, #999);
+  border: none;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.laterBtn:hover {
+  color: var(--text-primary, #333);
+}
+
+/* Dark mode support */
+body.dark .promptCard {
+  background: var(--bg-card-dark, #1a1a1a);
+}
+
+body.dark .title {
+  color: var(--text-primary-dark, #fff);
+}
+
+body.dark .description {
+  color: var(--text-secondary-dark, #aaa);
+}
+
+body.dark .featureList li {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary-dark, #fff);
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .promptCard {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .bellIcon {
+    font-size: 2rem;
+  }
+}
