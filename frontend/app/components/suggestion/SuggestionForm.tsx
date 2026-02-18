@@ -105,22 +105,40 @@ const SuggestionForm = () => {
   };
 
   return (
-    <form onSubmit={handleAddHabit} className={styles.form}>
+    <form
+      onSubmit={handleAddHabit}
+      className={styles.form}
+      noValidate
+      aria-label="Add new habit"
+      id="suggestion-form"
+    >
       <div className={styles.floatingInput}>
         <input
           id="habit-title"
+          name="habit-title"
           className={styles.TitleInput}
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder=" "
+          autoComplete="off"
+          maxLength={50}
+          minLength={3}
+          required
+          spellCheck="false"
+          aria-required="true"
+          aria-invalid={!!error}
+          aria-describedby={error ? "form-error" : undefined}
         />
         <label htmlFor="habit-title">Habit Title</label>
       </div>
 
       <div className={styles.pickerContainer}>
-        <label className={styles.inputLabel}>Habit Icon</label>
+        <label htmlFor="habit-icon" className={styles.inputLabel}>
+          Habit Icon
+        </label>
         <button
+          id="habit-icon"
           className={styles.iconPreviewBtn}
           onPointerDown={(e) => createRipple(e)}
           type="button"
@@ -152,12 +170,18 @@ const SuggestionForm = () => {
       <div className={styles.floatingInput}>
         <input
           id="habit-target"
+          name="habit-target"
           className={styles.TargetInput}
           type="number"
           value={target}
           onChange={(e) => setTarget(Number(e.target.value))}
           placeholder=" "
           aria-label="Habit target in days"
+          autoComplete="off"
+          required
+          min={1}
+          max={365}
+          aria-required="true"
         />
 
         <label htmlFor="habit-target">Habit Target</label>
@@ -173,7 +197,7 @@ const SuggestionForm = () => {
         Add New Habit
       </button>
       {error && (
-        <div className={styles.error} role="alert">
+        <div id="form-error" className={styles.error} role="alert">
           <FaExclamationCircle />
           <span>{error}</span>
         </div>
