@@ -4,7 +4,7 @@ import styles from "@/app/Styles/Tracker/EditDialog.module.css";
 import { useRipple } from "@/app/Hooks/useRipple";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-import { FaCheck, FaTimes, FaEdit } from "react-icons/fa";
+import { FaCheck, FaTimes, FaEdit, FaSmile } from "react-icons/fa";
 
 interface Habit {
   title: string;
@@ -150,21 +150,34 @@ const EditDialog: React.FC<EditDialogProps> = ({
                 </div>
 
                 <div className={styles.pickerContainer}>
+                  <label
+                    htmlFor="edit-habit-icon"
+                    className={styles.inputLabel}
+                  >
+                    Habit Icon
+                  </label>
                   <button
-                    className={styles.btn}
+                    id="edit-habit-icon"
+                    className={styles.iconPreviewBtn}
                     type="button"
                     onPointerDown={(e) => createRipple(e)}
                     onClick={() => setShowPicker(!showPicker)}
-                    title={icon ? `Selected: ${icon}` : "Show Emoji"}
+                    title={icon ? `Selected: ${icon}` : "Choose Habit Icon"}
                     aria-label={
                       icon
                         ? `Selected emoji: ${icon}. Click to change`
-                        : "Choose an emoji icon"
+                        : "Choose an emoji icon for your habit"
                     }
                     aria-expanded={showPicker}
                   >
-                    {/* {icon ? `Selected: ${icon}` : "Show Emoji"} */}
-                    {icon || "😀 Choose Emoji"}
+                    {icon ? (
+                      <span className={styles.selectedEmoji}>{icon}</span>
+                    ) : (
+                      <div className={styles.placeholderIcon}>
+                        <FaSmile />
+                        <small>Add Icon</small>
+                      </div>
+                    )}
                   </button>
                   {showPicker && (
                     <div className={styles.pickerWrapper} ref={pickerRef}>
