@@ -5,17 +5,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Prevent flashbang on hard reload — sets bg on <html> before JS runs */
-html {
-  background-color: #f5f7fa; /* light default */
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    background-color: #0f172a; /* dark default */
-  }
-}
-
 /* overrides for view transition */
 ::view-transition-new(root),
 ::view-transition-old(root) {

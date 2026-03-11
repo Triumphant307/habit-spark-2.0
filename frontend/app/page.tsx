@@ -31,11 +31,11 @@ const Home: React.FC = () => {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 0.5, ease: [0.215, 0.61, 0.355, 1] },
     },
   };
 
@@ -48,24 +48,88 @@ const Home: React.FC = () => {
     },
   };
 
+  const badgeVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (i: number) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: 0.5 + i * 0.1,
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    }),
+  };
+
   return (
     <>
       <section className={styles.section}>
+        <div className={styles.hero__bg} />
+
         <motion.div
           className={styles.home}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
+          {/* Floating Badges */}
+          <motion.div
+            className={`${styles.badge} ${styles.badge__1}`}
+            custom={0}
+            variants={badgeVariants}
+            animate={{
+              y: [0, -10, 0],
+              transition: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut" as const,
+              },
+            }}
+          >
+            ✨ Track Smart
+          </motion.div>
+          <motion.div
+            className={`${styles.badge} ${styles.badge__2}`}
+            custom={1}
+            variants={badgeVariants}
+            animate={{
+              y: [0, 10, 0],
+              transition: {
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut" as const,
+              },
+            }}
+          >
+            Grow Fast 📈
+          </motion.div>
+          <motion.div
+            className={`${styles.badge} ${styles.badge__3}`}
+            custom={2}
+            variants={badgeVariants}
+            animate={{
+              y: [0, -8, 0],
+              transition: {
+                duration: 4.5,
+                repeat: Infinity,
+                ease: "easeInOut" as const,
+                delay: 1,
+              },
+            }}
+          >
+            🎯 Goal Driven
+          </motion.div>
+
           <motion.h1 className={styles.home__title} variants={itemVariants}>
             Welcome to {isReturning ? "Back" : ""} <br />
             <span
               style={{
                 background:
-                  "linear-gradient(45deg, var(--btn-primary-bg), var(--status-success))",
+                  "linear-gradient(135deg, var(--btn-primary-bg) 0%, var(--status-success) 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 display: "inline-block",
+                filter: "drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))",
               }}
             >
               HabitSpark
@@ -76,7 +140,7 @@ const Home: React.FC = () => {
             variants={itemVariants}
           >
             {isReturning
-              ? "We are glad to see you again!"
+              ? "We are glad to see you again! Your consistency is paying off."
               : "Your journey to better habits starts here. Track your progress, get suggestions, and celebrate your achievements."}
           </motion.p>
           <motion.div className={styles.home__cta} variants={itemVariants}>
