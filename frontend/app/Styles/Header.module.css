@@ -2,9 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 2200;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
   margin: 20px;
   padding: 1rem 2rem;
@@ -14,7 +14,6 @@
   backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  /* transition: all 0.5s ease-in-out; */
 }
 
 .headerScrolled {
@@ -23,9 +22,23 @@
   opacity: 1;
 }
 
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-self: start;
+}
+
 .header__title {
   font-weight: bold;
   color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  justify-self: end;
 }
 
 .header__navlist {
@@ -42,7 +55,7 @@
 
 .headerNav {
   display: flex;
-  margin-left: auto;
+  justify-self: center;
 }
 
 .headerNav.open .header__navlist {
@@ -109,6 +122,23 @@
     border-radius: 0;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .header__left {
+    justify-self: start;
+  }
+
+  .header__right {
+    justify-self: end;
+  }
+
+  .headerNav {
+    display: none;
+  }
+
+  .headerNav.open {
+    display: block;
   }
 
   .header__navlist {
@@ -117,9 +147,9 @@
     left: 0;
     height: 100vh;
     width: 260px;
-    justify-content: space-between;
+    justify-content: start;
     flex-direction: column;
-    gap: 0;
+    gap: 2rem;
     padding: 10rem 1.5rem 2rem;
     background-color: var(--bg-page);
     border-right: 1px solid rgba(255, 255, 255, 0.18);

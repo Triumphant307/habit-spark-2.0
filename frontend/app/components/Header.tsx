@@ -59,19 +59,19 @@ const Header: React.FC = () => {
     <header
       className={`${Style.header} ${isScrolled ? Style.headerScrolled : ""}`}
     >
-       <button
-        className={`${Style.hamburger} ${isMenuOpen ? Style.open : ""}`}
-        onClick={toggleMenu}
-        aria-label="Toggle Menu"
-        ref={hamburgerRef}
-      >
-        <span className={Style.bar} />
-        <span className={Style.bar} />
-        <span className={Style.bar} />
-      </button>
-      <h1 className={Style.header__title}>HabitSpark</h1>
-
-     
+      <div className={Style.header__left}>
+        <button
+          className={`${Style.hamburger} ${isMenuOpen ? Style.open : ""}`}
+          onClick={toggleMenu}
+          aria-label="Toggle Menu"
+          ref={hamburgerRef}
+        >
+          <span className={Style.bar} />
+          <span className={Style.bar} />
+          <span className={Style.bar} />
+        </button>
+        <h1 className={Style.header__title}>HabitSpark</h1>
+      </div>
 
       <nav
         className={`${Style.headerNav} ${isMenuOpen ? Style.open : ""}`}
@@ -122,14 +122,12 @@ const Header: React.FC = () => {
               Tracker
             </Link>
           </li>
-          <li
-            className={Style.header__nav__item}
-            onClick={() => setIsMenuOpen(false)}
-          >
-          </li>
         </ul>
-        <ThemeToggle />
       </nav>
+
+      <div className={Style.header__right}>
+        <ThemeToggle />
+      </div>
     </header>
   );
 };
