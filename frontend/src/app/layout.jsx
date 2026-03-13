@@ -1,14 +1,14 @@
 import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import BackToTop from "@/app/components/BackToTop";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 import NextTopLoader from "nextjs-toploader";
-import NotificationInitializer from "@/app/components/NotificationInitializer";
-import NotificationSettings from "@/app/components/NotificationSettings";
-import ServiceWorkerRegister from "@/app/components/ServiceWorkerRegister";
-import UpdatePrompt from "@/app/components/UpdatePrompt";
-import ErrorBoundary from "@/app/components/ErrorBoundary";
+import NotificationInitializer from "@/components/NotificationInitializer";
+import NotificationSettings from "@/components/NotificationSettings";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import UpdatePrompt from "@/components/UpdatePrompt";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import styles from "@/app/Styles/Tracker/EditDialog.module.css";
-import { useRipple } from "@/app/Hooks/useRipple";
+import styles from "@/Styles/Tracker/EditDialog.module.css";
+import { useRipple } from "@/Hooks/useRipple";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { FaCheck, FaTimes, FaEdit, FaSmile } from "react-icons/fa";

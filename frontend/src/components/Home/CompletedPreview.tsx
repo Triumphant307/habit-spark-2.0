@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/app/Styles/Home/CompletedPreview.module.css";
+import styles from "@/Styles/Home/CompletedPreview.module.css";
 import Aos from "aos";
 import { useEffect } from "react";
 import ProgressTrack from "../ProgressTracker";

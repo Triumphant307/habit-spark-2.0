@@ -24,7 +24,7 @@
     ],
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     },
     "types": [
@@ -36,10 +36,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/tracker/page.tsx",
-    "app/layout.jsx",
-    "app/page.jsx",
-    "app/components/Ripple.tsx",
+    "src/app/tracker/page.tsx",
+    "src/app/layout.jsx",
+    "src/app/page.jsx",
+    "src/components/Ripple.tsx",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [

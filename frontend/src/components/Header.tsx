@@ -1,6 +1,6 @@
 "use client";
-import Style from "@/app/Styles/Header.module.css";
-import ThemeToggle from "@/app/Theme/ThemeToggle";
+import Style from "@/Styles/Header.module.css";
+import ThemeToggle from "@/Theme/ThemeToggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";

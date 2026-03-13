@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
-import style from "@/app/Styles/ThemeToggle.module.css";
-import useLocalStorage from "@/app/Hooks/useLocalStorage";
+import style from "@/Styles/ThemeToggle.module.css";
+import useLocalStorage from "@/Hooks/useLocalStorage";
 import { useEffect, useState } from "react";
 
 // View transition with bi-directional horizontal sweep animation for switching states in the document, eg. theme

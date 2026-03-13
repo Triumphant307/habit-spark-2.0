@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import styles from "@/app/Styles/Tracker/HabitNotFound.module.css";
+import styles from "@/Styles/Tracker/HabitNotFound.module.css";
 import { Planet } from "react-kawaii";
 
 const HabitNotFound: React.FC = () => {

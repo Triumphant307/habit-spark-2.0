@@ -1,7 +1,7 @@
 import { appState } from "../state/state";
 import type { Habit } from "../types/habit";
-import { generateId } from "@/app/utils/generateId";
-import { slugify } from "@/app/utils/slugify";
+import { generateId } from "@/utils/generateId";
+import { slugify } from "@/utils/slugify";
 import dayjs from "dayjs";
 
 /**

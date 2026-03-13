@@ -1,4 +1,4 @@
-import styles from "@/app/Styles/Tracker/Tracker.module.css";
+import styles from "@/Styles/Tracker/Tracker.module.css";
 
 export default function TrackerSkeleton() {
   return (

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBell, FaBellSlash, FaCheck, FaTimes } from "react-icons/fa";
-import { notificationService } from "@/app/services/notificationService";
+import { notificationService } from "@/services/notificationService";
 import styles from "./NotificationSettings.module.css";
 
 export default function NotificationSettings() {

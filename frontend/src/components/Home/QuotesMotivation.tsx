@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Aos from "aos";
-import styles from "@/app/Styles/Home/QuotesMotivation.module.css";
+import styles from "@/Styles/Home/QuotesMotivation.module.css";
 
 type Quote = {
   q: string;

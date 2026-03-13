@@ -1,10 +1,10 @@
 "use client";
-import styles from "@/app/Styles/Home/Home.module.css";
-import FeaturedHighlight from "@/app/components/Home/FeaturedHighlight";
-import QuotesMotivation from "@/app/components/Home/QuotesMotivation";
-import CompletedPreview from "@/app/components/Home/CompletedPreview";
-import LottieAnimation from "@/app/components/Home/LottieAniamtion";
-import { useRipple } from "@/app/Hooks/useRipple";
+import styles from "@/Styles/Home/Home.module.css";
+import FeaturedHighlight from "@/components/Home/FeaturedHighlight";
+import QuotesMotivation from "@/components/Home/QuotesMotivation";
+import CompletedPreview from "@/components/Home/CompletedPreview";
+import LottieAnimation from "@/components/Home/LottieAniamtion";
+import { useRipple } from "@/Hooks/useRipple";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { trackHomeVisit } from "@/core/intent/homeIntent";

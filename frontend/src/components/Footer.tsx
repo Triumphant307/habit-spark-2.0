@@ -1,4 +1,4 @@
-import styles from "@/app/Styles/Footer.module.css";
+import styles from "@/Styles/Footer.module.css";
 import Link from "next/link";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 

@@ -9,9 +9,9 @@ import {
   REINSTALL_FROM_VERSION,
   REINSTALL_MESSAGE,
   WHATS_NEW,
-} from "@/app/config/version";
-import styles from "@/app/Styles/UpdatePrompt.module.css";
-import { safeLocalStorage } from "@/app/utils/safeLocalStorage";
+} from "@/config/version";
+import styles from "@/Styles/UpdatePrompt.module.css";
+import { safeLocalStorage } from "@/utils/safeLocalStorage";
 
 const VERSION_KEY = "habitspark_installed_version";
 const DISMISSED_KEY = "habitspark_update_dismissed";
