@@ -1,12 +1,12 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { getTipsByCategory } from "@/app/utils/getTipsByCatergory";
-import Search from "@/app/components/suggestion/Search";
-import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
-import AnimatedTipCard from "@/app/components/suggestion/AnimatedTipCard";
+import { getTipsByCategory } from "@/utils/getTipsByCatergory";
+import Search from "@/components/suggestion/Search";
+import styles from "@/Styles/Suggestion/suggestionCard.module.css";
+import AnimatedTipCard from "@/components/suggestion/AnimatedTipCard";
 import { MdGridView, MdViewList } from "react-icons/md";
-import useLocalStorage from "@/app/Hooks/useLocalStorage";
-import { useRipple } from "@/app/Hooks/useRipple";
+import useLocalStorage from "@/Hooks/useLocalStorage";
+import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef } from "react";
 
 export interface Tip {

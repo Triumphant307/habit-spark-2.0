@@ -1,5 +1,5 @@
 import { FaCheck, FaUndoAlt, FaTrash, FaEdit } from "react-icons/fa";
-import { useRipple } from "@/app/Hooks/useRipple";
+import { useRipple } from "@/Hooks/useRipple";
 interface Habit {
   streak: number;
   target: number;

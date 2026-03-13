@@ -1,12 +1,12 @@
 "use client";
-import styles from "@/app/Styles/Tracker/Tracker.module.css";
+import styles from "@/Styles/Tracker/Tracker.module.css";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import TrackerCard from "./TrackerCard";
-import Search from "@/app/components/suggestion/Search";
+import Search from "@/components/suggestion/Search";
 import { useState, useRef, useEffect } from "react";
-import { useReactor } from "@/app/Hooks/useReactor";
-import { notificationService } from "@/app/services/notificationService";
+import { useReactor } from "@/Hooks/useReactor";
+import { notificationService } from "@/services/notificationService";
 import dayjs from "dayjs";
 import { Habit } from "@/core/types/habit";
 

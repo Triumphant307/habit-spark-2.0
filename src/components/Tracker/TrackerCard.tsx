@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import ProgressTrack from "@/app/components/ProgressTracker";
-import style from "@/app/Styles/Tracker/TrackerCard.module.css";
-import { useRipple } from "@/app/Hooks/useRipple";
+import ProgressTrack from "@/components/ProgressTracker";
+import style from "@/Styles/Tracker/TrackerCard.module.css";
+import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useEffect } from "react";
 import { Habit } from "@/core/types/habit";
 import {
@@ -10,11 +10,11 @@ import {
   reorderHabitIntent,
 } from "@/core/intent/habitIntents";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
-import { notificationService } from "@/app/services/notificationService";
+import { notificationService } from "@/services/notificationService";
 import dayjs from "dayjs";
-import toast from "@/app/utils/toast";
+import toast from "@/utils/toast";
 import confetti from "canvas-confetti";
-import logger from "@/app/utils/logger";
+import logger from "@/utils/logger";
 
 interface TrackerCardProps {
   habits: Habit[];

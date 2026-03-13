@@ -1,19 +1,19 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
-import { Tip } from "@/app/components/suggestion/SuggestionCard";
+import { Tip } from "@/components/suggestion/SuggestionCard";
 import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
-import { useReactor } from "@/app/Hooks/useReactor";
+import { useReactor } from "@/Hooks/useReactor";
 import { addHabitIntent, deleteHabitIntent } from "@/core/intent/habitIntents";
-import { useRipple } from "@/app/Hooks/useRipple";
-import styles from "@/app/Styles/Suggestion/suggestionCard.module.css";
-import toast from "@/app/utils/toast";
-import logger from "@/app/utils/logger";
+import { useRipple } from "@/Hooks/useRipple";
+import styles from "@/Styles/Suggestion/suggestionCard.module.css";
+import toast from "@/utils/toast";
+import logger from "@/utils/logger";
 import Link from "next/link";
 import { Habit } from "@/core/types/habit";
-import { slugify } from "@/app/utils/slugify";
-import { generateId } from "@/app/utils/generateId";
+import { slugify } from "@/utils/slugify";
+import { generateId } from "@/utils/generateId";
 import { useRef } from "react";
 
 interface AnimatedTipCardProps {

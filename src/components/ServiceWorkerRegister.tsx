@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import logger from "@/app/utils/logger";
+import logger from "@/utils/logger";
 
 export default function ServiceWorkerRegister() {
   useEffect(() => {

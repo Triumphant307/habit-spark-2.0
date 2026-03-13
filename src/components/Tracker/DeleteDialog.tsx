@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import styles from "@/app/Styles/Tracker/DeleteDialog.module.css";
-import { useRipple } from "@/app/Hooks/useRipple";
+import styles from "@/Styles/Tracker/DeleteDialog.module.css";
+import { useRipple } from "@/Hooks/useRipple";
 import { FaExclamationTriangle, FaTrash, FaTimes } from "react-icons/fa";
 
 interface DeleteDialogProp {

@@ -2,7 +2,7 @@
  * Centralized Logger Utility
  *
  * Usage:
- *   import { logger } from '@/app/utils/logger';
+ *   import { logger } from '@/utils/logger';
  *   logger.info('User logged in');
  *   logger.warn('API slow response');
  *   logger.error('Failed to save habit', error);
