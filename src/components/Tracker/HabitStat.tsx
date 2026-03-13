@@ -1,4 +1,4 @@
-import ProgressTrack from "@/components/ProgressTracker";
+import ProgressTrack from "@/components/UI/ProgressTracker";
 
 interface Habit {
   target: number;

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
-import style from "@/Styles/ThemeToggle.module.css";
+import style from "@/Styles/Layout/ThemeToggle.module.css";
 import useLocalStorage from "@/Hooks/useLocalStorage";
 import { useEffect, useState } from "react";
 

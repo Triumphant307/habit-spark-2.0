@@ -4,7 +4,7 @@ import React, { Component, ErrorInfo, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { FaExclamationTriangle, FaRedo, FaHome } from "react-icons/fa";
 import logger from "@/utils/logger";
-import styles from "@/Styles/ErrorBoundary.module.css";
+import styles from "@/Styles/Core/ErrorBoundary.module.css";
 
 interface Props {
   children: ReactNode;

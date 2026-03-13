@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import ProgressTrack from "@/components/ProgressTracker";
+import ProgressTrack from "@/components/UI/ProgressTracker";
 import style from "@/Styles/Tracker/TrackerCard.module.css";
 import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useEffect } from "react";

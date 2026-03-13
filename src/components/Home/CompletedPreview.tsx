@@ -3,7 +3,7 @@
 import styles from "@/Styles/Home/CompletedPreview.module.css";
 import Aos from "aos";
 import { useEffect } from "react";
-import ProgressTrack from "../ProgressTracker";
+import ProgressTrack from "../UI/ProgressTracker";
 
 
 interface Habit {

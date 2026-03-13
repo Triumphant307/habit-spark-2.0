@@ -1,13 +1,13 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
-import { Tip } from "@/components/suggestion/SuggestionCard";
-import { motion } from "framer-motion";
+import { Tip } from "@/components/Suggestion/SuggestionCard";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { useReactor } from "@/Hooks/useReactor";
 import { addHabitIntent, deleteHabitIntent } from "@/core/intent/habitIntents";
 import { useRipple } from "@/Hooks/useRipple";
-import styles from "@/Styles/Suggestion/suggestionCard.module.css";
+import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
 import Link from "next/link";

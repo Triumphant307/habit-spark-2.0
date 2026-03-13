@@ -1,5 +1,5 @@
 "use client";
-import Style from "@/Styles/Header.module.css";
+import Style from "@/Styles/Layout/Header.module.css";
 import ThemeToggle from "@/Theme/ThemeToggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

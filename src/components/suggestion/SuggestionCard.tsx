@@ -1,9 +1,10 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { getTipsByCategory } from "@/utils/getTipsByCatergory";
-import Search from "@/components/suggestion/Search";
-import styles from "@/Styles/Suggestion/suggestionCard.module.css";
-import AnimatedTipCard from "@/components/suggestion/AnimatedTipCard";
+import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
+import Search from "@/components/Suggestion/Search";
+import { ToastContainer, toast } from "react-toastify";
+import AnimatedTipCard from "@/components/Suggestion/AnimatedTipCard";
 import { MdGridView, MdViewList } from "react-icons/md";
 import useLocalStorage from "@/Hooks/useLocalStorage";
 import { useRipple } from "@/Hooks/useRipple";

@@ -1,8 +1,8 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import BackToTop from "@/components/BackToTop";
-import { Providers } from "@/components/Providers";
-import { ThemeInitializer } from "@/components/ThemeInitializer";
+import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer";
+import BackToTop from "@/components/Layout/BackToTop";
+import { Providers } from "@/components/Layout/Providers";
+import { ThemeInitializer } from "@/components/Core/ThemeInitializer";
 
 import "./globals.css";
 import "aos/dist/aos.css";
