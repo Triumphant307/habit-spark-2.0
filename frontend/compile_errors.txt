@@ -1,6 +1,0 @@
-.next/types/validator.ts(27,39): error TS2307: Cannot find module '../../app/habit/[slug]/page.js' or its corresponding type declarations.
-.next/types/validator.ts(36,39): error TS2307: Cannot find module '../../app/page.js' or its corresponding type declarations.
-.next/types/validator.ts(45,39): error TS2307: Cannot find module '../../app/suggestion/page.js' or its corresponding type declarations.
-.next/types/validator.ts(54,39): error TS2307: Cannot find module '../../app/tracker/page.js' or its corresponding type declarations.
-src/app/tracker/page.tsx(3,29): error TS2307: Cannot find module '../components/Tracker/TrackerSkeleton' or its corresponding type declarations.
-src/app/tracker/page.tsx(8,16): error TS2307: Cannot find module '../components/Tracker/TrackerClient' or its corresponding type declarations.
