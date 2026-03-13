@@ -6,9 +6,16 @@ import CompletedPreview from "@/components/Home/CompletedPreview";
 import LottieAnimation from "@/components/Home/LottieAniamtion";
 import { useRipple } from "@/Hooks/useRipple";
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { trackHomeVisit } from "@/core/intent/homeIntent";
 import { useEffect, useState } from "react";
+
+import {
+  containerVariants,
+  itemVariants,
+  fadeInUpVariants,
+  badgeVariants,
+} from "@/components/Home/HomeAnimations";
 
 const Home: React.FC = () => {
   const createRipple = useRipple();
@@ -18,48 +25,6 @@ const Home: React.FC = () => {
     const returning = trackHomeVisit();
     setIsReturning(returning);
   }, []);
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: [0.215, 0.61, 0.355, 1] },
-    },
-  };
-
-  const fadeInUpVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
-  const badgeVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delay: 0.5 + i * 0.1,
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    }),
-  };
 
   return (
     <>
@@ -122,18 +87,7 @@ const Home: React.FC = () => {
 
           <motion.h1 className={styles.home__title} variants={itemVariants}>
             Welcome to {isReturning ? "Back" : ""} <br />
-            <span
-              style={{
-                background:
-                  "linear-gradient(135deg, var(--btn-primary-bg) 0%, var(--status-success) 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                display: "inline-block",
-                filter: "drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))",
-              }}
-            >
-              HabitSpark
-            </span>
+            <span className={styles.home__titleSpan}>HabitSpark</span>
           </motion.h1>
           <motion.p
             className={styles.home__description}
