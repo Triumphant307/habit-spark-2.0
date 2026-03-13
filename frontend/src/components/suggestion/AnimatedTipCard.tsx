@@ -1,7 +1,7 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
-import { Tip } from "./SuggestionCard";
+import { Tip } from "@/components/Suggestion/SuggestionCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { useReactor } from "@/Hooks/useReactor";
