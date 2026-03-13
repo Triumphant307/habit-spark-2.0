@@ -1,5 +1,5 @@
 "use client";
-import styles from "../Styles/Completed.module.css";
+import styles from "@/Styles/Completed.module.css";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaHardHat, FaTools, FaTrafficLight } from "react-icons/fa";
