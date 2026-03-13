@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import style from "@/app/Styles/Tracker/HabitDetails.module.css";
+import style from "@/Styles/Tracker/HabitDetails.module.css";
 import { useParams, useRouter } from "next/navigation";
-import HabitHistory from "@/app/components/Tracker/HabitHistory";
-import HabitAction from "@/app/components/Tracker/HabitAction";
-import HabitStat from "@/app/components/Tracker/HabitStat";
-import DeleteDialog from "@/app/components/Tracker/DeleteDialog";
-import EditDialog from "@/app/components/Tracker/EditDialog";
-import HabitNotFound from "@/app/components/Tracker/HabitNotFound";
+import HabitHistory from "@/components/Tracker/HabitHistory";
+import HabitAction from "@/components/Tracker/HabitAction";
+import HabitStat from "@/components/Tracker/HabitStat";
+import DeleteDialog from "@/components/Tracker/DeleteDialog";
+import EditDialog from "@/components/Tracker/EditDialog";
+import HabitNotFound from "@/components/Tracker/HabitNotFound";
 import {
   resetHabitIntent,
   updateHabitIntent,
@@ -17,11 +17,11 @@ import {
   completeHabitIntent,
 } from "@/core/intent/habitIntents";
 import { findHabitBySlug } from "@/core/intent/habitIntents";
-import { useReactor } from "@/app/Hooks/useReactor";
-import toast from "@/app/utils/toast";
-import logger from "@/app/utils/logger";
+import { useReactor } from "@/Hooks/useReactor";
+import toast from "@/utils/toast";
+import logger from "@/utils/logger";
 import confetti from "canvas-confetti";
-import { notificationService } from "@/app/services/notificationService";
+import { notificationService } from "@/services/notificationService";
 import Link from "next/link";
 import dayjs from "dayjs";
 
