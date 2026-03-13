@@ -69,6 +69,19 @@
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
+.home__titleSpan {
+  background: linear-gradient(
+    135deg,
+    var(--btn-primary-bg) 0%,
+    var(--status-success) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+}
+
 .home__button {
   position: relative;
   overflow: hidden;
