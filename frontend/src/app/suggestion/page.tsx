@@ -1,6 +1,6 @@
 import styles from "@/Styles/Suggestion/Suggestion.module.css";
-import SuggestionCard from "@/components/suggestion/SuggestionCard";
-import SuggestionForm from "@/components/suggestion/SuggestionForm";
+import SuggestionCard from "@/components/Suggestion/SuggestionCard";
+import SuggestionForm from "@/components/Suggestion/SuggestionForm";
 
 const Suggestions = () => {
   return (

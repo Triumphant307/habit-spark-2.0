@@ -3,11 +3,11 @@
 import { ToastContainer, Slide } from "react-toastify";
 import NextTopLoader from "nextjs-toploader";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import NotificationInitializer from "@/components/NotificationInitializer";
-import NotificationSettings from "@/components/NotificationSettings";
-import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
-import UpdatePrompt from "@/components/UpdatePrompt";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import NotificationInitializer from "@/components/PWA/NotificationInitializer";
+import NotificationSettings from "@/components/PWA/NotificationSettings";
+import ServiceWorkerRegister from "@/components/PWA/ServiceWorkerRegister";
+import UpdatePrompt from "@/components/PWA/UpdatePrompt";
+import ErrorBoundary from "@/components/Core/ErrorBoundary";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

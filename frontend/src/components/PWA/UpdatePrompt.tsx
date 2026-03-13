@@ -10,7 +10,7 @@ import {
   REINSTALL_MESSAGE,
   WHATS_NEW,
 } from "@/config/version";
-import styles from "@/Styles/UpdatePrompt.module.css";
+import styles from "@/Styles/PWA/UpdatePrompt.module.css";
 import { safeLocalStorage } from "@/utils/safeLocalStorage";
 
 const VERSION_KEY = "habitspark_installed_version";
