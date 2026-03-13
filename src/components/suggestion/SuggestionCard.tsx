@@ -2,9 +2,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { getTipsByCategory } from "@/utils/getTipsByCatergory";
 import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
-import Search from "@/components/Suggestion/Search";
+import Search from "./Search";
 import { ToastContainer, toast } from "react-toastify";
-import AnimatedTipCard from "@/components/Suggestion/AnimatedTipCard";
+import AnimatedTipCard from "./AnimatedTipCard";
 import { MdGridView, MdViewList } from "react-icons/md";
 import useLocalStorage from "@/Hooks/useLocalStorage";
 import { useRipple } from "@/Hooks/useRipple";
