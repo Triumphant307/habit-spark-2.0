@@ -3,7 +3,7 @@ import styles from "@/Styles/Tracker/Tracker.module.css";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import TrackerCard from "./TrackerCard";
-import Search from "@/components/Suggestion/Search";
+import Search from "../Suggestion/Search";
 import { useState, useRef, useEffect } from "react";
 import { useReactor } from "@/Hooks/useReactor";
 import { notificationService } from "@/services/notificationService";
