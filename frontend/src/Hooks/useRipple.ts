@@ -32,8 +32,8 @@ export function useRipple() {
         : (e.clientY - rect.top) * (rH / rect.height) - size / 2;
       const wrapper = document.createElement("span");
       const ripple = document.createElement("span");
-      wrapper.className = "ripple-container";
-      ripple.className = "ripple hold";
+      wrapper.className = "Ripple_Container";
+      ripple.className = "Ripple_Element Hold";
       ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
       let canRelease = false;
       ripple.addEventListener("animationend", () => (canRelease = true), {
@@ -46,7 +46,7 @@ export function useRipple() {
           return ripple.addEventListener("animationend", release, {
             once: true,
           });
-        ripple.classList.replace("hold", "fade");
+        ripple.classList.replace("Hold", "Fade");
         ripple.addEventListener("animationend", () => {
           ("requestIdleCallback" in window ? requestIdleCallback : setTimeout)(
             () => wrapper.remove()

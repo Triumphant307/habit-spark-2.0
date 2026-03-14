@@ -1,60 +1,61 @@
-.footer {
-  background-color: var(--bg-card);
-  color: var(--text-secondary);
-  padding: 2rem 1rem;
+.Footer_Container {
+  background-color: var(--color-surface-card);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-3xl) var(--spacing-lg);
   text-align: center;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
   margin-top: auto;
+  border-top: 1px solid var(--border-color-base);
 }
 
-.brand {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+.Footer_Brand {
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
 }
 
-.navLinks {
+.Footer_NavLinks {
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--spacing-lg);
   flex-wrap: wrap;
   padding: 0;
-  margin: 1rem 0;
+  margin: var(--spacing-lg) 0;
 }
 
-.navLinks a {
+.Footer_NavLinks a {
   text-decoration: none;
-  color: var(--text-secondary);
-  transition: color 0.3s;
+  color: var(--color-text-secondary);
+  transition: var(--animation-transition-fast);
 }
 
-.navLinks a:hover {
-  color: var(--text-primary);
+.Footer_NavLinks a:hover {
+  color: var(--color-text-primary);
 }
 
-.socials {
+.Footer_Socials {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin: 1rem 0;
+  gap: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
 }
 
-.socials a {
-  color: var(--text-secondary);
-  font-size: 1.5rem;
-  transition: color 0.3s;
+.Footer_Socials a {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-2xl);
+  transition: var(--animation-transition-fast);
 }
 
-.socials a:hover {
-  color: var(--text-primary);
+.Footer_Socials a:hover {
+  color: var(--color-brand-primary);
 }
 
-.credit {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+.Footer_Credit {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
 }
 
-.heart {
-  color: red;
+.Footer_HeartIcon {
+  color: var(--color-status-error);
 }

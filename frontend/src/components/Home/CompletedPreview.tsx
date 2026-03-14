@@ -5,7 +5,6 @@ import Aos from "aos";
 import { useEffect } from "react";
 import ProgressTrack from "../UI/ProgressTracker";
 
-
 interface Habit {
   icon: string;
   title: string;
@@ -14,27 +13,29 @@ interface Habit {
 }
 
 const CompletedPreview: React.FC = () => {
-  const habits : Habit[] = [
+  const habits: Habit[] = [
     { icon: "💧", title: "Drink Water", streak: 30, target: 30 },
     { icon: "📚", title: "Read Book", streak: 3, target: 30 },
-    { icon: "🏃", title: "Exercise", streak: 5, target: 30 },
+    { icon: "🚴", title: "Exercise", streak: 5, target: 30 },
   ];
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
-  });
+  }, []);
 
   return (
-    <section className={styles.completedPreview}>
-      <h2 className={styles.title}>Complete Habits Preview </h2>
-      <div className={styles.habits} data-aos="fade-up" data-aos-delay="200">
+    <section className={styles.CompletedPreview_Container}>
+      <h2 className={styles.CompletedPreview_Title}>Recently Completed Habits</h2>
+      <div className={styles.CompletedPreview_Grid} data-aos="fade-up" data-aos-delay="200">
         {habits.map((habit, index) => {
           const progress = Math.round((habit.streak / habit.target) * 100);
           return (
-            <div key={index} className={styles.habit}>
-              <div className={styles.icon}>{habit.icon}</div>
-              <h3 className={styles.habitTitle}>{habit.title}</h3>
-              <p className={styles.streak}>{habit.streak} days</p>
+            <div key={index} className={styles.CompletedPreview_Item}>
+              <div className={styles.CompletedPreview_Icon}>{habit.icon}</div>
+              <h3 className={styles.CompletedPreview_ItemTitle}>{habit.title}</h3>
+              <p className={styles.CompletedPreview_Streak}>
+                {habit.streak} days
+              </p>
               <ProgressTrack radius={65} stroke={8} progress={progress} />
             </div>
           );

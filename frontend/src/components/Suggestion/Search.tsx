@@ -1,5 +1,5 @@
 "use client";
-import style from "@/Styles/Suggestion/SearchBar.module.css";
+import styles from "@/Styles/Suggestion/SearchBar.module.css";
 import React, { useRef } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 
@@ -27,8 +27,8 @@ const Search: React.FC<SearchProps> = ({
   };
 
   return (
-    <div className={style.searchWrapper}>
-      <FaSearch className={style.iconLeft} aria-hidden="true" />
+    <div className={styles.SearchBar_Container}>
+      <FaSearch className={styles.SearchBar_Icon} aria-hidden="true" />
       <input
         id="habit-search"
         name="habit-search"
@@ -36,7 +36,7 @@ const Search: React.FC<SearchProps> = ({
         ref={inputRef}
         onKeyDown={handleKeyDown}
         placeholder="Search for a habit..."
-        className={style.searchBar}
+        className={styles.SearchBar_Input}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         aria-label="Search habits"
@@ -45,7 +45,7 @@ const Search: React.FC<SearchProps> = ({
       {searchQuery && (
         <button
           onClick={handleClear}
-          className={style.clearButton}
+          className={styles.SearchBar_ClearButton}
           aria-label="Clear search"
         >
           <FaTimes title="clear" aria-hidden="true" />

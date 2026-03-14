@@ -5,15 +5,15 @@ import { Planet } from "react-kawaii";
 
 const HabitNotFound: React.FC = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.HabitNotFound_Container}>
       <Planet size={200} mood="ko" color="#FCCB7E" />
-      <h1 className={styles.title}>Habit Not Found</h1>
-      <p className={styles.message}>
+      <h1 className={styles.HabitNotFound_Title}>Habit Not Found</h1>
+      <p className={styles.HabitNotFound_Message}>
         Oops! We couldn't find the habit you're looking for. It might have been
         deleted or you may have followed a broken link.
       </p>
       <Link href="/tracker">
-        <button className={styles.button}>Go Back to Tracker</button>
+        <button className={styles.HabitNotFound_Button}>Go Back to Tracker</button>
       </Link>
     </div>
   );

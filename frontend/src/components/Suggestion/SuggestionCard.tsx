@@ -5,7 +5,7 @@ import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import Search from "@/components/Suggestion/Search";
 import { ToastContainer, toast } from "react-toastify";
 import AnimatedTipCard from "@/components/Suggestion/AnimatedTipCard";
-import { MdGridView, MdViewList } from "react-icons/md";
+import { FaThLarge, FaList } from "react-icons/fa";
 import useLocalStorage from "@/Hooks/useLocalStorage";
 import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef } from "react";
@@ -33,7 +33,6 @@ const SuggestionCard: React.FC = () => {
   );
 
   const resultRef = useRef(null);
-
   const createRipple = useRipple();
 
   const categories = [
@@ -54,10 +53,6 @@ const SuggestionCard: React.FC = () => {
           tip.title.toLowerCase().includes(searchQuery.toLowerCase()),
         );
 
-  const toogleViewMode = () => {
-    setViewMode((prev) => (prev === "grid" ? "list" : "grid"));
-  };
-
   return (
     <>
       <Search
@@ -65,85 +60,71 @@ const SuggestionCard: React.FC = () => {
         setSearchQuery={setSearchQuery}
         resultRef={resultRef}
       />
-      <div className={styles.viewToggle}>
+      <div className={styles.SuggestionCard_ViewToggle}>
         <button
-          className={viewMode === "grid" ? styles.active : ""}
-          onClick={toogleViewMode}
-          onPointerDown={(e) => createRipple(e)}
+          className={viewMode === "grid" ? styles.SuggestionCard_ViewToggle_Active : ""}
+          onClick={() => setViewMode("grid")}
           aria-label="Grid View"
-          title="Toogle grid"
+          title="Toggle grid"
         >
-          <MdGridView size={20} />
+          <FaThLarge />
         </button>
         <button
-          className={viewMode === "list" ? styles.active : ""}
+          className={viewMode === "list" ? styles.SuggestionCard_ViewToggle_Active : ""}
           onClick={() => setViewMode("list")}
-          onPointerDown={(e) => createRipple(e)}
           aria-label="List View"
-          title="Toogle List"
+          title="Toggle List"
         >
-          <MdViewList size={20} />
+          <FaList />
         </button>
       </div>
 
-      <div className={styles.filterButtons}>
-        {categories.map((catergory) => (
+      <div className={styles.SuggestionCard_FilterContainer}>
+        {categories.map((category) => (
           <button
-            ref={resultRef}
-            key={catergory}
+            key={category}
             type="button"
-            onClick={() => setFilter(catergory)}
-            onPointerDown={(e) => createRipple(e)}
-            className={filter === catergory ? styles.active : ""}
-            aria-pressed={filter === catergory}
+            onClick={() => setFilter(category)}
+            className={filter === category ? styles.SuggestionCard_Filter_Active : ""}
+            aria-pressed={filter === category}
           >
-            {catergory === "Favorites"
-              ? `❤️ Favorites${
-                  favorites.length > 0 ? ` (${favorites.length})` : ""
-                }`
-              : catergory}
+            {category}
+            {category === "Favorites" && favorites.length > 0 && (
+              <span className={styles.SuggestionCard_Badge}>
+                {favorites.length}
+              </span>
+            )}
           </button>
         ))}
       </div>
 
-      <div
-        className={styles.tipCard}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          marginTop: "30px",
-          gap: "20px",
-        }}
-      >
+      <div className={`${styles.SuggestionCard_Grid} ${viewMode === "list" ? styles.SuggestionCard_Grid_List : ""}`}>
         {filteredTips.length === 0 ? (
-          <>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={styles.noResults}
-            >
-              <span style={{ fontSize: "2rem" }}>
-                {filter === "Favorites" ? "💔" : searchQuery ? "🔎" : "📋"}
-              </span>
-              <p>
-                {filter === "Favorites"
-                  ? "Your favorites list is empty"
-                  : searchQuery
-                    ? `No results for "${searchQuery}"`
-                    : `No ${filter === "All" ? "suggestions" : filter.toLowerCase() + " habits"} available`}
-              </p>
-              <small>
-                {filter === "Favorites"
-                  ? "Tap the ❤️ heart icon on any suggestion to save it here"
-                  : searchQuery
-                    ? "Try checking your spelling or using different keywords"
-                    : filter !== "All"
-                      ? `Browse other categories or check back soon for ${filter.toLowerCase()} habits`
-                      : "New suggestions are added regularly. Check back soon!"}
-              </small>
-            </motion.div>
-          </>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={styles.SuggestionCard_NoResults}
+          >
+            <span style={{ fontSize: "2rem" }}>
+              {filter === "Favorites" ? "💔" : searchQuery ? "🔎" : "📋"}
+            </span>
+            <p>
+              {filter === "Favorites"
+                ? "Your favorites list is empty"
+                : searchQuery
+                  ? `No results for "${searchQuery}"`
+                  : `No ${filter === "All" ? "suggestions" : filter.toLowerCase() + " habits"} available`}
+            </p>
+            <small>
+              {filter === "Favorites"
+                ? "Tap the ❤️ heart icon on any suggestion to save it here"
+                : searchQuery
+                  ? "Try checking your spelling or using different keywords"
+                  : filter !== "All"
+                    ? `Browse other categories or check back soon for ${filter.toLowerCase()} habits`
+                    : "New suggestions are added regularly. Check back soon!"}
+            </small>
+          </motion.div>
         ) : (
           <AnimatePresence>
             {filteredTips.map((tip) => (

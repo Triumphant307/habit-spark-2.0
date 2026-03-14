@@ -1,79 +1,95 @@
-.themeToggle {
-  width: 56px;
-  height: 30px;
-  border-radius: 999px;
-  border: none;
+.ThemeToggle_Container {
+  width: 64px;
+  height: 32px;
+  border-radius: var(--shape-radius-md);
+  border: 1px solid var(--border-color-muted, rgba(255, 255, 255, 0.1));
   cursor: pointer;
   position: relative;
-  background: var(--toggle-bg);
-  transition: background 0.35s ease;
+  background: var(--color-surface-hover);
+  transition: var(--animation-transition-smooth);
   isolation: isolate;
-  overflow: hidden;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.light {
-  --toggle-bg: #e5e7eb;
+:global(.dark) .ThemeToggle_Container {
+  background: var(--color-surface-muted);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
-.dark {
-  --toggle-bg: #111827;
-}
-
-.bgIcon {
+.ThemeToggle_BackgroundIcon {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  opacity: 0.55;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-md);
+  opacity: 0.4;
+  transition: var(--animation-transition-smooth);
   pointer-events: none;
+  color: var(--color-text-muted);
 }
 
-.dark .bgIcon {
-  transform: translateX(-12px) scale(0.9);
+:global(.dark) .ThemeToggle_BackgroundIcon {
+  opacity: 0.7;
+  color: #fff;
 }
 
-.light .bgIcon {
-  transform: translateX(12px) scale(0.9);
-}
-
-.knob {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: white;
+.ThemeToggle_Knob {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--shape-radius-md);
+  background: var(--color-surface-pure-white);
   position: absolute;
-  top: 4px;
-  left: 4px;
-  display: grid;
-  place-items: center;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  z-index: 1;
+  top: 2px;
+  left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: var(--z-index-layer-base);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
 }
 
-.dark .knob {
+:global(.dark) .ThemeToggle_Knob {
+  transform: translateX(32px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 15px rgba(129, 140, 248, 0.4);
+}
+
+.ThemeToggle_KnobIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease;
+  color: var(--color-brand-primary);
+}
+
+:global(.dark) .ThemeToggle_KnobIcon {
+  color: #1e293b;
+  transform: rotate(360deg);
+}
+
+.ThemeToggle_Container:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+}
+
+.ThemeToggle_Container:active .ThemeToggle_Knob {
+  width: 32px;
+}
+
+:global(.dark) .ThemeToggle_Container:active .ThemeToggle_Knob {
   transform: translateX(26px);
-  box-shadow: 0 0 10px rgba(129, 140, 248, 0.6);
-}
-
-.knobIcon {
-  display: grid;
-  place-items: center;
-  transition: transform 0.35s ease, opacity 0.25s ease;
-}
-
-.light .knobIcon {
-  transform: scale(1);
-}
-
-.dark .knobIcon {
-  transform: scale(1.05);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .knob,
-  .knobIcon,
-  .bgIcon {
+  .ThemeToggle_Knob,
+  .ThemeToggle_KnobIcon,
+  .ThemeToggle_BackgroundIcon {
     transition: none;
   }
 }

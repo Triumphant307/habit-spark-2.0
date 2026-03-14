@@ -1,72 +1,65 @@
-.tracker {
+.Tracker {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   max-height: 100%;
-  padding: 50px;
+  padding: var(--spacing-7xl); /* Roughly 50px */
 }
 
-.title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 1.5rem;
+.Tracker_Title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2xl);
   text-align: center;
 }
 
-.noResults {
+.Tracker_NoResults {
   text-align: center;
-  padding: 2.5rem 1.5rem;
-  color: var(--text-primary);
-  border-radius: 1rem;
-  background-color: var(--bg-card);
-  max-width: 500px;
-  margin: 3rem auto;
-  box-shadow: var(--box-shadow);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  padding: var(--spacing-4xl) var(--spacing-2xl);
+  color: var(--color-text-primary);
+  border-radius: var(--shape-radius-xl);
+  background-color: var(--color-surface-card);
+  max-width: 500px; /* Custom width remains literal or add token if used elsewhere */
+  margin: var(--spacing-5xl) auto;
+  box-shadow: var(--shadow-elevation-md);
+  transition: var(--animation-transition-base);
 }
 
-.noResults:hover {
+.Tracker_NoResults:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-interaction-card-soft);
 }
 
-.goSuggestBtn {
-  margin-top: 1.5rem;
+.Tracker_SuggestButton {
+  margin-top: var(--spacing-2xl);
   display: inline-block;
-  padding: 0.6rem 1.25rem;
-  background-color: var(--btn-primary-bg);
-  color: #fff;
-  border-radius: 8px;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background-color: var(--color-button-primary-background);
+  color: var(--color-button-primary-text);
+  border-radius: var(--shape-radius-md);
   text-decoration: none;
-  font-weight: 500;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
+  font-weight: var(--font-weight-medium);
+  transition: var(--animation-transition-base);
 }
 
-.goSuggestBtn:hover {
-  background-color: var(
-    --btn-primary-bg-hover,
-    #4f46e5
-  ); /* Fallback if var not set */
+.Tracker_SuggestButton:hover {
+  background-color: var(--color-brand-indigo);
   transform: scale(1.03);
 }
 
 @media (max-width: 600px) {
-  .title {
-    font-size: 1.5rem;
+  .Tracker_Title {
+    font-size: var(--font-size-2xl);
   }
 
-  .noResults {
-    padding: 2rem 1rem;
-    margin: 2rem 1rem;
+  .Tracker_NoResults {
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    margin: var(--spacing-3xl) var(--spacing-lg);
   }
 
-  .goSuggestBtn {
+  .Tracker_SuggestButton {
     width: 100%;
     text-align: center;
   }
@@ -82,74 +75,74 @@
   }
 }
 
-.searchSkeleton,
-.cardSkeleton {
-  background: var(--bg-card);
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: var(--box-shadow);
+.Tracker_SearchSkeleton,
+.Tracker_CardSkeleton {
+  background: var(--color-surface-card);
+  border-radius: var(--shape-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-elevation-md);
 }
 
-.searchSkeleton {
-  max-width: 600px;
+.Tracker_SearchSkeleton {
+  max-width: var(--width-container-standard);
   width: 100%;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto var(--spacing-2xl);
 }
 
-.skeletonGrid {
+.Tracker_SkeletonGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  gap: var(--spacing-2xl);
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--width-container-page);
 }
 
-.skeletonBar,
-.skeletonTitle,
-.skeletonText {
-  background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+.Tracker_SkeletonBar,
+.Tracker_SkeletonTitle,
+.Tracker_SkeletonText {
+  background: linear-gradient(90deg, var(--color-surface-muted) 0%, var(--color-surface-hover) 50%, var(--color-surface-muted) 100%);
   background-size: 2000px 100%;
   animation: shimmer 2s infinite linear;
-  border-radius: 6px;
+  border-radius: var(--shape-radius-sm);
 }
 
-.skeletonBar {
+.Tracker_SkeletonBar {
   height: 48px;
   width: 100%;
 }
 
-.skeletonTitle {
+.Tracker_SkeletonTitle {
   height: 24px;
   width: 70%;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--spacing-md);
 }
 
-.skeletonText {
+.Tracker_SkeletonText {
   height: 16px;
   width: 90%;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-sm);
 }
 
-.skeletonText:last-child {
+.Tracker_SkeletonText:last-child {
   width: 60%;
 }
 
 /* Dark mode skeleton styles */
-body.dark .skeletonBar,
-body.dark .skeletonTitle,
-body.dark .skeletonText {
-  background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+html.dark .Tracker_SkeletonBar,
+html.dark .Tracker_SkeletonTitle,
+html.dark .Tracker_SkeletonText {
+  background: linear-gradient(90deg, var(--color-surface-muted) 0%, var(--color-surface-hover) 50%, var(--color-surface-muted) 100%);
   background-size: 2000px 100%;
 }
 
 @media (max-width: 600px) {
-  .skeletonGrid {
+  .Tracker_SkeletonGrid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--spacing-lg);
   }
 
-  .searchSkeleton {
-    margin-bottom: 1rem;
+  .Tracker_SearchSkeleton {
+    margin-bottom: var(--spacing-lg);
   }
 }

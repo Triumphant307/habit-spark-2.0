@@ -13,7 +13,7 @@ interface HabitStatProps {
 
 const HabitStat: React.FC<HabitStatProps> = ({ habit, progress, style }) => {
   return (
-    <div className={style.stats}>
+    <div className={style.HabitDetails_Stats}>
       <p>
         <strong>Target:</strong> {habit.target} days
       </p>

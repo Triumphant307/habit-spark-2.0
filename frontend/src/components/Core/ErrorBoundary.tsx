@@ -58,38 +58,44 @@ class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className={styles.container}>
+        <div className={styles.ErrorBoundary_Container}>
           <motion.div
-            className={styles.card}
+            className={styles.ErrorBoundary_Card}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
           >
-            <div className={styles.iconWrapper}>
-              <FaExclamationTriangle className={styles.icon} />
+            <div className={styles.ErrorBoundary_IconWrapper}>
+              <FaExclamationTriangle className={styles.ErrorBoundary_Icon} />
             </div>
 
-            <h1 className={styles.title}>Something went wrong</h1>
+            <h1 className={styles.ErrorBoundary_Title}>Something went wrong</h1>
 
-            <p className={styles.message}>
+            <p className={styles.ErrorBoundary_Message}>
               We apologize for the inconvenience. An unexpected error occurred.
             </p>
 
             {process.env.NODE_ENV !== "production" && this.state.error && (
-              <details className={styles.details}>
+              <details className={styles.ErrorBoundary_Details}>
                 <summary>Error Details (Dev Only)</summary>
-                <pre className={styles.errorText}>
+                <pre className={styles.ErrorBoundary_ErrorText}>
                   {this.state.error.toString()}
                   {this.state.errorInfo?.componentStack}
                 </pre>
               </details>
             )}
 
-            <div className={styles.actions}>
-              <button className={styles.retryBtn} onClick={this.handleRetry}>
+            <div className={styles.ErrorBoundary_Actions}>
+              <button 
+                className={`${styles.ErrorBoundary_Button} ${styles.ErrorBoundary_RetryButton}`} 
+                onClick={this.handleRetry}
+              >
                 <FaRedo /> Try Again
               </button>
-              <button className={styles.homeBtn} onClick={this.handleGoHome}>
+              <button 
+                className={`${styles.ErrorBoundary_Button} ${styles.ErrorBoundary_HomeButton}`} 
+                onClick={this.handleGoHome}
+              >
                 <FaHome /> Go Home
               </button>
             </div>

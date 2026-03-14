@@ -1,173 +1,179 @@
-.overlay {
+.UpdatePrompt_Overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  inset: 0;
+  background: var(--color-surface-overlay);
+  backdrop-filter: var(--effect-blur-glass);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
-  padding: 20px;
+  z-index: var(--z-index-modal);
+  padding: var(--spacing-xl);
 }
 
-.modal {
-  background: var(--bg-card);
-  border-radius: 20px;
-  padding: 32px;
-  max-width: 400px;
+.UpdatePrompt_Card {
+  background: var(--color-surface-card);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-4xl);
+  max-width: var(--width-container-mini);
   width: 100%;
   text-align: center;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color-base);
+  box-shadow: var(--shadow-elevation-lg);
 }
 
-.closeBtn {
+.UpdatePrompt_CloseButton {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
   background: none;
   border: none;
-  color: var(--text-secondary);
-  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xl);
   cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-  transition: all 0.2s ease;
+  padding: var(--spacing-sm);
+  border-radius: var(--shape-radius-full);
+  transition: var(--animation-transition-smooth);
 }
 
-.closeBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
+.UpdatePrompt_CloseButton:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
 }
 
-.iconWrapper {
+.UpdatePrompt_IconWrapper {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--btn-primary-bg), #6366f1);
+  border-radius: var(--shape-radius-full);
+  background: var(--gradient-surface-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  margin: 0 auto var(--spacing-xl);
+  box-shadow: var(--shadow-interaction-primary);
 }
 
-.icon {
-  font-size: 2rem;
-  color: white;
+.UpdatePrompt_Icon {
+  font-size: var(--font-size-4xl);
+  color: #fff;
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--text-primary);
+.UpdatePrompt_Title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
 }
 
-.message {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+.UpdatePrompt_Message {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-base);
+  margin-bottom: var(--spacing-xl);
 }
 
-.whatsNew {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 24px;
+.UpdatePrompt_Changes {
+  background: var(--color-surface-muted);
+  border-radius: var(--shape-radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
   text-align: left;
 }
 
-.whatsNew h3 {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
+.UpdatePrompt_Changes h3 {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.whatsNew ul {
+.UpdatePrompt_Changes ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.whatsNew li {
-  color: var(--text-primary);
-  font-size: 0.9rem;
-  padding: 4px 0;
+.UpdatePrompt_Changes li {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
-.actions {
+.UpdatePrompt_Changes li::before {
+  content: "•";
+  color: var(--color-brand-primary);
+}
+
+.UpdatePrompt_Actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--spacing-md);
 }
 
-.reinstallBtn {
+.UpdatePrompt_UpdateButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  background: linear-gradient(135deg, var(--btn-primary-bg), #6366f1);
-  color: white;
+  gap: var(--spacing-sm);
+  background: var(--gradient-surface-primary);
+  color: #fff;
   border: none;
-  padding: 14px 24px;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--shape-radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--animation-transition-smooth);
+  box-shadow: var(--shadow-interaction-primary);
 }
 
-.reinstallBtn:hover {
+.UpdatePrompt_UpdateButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+  box-shadow: var(--shadow-interaction-hover);
 }
 
-.laterBtn {
+.UpdatePrompt_LaterButton {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--text-secondary);
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-size: 0.95rem;
+  border: 1px solid var(--border-color-muted);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--shape-radius-md);
+  font-size: var(--font-size-sm);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--animation-transition-smooth);
 }
 
-.laterBtn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+.UpdatePrompt_LaterButton:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
 }
 
-.hint {
-  margin-top: 16px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+.UpdatePrompt_Hint {
+  margin-top: var(--spacing-xl);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
   opacity: 0.7;
 }
 
 @media (max-width: 480px) {
-  .modal {
-    padding: 24px;
+  .UpdatePrompt_Card {
+    padding: var(--spacing-xl);
   }
 
-  .title {
-    font-size: 1.3rem;
+  .UpdatePrompt_Title {
+    font-size: var(--font-size-xl);
   }
 
-  .iconWrapper {
+  .UpdatePrompt_IconWrapper {
     width: 64px;
     height: 64px;
   }
 
-  .icon {
-    font-size: 1.5rem;
+  .UpdatePrompt_Icon {
+    font-size: var(--font-size-2xl);
   }
 }

@@ -113,20 +113,20 @@ const HabitDetails = () => {
 
   return (
     <motion.section
-      className={style.details}
+      className={style.HabitDetails}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.div variants={itemVariants}>
-        <Link href="/tracker" className={style.backBtn} title="Back to Tracker">
+        <Link href="/tracker" className={style.HabitDetails_BackButton} title="Back to Tracker">
           ← Back to Tracker
         </Link>
       </motion.div>
 
-      <motion.div className={style.card} variants={itemVariants}>
-        <span className={style.icon}>{habit.icon}</span>
-        <h2 className={style.title}>{habit.title}</h2>
+      <motion.div className={style.HabitDetails_Card} variants={itemVariants}>
+        <span className={style.HabitDetails_Icon}>{habit.icon}</span>
+        <h2 className={style.HabitDetails_Title}>{habit.title}</h2>
 
         <HabitStat habit={habit} progress={progress} style={style} />
         <HabitAction

@@ -133,31 +133,31 @@ export default function UpdatePrompt() {
   return (
     <AnimatePresence>
       <motion.div
-        className={styles.overlay}
+        className={styles.UpdatePrompt_Overlay}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className={styles.modal}
+          className={styles.UpdatePrompt_Card}
           initial={{ scale: 0.9, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
         >
-          <button className={styles.closeBtn} onClick={handleDismiss}>
+          <button className={styles.UpdatePrompt_CloseButton} onClick={handleDismiss}>
             <FaTimes />
           </button>
 
-          <div className={styles.iconWrapper}>
-            <FaRocket className={styles.icon} />
+          <div className={styles.UpdatePrompt_IconWrapper}>
+            <FaRocket className={styles.UpdatePrompt_Icon} />
           </div>
 
-          <h2 className={styles.title}>Update Available! 🎉</h2>
+          <h2 className={styles.UpdatePrompt_Title}>Update Available! 🎉</h2>
 
-          <p className={styles.message}>{REINSTALL_MESSAGE}</p>
+          <p className={styles.UpdatePrompt_Message}>{REINSTALL_MESSAGE}</p>
 
           {WHATS_NEW.length > 0 && (
-            <div className={styles.whatsNew}>
+            <div className={styles.UpdatePrompt_Changes}>
               <h3>What's New:</h3>
               <ul>
                 {WHATS_NEW.map((item, i) => (
@@ -167,16 +167,16 @@ export default function UpdatePrompt() {
             </div>
           )}
 
-          <div className={styles.actions}>
-            <button className={styles.reinstallBtn} onClick={handleReinstall}>
+          <div className={styles.UpdatePrompt_Actions}>
+            <button className={styles.UpdatePrompt_UpdateButton} onClick={handleReinstall}>
               <FaDownload /> Reinstall App
             </button>
-            <button className={styles.laterBtn} onClick={handleDismiss}>
+            <button className={styles.UpdatePrompt_LaterButton} onClick={handleDismiss}>
               Maybe Later
             </button>
           </div>
 
-          <p className={styles.hint}>Version {APP_VERSION}</p>
+          <p className={styles.UpdatePrompt_Hint}>Version {APP_VERSION}</p>
         </motion.div>
       </motion.div>
     </AnimatePresence>

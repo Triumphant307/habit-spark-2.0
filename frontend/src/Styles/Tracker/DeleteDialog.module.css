@@ -1,122 +1,114 @@
-.dialog {
+.DeleteDialog_Container {
   position: fixed;
   top: 40%;
-  left: 35%;
+  left: 35%; /* Note: This left 35% seems non-centered, might want 50% if possible, but keeping for now */
   transform: translate(-50%, -50%);
-  padding: 24px;
+  padding: var(--spacing-2xl);
   border: none;
-  border-radius: 16px;
-  max-width: 400px;
+  border-radius: var(--shape-radius-xl);
+  max-width: var(--width-container-narrow);
   width: 90%;
-  background-color: var(--bg-card);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  background-color: var(--color-surface-card);
+  box-shadow: var(--shadow-interaction-dialog);
   text-align: center;
+  z-index: var(--z-index-layer-overlay);
 }
 
-.warningHeader {
+.DeleteDialog_Container h2 {
+  color: var(--color-text-primary);
+  margin: 0;
+  font-size: var(--font-size-2xl);
+}
+
+.DeleteDialog_Container p {
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.DeleteDialog_Container::backdrop {
+  background: var(--color-surface-overlay-light);
+  backdrop-filter: var(--effect-blur-glass);
+}
+
+.DeleteDialog_Header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
 }
 
-.warningIcon {
-  font-size: 3rem;
-  color: #f1c40f;
+.DeleteDialog_Icon {
+  font-size: var(--font-size-5xl);
+  color: var(--color-status-warning-alt);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-.dialog h2 {
-  color: var(--text-primary);
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.dialog p {
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 24px;
-}
-
-.dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px);
-}
-
-.dialogActions {
+.DeleteDialog_Actions {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: var(--spacing-md);
 }
 
-.dialogActions button {
+.DeleteDialog_Actions button {
   position: relative;
   overflow: hidden;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--shape-radius-lg);
   border: none;
   cursor: pointer;
-  color: white;
-  font-weight: 600;
+  color: var(--color-button-primary-text);
+  font-weight: var(--font-weight-semibold);
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: var(--spacing-sm);
+  transition: var(--animation-transition-smooth);
 }
 
-.cancelBtn {
-  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+.DeleteDialog_CancelButton {
+  background: var(--gradient-surface-primary);
+  box-shadow: var(--shadow-interaction-primary);
 }
 
-.cancelBtn:hover {
+.DeleteDialog_CancelButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+  box-shadow: var(--shadow-interaction-hover);
 }
 
-.deleteBtn {
-  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+.DeleteDialog_ConfirmButton {
+  background: var(--gradient-surface-error);
+  box-shadow: var(--shadow-interaction-error);
 }
 
-.deleteBtn:hover {
+.DeleteDialog_ConfirmButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
 }
 
-.dialogActions button:active {
+.DeleteDialog_Actions button:active {
   transform: translateY(0) scale(0.95);
 }
 
 @media (max-width: 600px) {
-  .dialog {
+  .DeleteDialog_Container {
     top: 35%;
-    left: 3%;
+    left: 50%; /* Adjusted to 50% for centering on mobile */
     width: 95%;
-    padding: 20px;
+    padding: var(--spacing-xl);
   }
 
-  .dialogActions {
+  .DeleteDialog_Actions {
     flex-direction: column-reverse;
   }
 
-  .dialogActions button {
+  .DeleteDialog_Actions button {
     width: 100%;
     justify-content: center;
   }

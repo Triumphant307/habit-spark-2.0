@@ -104,7 +104,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
 
   return (
     <section aria-label="Your habits list">
-      <div className={style.tipCard} onDragEnd={handleDragEnd} role="list">
+      <div className={style.TrackerCard_Grid} onDragEnd={handleDragEnd} role="list">
         <AnimatePresence>
           {habits.map((habit, index) => {
             const progress = Math.round((habit.streak / habit.target) * 100);
@@ -114,7 +114,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
             return (
               <motion.div
                 key={habit.id || `habit-${index}`}
-                className={`${style.card} ${isDragging ? style.dragging : ""}`}
+                className={`${style.TrackerCard_Container} ${isDragging ? style.isDragging : ""}`}
                 draggable
                 onDragStart={() => handleDragStart(index)}
                 onDragOver={() => handleDragOver(index)}
@@ -126,14 +126,14 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                 aria-label={`${habit.title}, streak: ${habit.streak} days, target: ${habit.target} days`}
               >
                 <div
-                  className={style.dragHandle}
+                  className={style.TrackerCard_DragHandle}
                   aria-label="Drag to reorder habit"
                 >
                   <FaGripVertical aria-hidden="true" />
                 </div>
                 <button
-                  className={`${style.quickCompleteBtn} ${
-                    isCompletedToday ? style.completedBtn : ""
+                  className={`${style.TrackerCard_CompleteButton} ${
+                    isCompletedToday ? style.isCompleted : ""
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
@@ -158,16 +158,16 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
 
                 <Link
                   href={habit.id ? `/habit/${habit.slug}` : "#"}
-                  className={style.cardLink}
+                  className={style.TrackerCard_Link}
                   onPointerDown={(e) => createRipple(e)}
                   title="Click for more details"
                 >
-                  <span className={style.habitIcon}>{habit.icon}</span>
-                  <h3 className={style.habitTitle}>{habit.title}</h3>
-                  <p className={style.habitTarget}>
+                  <span className={style.TrackerCard_Icon}>{habit.icon}</span>
+                  <h3 className={style.TrackerCard_Title}>{habit.title}</h3>
+                  <p className={style.TrackerCard_Target}>
                     Target: {habit.target} days
                   </p>
-                  <p className={style.habitStreak}>Streak: {habit.streak}</p>
+                  <p className={style.TrackerCard_Streak}>Streak: {habit.streak}</p>
                   <ProgressTrack radius={50} stroke={5} progress={progress} />
                 </Link>
               </motion.div>

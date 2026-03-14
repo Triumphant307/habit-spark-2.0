@@ -57,31 +57,31 @@ const Header: React.FC = () => {
   // This component renders the header with a title and a responsive navigation menu
   return (
     <header
-      className={`${Style.header} ${isScrolled ? Style.headerScrolled : ""}`}
+      className={`${Style.Header_Container} ${isScrolled ? Style.Header_ContainerScrolled : ""}`}
     >
-      <div className={Style.header__left}>
+      <div className={Style.Header_Left}>
         <button
-          className={`${Style.hamburger} ${isMenuOpen ? Style.open : ""}`}
+          className={`${Style.Header_Hamburger} ${isMenuOpen ? Style.open : ""}`}
           onClick={toggleMenu}
           aria-label="Toggle Menu"
           ref={hamburgerRef}
         >
-          <span className={Style.bar} />
-          <span className={Style.bar} />
-          <span className={Style.bar} />
+          <span className={Style.Header_HamburgerBar} />
+          <span className={Style.Header_HamburgerBar} />
+          <span className={Style.Header_HamburgerBar} />
         </button>
-        <h1 className={Style.header__title}>HabitSpark</h1>
+        <h1 className={Style.Header_Title}>HabitSpark</h1>
       </div>
 
       <nav
-        className={`${Style.headerNav} ${isMenuOpen ? Style.open : ""}`}
+        className={`${Style.Header_Nav} ${isMenuOpen ? Style.open : ""}`}
         ref={navRef}
       >
-        <ul className={Style.header__navlist}>
-          <li className={Style.header__nav__item}>
+        <ul className={Style.Header_NavList}>
+          <li className={Style.Header_Nav_item}>
             <Link
               href="/"
-              className={`${Style.header__nav__link} ${
+              className={`${Style.Header_NavLink} ${
                 pathname === "/" ? Style.active : ""
               }`}
               onClick={() => setIsMenuOpen(false)}
@@ -89,10 +89,10 @@ const Header: React.FC = () => {
               Home
             </Link>
           </li>
-          <li className={Style.header__nav__item}>
+          <li className={Style.Header_Nav_item}>
             <Link
               href="/suggestion"
-              className={`${Style.header__nav__link} ${
+              className={`${Style.Header_NavLink} ${
                 pathname === "/suggestion" ? Style.active : ""
               }`}
               onClick={() => setIsMenuOpen(false)}
@@ -100,10 +100,10 @@ const Header: React.FC = () => {
               Suggestions
             </Link>
           </li>
-          <li className={Style.header__nav__item}>
+          <li className={Style.Header_Nav_item}>
             <Link
               href="/completed"
-              className={`${Style.header__nav__link} ${
+              className={`${Style.Header_NavLink} ${
                 pathname === "/completed" ? Style.active : ""
               }`}
               onClick={() => setIsMenuOpen(false)}
@@ -111,10 +111,10 @@ const Header: React.FC = () => {
               Completed
             </Link>
           </li>
-          <li className={Style.header__nav__item}>
+          <li className={Style.Header_Nav_item}>
             <Link
               href="/tracker"
-              className={`${Style.header__nav__link} ${
+              className={`${Style.Header_NavLink} ${
                 pathname === "/tracker" ? Style.active : ""
               }`}
               onClick={() => setIsMenuOpen(false)}
@@ -125,7 +125,7 @@ const Header: React.FC = () => {
         </ul>
       </nav>
 
-      <div className={Style.header__right}>
+      <div className={Style.Header_Right}>
         <ThemeToggle />
       </div>
     </header>

@@ -1,9 +1,9 @@
-:where(*:has(> .ripple-container)) {
+:where(*:has(> .Ripple_Container)) {
   --ripple-expand-scale: 2.05;
   position: relative;
 }
 
-.ripple-container {
+.Ripple_Container {
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -11,20 +11,20 @@
   border-radius: inherit;
 }
 
-.ripple {
+.Ripple_Element {
   position: absolute;
-  border-radius: 50%;
+  border-radius: var(--shape-radius-full);
   z-index: 0;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: var(--color-surface-ripple, rgba(255, 255, 255, 0.6));
   transform: scale(0);
 }
 
-.ripple.hold {
-  animation: ripple-expand 350ms ease-out forwards;
+.Ripple_Element.Hold {
+  animation: ripple-expand 350ms var(--animation-easing-smooth) forwards;
 }
 
-.ripple.fade {
-  animation: ripple-fade 350ms ease-in forwards;
+.Ripple_Element.Fade {
+  animation: ripple-fade 350ms var(--animation-easing-base) forwards;
 }
 
 @keyframes ripple-expand {
