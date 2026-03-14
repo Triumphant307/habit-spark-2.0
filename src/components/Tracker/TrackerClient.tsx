@@ -107,7 +107,7 @@ export default function TrackerClient() {
                 Clear Search
               </button>
             ) : (
-              <Link href="/suggestion" className={styles.goSuggestBtn}>
+              <Link href="/Suggestion" className={styles.goSuggestBtn}>
                 Browse Suggestions
               </Link>
             )}
