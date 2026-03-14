@@ -91,9 +91,9 @@ const Header: React.FC = () => {
           </li>
           <li className={Style.header__nav__item}>
             <Link
-              href="/suggestion"
+              href="/Suggestion"
               className={`${Style.header__nav__link} ${
-                pathname === "/suggestion" ? Style.active : ""
+                pathname === "/Suggestion" ? Style.active : ""
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
