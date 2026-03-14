@@ -103,7 +103,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   return (
     <>
       <dialog
-        className={styles.EditDialog}
+        className={styles.EditDialog_Container}
         onClose={onClose}
         onCancel={onClose}
         ref={dialogRef}
@@ -117,12 +117,12 @@ const EditDialog: React.FC<EditDialogProps> = ({
               exit={{ opacity: 0, scale: 0.9, y: -20 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <form onSubmit={handleSubmit} className={styles.dialogForm}>
-                <h2 id="edit-dialog-title" className={styles.dialogTitle}>
-                  <FaEdit className={styles.titleIcon} /> Edit Habit
+              <form onSubmit={handleSubmit} className={styles.EditDialog_Form}>
+                <h2 id="edit-dialog-title" className={styles.EditDialog_Title}>
+                  <FaEdit className={styles.EditDialog_TitleIcon} /> Edit Habit
                 </h2>
 
-                <div className={styles.floatingInput}>
+                <div className={styles.EditDialog_FloatingInput}>
                   <input
                     type="text"
                     id="title"
@@ -135,7 +135,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
                   <label htmlFor="title">Habit Title</label>
                 </div>
 
-                <div className={styles.floatingInput}>
+                <div className={styles.EditDialog_FloatingInput}>
                   <input
                     id="target"
                     type="number"
@@ -144,21 +144,21 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     min={1}
                     required
                     placeholder=" "
-                    className={styles.inputs}
+                    className={styles.EditDialog_InputField}
                   />
                   <label htmlFor="target">Habit Target:</label>
                 </div>
 
-                <div className={styles.pickerContainer}>
+                <div className={styles.EditDialog_PickerContainer}>
                   <label
                     htmlFor="edit-habit-icon"
-                    className={styles.inputLabel}
+                    className={styles.EditDialog_InputLabel}
                   >
                     Habit Icon
                   </label>
                   <button
                     id="edit-habit-icon"
-                    className={styles.iconPreviewBtn}
+                    className={styles.EditDialog_IconPreview}
                     type="button"
                     onPointerDown={(e) => createRipple(e)}
                     onClick={() => setShowPicker(!showPicker)}
@@ -171,29 +171,28 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     aria-expanded={showPicker}
                   >
                     {icon ? (
-                      <span className={styles.selectedEmoji}>{icon}</span>
+                      <span className={styles.EditDialog_SelectedEmoji}>{icon}</span>
                     ) : (
-                      <div className={styles.placeholderIcon}>
+                      <div className={styles.EditDialog_PlaceholderIcon}>
                         <FaSmile />
                         <small>Add Icon</small>
                       </div>
                     )}
                   </button>
                   {showPicker && (
-                    <div className={styles.pickerWrapper} ref={pickerRef}>
+                    <div className={styles.EditDialog_PickerWrapper} ref={pickerRef}>
                       <Picker data={data} onEmojiSelect={handleEmojiSelect} />
                     </div>
                   )}
                 </div>
-                {error && <div className={styles.error}>{error}</div>}
-                <div className={styles.dialogAction}>
+                {error && <div className={styles.EditDialog_Error}>{error}</div>}
+                <div className={styles.EditDialog_Actions}>
                   <button
                     type="button"
                     onClick={onClose}
                     onPointerDown={(e) => createRipple(e)}
                     title="Cancel Edit"
                     aria-label="Cancel editing and close dialog"
-                    className={styles.cancelBtn}
                   >
                     <FaTimes /> Cancel
                   </button>
@@ -203,7 +202,6 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     type="submit"
                     title="Save Edit"
                     aria-label="Save changes to habit"
-                    className={styles.saveBtn}
                   >
                     <FaCheck /> Save
                   </button>

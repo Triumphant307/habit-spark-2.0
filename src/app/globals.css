@@ -12,72 +12,236 @@
 }
 
 :root {
-  /* Backgrounds */
-  --bg-page: #f5f7fa;
-  --bg-card: rgba(255, 255, 255, 0.8); /* Semi-transparent for glassmorphism */
-  --bg-hover: #e0ebff;
+  /* Surface & Backgrounds */
+  --color-surface-page: #f5f7fa;
+  --color-surface-card: rgba(255, 255, 255, 0.8);
+  --color-surface-hover: #e0ebff;
+  --color-surface-pure-white: #ffffff;
+  --color-surface-pure-black: #000000;
+  --color-surface-overlay-light: rgba(0, 0, 0, 0.5);
+  --color-surface-overlay-dark: rgba(0, 0, 0, 0.6);
 
-  /* Text colors */
-  --text-primary: #333333;
-  --text-secondary: #666666;
+  /* Typography */
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+
+  /* Brand Palette */
+  --color-brand-primary: #3b82f6;
+  --color-brand-indigo: #6366f1;
+  --color-brand-violet: #7c3aed;
+
+  /* Status & Semantic */
+  --color-status-success: #10b981;
+  --color-status-warning: #f59e0b;
+  --color-status-error: #ef4444;
+  --color-status-error-hover: #dc2626;
+  --color-status-sun-icon: #facc15;
+  --color-status-warning-alt: #f1c40f;
 
   /* Buttons */
-  --btn-primary-bg: #3b82f6;
-  --btn-primary-text: #ffffff;
-  --btn-primary-hover-bg: #1549f3d3;
+  --color-button-primary-background: var(--color-brand-primary);
+  --color-button-primary-text: #ffffff;
+  --color-button-primary-hover: #1549f3d3;
 
-  /* Status colors */
-  --status-success: #10b981;
-  --status-warning: #f59e0b;
-  --status-error: #ef4444;
-  --status-error-hover: #dc2626;
+  /* Typography Scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.85rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+  --font-size-5xl: 3rem;
 
-  /* box shadow */
-  --box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --box-shadow-hover:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --box-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.5);
-  --box-shadow-header:
-    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
-  --blur-background: rgba(255, 255, 255, 0.6);
+  /* Spacing Scale (based on 4px steps) */
+  --spacing-3xs: 0.125rem; /* 2px */
+  --spacing-2xs: 0.25rem;  /* 4px */
+  --spacing-xs: 0.375rem;   /* 6px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 0.75rem;   /* 12px */
+  --spacing-lg: 1rem;      /* 16px */
+  --spacing-xl: 1.25rem;   /* 20px */
+  --spacing-2xl: 1.5rem;   /* 24px */
+  --spacing-3xl: 2rem;     /* 32px */
+  --spacing-4xl: 2.5rem;   /* 40px */
+  --spacing-5xl: 3rem;     /* 48px */
+  --spacing-6xl: 4rem;     /* 64px */
+  --spacing-7xl: 5rem;     /* 80px */
 
-  /* Modern Gradient Background (Light) */
-  --bg-gradient:
+  /* Icon & Specific Brand Colors */
+  --color-icon-success: #22c55e;
+  --color-icon-error: #ef4444;
+  --color-icon-info: #3b82f6;
+  --color-icon-warning: #f59e0b;
+  --color-icon-sun: #facc15;
+  --color-icon-star: #f1c40f;
+  --color-icon-muted: #94a3b8;
+
+  /* Specific Component Surface Colors */
+  --color-surface-muted: #e2e8f0;
+  --color-surface-success-intense: #059669;
+
+  /* Gradients */
+  --gradient-surface-primary: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-indigo) 100%);
+  --gradient-surface-active: linear-gradient(135deg, #4f46e5 0%, var(--color-brand-violet) 100%);
+  --gradient-surface-error: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  --gradient-surface-pwa: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-effect-shine: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+
+  /* Elevation & Shadows */
+  --shadow-elevation-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-elevation-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-elevation-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-elevation-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  --shadow-interaction-primary: 0 4px 12px rgba(59, 130, 246, 0.3);
+  --shadow-interaction-hover: 0 8px 20px rgba(59, 130, 246, 0.4);
+  --shadow-interaction-error: 0 4px 12px rgba(231, 76, 60, 0.3);
+  --shadow-interaction-dialog: 0 20px 40px rgba(0, 0, 0, 0.3);
+  --shadow-interaction-pwa-modal: 0 20px 60px rgba(0, 0, 0, 0.3);
+  --shadow-interaction-pwa-button: 0 10px 30px rgba(102, 126, 234, 0.3);
+  --shadow-interaction-glow-violet: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  --shadow-interaction-card-soft: 0 10px 20px rgba(0, 0, 0, 0.2);
+  --shadow-interaction-tiny: 0 2px 5px rgba(0,0,0,0.1);
+
+  /* Borders & Shapes */
+  --border-color-base: #cccccc;
+  --border-glass-light: 1px solid rgba(255, 255, 255, 0.1);
+  --shape-radius-sm: 6px;
+  --shape-radius-md: 10px;
+  --shape-radius-lg: 12px;
+  --shape-radius-xl: 16px;
+
+  /* Effects */
+  --effect-blur-md: blur(8px);
+ --effect-blur-glass: blur(16px) saturate(180%) brightness(1.2);
+  --color-glass-background: rgba(255, 255, 255, 0.25);
+
+  /* Elevation, Stacking & Layers */
+  --z-index-layer-negative: -1;
+  --z-index-layer-base: 1;
+  --z-index-layer-above: 2;
+  --z-index-layer-component: 10;
+  --z-index-layer-dropdown: 100;
+  --z-index-layer-sticky: 999;
+  --z-index-layer-overlay: 1000;
+  --z-index-layer-header: 2200;
+  --z-index-layer-header-above: 2300;
+  --z-index-layer-notification: 10000;
+
+  /* Layout & Container Widths */
+  --width-container-narrow: 400px;
+  --width-container-standard: 600px;
+  --width-container-medium: 800px;
+  --width-container-wide: 1000px;
+  --width-container-page: 1200px;
+
+  /* Responsive Breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 700px;
+  --breakpoint-lg: 768px;
+  --breakpoint-xl: 900px;
+  --breakpoint-2xl: 1200px;
+
+  /* Animation & Behavior */
+  --animation-transition-fast: all 0.2s ease;
+  --animation-transition-base: all 0.3s ease;
+  --animation-transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Background Page Properties */
+  --gradient-background-page:
     radial-gradient(at 0% 0%, hsla(210, 100%, 96%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 0%, hsla(220, 100%, 96%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 100%, hsla(150, 100%, 96%, 1) 0px, transparent 50%),
     radial-gradient(at 0% 100%, hsla(200, 100%, 96%, 1) 0px, transparent 50%);
+
+  /* Legacy Compatibility Aliases */
+  --bg-page: var(--color-surface-page);
+  --bg-card: var(--color-surface-card);
+  --bg-hover: var(--color-surface-hover);
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-muted: var(--color-text-muted);
+  --btn-primary-bg: var(--color-button-primary-background);
+  --btn-primary-text: var(--color-button-primary-text);
+  --btn-primary-hover-bg: var(--color-button-primary-hover);
+  --status-success: var(--color-status-success);
+  --status-warning: var(--color-status-warning);
+  --status-error: var(--color-status-error);
+  --status-error-hover: var(--color-status-error-hover);
+  --gradient-primary: var(--gradient-surface-primary);
+  --gradient-active: var(--gradient-surface-active);
+  --gradient-error: var(--gradient-surface-error);
+  --gradient-shine: var(--gradient-effect-shine);
+  --box-shadow-sm: var(--shadow-elevation-sm);
+  --box-shadow-md: var(--shadow-elevation-md);
+  --box-shadow-lg: var(--shadow-elevation-lg);
+  --box-shadow-xl: var(--shadow-elevation-xl);
+  --shadow-primary: var(--shadow-interaction-primary);
+  --shadow-primary-hover: var(--shadow-interaction-hover);
+  --shadow-error: var(--shadow-interaction-error);
+  --box-shadow: var(--shadow-elevation-md);
+  --box-shadow-hover: var(--shadow-interaction-hover);
+  --box-shadow-focus: var(--shadow-interaction-glow-violet);
+  --box-shadow-header: var(--shadow-elevation-sm);
+  --transition-fast: var(--animation-transition-fast);
+  --transition-base: var(--animation-transition-base);
+  --transition-smooth: var(--animation-transition-smooth);
+  --radius-sm: var(--shape-radius-sm);
+  --radius-md: var(--shape-radius-md);
+  --radius-lg: var(--shape-radius-lg);
+  --radius-xl: var(--shape-radius-xl);
+  --blur-background: var(--color-glass-background);
+  --bg-gradient: var(--gradient-background-page);
 }
 
 html.dark body {
-  --bg-page: #0f172a;
-  --bg-card: rgba(30, 41, 59, 0.7); /* Semi-transparent dark */
-  --bg-hover: #334155;
+  --color-surface-page: #0f172a;
+  --color-surface-card: rgba(30, 41, 59, 0.7);
+  --color-surface-hover: #334155;
+  --color-surface-muted: #1e293b;
+  --color-surface-overlay-light: rgba(0, 0, 0, 0.7);
+  --color-surface-overlay-dark: rgba(0, 0, 0, 0.82);
 
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
 
-  --box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --box-shadow-hover:
-    0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-  --box-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.5);
-  --box-shadow-header: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  --shadow-elevation-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  --shadow-elevation-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-elevation-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  
+  --shadow-interaction-primary: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-interaction-hover: 0 8px 20px rgba(0, 0, 0, 0.6);
+  --shadow-interaction-dialog: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --shadow-interaction-pwa-modal: 0 20px 60px rgba(0, 0, 0, 0.6);
+  --shadow-interaction-pwa-button: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-interaction-glow-violet: 0 0 0 3px rgba(124, 58, 237, 0.4);
+  --shadow-interaction-card-soft: 0 10px 20px rgba(0, 0, 0, 0.4);
+  --shadow-interaction-tiny: 0 2px 5px rgba(0,0,0,0.3);
 
-  --blur-background: rgba(15, 23, 42, 0.6);
+  --border-color-base: #334155;
+  --border-glass-light: 1px solid rgba(255, 255, 255, 0.05);
 
-  /* Modern Gradient Background (Dark) */
-  --bg-gradient:
+  --color-glass-background: rgba(30, 41, 59, 0.45);
+
+  --gradient-background-page:
     radial-gradient(at 0% 0%, hsla(222, 47%, 11%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 0%, hsla(240, 50%, 15%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 100%, hsla(260, 50%, 15%, 1) 0px, transparent 50%),
     radial-gradient(at 0% 100%, hsla(200, 50%, 10%, 1) 0px, transparent 50%);
 
-  background-color: var(--bg-page);
-  background-image: var(--bg-gradient);
-  color: var(--text-primary);
+  background-color: var(--color-surface-page);
+  background-image: var(--gradient-background-page);
+  color: var(--color-text-primary);
 }
 
 body {

@@ -43,20 +43,20 @@ const FeaturedHighlight = () => {
   // Render the features section
   // Each feature is displayed as a card with an icon, title, and description
   return (
-    <section className={styles.featuresSection}>
-      <h2 className={styles.featuresTitle}>Features</h2>
-      <div className={styles.featuresContainer}>
+    <section className={styles.FeaturedHighlight_Section}>
+      <h2 className={styles.FeaturedHighlight_Heading}>Features</h2>
+      <div className={styles.FeaturedHighlight_Grid}>
         {feature.map((item, index) => (
-          <Link key={item.id} href={item.href} className={styles.featureLink}>
+          <Link key={item.id} href={item.href} className={styles.FeaturedHighlight_Link}>
             <div
               key={index}
-              className={styles.featureCard}
+              className={styles.FeaturedHighlight_Card}
               data-aos="zoom-in"
               data-aos-delay="200"
             >
-              <span className={styles.featureIcon}>{item.icon}</span>
-              <h3 className={styles.featureTitle}>{item.title}</h3>
-              <p className={styles.featureDescription}>{item.description}</p>
+              <span className={styles.FeaturedHighlight_Icon}>{item.icon}</span>
+              <h3 className={styles.FeaturedHighlight_FeatureTitle}>{item.title}</h3>
+              <p className={styles.FeaturedHighlight_Description}>{item.description}</p>
             </div>
           </Link>
         ))}

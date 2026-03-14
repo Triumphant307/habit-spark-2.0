@@ -37,7 +37,7 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
     <AnimatePresence>
       {isOpen && (
         <MotionDialog
-          className={styles.dialog}
+          className={styles.DeleteDialog_Container}
           ref={dialogRef}
           onClose={onClose}
           onCancel={onClose}
@@ -49,27 +49,27 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({
           aria-labelledby="delete-dialog-title"
           aria-describedby="delete-dialog-description"
         >
-          <div className={styles.warningHeader}>
-            <FaExclamationTriangle className={styles.warningIcon} />
+          <div className={styles.DeleteDialog_Header}>
+            <FaExclamationTriangle className={styles.DeleteDialog_Icon} />
             <h2 id="delete-dialog-title">Delete Habit</h2>
           </div>
           <p id="delete-dialog-description">
             Are you sure you want to delete this habit? This action cannot be
             undone.
           </p>
-          <div className={styles.dialogActions}>
+          <div className={styles.DeleteDialog_Actions}>
             <button
               autoFocus
               onClick={onClose}
               onPointerDown={(e) => createRipple(e)}
-              className={styles.cancelBtn}
+              className={styles.DeleteDialog_CancelButton}
               title="Cancel habit"
               aria-label="Cancel and close dialog"
             >
               <FaTimes /> Cancel
             </button>
             <button
-              className={styles.deleteBtn}
+              className={styles.DeleteDialog_ConfirmButton}
               onPointerDown={(e) => createRipple(e)}
               onClick={onConfirm}
               title="Delete habit"

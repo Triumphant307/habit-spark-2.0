@@ -62,13 +62,13 @@ export default function TrackerClient() {
 
   return (
     <motion.section
-      className={styles.tracker}
+      className={styles.Tracker}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.div className="tracker-page" variants={itemVariants}>
-        <h2 className={styles.title}>🎯 Your Habits</h2>
+        <h2 className={styles.Tracker_Title}>🎯 Your Habits</h2>
       </motion.div>
 
       <motion.div variants={itemVariants}>
@@ -82,7 +82,7 @@ export default function TrackerClient() {
       {filteredHabits.length === 0 ? (
         <motion.div
           key="no-habits"
-          className={styles.noResults}
+          className={styles.Tracker_NoResults}
           variants={itemVariants}
         >
           <span style={{ fontSize: "2rem" }}>{searchQuery ? "🔎" : "🌱"}</span>
@@ -100,14 +100,14 @@ export default function TrackerClient() {
           <div>
             {searchQuery ? (
               <button
-                className={styles.goSuggestBtn}
+                className={styles.Tracker_SuggestButton}
                 onClick={() => setSearchQuery("")}
                 style={{ marginTop: "10px", border: "none" }}
               >
                 Clear Search
               </button>
             ) : (
-              <Link href="/suggestion" className={styles.goSuggestBtn}>
+              <Link href="/suggestion" className={styles.Tracker_SuggestButton}>
                 Browse Suggestions
               </Link>
             )}

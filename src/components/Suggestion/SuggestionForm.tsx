@@ -1,24 +1,20 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data";
 import styles from "@/Styles/Suggestion/SuggestionForm.module.css";
 import { useRipple } from "@/Hooks/useRipple";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
 import { addHabitIntent } from "@/core/intent/habitIntents";
-import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
 import Link from "next/link";
 import { FaSmile, FaExclamationCircle } from "react-icons/fa";
+import { AnimatePresence, motion } from "framer-motion";
 
-interface Emoji {
-  native: string;
-  [key: string]: unknown;
-}
-
-const SuggestionForm = () => {
+const SuggestionForm: React.FC = () => {
   const [title, setTitle] = useState("");
+  const [target, setTarget] = useState(1);
   const [icon, setIcon] = useState("");
-  const [target, setTarget] = useState(30);
   const [error, setError] = useState("");
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef<HTMLDivElement | null>(null);
@@ -41,9 +37,9 @@ const SuggestionForm = () => {
     };
   }, [showPicker]);
 
-  const handleEmojiSelect = (emoji: Emoji) => {
-    setIcon(emoji.native); // Set the selected emoji as the icon
-    setShowPicker(false); // Optionally close the picker
+  const handleEmojiSelect = (emoji: { native: string }) => {
+    setIcon(emoji.native);
+    setShowPicker(false);
   };
 
   const handleAddHabit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -107,16 +103,15 @@ const SuggestionForm = () => {
   return (
     <form
       onSubmit={handleAddHabit}
-      className={styles.form}
+      className={styles.SuggestionForm_Container}
       noValidate
       aria-label="Add new habit"
       id="suggestion-form"
     >
-      <div className={styles.floatingInput}>
+      <div className={styles.SuggestionForm_FloatingInput}>
         <input
           id="habit-title"
           name="habit-title"
-          className={styles.TitleInput}
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -130,16 +125,19 @@ const SuggestionForm = () => {
           aria-invalid={!!error}
           aria-describedby={error ? "form-error" : undefined}
         />
-        <label htmlFor="habit-title">Habit Title</label>
+        <label htmlFor="habit-title">What's the habit name?</label>
       </div>
 
-      <div className={styles.pickerContainer}>
-        <label htmlFor="habit-icon" className={styles.inputLabel}>
-          Habit Icon
+      <div className={styles.SuggestionForm_PickerContainer}>
+        <label
+          htmlFor="habit-icon"
+          className={styles.SuggestionForm_InputLabel}
+        >
+          Pick a representative icon
         </label>
         <button
           id="habit-icon"
-          className={styles.iconPreviewBtn}
+          className={styles.SuggestionForm_IconPreview}
           onPointerDown={(e) => createRipple(e)}
           type="button"
           onClick={() => setShowPicker(!showPicker)}
@@ -152,26 +150,33 @@ const SuggestionForm = () => {
           aria-expanded={showPicker}
         >
           {icon ? (
-            <span className={styles.selectedEmoji}>{icon}</span>
+            <span className={styles.SuggestionForm_SelectedEmoji}>{icon}</span>
           ) : (
-            <div className={styles.placeholderIcon}>
+            <div className={styles.SuggestionForm_PlaceholderIcon}>
               <FaSmile />
-              <small>Add Icon</small>
+              <small>Select</small>
             </div>
           )}
         </button>
-        {showPicker && (
-          <div className={styles.pickerWrapper} ref={pickerRef}>
-            <Picker data={data} onEmojiSelect={handleEmojiSelect} />
-          </div>
-        )}
+        <AnimatePresence>
+          {showPicker && (
+            <motion.div
+              className={styles.SuggestionForm_PickerWrapper}
+              ref={pickerRef}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+            >
+              <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      <div className={styles.floatingInput}>
+      <div className={styles.SuggestionForm_FloatingInput}>
         <input
           id="habit-target"
           name="habit-target"
-          className={styles.TargetInput}
           type="number"
           value={target}
           onChange={(e) => setTarget(Number(e.target.value))}
@@ -184,20 +189,25 @@ const SuggestionForm = () => {
           aria-required="true"
         />
 
-        <label htmlFor="habit-target">Habit Target</label>
+        <label htmlFor="habit-target">Goal (days)</label>
       </div>
 
       <button
-        className={styles.btn}
+        className={styles.SuggestionForm_SubmitButton}
         onPointerDown={(e) => createRipple(e)}
         type="submit"
         title="Add new Habits"
         aria-label="Add new habit to your tracker"
       >
-        Add New Habit
+        Build Habit
       </button>
+
       {error && (
-        <div id="form-error" className={styles.error} role="alert">
+        <div
+          id="form-error"
+          className={styles.SuggestionForm_Error}
+          role="alert"
+        >
           <FaExclamationCircle />
           <span>{error}</span>
         </div>

@@ -1,164 +1,158 @@
-.tipCard {
+.TrackerCard_Grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Horizontal layout on desktop */
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   text-align: center;
-  gap: 20px;
-  margin-top: 30px;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-3xl);
   cursor: pointer;
 }
 
-.habitIcon {
-  font-size: 2rem;
+.TrackerCard_Icon {
+  font-size: var(--font-size-3xl);
 }
 
-.habitTitle {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-  font-weight: bold;
+.TrackerCard_Title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
 }
 
-.card {
+.TrackerCard_Container {
   position: relative;
   overflow: hidden;
-  background-color: var(--bg-card);
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: var(--box-shadow);
-  transition: transform 0.2s ease;
+  background-color: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-md);
+  border-radius: var(--shape-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-elevation-md);
+  transition: var(--animation-transition-fast);
 }
 
-.card:hover {
+.TrackerCard_Container:hover {
   transform: scale(1.03);
-  transition: 0.3s;
-  box-shadow: var(--box-shadow-hover);
+  transition: var(--animation-transition-base);
+  box-shadow: var(--shadow-interaction-hover);
 }
 
-.card.dragging {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+.TrackerCard_Container.isDragging {
+  box-shadow: var(--shadow-interaction-card-soft);
   transform: scale(1.05);
   cursor: grabbing;
 }
 
-.dragHandle {
+.TrackerCard_DragHandle {
   position: absolute;
-  left: 10px;
+  left: var(--spacing-md);
   top: 50%;
   transform: translateY(-50%);
   cursor: grab;
-  color: var(--text-secondary);
-  font-size: 1.5rem;
-  z-index: 10;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-2xl);
+  z-index: var(--z-index-layer-component);
 }
 
-.card h3 {
-  margin: 0.5rem 0;
+.TrackerCard_Description {
+  margin: var(--spacing-sm) 0;
 }
 
-.card p {
-  margin: 0.2rem 0;
+.TrackerCard_Target,
+.TrackerCard_Streak {
+  margin: var(--spacing-2xs) 0;
+  color: var(--color-text-primary);
 }
 
-.cardLink {
+.TrackerCard_Link {
   text-decoration: none;
   color: inherit;
 }
 
-.habitTarget {
-  color: var(--text-primary);
-}
-
-.habitStreak {
-  color: var(--text-primary);
-}
-
-.emptyState {
+.TrackerCard_EmptyState {
   text-align: center;
-  padding: 2rem;
+  padding: var(--spacing-3xl);
   opacity: 0.7;
-  max-width: 600px;
-  background-color: var(--bg-card);
-  border-radius: 9px;
-  box-shadow: var(--box-shadow);
+  max-width: var(--width-container-standard);
+  background-color: var(--color-surface-card);
+  border-radius: var(--shape-radius-md);
+  box-shadow: var(--shadow-elevation-md);
 }
 
-.emptyIcon {
-  font-size: 3rem;
+.TrackerCard_EmptyIcon {
+  font-size: var(--font-size-5xl);
 }
 
-.goSuggestBtn {
-  margin-top: 1rem;
+.TrackerCard_SuggestButton {
+  margin-top: var(--spacing-lg);
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: var(--btn-primary-bg);
-  color: #fff;
-  border-radius: 6px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-button-primary-background);
+  color: var(--color-button-primary-text);
+  border-radius: var(--shape-radius-sm);
   text-decoration: none;
-  transition: 0.3s ease-in-out;
+  transition: var(--animation-transition-base);
 }
 
-.goSuggestBtn:hover {
-  background-color: var(--btn-primary-hover-bg);
+.TrackerCard_SuggestButton:hover {
+  background-color: var(--color-button-primary-hover);
 }
 
-.quickCompleteBtn {
+.TrackerCard_CompleteButton {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: var(--spacing-3xl);
+  height: var(--spacing-3xl);
   border-radius: 50%;
   border: none;
-  background-color: var(--bg-page);
-  color: var(--text-secondary);
+  background-color: var(--color-surface-page);
+  color: var(--color-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  z-index: 10;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: var(--animation-transition-fast);
+  z-index: var(--z-index-layer-component);
+  box-shadow: var(--shadow-interaction-tiny);
 }
 
-.quickCompleteBtn:hover {
-  background-color: #e2e8f0;
+.TrackerCard_CompleteButton:hover {
+  background-color: var(--color-surface-muted);
   transform: scale(1.1);
 }
 
-.completedBtn {
-  background-color: var(--status-success);
-  color: white;
+.TrackerCard_CompleteButton.isCompleted {
+  background-color: var(--color-status-success);
+  color: var(--color-surface-pure-white);
 }
 
-.completedBtn:hover {
-  background-color: #059669;
+.TrackerCard_CompleteButton.isCompleted:hover {
+  background-color: var(--color-surface-success-intense);
 }
 
 @media (max-width: 768px) {
-  .tipCard {
-    grid-template-columns: 1fr; /* Vertical layout on mobile */
-    gap: 15px;
-    margin-top: 1.5rem;
+  .TrackerCard_Grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
   }
-  .card {
-    padding: 0.5rem;
-  }
-
-  .habitIcon {
-    font-size: 1.5rem;
+  .TrackerCard_Container {
+    padding: var(--spacing-sm);
   }
 
-  .habitTitle {
-    font-size: 1.1rem;
+  .TrackerCard_Icon {
+    font-size: var(--font-size-2xl);
   }
 
-  .emptyState {
-    padding: 1rem;
+  .TrackerCard_Title {
+    font-size: var(--font-size-lg);
   }
 
-  .emptyIcon {
-    font-size: 2.5rem;
+  .TrackerCard_EmptyState {
+    padding: var(--spacing-lg);
+  }
+
+  .TrackerCard_EmptyIcon {
+    font-size: var(--font-size-4xl);
   }
 }

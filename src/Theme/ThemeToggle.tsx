@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
-import style from "@/Styles/Layout/ThemeToggle.module.css";
+import styles from "@/Styles/Layout/ThemeToggle.module.css";
 import useLocalStorage from "@/Hooks/useLocalStorage";
 import { useEffect, useState } from "react";
 
@@ -55,21 +55,22 @@ const ThemeToggle = React.memo((): React.JSX.Element | null => {
 
   return (
     <button
-      className={`${style.themeToggle} ${isDark ? style.dark : style.light}`}
+      className={styles.ThemeToggle_Container}
       onClick={() => toggleWithSweep(toggleTheme, !isDark, mounted)}
       aria-label="Toggle theme"
     >
-      <span className={style.bgIcon} aria-hidden>
-        {isDark ? (
-          <FaSun color="#facc15" size={16} />
-        ) : (
-          <FaMoon color="#fff" size={16} />
-        )}
-      </span>
+      <div className={styles.ThemeToggle_BackgroundIcon} aria-hidden>
+        <FaSun size={12} />
+        <FaMoon size={12} />
+      </div>
 
-      <span className={style.knob}>
-        <span className={style.knobIcon}>
-          {isDark ? <FaMoon size={14} /> : <FaSun color="#facc15" size={14} />}
+      <span className={styles.ThemeToggle_Knob}>
+        <span className={styles.ThemeToggle_KnobIcon}>
+          {isDark ? (
+            <FaMoon size={14} />
+          ) : (
+            <FaSun size={14} style={{ color: "var(--color-status-sun-icon)" }} />
+          )}
         </span>
       </span>
     </button>

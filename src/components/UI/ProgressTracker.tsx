@@ -44,7 +44,7 @@ const ProgressTrack: React.FC<ProgressTrackProps> = ({
         textAnchor="middle"
         dy=".3em"
         fontSize="1.1em"
-        fill="var(--text-primary)"
+        fill="var(--color-text-primary)"
       >
         {progress}%
       </text>

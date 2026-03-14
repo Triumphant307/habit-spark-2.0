@@ -4,8 +4,8 @@ import SuggestionForm from "@/components/Suggestion/SuggestionForm";
 
 const Suggestions = () => {
   return (
-    <div className={styles.suggestions}>
-      <h1 className={styles.title}>Habit Suggestions</h1>
+    <div className={styles.Suggestion_Container}>
+      <h1 className={styles.Suggestion_Title}>Habit Suggestions</h1>
       <SuggestionForm />
       <SuggestionCard />
     </div>

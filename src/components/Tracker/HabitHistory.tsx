@@ -51,30 +51,30 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
       isAfterTrackingStart
     ) {
       if (isDone) {
-        dotColor = "#4CAF50";
+        dotColor = "var(--color-status-success)";
         customStyles = {
-          bgcolor: "#4CAF50",
-          color: "#FFFFFF",
+          bgcolor: "var(--color-status-success)",
+          color: "var(--color-surface-pure-white)",
           borderRadius: "50%",
-          fontWeight: "bold",
-          "&:hover": { bgcolor: "#45A049" },
+          fontWeight: "var(--font-weight-bold)",
+          "&:hover": { bgcolor: "var(--color-surface-success-intense)" },
         };
       } else {
-        dotColor = "#F44336";
+        dotColor = "var(--color-status-error)";
         customStyles = {
-          bgcolor: "#F44336",
-          color: "#FFFFFF",
+          bgcolor: "var(--color-status-error)",
+          color: "var(--color-surface-pure-white)",
           borderRadius: "50%",
-          fontWeight: "bold",
-          "&:hover": { bgcolor: "#E53935" },
+          fontWeight: "var(--font-weight-bold)",
+          "&:hover": { bgcolor: "var(--color-status-error-hover)" },
         };
       }
     } else if (!isFuture && isAfterStart && !hasStartedTracking) {
-      dotColor = "#BDBDBD";
+      dotColor = "var(--color-text-muted)";
       customStyles = {
-        border: "1px solid #BDBDBD",
+        border: "1px solid var(--color-text-muted)",
         borderRadius: "50%",
-        "&:hover": { bgcolor: "rgba(189, 189, 189, 0.1)" },
+        "&:hover": { bgcolor: "rgba(153, 153, 153, 0.1)" },
       };
     }
 
@@ -89,9 +89,9 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
               left: "50%",
               transform: "translateX(-50%)",
               color: dotColor,
-              fontSize: "1rem",
+              fontSize: "var(--font-size-base)",
               lineHeight: 1,
-              fontWeight: "bold",
+              fontWeight: "var(--font-weight-bold)",
               textShadow: "0 0 2px rgba(0,0,0,0.3)",
             }}
           >
@@ -103,11 +103,11 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
   };
 
   return (
-    <div className={style.history}>
-      <h3 className={style.historyTitle}>
+    <div className={style.HabitDetails_History}>
+      <h3 className={style.HabitDetails_HistoryTitle}>
         📆 Habit History
         {habit.history.length === 0 && (
-          <span style={{ fontSize: "0.8rem", color: "#666", display: "block" }}>
+          <span style={{ fontSize: "var(--font-size-xs)", color: "var(--color-text-muted)", display: "block" }}>
             Complete your first day to start tracking!
           </span>
         )}

@@ -1,22 +1,20 @@
-/* Notification Settings Styles */
-
-.statusIndicator {
+.Notification_StatusIndicator {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
+  top: var(--spacing-xl);
+  right: var(--spacing-xl);
+  z-index: var(--z-index-sticky);
 }
 
-.iconEnabled {
-  font-size: 1.5rem;
-  color: var(--success-color, #10b981);
+.Notification_IconEnabled {
+  font-size: var(--font-size-2xl);
+  color: var(--color-status-success);
   filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.3));
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse var(--animation-duration-slow) ease-in-out infinite;
 }
 
-.iconDisabled {
-  font-size: 1.5rem;
-  color: var(--text-secondary, #999);
+.Notification_IconDisabled {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-muted);
   opacity: 0.6;
 }
 
@@ -32,63 +30,64 @@
 
 /* Permission Prompt */
 
-.promptOverlay {
+.Notification_Overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
+  background: var(--color-surface-overlay);
+  backdrop-filter: var(--effect-blur-glass);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
-  padding: 1rem;
+  z-index: var(--z-index-modal);
+  padding: var(--spacing-md);
 }
 
-.promptCard {
-  background: var(--bg-card, white);
-  border-radius: 20px;
-  padding: 2rem;
-  max-width: 400px;
+.Notification_Card {
+  background: var(--color-surface-card);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-3xl);
+  max-width: var(--width-container-mini);
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-elevation-lg);
   position: relative;
   text-align: center;
+  border: 1px solid var(--border-color-base);
 }
 
-.closeBtn {
+.Notification_CloseButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
   background: transparent;
   border: none;
-  font-size: 1.25rem;
-  color: var(--text-secondary, #999);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: all 0.2s;
+  padding: var(--spacing-sm);
+  border-radius: var(--shape-radius-full);
+  transition: var(--animation-transition-smooth);
 }
 
-.closeBtn:hover {
-  background: var(--bg-hover, #f0f0f0);
-  color: var(--text-primary, #333);
+.Notification_CloseButton:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
 }
 
-.iconWrapper {
+.Notification_IconWrapper {
   width: 80px;
   height: 80px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 50%;
+  margin: 0 auto var(--spacing-xl);
+  background: var(--gradient-surface-primary);
+  border-radius: var(--shape-radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow-interaction-primary);
 }
 
-.bell Icon {
-  font-size: 2.5rem;
-  color: white;
+.Notification_BellIcon {
+  font-size: var(--font-size-5xl);
+  color: #fff;
   animation: bellRing 2s ease-in-out infinite;
 }
 
@@ -112,125 +111,107 @@
   }
 }
 
-.title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text-primary, #333);
-  margin-bottom: 0.75rem;
+.Notification_Title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
 }
 
-.description {
-  font-size: 1rem;
-  color: var(--text-secondary, #666);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+.Notification_Description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+  line-height: var(--font-line-height-base);
 }
 
-.featureList {
+.Notification_FeatureList {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
+  margin: var(--spacing-xl) 0;
   text-align: left;
 }
 
-.featureList li {
+.Notification_FeatureList li {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
-  background: var(--bg-hover, #f8f9fa);
-  font-size: 0.95rem;
-  color: var(--text-primary, #333);
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: var(--shape-radius-md);
+  margin-bottom: var(--spacing-sm);
+  background: var(--color-surface-muted);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
 }
 
-.featureList li svg {
-  color: var(--success-color, #10b981);
-  font-size: 1.1rem;
+.Notification_FeatureList li svg {
+  color: var(--color-status-success);
+  font-size: var(--font-size-lg);
 }
 
-.actions {
+.Notification_Actions {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 2rem;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-2xl);
 }
 
-.enableBtn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+.Notification_EnableButton {
+  background: var(--gradient-surface-primary);
+  color: #fff;
   border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--shape-radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  gap: var(--spacing-sm);
+  transition: var(--animation-transition-smooth);
+  box-shadow: var(--shadow-interaction-primary);
 }
 
-.enableBtn:hover {
+.Notification_EnableButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  box-shadow: var(--shadow-interaction-hover);
 }
 
-.enableBtn:active {
+.Notification_EnableButton:active {
   transform: translateY(0);
 }
 
-.laterBtn {
+.Notification_LaterButton {
   background: transparent;
-  color: var(--text-secondary, #999);
+  color: var(--color-text-muted);
   border: none;
-  padding: 0.75rem;
-  font-size: 0.95rem;
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-sm);
   cursor: pointer;
-  transition: color 0.2s;
+  transition: var(--animation-transition-smooth);
 }
 
-.laterBtn:hover {
-  color: var(--text-primary, #333);
-}
-
-/* Dark mode support */
-body.dark .promptCard {
-  background: var(--bg-card-dark, #1a1a1a);
-}
-
-body.dark .title {
-  color: var(--text-primary-dark, #fff);
-}
-
-body.dark .description {
-  color: var(--text-secondary-dark, #aaa);
-}
-
-body.dark .featureList li {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary-dark, #fff);
+.Notification_LaterButton:hover {
+  color: var(--color-text-primary);
 }
 
 /* Mobile responsive */
 @media (max-width: 480px) {
-  .promptCard {
-    padding: 1.5rem;
+  .Notification_Card {
+    padding: var(--spacing-xl);
   }
 
-  .title {
-    font-size: 1.5rem;
+  .Notification_Title {
+    font-size: var(--font-size-2xl);
   }
 
-  .iconWrapper {
+  .Notification_IconWrapper {
     width: 60px;
     height: 60px;
   }
 
-  .bellIcon {
-    font-size: 2rem;
+  .Notification_BellIcon {
+    font-size: var(--font-size-3xl);
   }
 }

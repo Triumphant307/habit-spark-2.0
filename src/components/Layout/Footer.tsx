@@ -4,10 +4,10 @@ import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 const Footer : React.FC = () => {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.brand}>HabitSpark © 2025</div>
+    <footer className={styles.Footer_Container}>
+      <div className={styles.Footer_Brand}>HabitSpark © 2025</div>
 
-      <ul className={styles.navLinks}>
+      <ul className={styles.Footer_NavLinks}>
         <li>
           <Link href="/">Home</Link>
         </li>
@@ -22,7 +22,7 @@ const Footer : React.FC = () => {
         </li>
       </ul>
 
-      <div className={styles.socials}>
+      <div className={styles.Footer_Socials}>
         <a
           href="https://github.com/Triumphant307"
           target="_blank"
@@ -42,8 +42,8 @@ const Footer : React.FC = () => {
         </a>
       </div>
 
-      <div className={styles.credit}>
-        Made with <span className={styles.heart}>❤️</span> by Triumphant_
+      <div className={styles.Footer_Credit}>
+        Made with <span className={styles.Footer_HeartIcon}>❤️</span> by Triumphant_
       </div>
     </footer>
   );

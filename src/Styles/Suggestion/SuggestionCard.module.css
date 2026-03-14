@@ -1,255 +1,255 @@
-.tipCard {
+.SuggestionCard_Grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-3xl);
 }
 
-.card {
+@media (min-width: 1024px) {
+  .SuggestionCard_Grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.SuggestionCard_Grid_List {
+  grid-template-columns: 1fr !important;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.SuggestionCard_Container {
   text-align: center;
-  background-color: var(--bg-card);
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: var(--box-shadow);
-  transition: box-shadow 0.3s ease;
+  background-color: var(--color-surface-card);
+  padding: var(--spacing-lg);
+  border-radius: var(--shape-radius-md);
+  box-shadow: var(--shadow-elevation-sm);
+  transition: var(--animation-transition-smooth);
 }
 
-.card h3 {
-  font-weight: normal;
+.SuggestionCard_Container h3 {
+  font-weight: var(--font-weight-normal);
   text-align: center;
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
 }
 
-.card:hover {
-  box-shadow: var(--box-shadow-hover);
+.SuggestionCard_Container:hover {
+  box-shadow: var(--shadow-interaction-hover);
+  transform: translateY(-2px);
 }
 
-.btn {
+.SuggestionCard_ActionButton {
   position: relative;
   overflow: hidden;
-  padding: 0.6rem 1.2rem;
-  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
-  color: #fff;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  background: var(--gradient-surface-primary);
+  color: var(--color-button-primary-text);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--shape-radius-md);
   cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
   letter-spacing: 0.02em;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 4px 12px rgba(59, 130, 246, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: var(--animation-transition-smooth);
+  box-shadow: var(--shadow-interaction-primary);
 }
 
-.btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: left 0.5s ease;
-}
-
-.btn:disabled {
-  background: #9ca3af;
+.SuggestionCard_ActionButton:disabled {
+  background: var(--color-surface-muted);
   cursor: not-allowed;
   opacity: 0.6;
   pointer-events: none;
   box-shadow: none;
 }
 
-.btn:disabled:hover {
-  transform: none;
-}
-
-.btn:hover {
+.SuggestionCard_ActionButton:hover:not(:disabled) {
   transform: translateY(-2px) scale(1.02);
-  box-shadow:
-    0 8px 20px rgba(59, 130, 246, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-interaction-hover);
 }
 
-.btn:hover::before {
-  left: 100%;
-}
-
-.btn:active {
+.SuggestionCard_ActionButton:active:not(:disabled) {
   transform: translateY(0) scale(0.98);
 }
 
-.btn:focus-visible {
-  outline: none;
-  box-shadow: var(--box-shadow-focus);
-}
-
-.filterButtons {
+.SuggestionCard_FilterContainer {
   display: flex;
-  gap: 10px;
+  gap: var(--spacing-md);
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-xl);
   flex-wrap: wrap;
 }
 
-.filterButtons button {
+.SuggestionCard_FilterContainer button {
   position: relative;
   overflow: hidden;
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-sm) var(--spacing-lg);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--shape-radius-md);
   cursor: pointer;
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.85rem;
-  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+  color: var(--color-button-primary-text);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  background: var(--gradient-surface-primary);
+  transition: var(--animation-transition-smooth);
+  box-shadow: var(--shadow-interaction-tiny);
+  opacity: 0.8;
 }
 
-.filterButtons button:hover {
+.SuggestionCard_FilterContainer button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+  opacity: 1;
+  box-shadow: var(--shadow-interaction-hover);
 }
 
-.filterButtons button:active {
-  transform: translateY(0) scale(0.98);
+.SuggestionCard_Filter_Active {
+  background: var(--gradient-surface-active) !important;
+  box-shadow: var(--shadow-interaction-hover);
+  opacity: 1 !important;
 }
 
-.filterButtons .active {
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+.SuggestionCard_Badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-card);
+  color: var(--color-brand-primary);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-bold);
+  padding: 0 var(--spacing-xs);
+  height: 18px;
+  min-width: 18px;
+  border-radius: var(--shape-radius-circle);
+  margin-left: var(--spacing-xs);
+  box-shadow: var(--shadow-interaction-tiny);
+  transition: var(--animation-transition-fast);
 }
 
-.icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+.SuggestionCard_Filter_Active .SuggestionCard_Badge {
+  background: var(--color-surface-page);
+  color: var(--color-brand-active, #7c4dff);
 }
 
-.noResults {
+.SuggestionCard_Icon {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-sm);
+}
+
+.SuggestionCard_NoResults {
+  grid-column: 1 / -1;
   text-align: center;
-  padding: 3rem 1rem;
-  color: var(--text-primary);
-  border-radius: 1rem;
-  background-color: var(--bg-card);
+  padding: var(--spacing-4xl) var(--spacing-lg);
+  color: var(--color-text-primary);
+  border-radius: var(--shape-radius-lg);
+  background-color: var(--color-surface-card);
   max-width: 400px;
-  margin: 2rem auto;
-  box-shadow: var(--box-shadow);
-  transition: all 0.3s ease;
+  margin: var(--spacing-2xl) auto;
+  box-shadow: var(--shadow-elevation-sm);
+  transition: var(--animation-transition-smooth);
 }
 
-.noResults p {
-  font-size: 1.25rem;
-  margin: 0.5rem 0;
+.SuggestionCard_NoResults p {
+  font-size: var(--font-size-xl);
+  margin: var(--spacing-sm) 0;
 }
 
-.noResults small {
-  color: #888;
+.SuggestionCard_NoResults small {
+  color: var(--color-text-muted);
 }
 
-.btnHeart {
-  background-color: none;
+.SuggestionCard_HeartButton {
+  background: transparent;
   border: none;
   cursor: pointer;
-  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.4rem;
-  border-radius: 50%;
-  transition:
-    background 0.2s,
-    box-shadow 0.2s;
-  box-shadow: none;
+  padding: var(--spacing-xs);
+  border-radius: var(--shape-radius-circle);
+  transition: var(--animation-transition-fast);
 }
 
-.btnHeart:hover {
-  background: rgba(0, 123, 255, 0.08);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+.SuggestionCard_HeartButton:hover {
+  background-color: var(--color-glass-background);
+  backdrop-filter: var(--effect-blur-md);
+  box-shadow: var(--shadow-interaction-hover);
 }
 
-.listView {
+
+
+.SuggestionCard_ListView {
   width: 100%;
-  max-width: 700px;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--spacing-lg);
   text-align: left;
-  padding: 1.5rem;
+  padding: var(--spacing-xl);
 }
 
-.listView .icon {
-  font-size: 2.5rem;
+.SuggestionCard_ListView .SuggestionCard_Icon {
+  font-size: var(--font-size-4xl);
 }
 
-.listView .btn {
+.SuggestionCard_ListView .SuggestionCard_ActionButton {
   margin-left: auto;
 }
 
-.gridView {
-  width: 250px;
+.SuggestionCard_GridView {
+  width: 100%;
 }
 
-.viewToggle {
+.SuggestionCard_ViewToggle {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
 }
 
-.viewToggle button {
+.SuggestionCard_ViewToggle button {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--btn-primary-bg) 0%, #6366f1 100%);
-  color: #fff;
+  background: var(--gradient-surface-primary);
+  color: var(--color-button-primary-text);
   border: none;
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  border-radius: var(--shape-radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-base);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+  transition: var(--animation-transition-smooth);
+  box-shadow: var(--shadow-interaction-tiny);
+  opacity: 0.7;
 }
 
-.viewToggle button.active {
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+.SuggestionCard_ViewToggle_Active {
+  background: var(--gradient-surface-active) !important;
+  box-shadow: var(--shadow-interaction-hover);
+  opacity: 1 !important;
 }
 
-.viewToggle button:hover:not(.active) {
+.SuggestionCard_ViewToggle button:hover:not(.SuggestionCard_ViewToggle_Active) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+  opacity: 0.9;
+  box-shadow: var(--shadow-interaction-hover);
 }
 
-.viewToggle button:active {
-  transform: translateY(0) scale(0.98);
-}
-
-@media (max-width: 600px) {
-  .tipCard {
+@media (max-width: 768px) {
+  .SuggestionCard_Grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 
-  .btn {
+  .SuggestionCard_ActionButton {
     width: 100%;
   }
 
-  .listView {
+  .SuggestionCard_ListView {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  .listView .btn {
+  .SuggestionCard_ListView .SuggestionCard_ActionButton {
     width: 100%;
   }
 }

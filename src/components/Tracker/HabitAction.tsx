@@ -25,7 +25,7 @@ const HabitAction: React.FC<HabitActionProps> = ({
 
   return (
     <>
-      <div className={style.actions}>
+      <div className={style.HabitDetails_Actions}>
         {habit.streak < habit.target && (
           <button
             type="button"
@@ -49,7 +49,6 @@ const HabitAction: React.FC<HabitActionProps> = ({
 
         <button
           type="button"
-          className={style.editBtn}
           onPointerDown={(e) => createRipple(e)}
           onClick={handleEditClick}
           title="Edit Habit"
@@ -58,10 +57,10 @@ const HabitAction: React.FC<HabitActionProps> = ({
           <FaEdit aria-hidden="true" /> Edit
         </button>
       </div>
-      <div className={style.deleteActions}>
+      <div className={style.HabitDetails_DeleteActions}>
         <button
           type="button"
-          className={style.deleteBtn}
+          className={style.HabitDetails_DeleteButton}
           onClick={handleDeleteClick}
           onPointerDown={(e) => createRipple(e)}
           aria-label="Delete this habit permanently"

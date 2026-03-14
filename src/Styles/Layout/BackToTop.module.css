@@ -1,18 +1,20 @@
-.backToTop {
+.BackToTop_Button {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background-color: var(--bg-card);
-  color: var(--text-primary);
+  bottom: var(--spacing-3xl);
+  right: var(--spacing-3xl);
+  background-color: var(--color-surface-card);
+  color: var(--color-text-primary);
   border: none;
-  border-radius: 50%;
-  padding: 0.5rem;
+  border-radius: var(--shape-radius-circle);
+  padding: var(--spacing-sm);
   cursor: pointer;
-  box-shadow: var(--box-shadow);
-  z-index: 999;
-  transition: background-color 0.3s;
+  box-shadow: var(--shadow-elevation-md);
+  z-index: var(--z-index-layer-sticky);
+  transition: var(--animation-transition-smooth);
 }
 
-.backToTop:hover {
-  background-color: var(--bg-hover);
+.BackToTop_Button:hover {
+  background-color: var(--color-surface-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-interaction-hover);
 }

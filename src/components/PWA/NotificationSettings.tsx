@@ -62,15 +62,15 @@ export default function NotificationSettings() {
   return (
     <>
       {/* Compact status indicator */}
-      <div className={styles.statusIndicator}>
+      <div className={styles.Notification_StatusIndicator}>
         {permission === "granted" ? (
           <FaBell
-            className={styles.iconEnabled}
+            className={styles.Notification_IconEnabled}
             title="Notifications enabled"
           />
         ) : (
           <FaBellSlash
-            className={styles.iconDisabled}
+            className={styles.Notification_IconDisabled}
             title="Notifications disabled"
           />
         )}
@@ -80,37 +80,37 @@ export default function NotificationSettings() {
       <AnimatePresence>
         {showPrompt && (
           <motion.div
-            className={styles.promptOverlay}
+            className={styles.Notification_Overlay}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className={styles.promptCard}
+              className={styles.Notification_Card}
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
             >
               <button
-                className={styles.closeBtn}
+                className={styles.Notification_CloseButton}
                 onClick={handleDismiss}
                 aria-label="Close"
               >
                 <FaTimes />
               </button>
 
-              <div className={styles.iconWrapper}>
-                <FaBell className={styles.bellIcon} />
+              <div className={styles.Notification_IconWrapper}>
+                <FaBell className={styles.Notification_BellIcon} />
               </div>
 
-              <h3 className={styles.title}>Enable Habit Reminders?</h3>
+              <h3 className={styles.Notification_Title}>Enable Habit Reminders?</h3>
 
-              <p className={styles.description}>
+              <p className={styles.Notification_Description}>
                 Get notified at your chosen times to stay on track with your
                 habits.
               </p>
 
-              <ul className={styles.featureList}>
+              <ul className={styles.Notification_FeatureList}>
                 <li>
                   <FaCheck /> Daily habit reminders
                 </li>
@@ -122,14 +122,14 @@ export default function NotificationSettings() {
                 </li>
               </ul>
 
-              <div className={styles.actions}>
+              <div className={styles.Notification_Actions}>
                 <button
-                  className={styles.enableBtn}
+                  className={styles.Notification_EnableButton}
                   onClick={handleEnableNotifications}
                 >
                   <FaBell /> Enable Notifications
                 </button>
-                <button className={styles.laterBtn} onClick={handleDismiss}>
+                <button className={styles.Notification_LaterButton} onClick={handleDismiss}>
                   Maybe Later
                 </button>
               </div>

@@ -28,18 +28,18 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <section className={styles.section}>
-        <div className={styles.hero__bg} />
+      <section className={styles.Home_Section}>
+        <div className={styles.Home_Background} />
 
         <motion.div
-          className={styles.home}
+          className={styles.Home_Container}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Floating Badges */}
           <motion.div
-            className={`${styles.badge} ${styles.badge__1}`}
+            className={`${styles.Home_Badge} ${styles.Home_Badge1}`}
             custom={0}
             variants={badgeVariants}
             animate={{
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
             ✨ Track Smart
           </motion.div>
           <motion.div
-            className={`${styles.badge} ${styles.badge__2}`}
+            className={`${styles.Home_Badge} ${styles.Home_Badge2}`}
             custom={1}
             variants={badgeVariants}
             animate={{
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
             Grow Fast 📈
           </motion.div>
           <motion.div
-            className={`${styles.badge} ${styles.badge__3}`}
+            className={`${styles.Home_Badge} ${styles.Home_Badge3}`}
             custom={2}
             variants={badgeVariants}
             animate={{
@@ -85,25 +85,24 @@ const Home: React.FC = () => {
             🎯 Goal Driven
           </motion.div>
 
-          <motion.h1 className={styles.home__title} variants={itemVariants}>
+          <motion.h1 className={styles.Home_Title} variants={itemVariants}>
             Welcome to {isReturning ? "Back" : ""} <br />
-            <span className={styles.home__titleSpan}>HabitSpark</span>
+            <span className={styles.Home_TitleAccent}>HabitSpark</span>
           </motion.h1>
           <motion.p
-            className={styles.home__description}
+            className={styles.Home_Description}
             variants={itemVariants}
           >
             {isReturning
               ? "We are glad to see you again! Your consistency is paying off."
               : "Your journey to better habits starts here. Track your progress, get suggestions, and celebrate your achievements."}
           </motion.p>
-          <motion.div className={styles.home__cta} variants={itemVariants}>
+          <motion.div className={styles.Home_CTA} variants={itemVariants}>
             <Link href="/suggestion" className={styles.home__button_link}>
               <button
                 onPointerDown={(e) => createRipple(e)}
-                className={styles.home__button}
+                className={styles.Home_HeroButton}
               >
-                {/* Get Started */}
                 {isReturning ? "Continue" : "Explore Now"}
               </button>
             </Link>
@@ -125,8 +124,8 @@ const Home: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
           variants={fadeInUpVariants}
         >
-          <h2 className={styles.h2}>Stay Consistent, Stay Motivated</h2>
-          <p className={styles.p}>
+          <h2 className={styles.Home_Heading}>Stay Consistent, Stay Motivated</h2>
+          <p className={styles.Home_Text}>
             Join us in building better habits and achieving your goals.
           </p>
           <LottieAnimation />

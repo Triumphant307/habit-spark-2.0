@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Aos from "aos";
 import styles from "@/Styles/Home/QuotesMotivation.module.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Quote = {
   q: string;
@@ -75,21 +76,32 @@ const QuotesMotivation = () => {
   }, []);
 
   return (
-    <section
-      className={styles.QuotesMotivation}
+    <div
+      className={styles.QuotesMotivation_Container}
       data-aos="zoom-in"
       data-aos-delay="200"
     >
-      <h2 className={styles.title}>💭 Daily Motivational Quote</h2>
+      <h2 className={styles.QuotesMotivation_Title}>💭 Daily Motivational Quote</h2>
 
-      <blockquote
-        className={styles.quotes}
-        style={{ opacity: visible ? 1 : 0 }}
-      >
-        “{quote.q}”
-        <footer className={styles.author}>— {quote.a}</footer>
-      </blockquote>
-    </section>
+      <AnimatePresence mode="wait">
+        {visible && (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className={styles.QuotesMotivation_Quote}>
+              “{quote.q}”
+            </p>
+            <p className={styles.QuotesMotivation_Author}>
+              — {quote.a}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

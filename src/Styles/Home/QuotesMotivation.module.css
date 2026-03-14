@@ -1,41 +1,36 @@
-.QuotesMotivation {
+.QuotesMotivation_Container {
   text-align: center;
-  padding: 20px;
-  background-color: var(--bg-card);
-  border-radius: 10px;
-  box-shadow: var(--box-shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: var(--spacing-xl);
+  background-color: var(--color-surface-card);
+  border-radius: var(--shape-radius-md);
+  box-shadow: var(--shadow-elevation-sm);
+  transition: var(--animation-transition-smooth);
 }
 
-.QuotesMotivation:hover {
-  transition: 1s ease-in-out;
-  box-shadow: var(--box-shadow-hover);
+.QuotesMotivation_Container:hover {
+  box-shadow: var(--shadow-interaction-hover);
   transform: translateY(-5px);
 }
 
-.QuotesMotivation:focus {
-  box-shadow: var(--box-shadow-focus);
-}
-
-.quotes {
-  font-size: 1.2rem;
-  color: var(--text-primary);
-  margin-bottom: 10px;
+.QuotesMotivation_Quote {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
   font-style: italic;
-  transition: opacity 0.5s ease-in-out;
+  transition: var(--animation-transition-smooth);
 }
 
-.quotes:hover {
+.QuotesMotivation_Quote:hover {
   transform: scale(1.03);
-  color: var(--accent, #007bff);
+  color: var(--color-brand-primary);
 }
 
-.author {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  font-weight: bold;
+.QuotesMotivation_Author {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-bold);
 }
 
-.title {
-  color: var(--text-secondary);
+.QuotesMotivation_Title {
+  color: var(--color-text-secondary);
 }
