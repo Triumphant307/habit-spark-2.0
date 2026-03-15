@@ -1,6 +1,5 @@
 .Header_Container {
   position: sticky;
-  top: 1rem;
   z-index: var(--z-index-layer-sticky);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
