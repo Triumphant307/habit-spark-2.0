@@ -70,7 +70,7 @@ const Header: React.FC = () => {
           <span className={Style.Header_HamburgerBar} />
           <span className={Style.Header_HamburgerBar} />
         </button>
-        <h1 className={Style.Header_Title}>HabitSpark</h1>
+        <h1 className={Style.Header_Title}>Habit<span className={Style.Header_Title_Spark}>Spark</span></h1>
       </div>
 
       <nav
