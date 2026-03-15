@@ -118,6 +118,7 @@
   --shape-radius-md: 10px;
   --shape-radius-lg: 12px;
   --shape-radius-xl: 16px;
+  --shape-radius-full: 50%;
 
   /* Effects */
   --effect-blur-md: blur(8px);

@@ -61,21 +61,6 @@ export default function NotificationSettings() {
 
   return (
     <>
-      {/* Compact status indicator */}
-      <div className={styles.Notification_StatusIndicator}>
-        {permission === "granted" ? (
-          <FaBell
-            className={styles.Notification_IconEnabled}
-            title="Notifications enabled"
-          />
-        ) : (
-          <FaBellSlash
-            className={styles.Notification_IconDisabled}
-            title="Notifications disabled"
-          />
-        )}
-      </div>
-
       {/* Permission prompt */}
       <AnimatePresence>
         {showPrompt && (
@@ -103,7 +88,9 @@ export default function NotificationSettings() {
                 <FaBell className={styles.Notification_BellIcon} />
               </div>
 
-              <h3 className={styles.Notification_Title}>Enable Habit Reminders?</h3>
+              <h3 className={styles.Notification_Title}>
+                Enable Habit Reminders?
+              </h3>
 
               <p className={styles.Notification_Description}>
                 Get notified at your chosen times to stay on track with your
@@ -129,7 +116,10 @@ export default function NotificationSettings() {
                 >
                   <FaBell /> Enable Notifications
                 </button>
-                <button className={styles.Notification_LaterButton} onClick={handleDismiss}>
+                <button
+                  className={styles.Notification_LaterButton}
+                  onClick={handleDismiss}
+                >
                   Maybe Later
                 </button>
               </div>
