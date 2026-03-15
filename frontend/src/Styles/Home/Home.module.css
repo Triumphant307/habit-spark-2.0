@@ -51,7 +51,7 @@
   text-align: center;
   padding: var(--spacing-2xl);
   width: 100%;
-  max-width: var(--width-container-large, 1200px);
+  max-width: var(--width-container-page);
   position: relative;
 }
 
