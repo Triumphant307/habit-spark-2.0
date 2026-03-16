@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          <LuZap /> Track Smart
+          <LuZap className={styles.Home_BadgeIcon} style={{ color: "var(--color-status-warning)" }} /> Track Smart
         </motion.div>
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge2}`}
@@ -63,7 +63,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          Grow Fast <LuTrendingUp />
+          Grow Fast <LuTrendingUp className={styles.Home_BadgeIcon} style={{ color: "var(--color-status-success)" }} />
         </motion.div>
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge3}`}
@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          <LuTarget /> Goal Driven
+          <LuTarget className={styles.Home_BadgeIcon} style={{ color: "var(--color-status-error)" }} /> Goal Driven
         </motion.div>
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge4}`}
@@ -95,7 +95,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          Cloud Sync <LuCloudSun />
+          Cloud Sync <LuCloudSun className={styles.Home_BadgeIcon} style={{ color: "var(--color-brand-primary)" }} />
         </motion.div>
 
         <motion.div
@@ -112,7 +112,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          100% Free <LuGift />
+          100% Free <LuGift className={styles.Home_BadgeIcon} style={{ color: "var(--color-brand-violet)" }} />
         </motion.div>
 
         <motion.h1 className={styles.Home_Title} variants={itemVariants}>
