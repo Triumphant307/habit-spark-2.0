@@ -1,13 +1,11 @@
 "use client";
 import styles from "@/Styles/Home/Home.module.css";
 import FeaturedHighlight from "@/components/Home/FeaturedHighlight";
-import QuotesMotivation from "@/components/Home/QuotesMotivation";
 import CompletedPreview from "@/components/Home/CompletedPreview";
-import LottieAnimation from "@/components/Home/LottieAniamtion";
 import { motion } from "framer-motion";
 import Hero from "@/components/Home/Hero";
 import HighlightsBar from "@/components/Home/HighlightsBar";
-import MotivationSection from "@/components/Home/MotivationSection";
+import MotivationHub from "@/components/Home/MotivationHub";
 import { fadeInUpVariants } from "@/components/Home/HomeAnimations";
 
 const Home: React.FC = () => {
@@ -27,17 +25,6 @@ const Home: React.FC = () => {
           <FeaturedHighlight />
         </motion.div>
 
-        <MotivationSection />
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeInUpVariants}
-        >
-          <QuotesMotivation />
-        </motion.div>
-
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -46,6 +33,8 @@ const Home: React.FC = () => {
         >
           <CompletedPreview />
         </motion.div>
+
+        <MotivationHub />
       </section>
     </>
   );

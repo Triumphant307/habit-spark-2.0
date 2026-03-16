@@ -1,0 +1,142 @@
+.MotivationHub_Section {
+  padding: var(--spacing-7xl) var(--spacing-2xl);
+  width: 100%;
+  max-width: var(--width-container-page);
+  margin: 0 auto;
+}
+
+.MotivationHub_Card {
+  background: var(--color-glass-background);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-5xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5xl);
+  box-shadow: var(--shadow-elevation-xl);
+  min-height: 450px;
+  position: relative;
+  overflow: hidden;
+}
+
+.VisualSide {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.LottieWrapper {
+  width: 100%;
+  max-width: 350px;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.2));
+}
+
+.ContentSide {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.Title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.Subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-3xl);
+  opacity: 0.8;
+}
+
+.QuoteWrapper {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.QuoteText {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--color-text-primary);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.QuoteAuthor {
+  font-size: var(--font-size-lg);
+  color: var(--color-brand-primary);
+  font-weight: var(--font-weight-bold);
+  display: block;
+}
+
+.Actions {
+  margin-top: var(--spacing-3xl);
+}
+
+.RefreshButton {
+  background: transparent;
+  border: 1.5px solid var(--color-brand-primary);
+  color: var(--color-brand-primary);
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--shape-radius-full);
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  transition: var(--animation-transition-smooth);
+  cursor: pointer;
+  width: fit-content;
+}
+
+.RefreshButton:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+}
+
+.RefreshButton:active {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .MotivationHub_Section {
+    padding: var(--spacing-4xl) var(--spacing-xl);
+  }
+
+  .MotivationHub_Card {
+    flex-direction: column;
+    padding: var(--spacing-3xl) var(--spacing-xl);
+    text-align: center;
+    gap: var(--spacing-3xl);
+  }
+
+  .ContentSide {
+    text-align: center;
+    align-items: center;
+  }
+
+  .QuoteWrapper {
+    min-height: 160px; /* Stable height on mobile too */
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .RefreshButton {
+    margin: 0 auto;
+  }
+
+  .LottieWrapper {
+    max-width: 250px;
+  }
+}
