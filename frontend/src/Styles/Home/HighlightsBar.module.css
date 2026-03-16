@@ -1,0 +1,86 @@
+.HighlightsContainer {
+  width: 100%;
+  max-width: 1000px;
+  margin: -2.8rem auto 4rem auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.HighlightsContent {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 0;
+  background: var(--color-glass-background);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: 100px;
+  box-shadow: var(--shadow-elevation-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Premium edge fade effects */
+.HighlightsContent::before,
+.HighlightsContent::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.HighlightsContent::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-surface-page), transparent);
+}
+
+.HighlightsContent::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-surface-page), transparent);
+}
+
+.CarouselTrack {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-left: 2.5rem;
+  white-space: nowrap;
+}
+
+.HighlightItemWrapper {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.HighlightItem {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.HighlightSeparator {
+  color: var(--color-brand-primary);
+  font-weight: var(--font-weight-bold);
+  opacity: 0.5;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .HighlightsContainer {
+    margin: -2rem auto 3rem auto;
+    max-width: 95%;
+  }
+
+  .CarouselTrack,
+  .HighlightItemWrapper {
+    gap: 1.5rem;
+  }
+}

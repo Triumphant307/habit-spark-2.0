@@ -42,19 +42,19 @@
   }
 }
 
-.Home_Container {
-  min-height: 100dvh;
+.Hero_section {
+  min-height: 84dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-6xl) var(--spacing-2xl);
   width: 100%;
   max-width: var(--width-container-page);
   position: relative;
+  margin-top: 0;
 }
-
 .Home_Title {
   font-size: clamp(3rem, 10vw, 6.25rem);
   font-weight: var(--font-weight-extra-bold, 800);
@@ -246,5 +246,9 @@
     padding: var(--spacing-md) var(--spacing-xl);
     width: 100%;
     max-width: 280px;
+  }
+
+  .Hero_section {
+    min-height: 100dvh;
   }
 }
