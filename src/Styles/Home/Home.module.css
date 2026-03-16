@@ -188,6 +188,16 @@
   left: 5%;
 }
 
+.Home_Badge4 {
+  top: 20%;
+  right: 10%;
+}
+
+.Home_Badge5 {
+  bottom: 15%;
+  left: 20%;
+}
+
 @media (max-width: 900px) {
   .Home_Badge3 {
     display: none;
