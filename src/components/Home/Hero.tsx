@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
   return (
     <>
       <motion.div
-        className={styles.Home_Container}
+        className={styles.Hero_section}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
