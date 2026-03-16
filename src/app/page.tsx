@@ -6,6 +6,7 @@ import CompletedPreview from "@/components/Home/CompletedPreview";
 import LottieAnimation from "@/components/Home/LottieAniamtion";
 import { motion } from "framer-motion";
 import Hero from "@/components/Home/Hero";
+import MotivationSection from "@/components/Home/MotivationSection";
 import { fadeInUpVariants } from "@/components/Home/HomeAnimations";
 
 const Home: React.FC = () => {
@@ -24,21 +25,7 @@ const Home: React.FC = () => {
           <FeaturedHighlight />
         </motion.div>
 
-        <motion.div
-          style={{ textAlign: "center", padding: "2rem" }}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeInUpVariants}
-        >
-          <h2 className={styles.Home_Heading}>
-            Stay Consistent, Stay Motivated
-          </h2>
-          <p className={styles.Home_Text}>
-            Join us in building better habits and achieving your goals.
-          </p>
-          <LottieAnimation />
-        </motion.div>
+        <MotivationSection />
 
         <motion.div
           initial="hidden"
