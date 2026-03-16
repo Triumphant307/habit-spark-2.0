@@ -171,6 +171,14 @@
   box-shadow: var(--shadow-elevation-lg);
   pointer-events: none;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.Home_BadgeIcon {
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 8px currentColor);
 }
 
 .Home_Badge1 {
