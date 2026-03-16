@@ -201,6 +201,7 @@
 @media (max-width: 480px) {
   .Notification_Card {
     padding: var(--spacing-xl);
+    width: 90%;
   }
 
   .Notification_Title {
