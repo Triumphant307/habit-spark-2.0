@@ -43,5 +43,8 @@ next-env.d.ts
 # git automation file
 git-save.sh
 
+# project plans
+SAAS_LANDING_PLAN.md
+
 .vscode
 GEMINI.md

@@ -10,6 +10,13 @@ import {
   badgeVariants,
   itemVariants,
 } from "./HomeAnimations";
+import {
+  LuZap,
+  LuTrendingUp,
+  LuTarget,
+  LuCloudSun,
+  LuGift,
+} from "react-icons/lu";
 
 const Hero: React.FC = () => {
   const createRipple = useRipple();
@@ -41,7 +48,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          ✨ Track Smart
+          <LuZap /> Track Smart
         </motion.div>
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge2}`}
@@ -56,7 +63,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          Grow Fast 📈
+          Grow Fast <LuTrendingUp />
         </motion.div>
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge3}`}
@@ -72,7 +79,40 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          🎯 Goal Driven
+          <LuTarget /> Goal Driven
+        </motion.div>
+        <motion.div
+          className={`${styles.Home_Badge} ${styles.Home_Badge4}`}
+          custom={3}
+          variants={badgeVariants}
+          animate={{
+            y: [0, 12, 0],
+            transition: {
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut" as const,
+              delay: 1.5,
+            },
+          }}
+        >
+          Cloud Sync <LuCloudSun />
+        </motion.div>
+
+        <motion.div
+          className={`${styles.Home_Badge} ${styles.Home_Badge5}`}
+          custom={4}
+          variants={badgeVariants}
+          animate={{
+            y: [0, -6, 0],
+            transition: {
+              duration: 5.5,
+              repeat: Infinity,
+              ease: "easeInOut" as const,
+              delay: 2,
+            },
+          }}
+        >
+          100% Free <LuGift />
         </motion.div>
 
         <motion.h1 className={styles.Home_Title} variants={itemVariants}>
@@ -82,7 +122,7 @@ const Hero: React.FC = () => {
         <motion.p className={styles.Home_Description} variants={itemVariants}>
           {isReturning
             ? "We are glad to see you again! Your consistency is paying off."
-            : "Your journey to better habits starts here. Track your progress, get suggestions, and celebrate your achievements."}
+            : "Turn your goals into measurable achievements. Visualize your consistency, analyze your progress, and stay motivated with HabitSpark."}
         </motion.p>
         <motion.div className={styles.Home_CTA} variants={itemVariants}>
           <Link href="/suggestion" className={styles.home__button_link}>
@@ -90,7 +130,7 @@ const Hero: React.FC = () => {
               onPointerDown={(e) => createRipple(e)}
               className={styles.Home_HeroButton}
             >
-              {isReturning ? "Continue" : "Explore Now"}
+              {isReturning ? "Sign Up - It's Free!" : "Sign Up - It's Free!"}
             </button>
           </Link>
         </motion.div>
