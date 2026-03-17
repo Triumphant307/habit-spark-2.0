@@ -1,48 +1,178 @@
 .CompletedPreview_Container {
-  padding: var(--spacing-2xl);
-  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.CompletedPreview_Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.CompletedPreview_TitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.CompletedPreview_TitleIcon {
+  font-size: 2rem;
+  color: var(--color-status-warning);
+  filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.4));
 }
 
 .CompletedPreview_Title {
-  font-size: var(--font-size-3xl);
-  margin-bottom: var(--spacing-xl);
+  font-size: 2.2rem;
+  font-weight: 800;
   color: var(--color-text-primary);
+  margin: 0;
 }
 
+.CompletedPreview_ViewAll {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.CompletedPreview_ViewAll:hover {
+  transform: translateX(5px);
+}
+
+/* Glassmorphism Grid */
 .CompletedPreview_Grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-2xl);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  justify-content: center;
 }
 
 .CompletedPreview_Item {
-  background: var(--color-surface-card);
-  border-radius: var(--shape-radius-md);
-  padding: var(--spacing-xl);
-  margin: var(--spacing-md);
-  box-shadow: var(--shadow-elevation-sm);
-  transition: var(--animation-transition-smooth);
-  cursor: pointer;
-  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
-.CompletedPreview_Item:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-interaction-hover);
+.CompletedPreview_Item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-brand-primary), var(--color-brand-violet));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.CompletedPreview_Icon {
-  font-size: var(--font-size-3xl);
+.CompletedPreview_Item:hover::before {
+  opacity: 1;
 }
 
+.CompletedPreview_Badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--color-status-warning);
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  font-size: 1.2rem;
+}
+
+/* Icon Section */
+.CompletedPreview_IconBox {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1.5rem;
+}
+
+.CompletedPreview_Emoji {
+  font-size: 3rem;
+  display: block;
+}
+
+.CompletedPreview_CheckIcon {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background: var(--color-status-success);
+  color: white;
+  border-radius: 50%;
+  padding: 4px;
+  font-size: 1.5rem;
+  border: 3px solid rgba(20, 20, 20, 0.8);
+}
+
+/* Content */
 .CompletedPreview_ItemTitle {
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-xl);
-  margin-top: var(--spacing-sm);
+  font-size: 1.4rem;
+  font-weight: 700;
   color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
 }
 
 .CompletedPreview_Streak {
-  font-size: var(--font-size-base);
   color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Progress Wrapper */
+.CompletedPreview_ProgressWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CompletedPreview_Percent {
+  position: absolute;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--color-status-success);
+}
+
+.CompletedPreview_EmptyHint {
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-top: 2rem;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+  .CompletedPreview_Container {
+    padding: 3rem 1.5rem;
+  }
+  
+  .CompletedPreview_Title {
+    font-size: 1.8rem;
+  }
+
+  .CompletedPreview_Grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
 }

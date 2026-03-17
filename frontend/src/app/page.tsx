@@ -17,22 +17,13 @@ const Home: React.FC = () => {
         <Hero />
         <HighlightsBar />
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        
           <FeaturedHighlight />
-        </motion.div>
+       
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeInUpVariants}
-        >
-          <CompletedPreview />
-        </motion.div>
+        
+          {/* <CompletedPreview /> */}
+        
 
         <MotivationHub />
       </section>
