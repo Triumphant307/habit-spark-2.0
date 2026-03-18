@@ -26,6 +26,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
         crawl={true}
         zIndex={9999}
         crawlSpeed={200}
+        initialPosition={0.08}
+        showAtBottom={false}
       />
       <ToastContainer
         position="top-right"

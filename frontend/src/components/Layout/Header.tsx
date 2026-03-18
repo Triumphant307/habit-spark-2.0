@@ -1,36 +1,60 @@
 "use client";
+
 import Style from "@/Styles/Layout/Header.module.css";
 import ThemeToggle from "@/Theme/ThemeToggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
+
 const Header: React.FC = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("hero");
 
-
-  // Effect to handle scroll event and change header styl
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // 2. Intersection Observer to track active sections
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    const sectionIds = ["hero", "features", "achievements"];
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -60% 0px", // Trigger when section is in top-middle area
+      threshold: 0,
+    };
+
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [pathname]);
 
   const navRef = useRef<HTMLDivElement | null>(null);
   const hamburgerRef = useRef<HTMLButtonElement | null>(null);
 
-  // Function to toggle the menu open/close state
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // Close the menu when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -43,21 +67,52 @@ const Header: React.FC = () => {
         setIsMenuOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMenuOpen]);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "auto"
-  }, [isMenuOpen])
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
+  }, [isMenuOpen]);
 
-  // This component renders the header with a title and a responsive navigation menu
+  // Smooth scroll handler
+  const handleScrollTo = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string,
+  ) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 100;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+
+        window.history.pushState(null, "", `#${id === "hero" ? "" : id}`);
+        setIsMenuOpen(false);
+      }
+    }
+  };
+
+  const navItems = [
+    { label: "Overview", href: "/", id: "hero" },
+    { label: "Features", href: "/#features", id: "features" },
+    { label: "Milestones", href: "/#achievements", id: "achievements" },
+    { label: "Tracker", href: "/tracker" },
+  ];
+
   return (
     <header
-      className={`${Style.Header_Container} ${isScrolled ? Style.Header_ContainerScrolled : ""}`}
+      className={`${Style.Header_Container} ${
+        isScrolled ? Style.Header_ContainerScrolled : ""
+      }`}
     >
       <div className={Style.Header_Left}>
         <button
@@ -70,7 +125,11 @@ const Header: React.FC = () => {
           <span className={Style.Header_HamburgerBar} />
           <span className={Style.Header_HamburgerBar} />
         </button>
-        <h1 className={Style.Header_Title}>Habit<span className={Style.Header_Title_Spark}>Spark</span></h1>
+        <Link href="/" className={Style.Header_LogoLink}>
+          <h1 className={Style.Header_Title}>
+            Habit<span className={Style.Header_Title_Spark}>Spark</span>
+          </h1>
+        </Link>
       </div>
 
       <nav
@@ -78,50 +137,23 @@ const Header: React.FC = () => {
         ref={navRef}
       >
         <ul className={Style.Header_NavList}>
-          <li className={Style.Header_Nav_item}>
-            <Link
-              href="/"
-              className={`${Style.Header_NavLink} ${
-                pathname === "/" ? Style.active : ""
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-          </li>
-          <li className={Style.Header_Nav_item}>
-            <Link
-              href="/suggestion"
-              className={`${Style.Header_NavLink} ${
-                pathname === "/suggestion" ? Style.active : ""
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Suggestions
-            </Link>
-          </li>
-          <li className={Style.Header_Nav_item}>
-            <Link
-              href="/completed"
-              className={`${Style.Header_NavLink} ${
-                pathname === "/completed" ? Style.active : ""
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Completed
-            </Link>
-          </li>
-          <li className={Style.Header_Nav_item}>
-            <Link
-              href="/tracker"
-              className={`${Style.Header_NavLink} ${
-                pathname === "/tracker" ? Style.active : ""
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Tracker
-            </Link>
-          </li>
+          {navItems.map((item) => {
+            const isActive = item.id
+              ? activeSection === item.id && pathname === "/"
+              : pathname === item.href;
+
+            return (
+              <li key={item.label} className={Style.Header_Nav_item}>
+                <Link
+                  href={item.href}
+                  className={`${Style.Header_NavLink} ${isActive ? Style.active : ""}`}
+                  onClick={(e) => item.id && handleScrollTo(e, item.id)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
 
