@@ -85,6 +85,10 @@
   text-decoration-thickness: 2px;
 }
 
+.Header_LogoLink {
+  text-decoration: none;
+}
+
 .Header_Hamburger {
   display: none;
   flex-direction: column;
