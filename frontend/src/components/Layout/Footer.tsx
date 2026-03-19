@@ -1,8 +1,16 @@
+"use client";
+
 import styles from "@/Styles/Layout/Footer.module.css";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 
-const Footer : React.FC = () => {
+const Footer: React.FC = () => {
+  const pathname = usePathname();
+
+  // Hide footer on Auth pages
+  if (pathname === "/login" || pathname === "/signup") return null;
+
   return (
     <footer className={styles.Footer_Container}>
       <div className={styles.Footer_Brand}>HabitSpark © 2025</div>
@@ -43,7 +51,8 @@ const Footer : React.FC = () => {
       </div>
 
       <div className={styles.Footer_Credit}>
-        Made with <span className={styles.Footer_HeartIcon}>❤️</span> by Triumphant_
+        Made with <span className={styles.Footer_HeartIcon}>❤️</span> by
+        Triumphant_
       </div>
     </footer>
   );

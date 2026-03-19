@@ -8,6 +8,10 @@ import React, { useState, useEffect, useRef } from "react";
 
 const Header: React.FC = () => {
   const pathname = usePathname();
+
+  // Hide header on Auth pages
+  if (pathname === "/login" || pathname === "/signup") return null;
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("hero");
