@@ -125,7 +125,7 @@ const Hero: React.FC = () => {
             : "Turn your goals into measurable achievements. Visualize your consistency, analyze your progress, and stay motivated with HabitSpark."}
         </motion.p>
         <motion.div className={styles.Home_CTA} variants={itemVariants}>
-          <Link href="/suggestion" className={styles.home__button_link}>
+          <Link href="/signup" className={styles.home__button_link}>
             <button
               onPointerDown={(e) => createRipple(e)}
               className={styles.Home_HeroButton}

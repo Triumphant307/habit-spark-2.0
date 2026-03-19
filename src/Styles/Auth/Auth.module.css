@@ -1,0 +1,128 @@
+.Auth_Layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: var(--gradient-background-page);
+  padding: var(--spacing-lg);
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.Auth_Content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+.Auth_Header {
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.Auth_Logo {
+  text-decoration: none;
+  transition: var(--animation-transition-fast);
+  display: inline-block;
+}
+
+.Auth_Logo:hover {
+  transform: scale(1.05);
+}
+
+.Auth_Logo_Text {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.Auth_Logo_Spark {
+  background: var(--gradient-surface-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.Auth_Footer {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-lg);
+}
+
+/* Glassmorphism Card Implementation */
+.Auth_Card {
+  width: 400px;
+  background-color: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-xl) var(--spacing-3xl);
+  box-shadow: var(--shadow-elevation-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  position: relative;
+  overflow: hidden;
+  transition: var(--animation-transition-smooth);
+}
+
+/* Subtle highlight on the top edge */
+.Auth_Card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-effect-shine);
+  opacity: 0.5;
+}
+
+.Auth_Footer {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md) 0;
+}
+
+.Auth_Footer a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  transition: color var(--animation-transition-fast);
+}
+
+.Auth_Footer a:hover {
+  color: var(--color-brand-primary);
+}
+
+.Auth_Footer a svg {
+  font-size: var(--font-size-base);
+}
+
+@media (max-width: 480px) {
+  .Auth_Layout {
+    padding: var(--spacing-lg);
+  }
+
+  .Auth_Logo_Text {
+    font-size: var(--font-size-3xl);
+  }
+
+  .Auth_Card {
+    padding: var(--spacing-4xl) var(--spacing-xl);
+    border-radius: var(--shape-radius-lg);
+    width: 100%;
+    max-width: 400px;
+  }
+}

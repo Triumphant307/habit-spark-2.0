@@ -1,0 +1,144 @@
+.Auth_Form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: center;
+  width: 100%;
+}
+
+.Auth_FormHeader {
+  text-align: center;
+}
+
+.Auth_FormTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.Auth_FormSubtitle {
+  margin-top: 0.25rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.Auth_FormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.Auth_FormFieldWrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.AuthForm_FloatingInput {
+  position: relative;
+  width: 100%;
+  margin-top: var(--spacing-lg);
+}
+
+.AuthForm_FloatingInput input {
+  width: 100%;
+  padding: var(--spacing-lg) var(--spacing-md);
+  font-size: var(--font-size-base);
+  border: 1px solid var(--border-color-base);
+  border-radius: var(--shape-radius-sm);
+  color: var(--color-text-primary);
+  background: transparent;
+  outline: none;
+  transition: var(--animation-transition-fast);
+}
+
+.AuthForm_FloatingInput input:focus {
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.AuthForm_FloatingInput label {
+  position: absolute;
+  left: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+  transition: var(--animation-transition-fast);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-2xs);
+  background: transparent;
+}
+
+.AuthForm_FloatingInput input:focus + label,
+.AuthForm_FloatingInput input:not(:placeholder-shown) + label {
+  top: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-brand-primary);
+  font-weight: 600;
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+}
+
+.Auth_FormIcon {
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+
+.AuthForm_FloatingInput input:focus + label .Auth_FormIcon {
+  color: var(--color-brand-primary);
+}
+
+.Auth_SubmitButton {
+  width: 100%;
+  padding: var(--spacing-lg);
+  border: none;
+  border-radius: var(--shape-radius-sm);
+  background: var(--gradient-surface-primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--animation-transition-fast);
+  margin-top: var(--spacing-md);
+}
+
+.Auth_SubmitButton:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-interaction-primary);
+}
+
+.Auth_FormButtonIcon {
+  font-size: 1.2rem;
+}
+
+.Auth_FormFooter {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-lg);
+}
+
+.Auth_FormFooter a {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.Auth_FormFooter a:hover {
+  color: var(--color-brand-indigo);
+  text-decoration: underline;
+}
