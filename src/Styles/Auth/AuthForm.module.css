@@ -37,6 +37,21 @@
   margin-top: var(--spacing-lg);
 }
 
+.Auth_ForgotPassword {
+  display: block;
+  text-align: right;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-top: calc(var(--spacing-xs) * -1);
+  margin-bottom: var(--spacing-sm);
+  transition: color 0.2s ease;
+}
+
+.Auth_ForgotPassword:hover {
+  color: var(--color-brand-primary);
+}
+
 .Auth_FormFooter a {
   color: var(--color-brand-primary);
   text-decoration: none;

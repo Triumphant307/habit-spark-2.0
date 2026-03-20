@@ -1,9 +1,13 @@
 import React from "react";
+import AuthCard from "@/components/Auth/AuthCard";
+import SignupForm from "@/components/Auth/SignupForm";
 
 const SignupPage: React.FC = () => {
   return (
     <div>
-      <h1>Signup Page Placeholder</h1>
+      <AuthCard>
+        <SignupForm />
+      </AuthCard>
     </div>
   );
 };

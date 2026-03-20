@@ -1,0 +1,28 @@
+.Divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: var(--spacing-lg) 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.Divider::before,
+.Divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-color-base);
+  opacity: 0.3;
+}
+
+.Divider::before {
+  margin-right: var(--spacing-md);
+}
+
+.Divider::after {
+  margin-left: var(--spacing-md);
+}

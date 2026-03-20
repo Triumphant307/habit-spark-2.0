@@ -2,14 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
   background-image: var(--gradient-background-page);
-  padding: var(--spacing-lg);
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  position: relative;
 }
 
 .Auth_Content {
