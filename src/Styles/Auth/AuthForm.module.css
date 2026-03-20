@@ -30,33 +30,6 @@
   width: 100%;
 }
 
-.Auth_SubmitButton {
-  width: 100%;
-  padding: var(--spacing-lg);
-  border: none;
-  border-radius: var(--shape-radius-sm);
-  background: var(--gradient-surface-primary);
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: var(--animation-transition-fast);
-  margin-top: var(--spacing-md);
-}
-
-.Auth_SubmitButton:hover {
-  filter: brightness(1.1);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-interaction-primary);
-}
-
-.Auth_FormButtonIcon {
-  font-size: 1.2rem;
-}
-
 .Auth_FormFooter {
   text-align: center;
   font-size: 0.9rem;
