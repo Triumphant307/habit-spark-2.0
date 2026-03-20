@@ -2,8 +2,9 @@
 
 import React from "react";
 import styles from "@/Styles/Auth/AuthForm.module.css";
-import { LuMail, LuLock, LuArrowRight } from "react-icons/lu";
+import { LuMail, LuLock } from "react-icons/lu";
 import AuthInput from "./UI/AuthInput";
+import AuthButton from "./UI/AuthButton";
 
 const LoginForm: React.FC = () => {
   return (
@@ -28,9 +29,7 @@ const LoginForm: React.FC = () => {
           required
         />
 
-        <button type="submit" className={styles.Auth_SubmitButton}>
-          Login <LuArrowRight className={styles.Auth_FormButtonIcon} />
-        </button>
+        <AuthButton type="submit">Login</AuthButton>
 
         <footer className={styles.Auth_FormFooter}>
           <p>
