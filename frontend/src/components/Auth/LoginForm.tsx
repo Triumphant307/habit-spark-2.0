@@ -2,9 +2,17 @@
 
 import React from "react";
 import styles from "@/Styles/Auth/AuthForm.module.css";
+import { useState } from "react";
 import { LuMail, LuLock, LuArrowRight, LuEye, LuEyeOff } from "react-icons/lu";
 
 const LoginForm: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+
   return (
     <form className={styles.Auth_Form}>
       <header className={styles.Auth_FormHeader}>
@@ -30,16 +38,27 @@ const LoginForm: React.FC = () => {
           <div className={styles.Auth_FormFieldWrapper}>
             <div className={styles.AuthForm_FloatingInput}>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 className={styles.Auth_FormInput}
-                placeholder=""
+                placeholder=" "
+                required
               />
-
+             
               <label htmlFor="password" className={styles.Auth_FormLabel}>
                 <LuLock className={styles.Auth_FormIcon} />
                 Password
               </label>
+
+              <button
+                type="button"
+                className={styles.Auth_FormPasswordToggle}
+                onClick={togglePasswordVisibility}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                title={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <LuEyeOff /> : <LuEye />}
+              </button>
             </div>
           </div>
 
