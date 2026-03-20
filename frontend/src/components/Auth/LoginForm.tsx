@@ -5,6 +5,8 @@ import styles from "@/Styles/Auth/AuthForm.module.css";
 import { LuMail, LuLock } from "react-icons/lu";
 import AuthInput from "./UI/AuthInput";
 import AuthButton from "./UI/AuthButton";
+import SocialAuth from "./SocialAuth";
+import AuthDivider from "./UI/AuthDivider";
 
 const LoginForm: React.FC = () => {
   return (
@@ -15,6 +17,9 @@ const LoginForm: React.FC = () => {
       </header>
 
       <div className={styles.Auth_FormGroup}>
+        <SocialAuth />
+        <AuthDivider />
+
         <AuthInput
           label="Email Address"
           type="email"
@@ -28,6 +33,10 @@ const LoginForm: React.FC = () => {
           icon={<LuLock />}
           required
         />
+
+        <a href="/forgot-password" className={styles.Auth_ForgotPassword}>
+          Forgot password?
+        </a>
 
         <AuthButton type="submit">Login</AuthButton>
 
