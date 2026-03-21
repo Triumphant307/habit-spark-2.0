@@ -7,10 +7,36 @@ import AuthInput from "./UI/AuthInput";
 import AuthButton from "./UI/AuthButton";
 import SocialAuth from "./SocialAuth";
 import AuthDivider from "./UI/AuthDivider";
+import { useForm } from "react-hook-form";
+import { loginSchema, type LoginFormValues } from "@/utils/authValidation";
+import { zodResolver as hookFormResolver } from "@hookform/resolvers/zod";
 
 const LoginForm: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormValues>({
+    resolver: hookFormResolver(loginSchema),
+    mode: "onBlur",
+  });
+
+  const onSubmit = async (data: LoginFormValues) => {
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      console.log("Form successfully submitted:", data);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
+
   return (
-    <form className={styles.Auth_Form}>
+    <form
+      className={styles.Auth_Form}
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
       <header className={styles.Auth_FormHeader}>
         <h1 className={styles.Auth_FormTitle}>Welcome Back</h1>
         <p className={styles.Auth_FormSubtitle}>Please login to your account</p>
@@ -24,6 +50,8 @@ const LoginForm: React.FC = () => {
           label="Email Address"
           type="email"
           icon={<LuMail />}
+          {...register("email")}
+          error={errors.email?.message}
           required
         />
 
@@ -31,6 +59,8 @@ const LoginForm: React.FC = () => {
           label="Password"
           type="password"
           icon={<LuLock />}
+          {...register("password")}
+          error={errors.password?.message}
           required
         />
 
@@ -38,7 +68,9 @@ const LoginForm: React.FC = () => {
           Forgot password?
         </a>
 
-        <AuthButton type="submit">Login</AuthButton>
+        <AuthButton type="submit" isLoading={isSubmitting}>
+          Login
+        </AuthButton>
 
         <footer className={styles.Auth_FormFooter}>
           <p>
