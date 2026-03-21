@@ -63,3 +63,11 @@
   color: var(--color-brand-indigo);
   text-decoration: underline;
 }
+
+.Auth_CheckboxError {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: -0.5rem;
+  margin-left: 2rem;
+  font-weight: 500;
+}
