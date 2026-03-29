@@ -1,0 +1,90 @@
+.GoalStep {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.Header {
+  text-align: center;
+}
+
+.Title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.Subtitle {
+  margin-top: 0.5rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+}
+
+.GoalGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.GoalCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color-base);
+  border-radius: var(--shape-radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.GoalCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-brand-primary);
+}
+
+.GoalCard.Selected {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.GoalIcon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.GoalLabel {
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.Actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+/* Secondary Button Style */
+.Secondary {
+  background: transparent !important;
+  border: 1px solid var(--border-color-base) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.Secondary:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--color-text-primary) !important;
+}
+
+@media (max-width: 480px) {
+  .GoalGrid {
+    grid-template-columns: 1fr;
+  }
+}

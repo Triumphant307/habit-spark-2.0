@@ -23,9 +23,8 @@
   transition: var(--animation-transition-fast);
 }
 
-
-.InputField[type="password"],
-.InputField[type="text"] {
+/* Specific padding for password or text fields that might have a toggle icon */
+.InputField.HasTrailingIcon {
   padding-right: calc(var(--spacing-md) * 2.5);
 }
 
@@ -54,7 +53,7 @@
   background: transparent;
 }
 
-
+/* Floating logic */
 .InputField:focus + .Label,
 .InputField:not(:placeholder-shown) + .Label {
   top: 0;
@@ -63,7 +62,6 @@
   font-weight: 600;
   background: var(--color-surface-card);
   backdrop-filter: var(--effect-blur-glass);
-  -webkit-backdrop-filter: var(--effect-blur-glass);
 }
 
 .Icon {

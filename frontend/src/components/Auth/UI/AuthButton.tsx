@@ -1,37 +1,16 @@
 "use client";
 
 import React from "react";
-import { LuArrowRight } from "react-icons/lu";
-import styles from "@/Styles/Auth/UI/AuthButton.module.css";
+import Button, { ButtonProps } from "@/components/UI/Button";
 
-interface AuthButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  isLoading?: boolean;
-  showIcon?: boolean;
-}
-
-const AuthButton = React.forwardRef<HTMLButtonElement, AuthButtonProps>(
-  (
-    { children, isLoading = false, showIcon = true, className, ...props },
-    ref,
-  ) => {
-    return (
-      <button
-        ref={ref}
-        className={`${styles.Auth_Button} ${className || ""}`}
-        disabled={isLoading || props.disabled}
-        {...props}
-      >
-        {isLoading ? (
-          <div className={styles.Spinner} />
-        ) : (
-          <>
-            {children}
-            {showIcon && <LuArrowRight className={styles.Icon} />}
-          </>
-        )}
-      </button>
-    );
-  },
+/**
+ * AuthButton is now a wrapper/alias for the generic Button component.
+ * It defaults to showIcon={true} to match the original Auth styling.
+ */
+const AuthButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    return <Button ref={ref} showIcon={true} {...props} />;
+  }
 );
 
 AuthButton.displayName = "AuthButton";

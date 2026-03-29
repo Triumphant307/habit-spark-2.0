@@ -1,0 +1,51 @@
+.FrequencyGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.Option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color-base);
+  border-radius: var(--shape-radius-lg);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.Option:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-brand-primary);
+}
+
+.ActiveOption {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--color-brand-primary);
+}
+
+.OptionIcon {
+  font-size: 1.5rem;
+  color: var(--color-brand-primary);
+}
+
+.OptionText {
+  display: flex;
+  flex-direction: column;
+}
+
+.OptionLabel {
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+}
+
+.OptionDescription {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,43 @@
+.SuccessContent {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl) 0;
+}
+
+.SuccessIcon {
+  font-size: 4rem;
+  color: #fbbf24;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.Summary {
+  background: rgba(255, 255, 255, 0.03);
+  padding: var(--spacing-lg);
+  border-radius: var(--shape-radius-lg);
+  border: 1px solid var(--border-color-base);
+  width: 100%;
+  text-align: left;
+}
+
+.SummaryTitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.SummaryHabit {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-brand-primary);
+}
