@@ -46,9 +46,12 @@ git-save.sh
 # project plans
 SAAS_LANDING_PLAN.md
 AUTH_SYSTEM_PLAN.md
+ONBOARDING_WIZARD_PLAN.md
 
 
 .vscode
 GEMINI.md
 .gemini
 senior-dev-mentor.skill
+CLAUDE.md
+.claude

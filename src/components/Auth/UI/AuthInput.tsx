@@ -1,57 +1,16 @@
 "use client";
 
-import React, { useState, useId } from "react";
-import { LuEye, LuEyeOff } from "react-icons/lu";
-import styles from "@/Styles/Auth/UI/AuthInput.module.css";
+import React from "react";
+import Input, { InputProps } from "@/components/UI/Input";
 
-interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  icon: React.ReactNode;
-  error?: string;
-}
-
-const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
-  ({ label, icon, type = "text", error, className, ...props }, ref) => {
-    const [showPassword, setShowPassword] = useState(false);
-    const inputId = useId();
-
-    const isPassword = type === "password";
-    const currentType = isPassword && showPassword ? "text" : type;
-
-    return (
-      <div className={styles.InputContainer}>
-        <div className={styles.FloatingWrapper}>
-          <input
-            {...props}
-            ref={ref}
-            id={inputId}
-            type={currentType}
-            className={`${styles.InputField} ${error ? styles.InputError : ""} ${className || ""}`}
-            placeholder=" "
-          />
-
-          <label htmlFor={inputId} className={styles.Label}>
-            <span className={styles.Icon}>{icon}</span>
-            {label}
-          </label>
-
-          {isPassword && (
-            <button
-              type="button"
-              className={styles.PasswordToggle}
-              onClick={() => setShowPassword(!showPassword)}
-              aria-label={showPassword ? "Hide password" : "Show password"}
-              title={showPassword ? "Hide password" : "Show password"}
-            >
-              {showPassword ? <LuEyeOff /> : <LuEye />}
-            </button>
-          )}
-        </div>
-        {error && <span className={styles.ErrorMessage}>{error}</span>}
-      </div>
-    );
-  },
-);
+/**
+ * AuthInput is now a wrapper/alias for the generic Input component.
+ * This ensures backward compatibility while promoting the use of the 
+ * generic Input component throughout the app.
+ */
+const AuthInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  return <Input ref={ref} {...props} />;
+});
 
 AuthInput.displayName = "AuthInput";
 

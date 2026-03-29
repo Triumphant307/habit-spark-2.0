@@ -8,8 +8,13 @@ import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 const Footer: React.FC = () => {
   const pathname = usePathname();
 
-  // Hide footer on Auth pages
-  if (pathname === "/login" || pathname === "/signup") return null;
+  // Hide footer on Auth and Onboarding pages
+  if (
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/onboarding"
+  )
+    return null;
 
   return (
     <footer className={styles.Footer_Container}>

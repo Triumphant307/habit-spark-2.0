@@ -1,0 +1,80 @@
+.Layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-image: var(--gradient-background-page);
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  position: relative;
+}
+
+.Card {
+  width: 550px;
+  max-width: 95%;
+  background-color: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-3xl);
+  box-shadow: var(--shadow-elevation-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  position: relative;
+  overflow: hidden;
+  transition: var(--animation-transition-smooth);
+}
+
+.Header {
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.Title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.Subtitle {
+  margin-top: 0.5rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+}
+
+.ActionGroup {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.BackButton {
+  background: transparent;
+  border: 1px solid var(--border-color-base);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-radius: var(--shape-radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.BackButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+  border-color: var(--color-brand-primary);
+}
+
+@media (max-width: 480px) {
+  .Card {
+    padding: var(--spacing-xl);
+  }
+  
+  .Title {
+    font-size: 1.5rem;
+  }
+}

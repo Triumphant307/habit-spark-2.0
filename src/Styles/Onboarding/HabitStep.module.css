@@ -1,0 +1,29 @@
+.ChipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+.Chip {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--shape-radius-full);
+  border: 1px solid var(--border-color-base);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Chip:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-brand-primary);
+  color: var(--color-text-primary);
+}
+
+.ActiveChip {
+  background: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: white;
+}

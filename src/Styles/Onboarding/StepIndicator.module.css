@@ -1,0 +1,81 @@
+.StepIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: var(--spacing-2xl);
+  padding: 0 var(--spacing-sm);
+}
+
+.Step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  position: relative;
+  z-index: 1;
+}
+
+.StepDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.StepDot.Active {
+  background-color: var(--color-brand-primary);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  transform: scale(1.1);
+}
+
+.StepDot.Completed {
+  background-color: var(--color-brand-primary);
+}
+
+.Checkmark {
+  color: white;
+  font-weight: bold;
+}
+
+.StepLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.StepLabel.Active {
+  color: var(--color-brand-primary);
+}
+
+.StepLine {
+  flex: 1;
+  height: 2px;
+  background-color: var(--color-border-light);
+  margin: 0 var(--spacing-xs);
+  margin-bottom: 1.5rem; /* Align with dots */
+  transition: background-color 0.3s ease;
+}
+
+.StepLine.Completed {
+  background-color: var(--color-brand-primary);
+}
+
+@media (max-width: 480px) {
+  .StepLabel {
+    display: none; /* Hide labels on very small screens to save space */
+  }
+  
+  .StepLine {
+    margin-bottom: 0;
+  }
+}
