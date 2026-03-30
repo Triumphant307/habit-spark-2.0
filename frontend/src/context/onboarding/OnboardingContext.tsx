@@ -45,7 +45,7 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const handleComplete = async () => {
     console.log("Onboarding Complete:", formData);
     // Integration point for database/backend
-    router.push("/tracker");
+    router.push("/dashboard");
   };
 
   return (
