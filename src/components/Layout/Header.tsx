@@ -10,7 +10,13 @@ const Header: React.FC = () => {
   const pathname = usePathname();
 
   // Hide header on Auth and Onboarding pages
-  if (pathname === "/login" || pathname === "/signup" || pathname === "/onboarding") return null;
+  if (
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/onboarding" ||
+    pathname === ("/dashboard")
+  )
+    return null;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

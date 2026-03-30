@@ -12,7 +12,8 @@ const Footer: React.FC = () => {
   if (
     pathname === "/login" ||
     pathname === "/signup" ||
-    pathname === "/onboarding"
+    pathname === "/onboarding" ||
+    pathname === "/dashboard"
   )
     return null;
 
