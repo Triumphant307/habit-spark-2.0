@@ -20,6 +20,13 @@
   cursor: grab;
   overflow: hidden;
   box-shadow: var(--shadow-elevation-sm);
+  border-left: 4px solid var(--color-brand-primary); /* Consistent Brand Accent */
+}
+
+.TrackerCard_Container:hover {
+  transform: translateX(4px);
+  border-left-color: var(--color-brand-indigo);
+  box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15); /* Soft brand glow */
 }
 
 /* Rim Light Effect */

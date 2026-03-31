@@ -12,9 +12,9 @@ import {
   reorderHabitIntent,
 } from "@/core/intent/habitIntents";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
+import { LuFlame } from "react-icons/lu";
 import dayjs from "dayjs";
 import toast from "@/utils/toast";
-import { LuFlame } from "react-icons/lu";
 import confetti from "canvas-confetti";
 import logger from "@/utils/logger";
 
@@ -73,9 +73,6 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
     const success = completeHabitIntent(habit.id);
 
     if (success) {
-      const newStreak = habit.streak + 1;
-
-      // Feedback
       const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
       const x = (rect.left + rect.width / 2) / window.innerWidth;
       const y = (rect.top + rect.height / 2) / window.innerHeight;
@@ -115,15 +112,12 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
               transition={{ duration: 0.2 }}
               role="listitem"
             >
-             
               <div className={style.TrackerCard_DragHandle}>
                 <FaGripVertical />
               </div>
 
-              
               <div className={style.TrackerCard_IconWrapper}>{habit.icon}</div>
 
-              
               <Link
                 href={`/habit/${habit.slug}`}
                 className={style.TrackerCard_Content}
@@ -144,17 +138,18 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                 </div>
               </Link>
 
-              
-              <button
+              <motion.button
                 className={`${style.TrackerCard_CompleteButton} ${
                   isCompletedToday ? style.isCompleted : ""
                 }`}
                 onClick={(e) => handleQuickComplete(e, habit)}
                 onPointerDown={(e) => createRipple(e)}
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
                 title={isCompletedToday ? "Completed today" : "Spark habit"}
               >
                 <FaCheck />
-              </button>
+              </motion.button>
             </motion.div>
           );
         })}
