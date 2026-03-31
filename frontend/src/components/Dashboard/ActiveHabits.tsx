@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import styles from "@/Styles/Dashboard/DashboardComponents.module.css";
+import styles from "@/Styles/Dashboard/ActiveHabits.module.css";
 import { useReactor } from "@/Hooks/useReactor";
 import { Habit } from "@/core/types/habit";
 import Search from "@/components/Suggestion/Search";

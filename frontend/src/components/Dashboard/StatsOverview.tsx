@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import styles from "@/Styles/Dashboard/DashboardComponents.module.css";
+import styles from "@/Styles/Dashboard/StatsOverview.module.css";
 import { useReactor } from "@/Hooks/useReactor";
 import { Habit } from "@/core/types/habit";
 import { LuFlame, LuZap, LuTrophy } from "react-icons/lu";

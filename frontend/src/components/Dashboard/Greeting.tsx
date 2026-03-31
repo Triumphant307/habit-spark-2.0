@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import styles from "@/Styles/Dashboard/DashboardComponents.module.css";
+import React, { useEffect, useState } from "react";
+import styles from "@/Styles/Dashboard/Greeting.module.css";
 import layoutStyles from "@/Styles/Dashboard/Dashboard.module.css";
 import dayjs from "dayjs";
 import { useReactor } from "@/Hooks/useReactor";
