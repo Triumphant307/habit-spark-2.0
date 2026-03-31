@@ -7,7 +7,6 @@ const DashboardClient = dynamic(
   () => import("@/components/Dashboard/DashboardClient"),
   {
     ssr: false,
-    loading: () => <TrackerSkeleton />,
   },
 );
 

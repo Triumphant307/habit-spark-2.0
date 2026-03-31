@@ -1,0 +1,41 @@
+.Habits_Section {
+  width: 100%;
+}
+
+.Section_Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+}
+
+.Section_Title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.Habits_Empty {
+  text-align: center;
+  padding: var(--spacing-4xl) var(--spacing-xl);
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: 1px dashed var(--border-color-base);
+  border-radius: var(--shape-radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.Empty_Icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.Empty_Text {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  max-width: 300px;
+}
