@@ -26,6 +26,9 @@ export interface Habit {
   /** URL-friendly slug for routing */
   slug: string;
 
+  /** Category of the habit (e.g., Health, Productivity) */
+  category?: string;
+
   /** Date when habit was created (ISO 8601 format) */
   startDate: string;
 
