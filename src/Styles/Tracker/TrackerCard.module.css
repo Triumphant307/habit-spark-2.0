@@ -1,158 +1,163 @@
 .TrackerCard_Grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  text-align: center;
-  gap: var(--spacing-xl);
-  margin-top: var(--spacing-3xl);
-  cursor: pointer;
-}
-
-.TrackerCard_Icon {
-  font-size: var(--font-size-3xl);
-}
-
-.TrackerCard_Title {
-  font-size: var(--font-size-xl);
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-bold);
+  gap: var(--spacing-md);
+  width: 100%;
 }
 
 .TrackerCard_Container {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-md);
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
   border-radius: var(--shape-radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-elevation-md);
-  transition: var(--animation-transition-fast);
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  gap: var(--spacing-lg);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: grab;
+  overflow: hidden;
+  box-shadow: var(--shadow-elevation-sm);
+}
+
+/* Rim Light Effect */
+.TrackerCard_Container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .TrackerCard_Container:hover {
-  transform: scale(1.03);
-  transition: var(--animation-transition-base);
-  box-shadow: var(--shadow-interaction-hover);
-}
-
-.TrackerCard_Container.isDragging {
-  box-shadow: var(--shadow-interaction-card-soft);
-  transform: scale(1.05);
-  cursor: grabbing;
-}
-
-.TrackerCard_DragHandle {
-  position: absolute;
-  left: var(--spacing-md);
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: grab;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-2xl);
-  z-index: var(--z-index-layer-component);
-}
-
-.TrackerCard_Description {
-  margin: var(--spacing-sm) 0;
-}
-
-.TrackerCard_Target,
-.TrackerCard_Streak {
-  margin: var(--spacing-2xs) 0;
-  color: var(--color-text-primary);
-}
-
-.TrackerCard_Link {
-  text-decoration: none;
-  color: inherit;
-}
-
-.TrackerCard_EmptyState {
-  text-align: center;
-  padding: var(--spacing-3xl);
-  opacity: 0.7;
-  max-width: var(--width-container-standard);
-  background-color: var(--color-surface-card);
-  border-radius: var(--shape-radius-md);
+  transform: translateX(4px);
+  border-color: rgba(255, 255, 255, 0.2);
   box-shadow: var(--shadow-elevation-md);
 }
 
-.TrackerCard_EmptyIcon {
-  font-size: var(--font-size-5xl);
+.TrackerCard_Container.isDragging {
+  opacity: 0.5;
+  cursor: grabbing;
+  transform: scale(1.02);
 }
 
-.TrackerCard_SuggestButton {
-  margin-top: var(--spacing-lg);
-  display: inline-block;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  background-color: var(--color-button-primary-background);
-  color: var(--color-button-primary-text);
+.TrackerCard_DragHandle {
+  color: var(--color-text-muted);
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.TrackerCard_Container:hover .TrackerCard_DragHandle {
+  opacity: 0.8;
+}
+
+.TrackerCard_IconWrapper {
+  width: 48px;
+  height: 48px;
   border-radius: var(--shape-radius-sm);
-  text-decoration: none;
-  transition: var(--animation-transition-base);
-}
-
-.TrackerCard_SuggestButton:hover {
-  background-color: var(--color-button-primary-hover);
-}
-
-.TrackerCard_CompleteButton {
-  position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
-  width: var(--spacing-3xl);
-  height: var(--spacing-3xl);
-  border-radius: 50%;
-  border: none;
-  background-color: var(--color-surface-page);
-  color: var(--color-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.TrackerCard_Content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xs);
+  text-decoration: none;
+}
+
+.TrackerCard_Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.TrackerCard_Title {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.TrackerCard_Streak {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-muted);
+  padding: 2px 8px;
+  border-radius: var(--shape-radius-full);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.TrackerCard_ProgressWrapper {
+  margin-top: var(--spacing-2xs);
+}
+
+.TrackerCard_CompleteButton {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color-base);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
   cursor: pointer;
-  transition: var(--animation-transition-fast);
-  z-index: var(--z-index-layer-component);
-  box-shadow: var(--shadow-interaction-tiny);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
 }
 
 .TrackerCard_CompleteButton:hover {
-  background-color: var(--color-surface-muted);
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
   transform: scale(1.1);
 }
 
 .TrackerCard_CompleteButton.isCompleted {
-  background-color: var(--color-status-success);
-  color: var(--color-surface-pure-white);
+  background: var(--gradient-surface-primary);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
 }
 
-.TrackerCard_CompleteButton.isCompleted:hover {
-  background-color: var(--color-surface-success-intense);
+@media (max-width: 1200px) {
+  .TrackerCard_Grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .TrackerCard_Grid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-2xl);
   }
+
   .TrackerCard_Container {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
   }
 
-  .TrackerCard_Icon {
-    font-size: var(--font-size-2xl);
-  }
-
-  .TrackerCard_Title {
-    font-size: var(--font-size-lg);
-  }
-
-  .TrackerCard_EmptyState {
-    padding: var(--spacing-lg);
-  }
-
-  .TrackerCard_EmptyIcon {
-    font-size: var(--font-size-4xl);
+  .TrackerCard_IconWrapper {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
   }
 }
