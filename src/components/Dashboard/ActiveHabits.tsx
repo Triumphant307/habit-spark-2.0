@@ -1,23 +1,25 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React from "react";
 import styles from "@/Styles/Dashboard/ActiveHabits.module.css";
 import { useReactor } from "@/Hooks/useReactor";
 import { Habit } from "@/core/types/habit";
-import Search from "@/components/Suggestion/Search";
 import TrackerCard from "../Tracker/TrackerCard";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Button from "../UI/Button";
+import { LuArrowRight } from "react-icons/lu";
 
 const ActiveHabits: React.FC = () => {
   const habits = useReactor<Habit[]>("habits") || [];
-  const [searchQuery, setSearchQuery] = useState("");
-  const resultRef = useRef<HTMLDivElement | null>(null);
 
-  const filteredHabits = habits.filter((habit) =>
-    habit.title.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  // Sort by highest streak first, then by most recently started
+  const topHabits = [...habits]
+    .sort((a, b) => {
+      if (b.streak !== a.streak) return b.streak - a.streak;
+      return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+    })
+    .slice(0, 6);
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -36,8 +38,23 @@ const ActiveHabits: React.FC = () => {
       variants={itemVariants}
     >
       <div className={styles.Section_Header}>
-        <h2 className={styles.Section_Title}>Your Active Sparks</h2>
-        {habits.length > 0 && (
+        <h2 className={styles.Section_Title}>Your Top Sparks</h2>
+        <div className={styles.Header_Actions}>
+          {habits.length > 6 && (
+            <Link href="/tracker">
+              <Button
+                variant="secondary"
+                style={{
+                  padding: "0 var(--spacing-md)",
+                  height: "32px",
+                  fontSize: "0.75rem",
+                }}
+              >
+                View All{" "}
+                <LuArrowRight size={14} style={{ marginLeft: "4px" }} />
+              </Button>
+            </Link>
+          )}
           <Link href="/suggestion">
             <Button
               style={{
@@ -48,33 +65,22 @@ const ActiveHabits: React.FC = () => {
               + New Habit
             </Button>
           </Link>
-        )}
+        </div>
       </div>
 
-      <div style={{ marginBottom: "var(--spacing-xl)" }}>
-        <Search
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          resultRef={resultRef}
-        />
-      </div>
-
-      {filteredHabits.length === 0 ? (
+      {habits.length === 0 ? (
         <div className={styles.Habits_Empty}>
-          <div className={styles.Empty_Icon}>{searchQuery ? "🔍" : "🌱"}</div>
+          <div className={styles.Empty_Icon}>🌱</div>
           <p className={styles.Empty_Text}>
-            {searchQuery
-              ? `No habits matching "${searchQuery}"`
-              : "Every great journey starts with a single spark. Ready to ignite yours?"}
+            Every great journey starts with a single spark. Ready to ignite
+            yours?
           </p>
           <Link href="/suggestion">
-            <Button showIcon>
-              {searchQuery ? "Clear Search" : "Browse Suggestions"}
-            </Button>
+            <Button showIcon>Browse Suggestions</Button>
           </Link>
         </div>
       ) : (
-        <TrackerCard habits={filteredHabits} />
+        <TrackerCard habits={topHabits} />
       )}
     </motion.div>
   );

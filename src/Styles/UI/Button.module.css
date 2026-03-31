@@ -3,7 +3,6 @@
   padding: var(--spacing-lg);
   border: none;
   border-radius: var(--shape-radius-sm);
-  background: var(--gradient-surface-primary);
   color: white;
   font-weight: 700;
   cursor: pointer;
@@ -15,10 +14,26 @@
   position: relative;
 }
 
+.Primary {
+  background: var(--gradient-surface-primary);
+}
+
+.Secondary {
+  background: transparent;
+  border: 1px solid var(--border-color-base);
+  color: var(--color-text-secondary);
+}
+
 .Button:hover:not(:disabled) {
   filter: brightness(1.1);
   transform: translateY(-1px);
   box-shadow: var(--shadow-interaction-primary);
+}
+
+.Secondary:hover:not(:disabled) {
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+  box-shadow: none;
 }
 
 .Button:active:not(:disabled) {
