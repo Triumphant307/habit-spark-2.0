@@ -8,6 +8,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   isLoading?: boolean;
   showIcon?: boolean;
   icon?: React.ReactNode;
+  variant?: "primary" | "secondary";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -17,15 +18,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       isLoading = false,
       showIcon = false,
       icon,
+      variant = "primary",
       className,
       ...props
     },
     ref,
   ) => {
+    const variantClass =
+      variant === "secondary" ? styles.Secondary : styles.Primary;
+
     return (
       <button
         ref={ref}
-        className={`${styles.Button} ${className || ""}`}
+        className={`${styles.Button} ${variantClass} ${className || ""}`}
         disabled={isLoading || props.disabled}
         {...props}
       >

@@ -65,7 +65,7 @@ export const GoalStep: React.FC = () => {
       </div>
 
       <div className={styles.Actions}>
-        <Button onClick={prevStep} className={styles.Secondary}>
+        <Button onClick={prevStep} variant="secondary">
           Back
         </Button>
         <Button
