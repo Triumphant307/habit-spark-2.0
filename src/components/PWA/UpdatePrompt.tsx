@@ -144,7 +144,10 @@ export default function UpdatePrompt() {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
         >
-          <button className={styles.UpdatePrompt_CloseButton} onClick={handleDismiss}>
+          <button
+            className={styles.UpdatePrompt_CloseButton}
+            onClick={handleDismiss}
+          >
             <FaTimes />
           </button>
 
@@ -168,10 +171,16 @@ export default function UpdatePrompt() {
           )}
 
           <div className={styles.UpdatePrompt_Actions}>
-            <button className={styles.UpdatePrompt_UpdateButton} onClick={handleReinstall}>
+            <button
+              className={styles.UpdatePrompt_UpdateButton}
+              onClick={handleReinstall}
+            >
               <FaDownload /> Reinstall App
             </button>
-            <button className={styles.UpdatePrompt_LaterButton} onClick={handleDismiss}>
+            <button
+              className={styles.UpdatePrompt_LaterButton}
+              onClick={handleDismiss}
+            >
               Maybe Later
             </button>
           </div>

@@ -171,7 +171,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     aria-expanded={showPicker}
                   >
                     {icon ? (
-                      <span className={styles.EditDialog_SelectedEmoji}>{icon}</span>
+                      <span className={styles.EditDialog_SelectedEmoji}>
+                        {icon}
+                      </span>
                     ) : (
                       <div className={styles.EditDialog_PlaceholderIcon}>
                         <FaSmile />
@@ -180,12 +182,17 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     )}
                   </button>
                   {showPicker && (
-                    <div className={styles.EditDialog_PickerWrapper} ref={pickerRef}>
+                    <div
+                      className={styles.EditDialog_PickerWrapper}
+                      ref={pickerRef}
+                    >
                       <Picker data={data} onEmojiSelect={handleEmojiSelect} />
                     </div>
                   )}
                 </div>
-                {error && <div className={styles.EditDialog_Error}>{error}</div>}
+                {error && (
+                  <div className={styles.EditDialog_Error}>{error}</div>
+                )}
                 <div className={styles.EditDialog_Actions}>
                   <button
                     type="button"

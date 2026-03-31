@@ -50,7 +50,9 @@ const CommitmentStep: React.FC = () => {
     >
       <header className={styles.Header}>
         <h1 className={styles.Title}>The Commitment 🤝</h1>
-        <p className={styles.Subtitle}>How often do you want to show up for this habit?</p>
+        <p className={styles.Subtitle}>
+          How often do you want to show up for this habit?
+        </p>
       </header>
 
       <div className={commStyles.FrequencyGrid}>
@@ -72,11 +74,16 @@ const CommitmentStep: React.FC = () => {
         ))}
       </div>
 
-      <div className={styles.ActionGroup} style={{ marginTop: "var(--spacing-xl)" }}>
+      <div
+        className={styles.ActionGroup}
+        style={{ marginTop: "var(--spacing-xl)" }}
+      >
         <button className={styles.BackButton} onClick={prevStep}>
           Back
         </button>
-        <Button onClick={nextStep} showIcon>Finalize</Button>
+        <Button onClick={nextStep} showIcon>
+          Finalize
+        </Button>
       </div>
     </motion.div>
   );

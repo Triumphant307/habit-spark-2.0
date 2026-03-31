@@ -1,14 +1,31 @@
 .Dashboard_Wrapper {
-  padding: var(--spacing-2xl) var(--spacing-xl);
-  max-width: 1200px;
-  margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-image: var(--gradient-background-page);
+}
+
+.Dashboard_Header {
+  padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-xl);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.Dashboard_Main {
+  padding: 0 var(--spacing-xl) var(--spacing-3xl);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
 }
 
 @media (max-width: 768px) {
-  .Dashboard_Wrapper {
-    padding: var(--spacing-xl) var(--spacing-md);
+  .Dashboard_Header {
+    padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-lg);
+  }
+
+  .Dashboard_Main {
+    padding: 0 var(--spacing-md) var(--spacing-2xl);
   }
 }

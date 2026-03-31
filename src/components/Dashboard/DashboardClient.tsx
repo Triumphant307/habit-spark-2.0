@@ -8,17 +8,6 @@ import StatsOverview from "./StatsOverview";
 import ActiveHabits from "./ActiveHabits";
 
 const DashboardClient: React.FC = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -29,24 +18,37 @@ const DashboardClient: React.FC = () => {
   };
 
   return (
-    <motion.div
-      className={styles.Dashboard_Wrapper}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <motion.div variants={itemVariants}>
-        <Greeting />
-      </motion.div>
+    <div className={styles.Dashboard_Wrapper}>
+      {/* Semantic Header for Greeting */}
+      <header className={styles.Dashboard_Header}>
+        <motion.div initial="hidden" animate="visible" variants={itemVariants}>
+          <Greeting />
+        </motion.div>
+      </header>
 
-      <motion.div variants={itemVariants}>
-        <StatsOverview />
-      </motion.div>
+      {/* Main Content for Stats and Habits */}
+      <main className={styles.Dashboard_Main}>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+        >
+          <motion.div variants={itemVariants}>
+            <StatsOverview />
+          </motion.div>
 
-      <motion.div variants={itemVariants}>
-        <ActiveHabits />
-      </motion.div>
-    </motion.div>
+          <motion.div variants={itemVariants}>
+            <ActiveHabits />
+          </motion.div>
+        </motion.div>
+      </main>
+    </div>
   );
 };
 

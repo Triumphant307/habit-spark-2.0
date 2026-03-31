@@ -5,7 +5,7 @@ import { appState } from "@/core/state/state";
  * A hook that bridges the Reactor core with React components.
  * It subscribes to a specific path in the appState and triggers
  * a re-render whenever that state changes.
- * 
+ *
  * @param path The path in the state to watch (e.g., "user.name" or "habits")
  * @returns The current value at that path
  */

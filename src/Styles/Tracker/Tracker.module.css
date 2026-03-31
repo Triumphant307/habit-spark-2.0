@@ -101,7 +101,12 @@
 .Tracker_SkeletonBar,
 .Tracker_SkeletonTitle,
 .Tracker_SkeletonText {
-  background: linear-gradient(90deg, var(--color-surface-muted) 0%, var(--color-surface-hover) 50%, var(--color-surface-muted) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-muted) 0%,
+    var(--color-surface-hover) 50%,
+    var(--color-surface-muted) 100%
+  );
   background-size: 2000px 100%;
   animation: shimmer 2s infinite linear;
   border-radius: var(--shape-radius-sm);
@@ -132,7 +137,12 @@
 html.dark .Tracker_SkeletonBar,
 html.dark .Tracker_SkeletonTitle,
 html.dark .Tracker_SkeletonText {
-  background: linear-gradient(90deg, var(--color-surface-muted) 0%, var(--color-surface-hover) 50%, var(--color-surface-muted) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-muted) 0%,
+    var(--color-surface-hover) 50%,
+    var(--color-surface-muted) 100%
+  );
   background-size: 2000px 100%;
 }
 

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import  {useOnboarding } from "@/context/onboarding/OnboardingContext";
+import { useOnboarding } from "@/context/onboarding/OnboardingContext";
 import styles from "@/Styles/Onboarding/StepIndicator.module.css";
 
 interface StepIndicatorProps {

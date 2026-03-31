@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const useLocalStorage = <T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, React.Dispatch<React.SetStateAction<T>>] => {
   const [storedValue, setStoredValue] = useState<T>(initialValue);
   const [isClient, setIsClient] = useState(false);

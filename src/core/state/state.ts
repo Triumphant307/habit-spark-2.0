@@ -3,9 +3,12 @@ import { reactify } from "../reactor/reactify";
 const defaultState = {
   user: {
     visitedHome: false,
+    nickname: "",
+    goals: [],
+    completedOnboarding: false,
   },
 
-  habits: []
+  habits: [],
 };
 
 // 1️⃣ Read previous state from localStorage (Safe for SSR)

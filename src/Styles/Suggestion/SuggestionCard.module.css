@@ -176,8 +176,6 @@
   box-shadow: var(--shadow-interaction-hover);
 }
 
-
-
 .SuggestionCard_ListView {
   width: 100%;
   display: flex;

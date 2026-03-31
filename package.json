@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -55,6 +56,7 @@
     "@types/react-toastify": "^4.0.2",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
+    "prettier": "^3.8.1",
     "sharp": "^0.34.5",
     "typescript": "^5.9.3"
   }

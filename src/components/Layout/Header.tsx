@@ -14,7 +14,7 @@ const Header: React.FC = () => {
     pathname === "/login" ||
     pathname === "/signup" ||
     pathname === "/onboarding" ||
-    pathname === ("/dashboard")
+    pathname === "/dashboard"
   )
     return null;
 

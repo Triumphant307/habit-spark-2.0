@@ -116,7 +116,9 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
       layout
       key={tip.id}
       className={`${styles.SuggestionCard_Container} ${
-        viewMode === "list" ? styles.SuggestionCard_ListView : styles.SuggestionCard_GridView
+        viewMode === "list"
+          ? styles.SuggestionCard_ListView
+          : styles.SuggestionCard_GridView
       }`}
       style={{ textAlign: "center" }}
       initial={{ opacity: 0, scale: 0.9 }}
@@ -124,7 +126,10 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
-      <button className={styles.SuggestionCard_HeartButton} onClick={toggleFavorite}>
+      <button
+        className={styles.SuggestionCard_HeartButton}
+        onClick={toggleFavorite}
+      >
         <FaHeart
           color={favorites.some((fav) => fav.id === tip.id) ? "red" : "gray"}
         />

@@ -6,13 +6,13 @@ export function useRipple() {
     (
       e: React.PointerEvent<HTMLElement>,
       target?: HTMLElement,
-      forceCenter = false
+      forceCenter = false,
     ) => {
       const currentTarget = target || e.currentTarget;
       if (
         (e.target !== e.currentTarget &&
           (e.target as HTMLElement).matches(
-            "button,[href],input,label,select,textarea,[tabindex]:not([tabindex='-1'])"
+            "button,[href],input,label,select,textarea,[tabindex]:not([tabindex='-1'])",
           )) ||
         (currentTarget as HTMLElement).hasAttribute("disabled")
       )
@@ -49,7 +49,7 @@ export function useRipple() {
         ripple.classList.replace("Hold", "Fade");
         ripple.addEventListener("animationend", () => {
           ("requestIdleCallback" in window ? requestIdleCallback : setTimeout)(
-            () => wrapper.remove()
+            () => wrapper.remove(),
           );
         });
         window.removeEventListener("pointerup", release);
@@ -58,6 +58,6 @@ export function useRipple() {
       window.addEventListener("pointerup", release);
       window.addEventListener("pointercancel", release);
     },
-    []
+    [],
   );
 }
