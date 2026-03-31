@@ -62,7 +62,9 @@ const SuggestionCard: React.FC = () => {
       />
       <div className={styles.SuggestionCard_ViewToggle}>
         <button
-          className={viewMode === "grid" ? styles.SuggestionCard_ViewToggle_Active : ""}
+          className={
+            viewMode === "grid" ? styles.SuggestionCard_ViewToggle_Active : ""
+          }
           onClick={() => setViewMode("grid")}
           aria-label="Grid View"
           title="Toggle grid"
@@ -70,7 +72,9 @@ const SuggestionCard: React.FC = () => {
           <FaThLarge />
         </button>
         <button
-          className={viewMode === "list" ? styles.SuggestionCard_ViewToggle_Active : ""}
+          className={
+            viewMode === "list" ? styles.SuggestionCard_ViewToggle_Active : ""
+          }
           onClick={() => setViewMode("list")}
           aria-label="List View"
           title="Toggle List"
@@ -85,7 +89,9 @@ const SuggestionCard: React.FC = () => {
             key={category}
             type="button"
             onClick={() => setFilter(category)}
-            className={filter === category ? styles.SuggestionCard_Filter_Active : ""}
+            className={
+              filter === category ? styles.SuggestionCard_Filter_Active : ""
+            }
             aria-pressed={filter === category}
           >
             {category}
@@ -98,7 +104,9 @@ const SuggestionCard: React.FC = () => {
         ))}
       </div>
 
-      <div className={`${styles.SuggestionCard_Grid} ${viewMode === "list" ? styles.SuggestionCard_Grid_List : ""}`}>
+      <div
+        className={`${styles.SuggestionCard_Grid} ${viewMode === "list" ? styles.SuggestionCard_Grid_List : ""}`}
+      >
         {filteredTips.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, y: 10 }}

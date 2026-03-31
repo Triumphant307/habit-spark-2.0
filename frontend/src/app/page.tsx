@@ -16,7 +16,7 @@ const Home: React.FC = () => {
         <div id="hero">
           <Hero />
         </div>
-        
+
         <HighlightsBar />
 
         <motion.div
@@ -34,8 +34,7 @@ const Home: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={fadeInUpVariants}
-        >
-        </motion.div>
+        ></motion.div>
 
         <div id="motivation">
           <MotivationHub />

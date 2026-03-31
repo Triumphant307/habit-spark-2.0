@@ -86,14 +86,14 @@ class ErrorBoundary extends Component<Props, State> {
             )}
 
             <div className={styles.ErrorBoundary_Actions}>
-              <button 
-                className={`${styles.ErrorBoundary_Button} ${styles.ErrorBoundary_RetryButton}`} 
+              <button
+                className={`${styles.ErrorBoundary_Button} ${styles.ErrorBoundary_RetryButton}`}
                 onClick={this.handleRetry}
               >
                 <FaRedo /> Try Again
               </button>
-              <button 
-                className={`${styles.ErrorBoundary_Button} ${styles.ErrorBoundary_HomeButton}`} 
+              <button
+                className={`${styles.ErrorBoundary_Button} ${styles.ErrorBoundary_HomeButton}`}
                 onClick={this.handleGoHome}
               >
                 <FaHome /> Go Home

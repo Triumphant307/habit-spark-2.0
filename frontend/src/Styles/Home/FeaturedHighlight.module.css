@@ -80,7 +80,8 @@
     gap: var(--spacing-5xl);
   }
 
-  .FeatureRow, .FeatureRow:nth-child(even) {
+  .FeatureRow,
+  .FeatureRow:nth-child(even) {
     flex-direction: column-reverse;
     gap: var(--spacing-3xl);
   }

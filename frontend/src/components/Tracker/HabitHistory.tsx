@@ -107,7 +107,13 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit, style }) => {
       <h3 className={style.HabitDetails_HistoryTitle}>
         📆 Habit History
         {habit.history.length === 0 && (
-          <span style={{ fontSize: "var(--font-size-xs)", color: "var(--color-text-muted)", display: "block" }}>
+          <span
+            style={{
+              fontSize: "var(--font-size-xs)",
+              color: "var(--color-text-muted)",
+              display: "block",
+            }}
+          >
             Complete your first day to start tracking!
           </span>
         )}

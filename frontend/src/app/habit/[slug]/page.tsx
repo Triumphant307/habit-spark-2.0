@@ -119,7 +119,11 @@ const HabitDetails = () => {
       animate="visible"
     >
       <motion.div variants={itemVariants}>
-        <Link href="/tracker" className={style.HabitDetails_BackButton} title="Back to Tracker">
+        <Link
+          href="/tracker"
+          className={style.HabitDetails_BackButton}
+          title="Back to Tracker"
+        >
           ← Back to Tracker
         </Link>
       </motion.div>

@@ -1,8 +1,84 @@
 .Greeting_Container {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: var(--spacing-md);
+}
+
+.Greeting_Info {
+  display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-2xl);
+}
+
+.Header_Actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-xs);
+}
+
+.Action_Button {
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--shape-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Action_Button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-brand-primary);
+  transform: translateY(-2px);
+}
+
+.Add_Button_Quick {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-lg);
+  height: 40px;
+  background: var(--gradient-surface-primary);
+  border: none;
+  border-radius: var(--shape-radius-sm);
+  color: white;
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Add_Button_Quick:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-interaction-primary);
+}
+
+@media (max-width: 600px) {
+  .Greeting_Container {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .Header_Actions {
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .Add_Button_Quick {
+    flex: 1;
+    justify-content: center;
+  }
 }
 
 .Greeting_Main {

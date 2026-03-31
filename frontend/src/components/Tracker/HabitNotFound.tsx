@@ -13,7 +13,9 @@ const HabitNotFound: React.FC = () => {
         deleted or you may have followed a broken link.
       </p>
       <Link href="/tracker">
-        <button className={styles.HabitNotFound_Button}>Go Back to Tracker</button>
+        <button className={styles.HabitNotFound_Button}>
+          Go Back to Tracker
+        </button>
       </Link>
     </div>
   );

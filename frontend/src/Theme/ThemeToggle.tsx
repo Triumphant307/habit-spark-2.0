@@ -30,7 +30,10 @@ export function toggleWithSweep(
 }
 
 const ThemeToggle = React.memo((): React.JSX.Element | null => {
-  const [isDark, setIsDark] = useLocalStorage<boolean | undefined>("theme", undefined);
+  const [isDark, setIsDark] = useLocalStorage<boolean | undefined>(
+    "theme",
+    undefined,
+  );
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -69,7 +72,10 @@ const ThemeToggle = React.memo((): React.JSX.Element | null => {
           {isDark ? (
             <FaMoon size={14} />
           ) : (
-            <FaSun size={14} style={{ color: "var(--color-status-sun-icon)" }} />
+            <FaSun
+              size={14}
+              style={{ color: "var(--color-status-sun-icon)" }}
+            />
           )}
         </span>
       </span>

@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { OnboardingData, OnboardingStep } from "@/types/onboarding";
 import { useRouter } from "next/navigation";
+import { completeOnboardingIntent } from "@/core/intent/userIntents";
 
 interface OnboardingContextType {
   formData: OnboardingData;
@@ -14,7 +15,9 @@ interface OnboardingContextType {
   handleComplete: () => Promise<void>;
 }
 
-const OnboardingContext = createContext<OnboardingContextType | undefined>(undefined);
+const OnboardingContext = createContext<OnboardingContextType | undefined>(
+  undefined,
+);
 
 export const useOnboarding = () => {
   const context = useContext(OnboardingContext);
@@ -24,7 +27,9 @@ export const useOnboarding = () => {
   return context;
 };
 
-export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const router = useRouter();
   const [step, setStep] = useState<OnboardingStep>(1);
   const totalSteps = 5;
@@ -35,29 +40,34 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     frequency: "Daily",
   });
 
-  const nextStep = () => setStep((prev) => (prev < totalSteps ? (prev + 1) as OnboardingStep : prev));
-  const prevStep = () => setStep((prev) => (prev > 1 ? (prev - 1) as OnboardingStep : prev));
+  const nextStep = () =>
+    setStep((prev) =>
+      prev < totalSteps ? ((prev + 1) as OnboardingStep) : prev,
+    );
+  const prevStep = () =>
+    setStep((prev) => (prev > 1 ? ((prev - 1) as OnboardingStep) : prev));
 
   const updateFormData = (updates: Partial<OnboardingData>) => {
     setFormData((prev) => ({ ...prev, ...updates }));
   };
 
   const handleComplete = async () => {
-    console.log("Onboarding Complete:", formData);
-    // Integration point for database/backend
-    router.push("/dashboard");
+    const success = completeOnboardingIntent(formData);
+    if (success) {
+      router.push("/dashboard");
+    }
   };
 
   return (
-    <OnboardingContext.Provider 
-      value={{ 
-        formData, 
-        updateFormData, 
-        currentStep: step, 
-        totalSteps, 
-        nextStep, 
-        prevStep, 
-        handleComplete 
+    <OnboardingContext.Provider
+      value={{
+        formData,
+        updateFormData,
+        currentStep: step,
+        totalSteps,
+        nextStep,
+        prevStep,
+        handleComplete,
       }}
     >
       {children}

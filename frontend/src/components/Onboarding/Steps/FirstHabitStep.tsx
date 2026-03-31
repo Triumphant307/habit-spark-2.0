@@ -64,12 +64,15 @@ const FirstHabitStep: React.FC = () => {
         ))}
       </div>
 
-      <div className={styles.ActionGroup} style={{ marginTop: "var(--spacing-xl)" }}>
+      <div
+        className={styles.ActionGroup}
+        style={{ marginTop: "var(--spacing-xl)" }}
+      >
         <button className={styles.BackButton} onClick={prevStep}>
           Back
         </button>
-        <Button 
-          onClick={handleContinue} 
+        <Button
+          onClick={handleContinue}
           disabled={formData.firstHabit.trim().length < 2}
           showIcon
         >

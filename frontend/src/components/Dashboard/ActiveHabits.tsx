@@ -16,7 +16,7 @@ const ActiveHabits: React.FC = () => {
   const resultRef = useRef<HTMLDivElement | null>(null);
 
   const filteredHabits = habits.filter((habit) =>
-    habit.title.toLowerCase().includes(searchQuery.toLowerCase())
+    habit.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -25,7 +25,12 @@ const ActiveHabits: React.FC = () => {
         <h2 className={styles.Section_Title}>Your Active Sparks</h2>
         {habits.length > 0 && (
           <Link href="/suggestion">
-            <Button style={{ padding: "var(--spacing-sm) var(--spacing-lg)", fontSize: "0.8rem" }}>
+            <Button
+              style={{
+                padding: "var(--spacing-sm) var(--spacing-lg)",
+                fontSize: "0.8rem",
+              }}
+            >
               + New Habit
             </Button>
           </Link>
@@ -44,8 +49,8 @@ const ActiveHabits: React.FC = () => {
         <div className={styles.Habits_Empty}>
           <div className={styles.Empty_Icon}>{searchQuery ? "🔍" : "🌱"}</div>
           <p className={styles.Empty_Text}>
-            {searchQuery 
-              ? `No habits matching "${searchQuery}"` 
+            {searchQuery
+              ? `No habits matching "${searchQuery}"`
               : "Every great journey starts with a single spark. Ready to ignite yours?"}
           </p>
           <Link href="/suggestion">

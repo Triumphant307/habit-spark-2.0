@@ -97,14 +97,22 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
 
         toast.success(`🎉 Amazing! You've hit a ${newStreak}-day streak!`);
 
-        notificationService.showStreakMilestone(habit.title, habit.icon, newStreak);
+        notificationService.showStreakMilestone(
+          habit.title,
+          habit.icon,
+          newStreak,
+        );
       }
     }
   };
 
   return (
     <section aria-label="Your habits list">
-      <div className={style.TrackerCard_Grid} onDragEnd={handleDragEnd} role="list">
+      <div
+        className={style.TrackerCard_Grid}
+        onDragEnd={handleDragEnd}
+        role="list"
+      >
         <AnimatePresence>
           {habits.map((habit, index) => {
             const progress = Math.round((habit.streak / habit.target) * 100);
@@ -167,7 +175,9 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                   <p className={style.TrackerCard_Target}>
                     Target: {habit.target} days
                   </p>
-                  <p className={style.TrackerCard_Streak}>Streak: {habit.streak}</p>
+                  <p className={style.TrackerCard_Streak}>
+                    Streak: {habit.streak}
+                  </p>
                   <ProgressTrack radius={50} stroke={5} progress={progress} />
                 </Link>
               </motion.div>

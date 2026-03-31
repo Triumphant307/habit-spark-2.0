@@ -71,13 +71,17 @@
 }
 
 .CompletedPreview_Item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--color-brand-primary), var(--color-brand-violet));
+  background: linear-gradient(
+    90deg,
+    var(--color-brand-primary),
+    var(--color-brand-violet)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -165,7 +169,7 @@
   .CompletedPreview_Container {
     padding: 3rem 1.5rem;
   }
-  
+
   .CompletedPreview_Title {
     font-size: 1.8rem;
   }

@@ -10,7 +10,7 @@ import Button, { ButtonProps } from "@/components/UI/Button";
 const AuthButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     return <Button ref={ref} showIcon={true} {...props} />;
-  }
+  },
 );
 
 AuthButton.displayName = "AuthButton";

@@ -38,7 +38,9 @@ export const GoalStep: React.FC = () => {
     >
       <div className={styles.Header}>
         <h2 className={styles.Title}>What's your focus?</h2>
-        <p className={styles.Subtitle}>Choose the areas you want to prioritize (Select all that apply)</p>
+        <p className={styles.Subtitle}>
+          Choose the areas you want to prioritize (Select all that apply)
+        </p>
       </div>
 
       <div className={styles.GoalGrid}>
@@ -66,7 +68,11 @@ export const GoalStep: React.FC = () => {
         <Button onClick={prevStep} className={styles.Secondary}>
           Back
         </Button>
-        <Button onClick={handleContinue} disabled={formData.goals.length === 0} showIcon>
+        <Button
+          onClick={handleContinue}
+          disabled={formData.goals.length === 0}
+          showIcon
+        >
           Continue
         </Button>
       </div>

@@ -26,7 +26,8 @@ const WelcomeStep: React.FC = () => {
       <header className={styles.Header}>
         <h1 className={styles.Title}>Welcome! 👋</h1>
         <p className={styles.Subtitle}>
-          What should we call you? We'll use this to personalize your HabitSpark experience.
+          What should we call you? We'll use this to personalize your HabitSpark
+          experience.
         </p>
       </header>
 
@@ -39,8 +40,8 @@ const WelcomeStep: React.FC = () => {
       />
 
       <div style={{ marginTop: "var(--spacing-xl)" }}>
-        <Button 
-          onClick={handleContinue} 
+        <Button
+          onClick={handleContinue}
           disabled={formData.nickname.trim().length < 2}
           showIcon
         >

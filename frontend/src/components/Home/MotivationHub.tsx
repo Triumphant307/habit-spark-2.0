@@ -32,7 +32,7 @@ const fallBackQuotes: Quote[] = [
   {
     q: "It does not matter how slowly you go as long as you do not stop.",
     a: "Confucius",
-  }
+  },
 ];
 
 const MotivationHub = () => {
@@ -44,8 +44,8 @@ const MotivationHub = () => {
     try {
       const response = await fetch(
         `https://api.allorigins.win/get?url=${encodeURIComponent(
-          "https://zenquotes.io/api/random"
-        )}`
+          "https://zenquotes.io/api/random",
+        )}`,
       );
 
       if (!response.ok) return null;
@@ -62,30 +62,35 @@ const MotivationHub = () => {
     }
   };
 
-  const rotateQuote = useCallback(async (shouldTriggerTransition = false) => {
-    if (shouldTriggerTransition) setIsFetchingQuote(true);
+  const rotateQuote = useCallback(
+    async (shouldTriggerTransition = false) => {
+      if (shouldTriggerTransition) setIsFetchingQuote(true);
 
-    setIsQuoteVisible(false);
+      setIsQuoteVisible(false);
 
-    await new Promise((resolve) => setTimeout(resolve, 400));
+      await new Promise((resolve) => setTimeout(resolve, 400));
 
-    const newQuote = await fetchRandomQuote();
+      const newQuote = await fetchRandomQuote();
 
-    if (newQuote) {
-      setActiveQuote(newQuote);
-    } else {
-      const currentIndex = fallBackQuotes.findIndex(q => q.q === activeQuote.q);
-      const nextIndex = (currentIndex + 1) % fallBackQuotes.length;
-      setActiveQuote(fallBackQuotes[nextIndex]);
-    }
+      if (newQuote) {
+        setActiveQuote(newQuote);
+      } else {
+        const currentIndex = fallBackQuotes.findIndex(
+          (q) => q.q === activeQuote.q,
+        );
+        const nextIndex = (currentIndex + 1) % fallBackQuotes.length;
+        setActiveQuote(fallBackQuotes[nextIndex]);
+      }
 
-    setIsQuoteVisible(true);
-    setIsFetchingQuote(false);
-  }, [activeQuote.q]);
+      setIsQuoteVisible(true);
+      setIsFetchingQuote(false);
+    },
+    [activeQuote.q],
+  );
 
   useEffect(() => {
     rotateQuote();
-  }, []); 
+  }, []);
 
   useEffect(() => {
     const autoRotateTimer = setInterval(() => {
@@ -97,7 +102,7 @@ const MotivationHub = () => {
 
   return (
     <section className={styles.MotivationHub_Section}>
-      <motion.div 
+      <motion.div
         className={styles.MotivationHub_Card}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -136,24 +141,32 @@ const MotivationHub = () => {
           </div>
 
           <div className={styles.Actions}>
-            <button 
+            <button
               className={styles.RefreshButton}
               onClick={() => rotateQuote(true)}
               disabled={isFetchingQuote}
             >
-              <LuSparkles style={{ 
-                animation: isFetchingQuote ? "spin 1s linear infinite" : "none" 
-              }} />
+              <LuSparkles
+                style={{
+                  animation: isFetchingQuote
+                    ? "spin 1s linear infinite"
+                    : "none",
+                }}
+              />
               {isFetchingQuote ? "Fetching Spark..." : "New Spark"}
             </button>
           </div>
         </div>
       </motion.div>
-      
+
       <style jsx>{`
         @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
       `}</style>
     </section>

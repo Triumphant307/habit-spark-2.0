@@ -30,13 +30,30 @@ const Completed: React.FC = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className={styles.Completed_IconWrapper}>
-          <motion.div variants={iconVariants} animate="float" style={{ animationDelay: "0s" }}>
+          <motion.div
+            variants={iconVariants}
+            animate="float"
+            style={{ animationDelay: "0s" }}
+          >
             <FaHardHat />
           </motion.div>
-          <motion.div variants={iconVariants} animate="float" style={{ animationDelay: "1s" }}>
-             <FaTools style={{ fontSize: "2.5rem", color: "var(--color-text-secondary)" }} />
+          <motion.div
+            variants={iconVariants}
+            animate="float"
+            style={{ animationDelay: "1s" }}
+          >
+            <FaTools
+              style={{
+                fontSize: "2.5rem",
+                color: "var(--color-text-secondary)",
+              }}
+            />
           </motion.div>
-           <motion.div variants={iconVariants} animate="float" style={{ animationDelay: "0.5s" }}>
+          <motion.div
+            variants={iconVariants}
+            animate="float"
+            style={{ animationDelay: "0.5s" }}
+          >
             <FaTrafficLight style={{ color: "var(--color-status-error)" }} />
           </motion.div>
         </div>

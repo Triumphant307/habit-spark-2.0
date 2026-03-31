@@ -11,7 +11,12 @@ export type OnboardingGoal =
   | "fitness"
   | "creativity";
 
-export type OnboardingFrequency = "Daily" | "Weekly" | "Custom" | "daily" | "weekdays";
+export type OnboardingFrequency =
+  | "Daily"
+  | "Weekly"
+  | "Custom"
+  | "daily"
+  | "weekdays";
 
 export interface OnboardingData {
   /** User's name/nickname */
@@ -24,7 +29,11 @@ export interface OnboardingData {
   frequency: OnboardingFrequency;
 }
 
-export const GOAL_OPTIONS: { value: OnboardingGoal; label: string; icon: string }[] = [
+export const GOAL_OPTIONS: {
+  value: OnboardingGoal;
+  label: string;
+  icon: string;
+}[] = [
   { value: "Health", label: "Health & Wellness", icon: "🍎" },
   { value: "Productivity", label: "Productivity", icon: "📈" },
   { value: "Mindfulness", label: "Mindfulness", icon: "🧘" },
@@ -32,7 +41,10 @@ export const GOAL_OPTIONS: { value: OnboardingGoal; label: string; icon: string 
   { value: "Other", label: "Other", icon: "✨" },
 ];
 
-export const SUGGESTED_HABITS: Record<string, { title: string; icon: string }[]> = {
+export const SUGGESTED_HABITS: Record<
+  string,
+  { title: string; icon: string }[]
+> = {
   Health: [
     { title: "Drink 8 glasses of water", icon: "💧" },
     { title: "Eat a healthy breakfast", icon: "🥣" },

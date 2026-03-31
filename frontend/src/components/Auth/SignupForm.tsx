@@ -33,7 +33,11 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <form className={styles.Auth_Form} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form
+      className={styles.Auth_Form}
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
       <header className={styles.Auth_FormHeader}>
         <h1 className={styles.Auth_FormTitle}>Create Account</h1>
         <p className={styles.Auth_FormSubtitle}>Join HabitSpark today</p>

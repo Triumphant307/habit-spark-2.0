@@ -17,9 +17,9 @@ const SocialAuth: React.FC = () => {
 
   return (
     <div className={styles.Social_Container}>
-      <button 
-        type="button" 
-        className={styles.Social_Button} 
+      <button
+        type="button"
+        className={styles.Social_Button}
         onClick={handleGoogleLogin}
         aria-label="Continue with Google"
       >
@@ -27,9 +27,9 @@ const SocialAuth: React.FC = () => {
         <span>Google</span>
       </button>
 
-      <button 
-        type="button" 
-        className={styles.Social_Button} 
+      <button
+        type="button"
+        className={styles.Social_Button}
         onClick={handleGithubLogin}
         aria-label="Continue with GitHub"
       >

@@ -12,16 +12,16 @@ const StatsOverview: React.FC = () => {
   const today = dayjs().format("YYYY-MM-DD");
 
   // 1. Calculate Best Streak
-  const bestStreak = habits.length > 0 ? Math.max(...habits.map(h => h.streak)) : 0;
+  const bestStreak =
+    habits.length > 0 ? Math.max(...habits.map((h) => h.streak)) : 0;
 
   // 2. Calculate Total Spark Points (Total completions ever)
   const totalSparkPoints = habits.reduce((acc, h) => acc + h.history.length, 0);
 
   // 3. Calculate Today's Progress
-  const completedToday = habits.filter(h => h.history.includes(today)).length;
-  const progressPercent = habits.length > 0 
-    ? Math.round((completedToday / habits.length) * 100) 
-    : 0;
+  const completedToday = habits.filter((h) => h.history.includes(today)).length;
+  const progressPercent =
+    habits.length > 0 ? Math.round((completedToday / habits.length) * 100) : 0;
 
   return (
     <div className={styles.Stats_Grid}>
@@ -49,7 +49,9 @@ const StatsOverview: React.FC = () => {
           <LuTrophy className={styles.Stat_Icon} />
         </div>
         <span className={styles.Stat_Value}>{progressPercent}%</span>
-        <span className={styles.Stat_Subtext}>{completedToday} / {habits.length} finished</span>
+        <span className={styles.Stat_Subtext}>
+          {completedToday} / {habits.length} finished
+        </span>
       </div>
     </div>
   );
