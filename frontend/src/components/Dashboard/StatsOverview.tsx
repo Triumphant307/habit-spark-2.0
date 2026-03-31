@@ -6,6 +6,7 @@ import { useReactor } from "@/Hooks/useReactor";
 import { Habit } from "@/core/types/habit";
 import { LuFlame, LuZap, LuTrophy } from "react-icons/lu";
 import dayjs from "dayjs";
+import { motion } from "framer-motion";
 
 const StatsOverview: React.FC = () => {
   const habits = useReactor<Habit[]>("habits") || [];
@@ -23,8 +24,22 @@ const StatsOverview: React.FC = () => {
   const progressPercent =
     habits.length > 0 ? Math.round((completedToday / habits.length) * 100) : 0;
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
+  };
+
   return (
-    <div className={styles.Stats_Grid}>
+    <motion.div
+      className={styles.Stats_Grid}
+      initial="hidden"
+      animate="visible"
+      variants={itemVariants}
+    >
       <div className={styles.Stat_Card}>
         <div className={styles.Stat_Header}>
           <span className={styles.Stat_Label}>Best Streak</span>
@@ -53,7 +68,7 @@ const StatsOverview: React.FC = () => {
           {completedToday} / {habits.length} finished
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

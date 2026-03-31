@@ -19,8 +19,22 @@ const ActiveHabits: React.FC = () => {
     habit.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
+  };
+
   return (
-    <div className={styles.Habits_Section}>
+    <motion.div
+      className={styles.Habits_Section}
+      initial="hidden"
+      animate="visible"
+      variants={itemVariants}
+    >
       <div className={styles.Section_Header}>
         <h2 className={styles.Section_Title}>Your Active Sparks</h2>
         {habits.length > 0 && (
@@ -62,7 +76,7 @@ const ActiveHabits: React.FC = () => {
       ) : (
         <TrackerCard habits={filteredHabits} />
       )}
-    </div>
+    </motion.div>
   );
 };
 
