@@ -57,6 +57,19 @@
   transform: scale(1.02);
 }
 
+.TrackerCard_Container.isCompleted {
+  opacity: 0.6;
+  filter: grayscale(0.2);
+  border-left-color: var(
+    --color-text-muted
+  ); /* De-emphasize the spark border */
+}
+
+.TrackerCard_Container.isCompleted:hover {
+  opacity: 0.9;
+  filter: grayscale(0);
+}
+
 .TrackerCard_DragHandle {
   color: var(--color-text-muted);
   cursor: grab;

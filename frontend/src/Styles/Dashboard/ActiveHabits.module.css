@@ -54,3 +54,7 @@
   font-size: var(--font-size-base);
   max-width: 300px;
 }
+
+.Button_Link {
+  text-decoration: none;
+}

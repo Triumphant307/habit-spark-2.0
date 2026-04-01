@@ -23,8 +23,8 @@ const LinearProgressBar: React.FC<LinearProgressBarProps> = ({
         animate={{ width: `${clampedProgress}%` }}
         transition={{
           type: "spring",
-          stiffness: 50,
-          damping: 15,
+          stiffness: 100, // Faster spring
+          damping: 12, // Less resistance
           restDelta: 0.001,
         }}
       >
