@@ -11,9 +11,8 @@
 .ProgressBar_Fill {
   height: 100%;
   background: var(--gradient-surface-primary);
-  border-radius: var(--shape-radius-lg);
+  border-radius: var(--shape-radius-md);
   position: relative;
-  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .ProgressBar_Spark {

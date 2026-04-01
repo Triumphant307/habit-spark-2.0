@@ -2,6 +2,7 @@
 
 import React from "react";
 import styles from "@/Styles/UI/LinearProgressBar.module.css";
+import { motion } from "framer-motion";
 
 interface LinearProgressBarProps {
   progress: number; // 0 to 100
@@ -12,19 +13,25 @@ const LinearProgressBar: React.FC<LinearProgressBarProps> = ({
   progress,
   className,
 }) => {
-  // Ensure progress is between 0 and 100
   const clampedProgress = Math.min(Math.max(progress, 0), 100);
 
   return (
     <div className={`${styles.ProgressBar_Track} ${className || ""}`}>
-      <div
+      <motion.div
         className={styles.ProgressBar_Fill}
-        style={{ width: `${clampedProgress}%` }}
+        initial={{ width: 0 }}
+        animate={{ width: `${clampedProgress}%` }}
+        transition={{
+          type: "spring",
+          stiffness: 50,
+          damping: 15,
+          restDelta: 0.001,
+        }}
       >
         {clampedProgress > 0 && clampedProgress < 100 && (
           <div className={styles.ProgressBar_Spark} />
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };
