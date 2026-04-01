@@ -62,7 +62,7 @@ const Greeting: React.FC = () => {
         </div>
 
         <div className={styles.Header_Actions}>
-          <Link href="/suggestion">
+          <Link className={styles.Add_Button_Quick_Link} href="/suggestion">
             <button className={styles.Add_Button_Quick}>
               <LuPlus />
               <span>Add Habit</span>
