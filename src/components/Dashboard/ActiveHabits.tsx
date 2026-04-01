@@ -9,13 +9,20 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Button from "../UI/Button";
 import { LuArrowRight } from "react-icons/lu";
+import dayjs from "dayjs";
 
 const ActiveHabits: React.FC = () => {
   const habits = useReactor<Habit[]>("habits") || [];
 
-  // Sort by highest streak first, then by most recently started
+  const today = dayjs().format("YYYY-MM-DD");
+
+  // Sort: Uncompleted first, then by highest streak, then by most recently started
   const topHabits = [...habits]
     .sort((a, b) => {
+      const aDone = a.history.includes(today);
+      const bDone = b.history.includes(today);
+
+      if (aDone !== bDone) return aDone ? 1 : -1; // Done habits go last
       if (b.streak !== a.streak) return b.streak - a.streak;
       return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
     })
@@ -26,7 +33,7 @@ const ActiveHabits: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" as const },
+      transition: { duration: 0.3, ease: "easeOut" as const },
     },
   };
 
@@ -55,7 +62,7 @@ const ActiveHabits: React.FC = () => {
               </Button>
             </Link>
           )}
-          <Link href="/suggestion">
+          <Link className={styles.Button_Link} href="/suggestion">
             <Button
               style={{
                 padding: "var(--spacing-sm) var(--spacing-lg)",

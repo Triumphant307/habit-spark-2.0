@@ -100,11 +100,12 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
               key={habit.id || `habit-${index}`}
               className={`${style.TrackerCard_Container} ${
                 isDragging ? style.isDragging : ""
-              }`}
+              } ${isCompletedToday ? style.isCompleted : ""}`}
               draggable
               onDragStart={() => handleDragStart(index)}
               onDragOver={() => handleDragOver(index)}
               onDragEnd={handleDragEnd}
+              layout // This makes the reordering animation smooth
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -128,7 +129,12 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                   <span className={style.TrackerCard_Streak}>
                     <LuFlame
                       size={12}
-                      style={{ marginRight: "4px", color: "#f97316" }}
+                      style={{
+                        marginRight: "4px",
+                        color: isCompletedToday
+                          ? "var(--color-text-muted)"
+                          : "#f97316",
+                      }}
                     />
                     {habit.streak}
                   </span>
