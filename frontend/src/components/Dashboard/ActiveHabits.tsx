@@ -62,16 +62,6 @@ const ActiveHabits: React.FC = () => {
               </Button>
             </Link>
           )}
-          <Link className={styles.Button_Link} href="/suggestion">
-            <Button
-              style={{
-                padding: "var(--spacing-sm) var(--spacing-lg)",
-                fontSize: "0.8rem",
-              }}
-            >
-              + New Habit
-            </Button>
-          </Link>
         </div>
       </div>
 

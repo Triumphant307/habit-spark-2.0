@@ -93,9 +93,13 @@
   color: var(--color-text-muted);
   background: rgba(255, 255, 255, 0.03);
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--shape-radius-full);
+  border-radius: var(--shape-radius-md);
   border: 1px solid var(--border-color-base);
   width: fit-content;
+}
+
+.Add_Button_Quick_Link {
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {
