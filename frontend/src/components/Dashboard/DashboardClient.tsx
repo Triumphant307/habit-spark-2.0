@@ -5,6 +5,7 @@ import styles from "@/Styles/Dashboard/Dashboard.module.css";
 import Greeting from "./Greeting";
 import StatsOverview from "./StatsOverview";
 import ActiveHabits from "./ActiveHabits";
+import MotivationHub from "./MotivationHub";
 
 const DashboardClient: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const DashboardClient: React.FC = () => {
       <Greeting />
 
       <main className={styles.Dashboard_Main}>
+        <MotivationHub />
         <StatsOverview />
         <ActiveHabits />
       </main>

@@ -1,0 +1,93 @@
+.Motivation_Card {
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: var(--shape-radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-elevation-sm);
+  transition: all 0.3s ease;
+}
+
+.Motivation_Card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-elevation-md);
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Title {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-brand-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.Refresh_Button {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.Refresh_Button:hover {
+  color: var(--color-brand-primary);
+  background: rgba(255, 255, 255, 0.05);
+  transform: rotate(180deg);
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.Quote_Text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+.Quote_Author {
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  padding: 2px 8px;
+  width: fit-content;
+}
+
+/* Background Sparkle Effect */
+.Motivation_Card::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: var(--gradient-surface-primary);
+  opacity: 0.05;
+  filter: blur(40px);
+  border-radius: 50%;
+  pointer-events: none;
+}
