@@ -3,6 +3,7 @@ import Footer from "@/components/Layout/Footer";
 import BackToTop from "@/components/Layout/BackToTop";
 import { Providers } from "@/components/Layout/Providers";
 import { ThemeInitializer } from "@/components/Core/ThemeInitializer";
+import LayoutClient from "@/components/Layout/LayoutClient";
 
 import "./globals.css";
 import "aos/dist/aos.css";
@@ -49,7 +50,9 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          <main>{children}</main>
+          <LayoutClient>
+            {children}
+          </LayoutClient>
           <Footer />
           <BackToTop />
         </Providers>

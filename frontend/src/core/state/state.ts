@@ -6,6 +6,9 @@ const defaultState = {
     nickname: "",
     goals: [],
     completedOnboarding: false,
+    preferences: {
+      sidebarCollapsed: false,
+    },
     motivation: {
       quote: "Every great journey starts with a single spark.",
       author: "General",
