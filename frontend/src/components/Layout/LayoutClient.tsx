@@ -17,8 +17,8 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
   const noSidebarPages = ["/login", "/signup", "/onboarding", "/"];
   const isAppPage = !noSidebarPages.includes(pathname);
 
-  // Dynamic padding based on sidebar state (Width + Margins + Buffer)
-  const paddingLeft = isAppPage ? (isCollapsed ? "100px" : "280px") : "0px";
+  // Dynamic padding based on sidebar state (Width + Margins)
+  const paddingLeft = isAppPage ? (isCollapsed ? "94px" : "244px") : "0px";
 
   return (
     <div className="App_Layout">

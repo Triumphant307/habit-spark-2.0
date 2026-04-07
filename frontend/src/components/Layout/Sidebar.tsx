@@ -39,7 +39,7 @@ const Sidebar: React.FC = () => {
   return (
     <aside
       className={styles.Sidebar_Container}
-      style={{ width: isCollapsed ? "80px" : "260px" }}
+      style={{ width: isCollapsed ? "70px" : "220px" }}
     >
       <div className={styles.Sidebar_Header}>
         <AnimatePresence>
