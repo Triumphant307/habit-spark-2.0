@@ -1,0 +1,111 @@
+.Heatmap_Container {
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: var(--shape-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  box-shadow: var(--shadow-elevation-sm);
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.Title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+}
+
+.Legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.Legend .Cell {
+  width: 12px;
+  height: 12px;
+}
+
+.Grid_Wrapper {
+  width: 100%;
+  padding-bottom: var(--spacing-xs);
+}
+
+/* Fluid Grid with Minimum Size Safeguard */
+.Grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(14px, 1fr));
+  grid-template-rows: repeat(7, auto);
+  grid-auto-flow: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.Cell {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.Cell:hover {
+  transform: scale(1.2);
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Spark Levels */
+.Level_0 {
+  background: rgba(255, 255, 255, 0.05);
+}
+.Level_1 {
+  background: rgba(59, 130, 246, 0.2);
+}
+.Level_2 {
+  background: rgba(59, 130, 246, 0.5);
+}
+.Level_3 {
+  background: rgba(59, 130, 246, 0.8);
+}
+.Level_4 {
+  background: var(--color-brand-indigo);
+  box-shadow: 0 0 8px var(--color-brand-primary);
+}
+
+.Tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-bottom: 8px;
+  z-index: 10;
+}
+
+.Cell:hover .Tooltip {
+  opacity: 1;
+}
