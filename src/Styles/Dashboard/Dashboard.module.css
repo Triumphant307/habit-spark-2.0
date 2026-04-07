@@ -5,15 +5,43 @@
   background-image: var(--gradient-background-page);
 }
 
+/* Outer wrapper that sticks and spans full width */
+.StickyHeader_Outer {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-layer-header);
+  width: 100%;
+  background: transparent;
+  backdrop-filter: blur(10px);
+}
+
+/* Add a bottom border shadow to the sticky header */
+.StickyHeader_Outer::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-color-base),
+    transparent
+  );
+  opacity: 0.2;
+}
+
+/* Inner header that stays centered at 1200px */
 .Dashboard_Header {
-  padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-xl);
+  padding: var(--spacing-xl) var(--spacing-xl);
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
 }
 
 .Dashboard_Main {
-  padding: 0 var(--spacing-xl) var(--spacing-3xl);
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-3xl);
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
@@ -22,10 +50,10 @@
 
 @media (max-width: 768px) {
   .Dashboard_Header {
-    padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-md);
   }
 
   .Dashboard_Main {
-    padding: 0 var(--spacing-md) var(--spacing-2xl);
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-2xl);
   }
 }
