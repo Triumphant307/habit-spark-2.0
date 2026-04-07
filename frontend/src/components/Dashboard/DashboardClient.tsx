@@ -16,8 +16,8 @@ const DashboardClient: React.FC = () => {
       <main className={styles.Dashboard_Main}>
         <MotivationHub />
         <StatsOverview />
-        <Heatmap />
         <ActiveHabits />
+        <Heatmap />
       </main>
     </div>
   );

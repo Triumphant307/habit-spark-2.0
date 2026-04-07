@@ -5,7 +5,7 @@
   background-color: var(--color-surface-card);
   color: var(--color-text-primary);
   border: none;
-  border-radius: var(--shape-radius-circle);
+  border-radius: var(--shape-radius-full);
   padding: var(--spacing-sm);
   cursor: pointer;
   box-shadow: var(--shadow-elevation-md);
