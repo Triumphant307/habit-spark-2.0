@@ -14,7 +14,7 @@ export const getTimeGreeting = (): string => {
 /**
  * Calculates completion counts for the last X days for the heatmap
  */
-export const getHeatmapData = (habits: Habit[], days = 84) => {
+export const getHeatmapData = (habits: Habit[], days = 364) => {
   const data: Record<string, number> = {};
   const today = dayjs();
 
