@@ -5,10 +5,11 @@
   border: var(--border-glass-light);
   border-radius: var(--shape-radius-lg);
   padding: var(--spacing-lg);
+  margin-top: var(--spacing-3xl); /* Added space between list and heatmap */
   margin-bottom: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   box-shadow: var(--shadow-elevation-sm);
 }
 
