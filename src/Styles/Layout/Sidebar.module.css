@@ -1,0 +1,112 @@
+.Sidebar_Container {
+  position: fixed;
+  left: var(--spacing-md);
+  top: var(--spacing-md);
+  bottom: var(--spacing-md);
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: var(--shape-radius-lg);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-index-layer-sticky);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-elevation-lg);
+}
+
+.Sidebar_Header {
+  padding: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.Logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: var(--gradient-surface-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Toggle_Button {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: var(--color-text-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--shape-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Toggle_Button:hover {
+  background: var(--color-brand-primary);
+  color: white;
+}
+
+.Sidebar_Nav {
+  flex: 1;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.Nav_Item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: var(--shape-radius-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Nav_Item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+}
+
+.Nav_Item_Active {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-brand-primary);
+  font-weight: 600;
+  border-left: 3px solid var(--color-brand-primary);
+}
+
+.Nav_Icon {
+  font-size: 1.25rem;
+  min-width: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.Nav_Label {
+  font-size: var(--font-size-sm);
+}
+
+.Sidebar_Footer {
+  padding: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+@media (max-width: 768px) {
+  .Sidebar_Container {
+    display: none; /* We'll implement mobile bottom bar later */
+  }
+}

@@ -44,3 +44,11 @@ export const completeOnboardingIntent = (data: OnboardingData) => {
 export const updateNicknameIntent = (nickname: string) => {
   appState.set("user.nickname", nickname);
 };
+
+/**
+ * Toggles the sidebar collapse state
+ */
+export const toggleSidebarIntent = () => {
+  const current = appState.get("user.preferences.sidebarCollapsed");
+  appState.set("user.preferences.sidebarCollapsed", !current);
+};
