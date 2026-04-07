@@ -32,21 +32,18 @@
   opacity: 0.2;
 }
 
-/* Inner header that stays centered at 1200px */
+/* Inner header content */
 .Dashboard_Header {
   padding: var(--spacing-xl) var(--spacing-xl);
-  max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
 }
 
 .Dashboard_Main {
   padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-3xl);
-  max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
   flex: 1;
 }
+
 
 @media (max-width: 768px) {
   .Dashboard_Header {

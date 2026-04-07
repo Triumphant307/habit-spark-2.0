@@ -1,8 +1,9 @@
 .Sidebar_Container {
   position: fixed;
-  left: var(--spacing-md);
-  top: var(--spacing-md);
-  bottom: var(--spacing-md);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: var(--spacing-md);
   background: var(--color-surface-card);
   backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);

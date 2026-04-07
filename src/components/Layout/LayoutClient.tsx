@@ -17,21 +17,24 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
   const noSidebarPages = ["/login", "/signup", "/onboarding", "/"];
   const isAppPage = !noSidebarPages.includes(pathname);
 
-  // Dynamic padding based on sidebar state
-  const paddingLeft = isAppPage ? (isCollapsed ? "80px" : "260px") : "0px";
+  // Dynamic padding based on sidebar state (Width + Margins + Buffer)
+  const paddingLeft = isAppPage ? (isCollapsed ? "100px" : "280px") : "0px";
 
   return (
     <div className="App_Layout">
       <Sidebar />
-      <main
+      <div
+        className="App_Content"
         style={{
           paddingLeft: isAppPage ? paddingLeft : "0px",
           transition: "padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           width: "100%",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         {children}
-      </main>
+      </div>
     </div>
   );
 };
