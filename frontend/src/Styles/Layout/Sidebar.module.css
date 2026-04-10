@@ -11,8 +11,8 @@
   border-radius: var(--shape-radius-lg);
   display: flex;
   flex-direction: column;
-  z-index: var(--z-index-layer-sticky);
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: var(--z-index-layer-notification); /* High z-index for drawer */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-elevation-lg);
 }
 
@@ -106,8 +106,45 @@
   gap: var(--spacing-xs);
 }
 
+/* Mobile Drawer Logic */
 @media (max-width: 768px) {
   .Sidebar_Container {
-    display: none; /* We'll implement mobile bottom bar later */
+    margin: 0;
+    border-radius: 0 var(--shape-radius-lg) var(--shape-radius-lg) 0;
+    width: 280px !important;
+    left: -280px; /* Hidden by default */
+    background: var(
+      --color-surface-page
+    ); /* More solid on mobile for readability */
   }
+
+  .Sidebar_Container.Mobile_Open {
+    left: 0;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+  }
+
+  .Sidebar_Header {
+    display: flex;
+  }
+
+  .Toggle_Button {
+    display: flex; /* We'll use this as a close button on mobile */
+  }
+}
+
+/* Dark Backdrop Overlay */
+.Mobile_Overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: calc(var(--z-index-layer-notification) - 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.Mobile_Overlay_Active {
+  opacity: 1;
+  pointer-events: auto;
 }

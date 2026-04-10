@@ -44,7 +44,6 @@
   flex: 1;
 }
 
-
 @media (max-width: 768px) {
   .Dashboard_Header {
     padding: var(--spacing-lg) var(--spacing-md);

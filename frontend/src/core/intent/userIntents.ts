@@ -52,3 +52,14 @@ export const toggleSidebarIntent = () => {
   const current = appState.get("user.preferences.sidebarCollapsed");
   appState.set("user.preferences.sidebarCollapsed", !current);
 };
+
+/**
+ * Toggles the mobile menu (hamburger) state
+ */
+export const toggleMobileMenuIntent = (forceState?: boolean) => {
+  const current = appState.get("user.preferences.mobileMenuOpen");
+  appState.set(
+    "user.preferences.mobileMenuOpen",
+    forceState !== undefined ? forceState : !current,
+  );
+};

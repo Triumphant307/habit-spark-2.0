@@ -98,8 +98,43 @@
   width: fit-content;
 }
 
-.Add_Button_Quick_Link {
-  text-decoration: none;
+.Mobile_Menu_Button {
+  display: none;
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  color: var(--color-text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--shape-radius-sm);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .Mobile_Menu_Button {
+    display: flex;
+  }
+
+  .Greeting_Info {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .Greeting_Date {
+    font-size: var(--font-size-sm);
+  }
+
+  .Greeting_Main {
+    width: 100%;
+    margin-top: var(--spacing-xs);
+    font-size: 1.75rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -116,11 +151,5 @@
   .Add_Button_Quick {
     flex: 1;
     justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .Greeting_Main {
-    font-size: 1.75rem;
   }
 }
