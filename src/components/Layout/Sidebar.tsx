@@ -94,7 +94,9 @@ const Sidebar: React.FC = () => {
             {isMobileOpen ? (
               <LuX />
             ) : isCollapsed ? (
-              <LuChevronRight />
+              <>
+                <LuChevronRight />
+              </>
             ) : (
               <LuChevronLeft />
             )}
