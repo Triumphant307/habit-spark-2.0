@@ -6,11 +6,12 @@ import layoutStyles from "@/Styles/Dashboard/Dashboard.module.css";
 import dayjs from "dayjs";
 import { useReactor } from "@/Hooks/useReactor";
 import { Habit } from "@/core/types/habit";
-import { LuCalendar, LuPlus, LuBell } from "react-icons/lu";
+import { LuCalendar, LuPlus, LuBell, LuMenu } from "react-icons/lu";
 import ThemeToggle from "@/Theme/ThemeToggle";
 import Link from "next/link";
 import { getTimeGreeting } from "@/utils/dateUtils";
 import { motion } from "framer-motion";
+import { toggleMobileMenuIntent } from "@/core/intent/userIntents";
 
 const Greeting: React.FC = () => {
   const habits = useReactor<Habit[]>("habits") || [];
@@ -41,6 +42,13 @@ const Greeting: React.FC = () => {
           variants={itemVariants}
         >
           <div className={styles.Greeting_Info}>
+            <button
+              className={styles.Mobile_Menu_Button}
+              onClick={() => toggleMobileMenuIntent()}
+              aria-label="Open Menu"
+            >
+              <LuMenu />
+            </button>
             <div className={styles.Greeting_Date}>
               <LuCalendar />
               {dayjs().format("dddd, MMMM D")}

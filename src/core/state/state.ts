@@ -8,6 +8,7 @@ const defaultState = {
     completedOnboarding: false,
     preferences: {
       sidebarCollapsed: false,
+      mobileMenuOpen: false,
     },
     motivation: {
       quote: "Every great journey starts with a single spark.",

@@ -50,9 +50,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          <LayoutClient>
-            {children}
-          </LayoutClient>
+          <LayoutClient>{children}</LayoutClient>
           <Footer />
           <BackToTop />
         </Providers>
