@@ -1,4 +1,4 @@
-import { appState } from "../state/state";
+import { appState } from "./app";
 import quotes from "../../data/quotes.json";
 import dayjs from "dayjs";
 
@@ -6,23 +6,18 @@ import dayjs from "dayjs";
  * Refreshes the daily motivation quote in the global state
  * @param force If true, ignores the daily check and updates anyway
  */
-export const refreshMotivationIntent = (force = false) => {
+export const refreshMotivation = (force = false) => {
   const today = dayjs().format("YYYY-MM-DD");
-  const lastUpdated = appState.get("user.motivation.lastUpdated");
-
-  // Only update if it's a new day or forced
+  const lastUpdated = appState.user.motivation.lastUpdated;
   if (lastUpdated !== today || force) {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const selectedQuote = quotes[randomIndex];
-
-    appState.set("user.motivation", {
+    appState.user.motivation = {
       quote: selectedQuote.q,
       author: selectedQuote.a,
       lastUpdated: today,
-    });
-
+    };
     return true;
   }
-
   return false;
 };

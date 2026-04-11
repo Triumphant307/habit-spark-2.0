@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { OnboardingData, OnboardingStep } from "@/types/onboarding";
 import { useRouter } from "next/navigation";
-import { completeOnboardingIntent } from "@/core/intent/userIntents";
+import { completeOnboarding } from "@/core/state/user";
 
 interface OnboardingContextType {
   formData: OnboardingData;
@@ -21,9 +21,7 @@ const OnboardingContext = createContext<OnboardingContextType | undefined>(
 
 export const useOnboarding = () => {
   const context = useContext(OnboardingContext);
-  if (!context) {
-    throw new Error("useOnboarding must be used within an OnboardingProvider");
-  }
+  if (!context) throw new Error("useOnboarding must be used within an OnboardingProvider");
   return context;
 };
 
@@ -52,10 +50,8 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const handleComplete = async () => {
-    const success = completeOnboardingIntent(formData);
-    if (success) {
-      router.push("/dashboard");
-    }
+    const success = completeOnboarding(formData);
+    if (success) router.push("/dashboard");
   };
 
   return (
@@ -74,3 +70,4 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({
     </OnboardingContext.Provider>
   );
 };
+

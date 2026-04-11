@@ -5,15 +5,15 @@ import Link from "next/link";
 import TrackerCard from "./TrackerCard";
 import Search from "@/components/Suggestion/Search";
 import { useState, useRef, useEffect } from "react";
-import { useReactor } from "@/Hooks/useReactor";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 import { notificationService } from "@/services/notificationService";
 import dayjs from "dayjs";
 import { Habit } from "@/core/types/habit";
 
 export default function TrackerClient() {
-  const habits = useReactor<Habit[]>("habits") || [];
+  const s = useReactor(appState);
   const [searchQuery, setSearchQuery] = useState("");
-
   // Streak-at-risk: notify once per session if it's evening and a habit isn't done
   useEffect(() => {
     if (!notificationService.isGranted()) return;
@@ -22,21 +22,15 @@ export default function TrackerClient() {
     if (!isEvening) return;
 
     const today = dayjs().format("YYYY-MM-DD");
-    habits.forEach((habit) => {
+    s.habits.forEach((habit) => {
       const completedToday = habit.history.includes(today);
-      if (!completedToday && habit.streak > 0) {
-        notificationService.showStreakAtRisk(
-          habit.title,
-          habit.icon,
-          habit.streak,
-        );
-      }
+      if (!completedToday && habit.streak > 0) notificationService.showStreakAtRisk(habit.title, habit.icon, habit.streak);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // run once on mount
   const resultRef = useRef<HTMLDivElement | null>(null);
 
-  const filteredHabits = habits.filter((habit) =>
+  const filteredHabits = s.habits.filter((habit) =>
     habit.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 

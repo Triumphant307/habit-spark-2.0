@@ -4,22 +4,21 @@ import React from "react";
 import styles from "@/Styles/Dashboard/Greeting.module.css";
 import layoutStyles from "@/Styles/Dashboard/Dashboard.module.css";
 import dayjs from "dayjs";
-import { useReactor } from "@/Hooks/useReactor";
-import { Habit } from "@/core/types/habit";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 import { LuCalendar, LuPlus, LuBell, LuMenu } from "react-icons/lu";
 import ThemeToggle from "@/Theme/ThemeToggle";
 import Link from "next/link";
 import { getTimeGreeting } from "@/utils/dateUtils";
 import { motion } from "framer-motion";
-import { toggleMobileMenuIntent } from "@/core/intent/userIntents";
+import { toggleMobileMenu } from "@/core/state/user";
 
 const Greeting: React.FC = () => {
-  const habits = useReactor<Habit[]>("habits") || [];
-  const nickname = useReactor<string>("user.nickname") || "HabitSparker";
+  const s = useReactor(appState);
   const timeGreeting = getTimeGreeting();
 
   const today = dayjs().format("YYYY-MM-DD");
-  const remainingHabits = habits.filter(
+  const remainingHabits = s.habits.filter(
     (h) => !h.history.includes(today),
   ).length;
 
@@ -44,7 +43,7 @@ const Greeting: React.FC = () => {
           <div className={styles.Greeting_Info}>
             <button
               className={styles.Mobile_Menu_Button}
-              onClick={() => toggleMobileMenuIntent()}
+              onClick={() => toggleMobileMenu()}
               aria-label="Open Menu"
             >
               <LuMenu />
@@ -55,9 +54,12 @@ const Greeting: React.FC = () => {
             </div>
             <h1 className={styles.Greeting_Main}>
               {timeGreeting},{" "}
-              <span className={styles.Greeting_Nickname}>{nickname}</span>!
+              <span className={styles.Greeting_Nickname}>
+                {s.user.nickname}
+              </span>
+              !
             </h1>
-            {habits.length > 0 ? (
+            {s.habits.length > 0 ? (
               <div className={styles.Greeting_Summary}>
                 {remainingHabits === 0
                   ? "✨ All habits completed for today! You're on fire."

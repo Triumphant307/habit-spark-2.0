@@ -2,11 +2,12 @@
 
 import React, { useEffect } from "react";
 import styles from "@/Styles/Layout/Sidebar.module.css";
-import { useReactor } from "@/Hooks/useReactor";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 import {
-  toggleSidebarIntent,
-  toggleMobileMenuIntent,
-} from "@/core/intent/userIntents";
+  toggleSidebar,
+  toggleMobileMenu,
+} from "@/core/state/user";
 import {
   LuLayoutDashboard,
   LuListTodo,
@@ -33,15 +34,14 @@ const footerItems = [
 ];
 
 const Sidebar: React.FC = () => {
-  const isCollapsed = useReactor<boolean>("user.preferences.sidebarCollapsed");
-  const isMobileOpen = useReactor<boolean>("user.preferences.mobileMenuOpen");
+  const s = useReactor(appState);
   const pathname = usePathname();
 
   // Logic: Show labels if mobile menu is open OR if desktop sidebar is NOT collapsed
-  const showLabels = isMobileOpen || !isCollapsed;
+  const showLabels = s.user.preferences.mobileMenuOpen || !s.user.preferences.sidebarCollapsed;
 
   useEffect(() => {
-    if (isMobileOpen) {
+    if (s.user.preferences.mobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -50,25 +50,25 @@ const Sidebar: React.FC = () => {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isMobileOpen]);
+  }, [s.user.preferences.mobileMenuOpen]);
 
   // Don't show sidebar on auth/onboarding pages
   const hideOnPages = ["/login", "/signup", "/onboarding", "/"];
   if (hideOnPages.includes(pathname)) return null;
 
-  const closeMobileMenu = () => toggleMobileMenuIntent(false);
+  const closeMobileMenu = () => toggleMobileMenu(false);
 
   return (
     <>
       {/* Dark Overlay for Mobile */}
       <div
-        className={`${styles.Mobile_Overlay} ${isMobileOpen ? styles.Mobile_Overlay_Active : ""}`}
+        className={`${styles.Mobile_Overlay} ${s.user.preferences.mobileMenuOpen ? styles.Mobile_Overlay_Active : ""}`}
         onClick={closeMobileMenu}
       />
 
       <aside
-        className={`${styles.Sidebar_Container} ${isMobileOpen ? styles.Mobile_Open : ""}`}
-        style={{ width: isCollapsed ? "70px" : "220px" }}
+        className={`${styles.Sidebar_Container} ${s.user.preferences.mobileMenuOpen ? styles.Mobile_Open : ""}`}
+        style={{ width: s.user.preferences.sidebarCollapsed ? "70px" : "220px" }}
       >
         <div className={styles.Sidebar_Header}>
           <AnimatePresence mode="wait">
@@ -87,13 +87,13 @@ const Sidebar: React.FC = () => {
           <button
             className={styles.Toggle_Button}
             onClick={() =>
-              isMobileOpen ? toggleMobileMenuIntent() : toggleSidebarIntent()
+              s.user.preferences.mobileMenuOpen ? toggleMobileMenu() : toggleSidebar()
             }
             aria-label="Toggle Navigation"
           >
-            {isMobileOpen ? (
+            {s.user.preferences.mobileMenuOpen ? (
               <LuX />
-            ) : isCollapsed ? (
+            ) : s.user.preferences.sidebarCollapsed ? (
               <LuChevronRight />
             ) : (
               <LuChevronLeft />
@@ -109,7 +109,7 @@ const Sidebar: React.FC = () => {
                 key={item.href}
                 href={item.href}
                 className={`${styles.Nav_Item} ${isActive ? styles.Nav_Item_Active : ""}`}
-                title={isCollapsed ? item.label : ""}
+                title={s.user.preferences.sidebarCollapsed ? item.label : ""}
                 onClick={closeMobileMenu}
               >
                 <span className={styles.Nav_Icon}>{item.icon}</span>
@@ -137,7 +137,7 @@ const Sidebar: React.FC = () => {
               key={item.label}
               href={item.href}
               className={styles.Nav_Item}
-              title={isCollapsed ? item.label : ""}
+              title={s.user.preferences.sidebarCollapsed ? item.label : ""}
               onClick={closeMobileMenu}
             >
               <span className={styles.Nav_Icon}>{item.icon}</span>
@@ -163,3 +163,4 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
+

@@ -1,16 +1,20 @@
 "use client";
 
 import React from "react";
-import { useReactor } from "@/Hooks/useReactor";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 import Sidebar from "./Sidebar";
 import { usePathname } from "next/navigation";
+import { TimeTravelOverlay } from "sia-reactor/adapters/react";
+import { time } from "@/core/state/app";
+import "sia-reactor/styles/time-travel-overlay.css";
 
 interface LayoutClientProps {
   children: React.ReactNode;
 }
 
 const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
-  const isCollapsed = useReactor<boolean>("user.preferences.sidebarCollapsed");
+  const s = useReactor(appState);
   const pathname = usePathname();
 
   // Pages that should NOT have a sidebar or special padding
@@ -18,7 +22,7 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
   const isAppPage = !noSidebarPages.includes(pathname);
 
   // Dynamic padding based on sidebar state and screen size
-  const paddingLeft = isAppPage ? (isCollapsed ? "94px" : "244px") : "0px";
+  const paddingLeft = isAppPage ? (s.user.preferences.sidebarCollapsed ? "94px" : "244px") : "0px";
 
   return (
     <div className="App_Layout">
@@ -52,6 +56,7 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
           }
         }
       `}</style>
+      <TimeTravelOverlay time={time} color="#3b82f6" />
     </div>
   );
 };
