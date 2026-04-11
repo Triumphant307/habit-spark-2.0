@@ -2,8 +2,9 @@
 
 import React, { useEffect } from "react";
 import styles from "@/Styles/Dashboard/MotivationHub.module.css";
-import { useReactor } from "@/Hooks/useReactor";
-import { refreshMotivationIntent } from "@/core/intent/motivationIntents";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
+import { refreshMotivation } from "@/core/state/motivation";
 import { LuSparkles, LuRefreshCw } from "react-icons/lu";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,18 +15,18 @@ interface MotivationData {
 }
 
 const MotivationHub: React.FC = () => {
-  const motivation = useReactor<MotivationData>("user.motivation");
+  const s = useReactor(appState);
 
   // Initial refresh logic (only if empty or new day)
   useEffect(() => {
-    refreshMotivationIntent();
+    refreshMotivation();
   }, []);
 
   const handleManualRefresh = () => {
-    refreshMotivationIntent(true); // Force a new random tip
+    refreshMotivation(true); // Force a new random tip
   };
 
-  if (!motivation) return null; // Prevent crash if state is not yet ready
+  if (!s.user.motivation) return null; // Prevent crash if state is not yet ready
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -59,15 +60,15 @@ const MotivationHub: React.FC = () => {
 
       <AnimatePresence mode="wait">
         <motion.div
-          key={motivation.quote}
+          key={s.user.motivation.quote}
           className={styles.Content}
           initial={{ opacity: 0, x: 10 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -10 }}
           transition={{ duration: 0.2 }}
         >
-          <p className={styles.Quote_Text}>{motivation.quote}</p>
-          <span className={styles.Quote_Author}>{motivation.author}</span>
+          <p className={styles.Quote_Text}>{s.user.motivation.quote}</p>
+          <span className={styles.Quote_Author}>{s.user.motivation.author}</span>
         </motion.div>
       </AnimatePresence>
     </motion.section>
@@ -75,3 +76,4 @@ const MotivationHub: React.FC = () => {
 };
 
 export default MotivationHub;
+

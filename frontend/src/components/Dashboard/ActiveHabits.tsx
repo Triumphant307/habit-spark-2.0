@@ -2,7 +2,8 @@
 
 import React from "react";
 import styles from "@/Styles/Dashboard/ActiveHabits.module.css";
-import { useReactor } from "@/Hooks/useReactor";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 import { Habit } from "@/core/types/habit";
 import TrackerCard from "../Tracker/TrackerCard";
 import Link from "next/link";
@@ -12,12 +13,10 @@ import { LuArrowRight } from "react-icons/lu";
 import dayjs from "dayjs";
 
 const ActiveHabits: React.FC = () => {
-  const habits = useReactor<Habit[]>("habits") || [];
-
+  const s = useReactor(appState);
   const today = dayjs().format("YYYY-MM-DD");
 
-  // Sort: Uncompleted first, then by highest streak, then by most recently started
-  const topHabits = [...habits]
+  const topHabits = [...s.habits]
     .sort((a, b) => {
       const aDone = a.history.includes(today);
       const bDone = b.history.includes(today);
@@ -47,7 +46,7 @@ const ActiveHabits: React.FC = () => {
       <div className={styles.Section_Header}>
         <h2 className={styles.Section_Title}>Your Top Sparks</h2>
         <div className={styles.Header_Actions}>
-          {habits.length > 6 && (
+          {s.habits.length > 6 && (
             <Link href="/tracker">
               <Button
                 variant="secondary"
@@ -65,7 +64,7 @@ const ActiveHabits: React.FC = () => {
         </div>
       </div>
 
-      {habits.length === 0 ? (
+      {s.habits.length === 0 ? (
         <div className={styles.Habits_Empty}>
           <div className={styles.Empty_Icon}>🌱</div>
           <p className={styles.Empty_Text}>

@@ -18,9 +18,7 @@ class NotificationService {
   private permission: NotificationPermission = "default";
 
   constructor() {
-    if (typeof window !== "undefined" && "Notification" in window) {
-      this.permission = Notification.permission;
-    }
+    if (typeof window !== "undefined" && "Notification" in window) this.permission = Notification.permission;
   }
 
   /**
@@ -32,9 +30,7 @@ class NotificationService {
       return false;
     }
 
-    if (this.permission === "granted") {
-      return true;
-    }
+    if (this.permission === "granted") return true;
 
     try {
       this.permission = await Notification.requestPermission();

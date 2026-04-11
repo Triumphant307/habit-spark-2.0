@@ -2,24 +2,22 @@
 
 import React, { useMemo } from "react";
 import styles from "@/Styles/Dashboard/Heatmap.module.css";
-import { useReactor } from "@/Hooks/useReactor";
-import { Habit } from "@/core/types/habit";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 import { getHeatmapData } from "@/utils/dateUtils";
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 
 const Heatmap: React.FC = () => {
-  const habits = useReactor<Habit[]>("habits") || [];
-  const data = useMemo(() => getHeatmapData(habits), [habits]);
+  const s = useReactor(appState);
+  const data = useMemo(() => getHeatmapData(s.habits), [s.habits]);
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   // 1. Group data into weeks (chunks of 7)
   const weeks = useMemo(() => {
     const result = [];
-    for (let i = 0; i < data.length; i += 7) {
-      result.push(data.slice(i, i + 7));
-    }
+    for (let i = 0; i < data.length; i += 7) result.push(data.slice(i, i + 7));
     return result;
   }, [data]);
 

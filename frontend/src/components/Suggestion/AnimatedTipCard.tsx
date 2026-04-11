@@ -1,11 +1,12 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
-import { Tip } from "@/components/Suggestion/SuggestionCard";
+import { Tip } from "@/core/types/app";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
-import { useReactor } from "@/Hooks/useReactor";
-import { addHabitIntent, deleteHabitIntent } from "@/core/intent/habitIntents";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
+import { addHabit, deleteHabit } from "@/core/state/habits";
 import { useRipple } from "@/Hooks/useRipple";
 import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import toast from "@/utils/toast";
@@ -18,22 +19,14 @@ import { useRef } from "react";
 
 interface AnimatedTipCardProps {
   tip: Tip;
-  favorites: Tip[];
-  setFavorites: React.Dispatch<React.SetStateAction<Tip[]>>;
   viewMode: "list" | "grid";
 }
 
-const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
-  tip,
-  favorites,
-  setFavorites,
-  viewMode,
-}) => {
+const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
   const lastAddedHabitId = useRef<string | null>(null);
 
-  const habits = useReactor<Habit[]>("habits") || [];
-
+  const s = useReactor(appState);
   const createRipple = useRipple();
 
   const displayIcon =
@@ -41,7 +34,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
   const displayTitle =
     typeof tip.title === "string" ? tip.title : String(tip.title ?? "");
 
-  const alreadyAdded = habits.some(
+  const alreadyAdded = s.habits.some(
     (h) => h.title.toLowerCase() === displayTitle.toLowerCase(),
   );
 
@@ -50,7 +43,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
       title: displayTitle,
       icon: displayIcon,
     });
-    const createdHabit = addHabitIntent({
+    const createdHabit = addHabit({
       title: displayTitle,
       icon: displayIcon,
       target: 30,
@@ -91,17 +84,23 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
   const handleUndo = (habitId?: string | null) => {
     if (!habitId) return;
 
-    deleteHabitIntent(habitId);
+    deleteHabit(habitId);
 
     toast.info(`${displayTitle.trim()} ${displayIcon} removed!`);
     lastAddedHabitId.current = null; // clear it
   };
 
   const toggleFavorite = () => {
-    const isFavorite = favorites.some((fav) => fav.id === tip.id);
-    setFavorites((prev) =>
-      isFavorite ? prev.filter((fav) => fav.id !== tip.id) : [...prev, tip],
+    const isFavorite = (s.suggestions.favorites || []).some(
+      (fav) => fav.id === tip.id,
     );
+    if (isFavorite) {
+      s.suggestions.favorites = (s.suggestions.favorites || []).filter(
+        (fav) => fav.id !== tip.id,
+      );
+    } else {
+      s.suggestions.favorites = [...(s.suggestions.favorites || []), tip];
+    }
     toast[isFavorite ? "info" : "success"](
       `${displayTitle} ${displayIcon} ${
         isFavorite ? "removed from" : "added to"
@@ -131,7 +130,11 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({
         onClick={toggleFavorite}
       >
         <FaHeart
-          color={favorites.some((fav) => fav.id === tip.id) ? "red" : "gray"}
+          color={
+            (s.suggestions.favorites || []).some((fav) => fav.id === tip.id)
+              ? "red"
+              : "gray"
+          }
         />
       </button>
 

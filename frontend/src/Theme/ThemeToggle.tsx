@@ -2,8 +2,9 @@
 import React from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import styles from "@/Styles/Layout/ThemeToggle.module.css";
-import useLocalStorage from "@/Hooks/useLocalStorage";
 import { useEffect, useState } from "react";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 
 // View transition with bi-directional horizontal sweep animation for switching states in the document, eg. theme
 export function toggleWithSweep(
@@ -30,28 +31,24 @@ export function toggleWithSweep(
 }
 
 const ThemeToggle = React.memo((): React.JSX.Element | null => {
-  const [isDark, setIsDark] = useLocalStorage<boolean | undefined>(
-    "theme",
-    undefined,
-  );
+  const s = useReactor(appState);
+  const isDark = s.theme === "dark";
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
-    setIsDark((prev) => (prev === undefined ? prefersDark : prev));
+    if (s.theme === undefined) s.theme = prefersDark ? "dark" : "light";
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (mounted) {
-      document.documentElement.classList.toggle("dark", isDark);
-    }
+    if (mounted) document.documentElement.classList.toggle("dark", isDark);
   }, [isDark, mounted]);
 
   const toggleTheme = () => {
-    setIsDark((prev) => !prev);
+    s.theme = isDark ? "light" : "dark";
   };
 
   if (!mounted) return null; // prevent hydration mismatch

@@ -23,9 +23,7 @@ const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("hero");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -44,9 +42,7 @@ const Header: React.FC = () => {
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
       });
     };
 

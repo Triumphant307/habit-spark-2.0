@@ -8,9 +8,9 @@ import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useEffect } from "react";
 import { Habit } from "@/core/types/habit";
 import {
-  completeHabitIntent,
-  reorderHabitIntent,
-} from "@/core/intent/habitIntents";
+  reorderHabits,
+  completeHabit
+} from "@/core/state/habits";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
 import { LuFlame } from "react-icons/lu";
 import dayjs from "dayjs";
@@ -53,7 +53,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
 
   const handleDragEnd = () => {
     logger.info("Habits reordered", { count: habits.length });
-    reorderHabitIntent(habits.map((h) => h.id));
+    reorderHabits(habits.map((h) => h.id));
     draggedItem.current = null;
     draggedIdx.current = null;
     setIsDragging(false);
@@ -70,7 +70,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
       return;
     }
 
-    const success = completeHabitIntent(habit.id);
+    const success = completeHabit(habit.id);
 
     if (success) {
       const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
@@ -165,3 +165,4 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
 };
 
 export default TrackerCard;
+

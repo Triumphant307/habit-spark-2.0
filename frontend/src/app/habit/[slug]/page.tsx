@@ -11,13 +11,14 @@ import DeleteDialog from "@/components/Tracker/DeleteDialog";
 import EditDialog from "@/components/Tracker/EditDialog";
 import HabitNotFound from "@/components/Tracker/HabitNotFound";
 import {
-  resetHabitIntent,
-  updateHabitIntent,
-  deleteHabitIntent,
-  completeHabitIntent,
-} from "@/core/intent/habitIntents";
-import { findHabitBySlug } from "@/core/intent/habitIntents";
-import { useReactor } from "@/Hooks/useReactor";
+  resetHabit,
+  updateHabit,
+  deleteHabit,
+  completeHabit,
+  findHabitBySlug
+} from "@/core/state/habits";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
 import confetti from "canvas-confetti";
@@ -35,7 +36,7 @@ const HabitDetails = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  const habits = useReactor("habits") || [];
+  const s = useReactor(appState);
 
   // Use the helper to find habit by slug
   const habit = findHabitBySlug(slug);
@@ -73,20 +74,20 @@ const HabitDetails = () => {
     }
 
     logger.info("Marking habit done", { id: habit.id, title: habit.title });
-    completeHabitIntent(habit.id);
+    completeHabit(habit.id as string);
     toast.success("Streak increased 🔥");
   };
 
   const handleReset = () => {
     logger.info("Resetting habit streak", { id: habit.id, title: habit.title });
-    resetHabitIntent(habit.id);
+    resetHabit(habit.id as string);
     toast.info("Streak reset to 0. Keep going! 💪");
   };
 
   const handleDeleteClick = () => setIsDialogOpen(true);
   const handleDelete = () => {
     logger.info("Deleting habit", { id: habit.id, title: habit.title });
-    deleteHabitIntent(habit.id);
+    deleteHabit(habit.id as string);
     toast.success("Habit deleted successfully! 🗑️");
     router.push("/tracker");
   };
@@ -158,7 +159,7 @@ const HabitDetails = () => {
         isOpen={isEditOpen}
         onClose={() => setIsEditOpen(false)}
         onSave={(updatedData) => {
-          updateHabitIntent(habit.id, updatedData);
+          updateHabit(habit.id as string, updatedData);
           toast.success("Habit updated successfully");
         }}
       />

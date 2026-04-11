@@ -6,7 +6,7 @@ import styles from "@/Styles/Suggestion/SuggestionForm.module.css";
 import { useRipple } from "@/Hooks/useRipple";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
-import { addHabitIntent } from "@/core/intent/habitIntents";
+import { addHabit } from "@/core/state/habits";
 import Link from "next/link";
 import { FaSmile, FaExclamationCircle } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
@@ -71,7 +71,7 @@ const SuggestionForm: React.FC = () => {
 
     // Uses Intent from the reactor core
     logger.info("Creating new habit", { title: trimmedTitle, icon, target });
-    addHabitIntent({
+    addHabit({
       title: title.trim(),
       icon,
       target,
@@ -217,3 +217,4 @@ const SuggestionForm: React.FC = () => {
 };
 
 export default SuggestionForm;
+

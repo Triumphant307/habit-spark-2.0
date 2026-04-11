@@ -1,6 +1,6 @@
 "use client";
 import styles from "@/Styles/Home/Home.module.css";
-import { trackHomeVisit } from "@/core/intent/homeIntent";
+import { trackHomeVisit } from "@/core/state/home";
 import { useRipple } from "@/Hooks/useRipple";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -160,3 +160,4 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+
