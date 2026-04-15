@@ -5,18 +5,24 @@
   background-image: var(--gradient-background-page);
 }
 
-/* Outer wrapper that sticks and spans full width */
+/* Outer wrapper no longer sticks the whole thing */
 .StickyHeader_Outer {
-  position: sticky;
-  top: 0;
-  z-index: var(--z-index-layer-header);
   width: 100%;
-  background: transparent;
-  backdrop-filter: blur(10px);
+  z-index: var(--z-index-layer-header);
 }
 
-/* Add a bottom border shadow to the sticky header */
-.StickyHeader_Outer::after {
+/* Only this section will stick */
+.TopBar_Sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: var(--z-index-layer-header);
+  background: var(--color-surface-page); /* Match app background */
+  padding: var(--spacing-md) 0;
+}
+
+/* Subtle line when sticking */
+.TopBar_Sticky::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -29,24 +35,29 @@
     var(--border-color-base),
     transparent
   );
-  opacity: 0.2;
+  opacity: 0.15;
 }
 
-/* Inner header content */
-.Dashboard_Header {
-  padding: var(--spacing-xl) var(--spacing-xl);
+/* Inner centered containers */
+.Dashboard_Header,
+.Dashboard_Main {
+  max-width: 1200px;
   width: 100%;
+  margin: 0 auto;
+}
+
+.Dashboard_Header {
+  padding: 0 var(--spacing-xl);
 }
 
 .Dashboard_Main {
   padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-3xl);
-  width: 100%;
   flex: 1;
 }
 
 @media (max-width: 768px) {
   .Dashboard_Header {
-    padding: var(--spacing-lg) var(--spacing-md);
+    padding: 0 var(--spacing-md);
   }
 
   .Dashboard_Main {
