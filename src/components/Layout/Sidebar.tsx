@@ -4,10 +4,7 @@ import React, { useEffect } from "react";
 import styles from "@/Styles/Layout/Sidebar.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
-import {
-  toggleSidebar,
-  toggleMobileMenu,
-} from "@/core/state/user";
+import { toggleSidebar, toggleMobileMenu } from "@/core/state/user";
 import {
   LuLayoutDashboard,
   LuListTodo,
@@ -38,7 +35,8 @@ const Sidebar: React.FC = () => {
   const pathname = usePathname();
 
   // Logic: Show labels if mobile menu is open OR if desktop sidebar is NOT collapsed
-  const showLabels = s.user.preferences.mobileMenuOpen || !s.user.preferences.sidebarCollapsed;
+  const showLabels =
+    s.user.preferences.mobileMenuOpen || !s.user.preferences.sidebarCollapsed;
 
   useEffect(() => {
     if (s.user.preferences.mobileMenuOpen) {
@@ -68,7 +66,9 @@ const Sidebar: React.FC = () => {
 
       <aside
         className={`${styles.Sidebar_Container} ${s.user.preferences.mobileMenuOpen ? styles.Mobile_Open : ""}`}
-        style={{ width: s.user.preferences.sidebarCollapsed ? "70px" : "220px" }}
+        style={{
+          width: s.user.preferences.sidebarCollapsed ? "70px" : "220px",
+        }}
       >
         <div className={styles.Sidebar_Header}>
           <AnimatePresence mode="wait">
@@ -87,7 +87,9 @@ const Sidebar: React.FC = () => {
           <button
             className={styles.Toggle_Button}
             onClick={() =>
-              s.user.preferences.mobileMenuOpen ? toggleMobileMenu() : toggleSidebar()
+              s.user.preferences.mobileMenuOpen
+                ? toggleMobileMenu()
+                : toggleSidebar()
             }
             aria-label="Toggle Navigation"
           >
@@ -163,4 +165,3 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
-

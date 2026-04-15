@@ -32,7 +32,10 @@ const SuggestionCard: React.FC = () => {
       ? (s.suggestions.favorites || []).filter((tip) =>
           tip.title.toLowerCase().includes(searchQuery.toLowerCase()),
         )
-      : getTipsByCategory(s.suggestions.filter, (s.suggestions.favorites || [])).filter((tip) =>
+      : getTipsByCategory(
+          s.suggestions.filter,
+          s.suggestions.favorites || [],
+        ).filter((tip) =>
           tip.title.toLowerCase().includes(searchQuery.toLowerCase()),
         );
 
@@ -46,7 +49,9 @@ const SuggestionCard: React.FC = () => {
       <div className={styles.SuggestionCard_ViewToggle}>
         <button
           className={
-            s.suggestions.viewMode === "grid" ? styles.SuggestionCard_ViewToggle_Active : ""
+            s.suggestions.viewMode === "grid"
+              ? styles.SuggestionCard_ViewToggle_Active
+              : ""
           }
           onClick={() => (s.suggestions.viewMode = "grid")}
           aria-label="Grid View"
@@ -56,7 +61,9 @@ const SuggestionCard: React.FC = () => {
         </button>
         <button
           className={
-            s.suggestions.viewMode === "list" ? styles.SuggestionCard_ViewToggle_Active : ""
+            s.suggestions.viewMode === "list"
+              ? styles.SuggestionCard_ViewToggle_Active
+              : ""
           }
           onClick={() => (s.suggestions.viewMode = "list")}
           aria-label="List View"
@@ -73,16 +80,19 @@ const SuggestionCard: React.FC = () => {
             type="button"
             onClick={() => (s.suggestions.filter = category)}
             className={
-              s.suggestions.filter === category ? styles.SuggestionCard_Filter_Active : ""
+              s.suggestions.filter === category
+                ? styles.SuggestionCard_Filter_Active
+                : ""
             }
             aria-pressed={s.suggestions.filter === category}
           >
             {category}
-            {category === "Favorites" && (s.suggestions.favorites || []).length > 0 && (
-              <span className={styles.SuggestionCard_Badge}>
-                {(s.suggestions.favorites || []).length}
-              </span>
-            )}
+            {category === "Favorites" &&
+              (s.suggestions.favorites || []).length > 0 && (
+                <span className={styles.SuggestionCard_Badge}>
+                  {(s.suggestions.favorites || []).length}
+                </span>
+              )}
           </button>
         ))}
       </div>
@@ -97,7 +107,11 @@ const SuggestionCard: React.FC = () => {
             className={styles.SuggestionCard_NoResults}
           >
             <span style={{ fontSize: "2rem" }}>
-              {s.suggestions.filter === "Favorites" ? "💔" : searchQuery ? "🔎" : "📋"}
+              {s.suggestions.filter === "Favorites"
+                ? "💔"
+                : searchQuery
+                  ? "🔎"
+                  : "📋"}
             </span>
             <p>
               {s.suggestions.filter === "Favorites"

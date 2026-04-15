@@ -68,7 +68,9 @@ const MotivationHub: React.FC = () => {
           transition={{ duration: 0.2 }}
         >
           <p className={styles.Quote_Text}>{s.user.motivation.quote}</p>
-          <span className={styles.Quote_Author}>{s.user.motivation.author}</span>
+          <span className={styles.Quote_Author}>
+            {s.user.motivation.author}
+          </span>
         </motion.div>
       </AnimatePresence>
     </motion.section>
@@ -76,4 +78,3 @@ const MotivationHub: React.FC = () => {
 };
 
 export default MotivationHub;
-

@@ -18,7 +18,8 @@ class NotificationService {
   private permission: NotificationPermission = "default";
 
   constructor() {
-    if (typeof window !== "undefined" && "Notification" in window) this.permission = Notification.permission;
+    if (typeof window !== "undefined" && "Notification" in window)
+      this.permission = Notification.permission;
   }
 
   /**

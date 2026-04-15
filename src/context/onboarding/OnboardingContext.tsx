@@ -21,7 +21,8 @@ const OnboardingContext = createContext<OnboardingContextType | undefined>(
 
 export const useOnboarding = () => {
   const context = useContext(OnboardingContext);
-  if (!context) throw new Error("useOnboarding must be used within an OnboardingProvider");
+  if (!context)
+    throw new Error("useOnboarding must be used within an OnboardingProvider");
   return context;
 };
 
@@ -70,4 +71,3 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({
     </OnboardingContext.Provider>
   );
 };
-

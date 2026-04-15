@@ -7,10 +7,7 @@ import style from "@/Styles/Tracker/TrackerCard.module.css";
 import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useEffect } from "react";
 import { Habit } from "@/core/types/habit";
-import {
-  reorderHabits,
-  completeHabit
-} from "@/core/state/habits";
+import { reorderHabits, completeHabit } from "@/core/state/habits";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
 import { LuFlame } from "react-icons/lu";
 import dayjs from "dayjs";
@@ -165,4 +162,3 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
 };
 
 export default TrackerCard;
-

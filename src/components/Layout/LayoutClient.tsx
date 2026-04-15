@@ -22,7 +22,11 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
   const isAppPage = !noSidebarPages.includes(pathname);
 
   // Dynamic padding based on sidebar state and screen size
-  const paddingLeft = isAppPage ? (s.user.preferences.sidebarCollapsed ? "94px" : "244px") : "0px";
+  const paddingLeft = isAppPage
+    ? s.user.preferences.sidebarCollapsed
+      ? "94px"
+      : "244px"
+    : "0px";
 
   return (
     <div className="App_Layout">

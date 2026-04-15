@@ -217,4 +217,3 @@ const SuggestionForm: React.FC = () => {
 };
 
 export default SuggestionForm;
-

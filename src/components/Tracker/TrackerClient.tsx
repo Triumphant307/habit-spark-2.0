@@ -24,7 +24,12 @@ export default function TrackerClient() {
     const today = dayjs().format("YYYY-MM-DD");
     s.habits.forEach((habit) => {
       const completedToday = habit.history.includes(today);
-      if (!completedToday && habit.streak > 0) notificationService.showStreakAtRisk(habit.title, habit.icon, habit.streak);
+      if (!completedToday && habit.streak > 0)
+        notificationService.showStreakAtRisk(
+          habit.title,
+          habit.icon,
+          habit.streak,
+        );
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // run once on mount
