@@ -32,64 +32,71 @@ const Greeting: React.FC = () => {
   };
 
   return (
-    <div className={layoutStyles.StickyHeader_Outer}>
-      <header className={layoutStyles.Dashboard_Header}>
-        <motion.div
-          className={styles.Greeting_Container}
-          initial="hidden"
-          animate="visible"
-          variants={itemVariants}
-        >
-          <div className={styles.Greeting_Info}>
-            <button
-              className={styles.Mobile_Menu_Button}
-              onClick={() => toggleMobileMenu()}
-              aria-label="Open Menu"
+    <>
+      {/* 1. STICKY TOP BAR: Date, Hamburger, and Global Actions */}
+      <div className={layoutStyles.TopBar_Sticky}>
+        <div className={layoutStyles.Dashboard_Header}>
+          <div className={styles.Greeting_Container}>
+            <div
+              className={styles.Greeting_Info}
+              style={{ flexDirection: "row", alignItems: "center" }}
             >
-              <LuMenu />
-            </button>
-            <div className={styles.Greeting_Date}>
-              <LuCalendar />
-              {dayjs().format("dddd, MMMM D")}
-            </div>
-            <h1 className={styles.Greeting_Main}>
-              {timeGreeting},{" "}
-              <span className={styles.Greeting_Nickname}>
-                {s.user.nickname}
-              </span>
-              !
-            </h1>
-            {s.habits.length > 0 ? (
-              <div className={styles.Greeting_Summary}>
-                {remainingHabits === 0
-                  ? "✨ All habits completed for today! You're on fire."
-                  : `🔥 You have ${remainingHabits} spark${remainingHabits > 1 ? "s" : ""} to ignite today.`}
-              </div>
-            ) : (
-              <div className={styles.Greeting_Summary}>
-                🌱 Ready to start your first habit?
-              </div>
-            )}
-          </div>
-
-          <div className={styles.Header_Actions}>
-            <Link href="/suggestion">
-              <button className={styles.Add_Button_Quick}>
-                <LuPlus />
-                <span>Add Habit</span>
+              <button
+                className={styles.Mobile_Menu_Button}
+                onClick={() => toggleMobileMenu()}
+                aria-label="Open Menu"
+              >
+                <LuMenu />
               </button>
-            </Link>
-            <button
-              className={styles.Action_Button}
-              aria-label="View Notifications"
-            >
-              <LuBell />
-            </button>
-            <ThemeToggle />
+              <div className={styles.Greeting_Date} style={{ marginBottom: 0 }}>
+                <LuCalendar />
+                {dayjs().format("dddd, MMMM D")}
+              </div>
+            </div>
+
+            <div className={styles.Header_Actions}>
+              <Link href="/suggestion" style={{ textDecoration: "none" }}>
+                <button className={styles.Add_Button_Quick}>
+                  <LuPlus />
+                  <span>Add Habit</span>
+                </button>
+              </Link>
+              <button
+                className={styles.Action_Button}
+                aria-label="View Notifications"
+              >
+                <LuBell />
+              </button>
+              <ThemeToggle />
+            </div>
           </div>
+        </div>
+      </div>
+
+      {/* 2. SCROLLABLE WELCOME: The big personalized greeting */}
+      <div
+        className={layoutStyles.Dashboard_Header}
+        style={{ paddingTop: "var(--spacing-xl)" }}
+      >
+        <motion.div initial="hidden" animate="visible" variants={itemVariants}>
+          <h1 className={styles.Greeting_Main}>
+            {timeGreeting},{" "}
+            <span className={styles.Greeting_Nickname}>{s.user.nickname}</span>!
+          </h1>
+          {s.habits.length > 0 ? (
+            <div className={styles.Greeting_Summary}>
+              {remainingHabits === 0
+                ? "✨ All habits completed for today! You're on fire."
+                : `🔥 You have ${remainingHabits} spark${remainingHabits > 1 ? "s" : ""} to ignite today.`}
+            </div>
+          ) : (
+            <div className={styles.Greeting_Summary}>
+              🌱 Ready to start your first habit?
+            </div>
+          )}
         </motion.div>
-      </header>
-    </div>
+      </div>
+    </>
   );
 };
 
