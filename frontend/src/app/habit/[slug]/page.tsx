@@ -15,7 +15,7 @@ import {
   updateHabit,
   deleteHabit,
   completeHabit,
-  findHabitBySlug
+  findHabitBySlug,
 } from "@/core/state/habits";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
