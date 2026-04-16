@@ -50,16 +50,16 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
           display: "flex",
           flexDirection: "column",
           // Sidebar offset applied here so both AppTopBar and main are offset correctly
-          paddingLeft: isAppPage ? `var(--sidebar-width, ${paddingLeft})` : "0px",
+          paddingLeft: isAppPage
+            ? `var(--sidebar-width, ${paddingLeft})`
+            : "0px",
           paddingBottom: isAppPage ? "var(--mobile-nav-height, 0px)" : "0px",
           transition: "padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         {/* Shared sticky top bar — visible on all sidebar routes */}
         {isAppPage && <AppTopBar />}
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
       </div>
 
       {/* Public footer + scroll-to-top — hidden on app routes */}
