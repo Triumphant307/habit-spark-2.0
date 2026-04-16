@@ -13,7 +13,9 @@ const Footer: React.FC = () => {
     pathname === "/login" ||
     pathname === "/signup" ||
     pathname === "/onboarding" ||
-    pathname === "/dashboard"
+    pathname === "/dashboard" ||
+    pathname === "/tracker" ||
+    pathname === "/suggestion"
   )
     return null;
 
