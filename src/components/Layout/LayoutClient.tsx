@@ -6,6 +6,7 @@ import { appState } from "@/core/state/app";
 import Header from "./Header";
 import Footer from "./Footer";
 import BackToTop from "./BackToTop";
+import AppTopBar from "./AppTopBar";
 import Sidebar from "./Sidebar";
 import { usePathname } from "next/navigation";
 import { TimeTravelOverlay } from "sia-reactor/adapters/react";
@@ -48,17 +49,15 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
           width: "100%",
           display: "flex",
           flexDirection: "column",
+          // Sidebar offset applied here so both AppTopBar and main are offset correctly
+          paddingLeft: isAppPage ? `var(--sidebar-width, ${paddingLeft})` : "0px",
+          paddingBottom: isAppPage ? "var(--mobile-nav-height, 0px)" : "0px",
           transition: "padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
-        <main
-          style={{
-            paddingLeft: isAppPage
-              ? `var(--sidebar-width, ${paddingLeft})`
-              : "0px",
-            paddingBottom: isAppPage ? "var(--mobile-nav-height, 0px)" : "0px",
-          }}
-        >
+        {/* Shared sticky top bar — visible on all sidebar routes */}
+        {isAppPage && <AppTopBar />}
+        <main>
           {children}
         </main>
       </div>
