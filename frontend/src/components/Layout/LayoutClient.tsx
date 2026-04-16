@@ -68,7 +68,7 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
 
       <style jsx>{`
         @media (max-width: 768px) {
-          main {
+          .App_Content {
             padding-left: 0 !important;
             padding-bottom: 80px !important;
           }
