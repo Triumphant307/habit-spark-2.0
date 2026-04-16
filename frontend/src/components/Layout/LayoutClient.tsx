@@ -3,6 +3,9 @@
 import React from "react";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
+import Header from "./Header";
+import Footer from "./Footer";
+import BackToTop from "./BackToTop";
 import Sidebar from "./Sidebar";
 import { usePathname } from "next/navigation";
 import { TimeTravelOverlay } from "sia-reactor/adapters/react";
@@ -13,13 +16,18 @@ interface LayoutClientProps {
   children: React.ReactNode;
 }
 
+// Routes that use the sidebar — public Header/Footer are suppressed here
+const APP_ROUTES = ["/dashboard", "/tracker", "/suggestion", "/habit"];
+
 const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
   const s = useReactor(appState);
   const pathname = usePathname();
 
   // Pages that should NOT have a sidebar or special padding
   const noSidebarPages = ["/login", "/signup", "/onboarding", "/"];
-  const isAppPage = !noSidebarPages.includes(pathname);
+  const isAppPage =
+    !noSidebarPages.includes(pathname) &&
+    APP_ROUTES.some((route) => pathname.startsWith(route));
 
   // Dynamic padding based on sidebar state and screen size
   const paddingLeft = isAppPage
@@ -30,6 +38,9 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
 
   return (
     <div className="App_Layout">
+      {/* Public header — hidden on app routes */}
+      {!isAppPage && <Header />}
+
       <Sidebar />
       <div
         className="App_Content"
@@ -51,6 +62,10 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
           {children}
         </main>
       </div>
+
+      {/* Public footer + scroll-to-top — hidden on app routes */}
+      {!isAppPage && <Footer />}
+      {!isAppPage && <BackToTop />}
 
       <style jsx>{`
         @media (max-width: 768px) {

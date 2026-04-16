@@ -1,6 +1,3 @@
-import Header from "@/components/Layout/Header";
-import Footer from "@/components/Layout/Footer";
-import BackToTop from "@/components/Layout/BackToTop";
 import { Providers } from "@/components/Layout/Providers";
 import { ThemeInitializer } from "@/components/Core/ThemeInitializer";
 import LayoutClient from "@/components/Layout/LayoutClient";
@@ -49,10 +46,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <Header />
           <LayoutClient>{children}</LayoutClient>
-          <Footer />
-          <BackToTop />
         </Providers>
       </body>
     </html>
