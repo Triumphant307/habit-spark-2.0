@@ -25,3 +25,84 @@
     font-size: var(--font-size-2xl);
   }
 }
+
+/* -------- "Create Custom Habit" CTA Banner -------- */
+
+.Suggestion_CTA {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  width: 100%;
+  max-width: var(--width-container-standard);
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-left: 3px solid var(--color-brand-primary);
+  border-radius: var(--shape-radius-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+  box-shadow: var(--shadow-elevation-sm);
+  transition: var(--animation-transition-smooth);
+}
+
+.Suggestion_CTA:hover {
+  box-shadow: var(--shadow-elevation-md);
+  transform: translateY(-1px);
+}
+
+.Suggestion_CTA_Text {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.Suggestion_CTA_Icon {
+  color: var(--color-brand-primary);
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+}
+
+.Suggestion_CTA_Button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--gradient-surface-primary);
+  border: none;
+  border-radius: var(--shape-radius-md);
+  color: var(--color-button-primary-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--animation-transition-smooth);
+  box-shadow: var(--shadow-interaction-primary);
+}
+
+.Suggestion_CTA_Button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-interaction-hover);
+}
+
+.Suggestion_CTA_Button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+@media (max-width: 600px) {
+  .Suggestion_CTA {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .Suggestion_CTA_Button {
+    width: 100%;
+    justify-content: center;
+  }
+}
