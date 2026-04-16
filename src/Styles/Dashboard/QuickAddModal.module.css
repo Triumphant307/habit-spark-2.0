@@ -1,0 +1,241 @@
+/* =============================================
+   QuickAddModal — Dashboard "New Habit" dialog
+   Uses existing design tokens from globals.css
+   ============================================= */
+
+.QAModal_Container {
+  padding: var(--spacing-xl);
+  border: none;
+  border-radius: var(--shape-radius-xl);
+  /* True centering — avoids the left:35% anti-pattern */
+  margin: auto;
+  inset: 0;
+  max-width: var(--width-container-narrow);
+  width: 90%;
+  background-color: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  box-shadow: var(--shadow-interaction-dialog);
+  overflow-y: auto;
+  z-index: var(--z-index-layer-overlay);
+}
+
+.QAModal_Container::backdrop {
+  background: var(--color-surface-overlay-light);
+  backdrop-filter: var(--effect-blur-glass);
+}
+
+/* -------- Form Layout -------- */
+
+.QAModal_Form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  align-items: center;
+  width: 100%;
+}
+
+/* -------- Title -------- */
+
+.QAModal_Title {
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.QAModal_TitleIcon {
+  color: var(--color-brand-primary);
+}
+
+/* -------- Emoji Icon Picker -------- */
+
+.QAModal_PickerContainer {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: var(--spacing-sm) 0;
+}
+
+.QAModal_InputLabel {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+  text-align: center;
+}
+
+.QAModal_IconPreview {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  border: 2px dashed rgba(59, 130, 246, 0.3);
+  border-radius: var(--shape-radius-xl);
+  cursor: pointer;
+  transition: var(--animation-transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.QAModal_IconPreview:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-brand-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-interaction-tiny);
+}
+
+.QAModal_SelectedEmoji {
+  font-size: var(--font-size-4xl);
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.QAModal_PlaceholderIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-2xl);
+}
+
+.QAModal_PlaceholderIcon small {
+  font-size: var(--font-size-xs);
+}
+
+.QAModal_PickerWrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-index-layer-notification);
+  border-radius: var(--shape-radius-lg);
+  box-shadow: var(--shadow-interaction-dialog);
+  animation: qaFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes qaFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* -------- Validation Error Banner -------- */
+
+.QAModal_Error {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  color: var(--color-button-primary-text);
+  background: var(--gradient-surface-error);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--shape-radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--spacing-lg);
+  box-shadow: var(--shadow-interaction-error);
+  width: 100%;
+  animation: qaShake 0.4s ease-in-out;
+}
+
+@keyframes qaShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+/* -------- Action Buttons -------- */
+
+.QAModal_Actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-2xl);
+  width: 100%;
+}
+
+/* Shared base for both buttons */
+.QAModal_CancelButton,
+.QAModal_SaveButton {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--shape-radius-md);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: var(--animation-transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+/* Neutral — no visual weight, secondary action */
+.QAModal_CancelButton {
+  background: transparent;
+  border: 1px solid var(--border-color-base);
+  color: var(--color-text-secondary);
+  box-shadow: none;
+}
+
+.QAModal_CancelButton:hover {
+  background: var(--color-surface-muted);
+  border-color: var(--color-text-secondary);
+  transform: translateY(-1px);
+}
+
+/* Brand gradient — primary action */
+.QAModal_SaveButton {
+  background: var(--gradient-surface-primary);
+  border: none;
+  color: var(--color-button-primary-text);
+  box-shadow: var(--shadow-interaction-primary);
+}
+
+.QAModal_SaveButton:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-interaction-hover);
+}
+
+.QAModal_SaveButton:active,
+.QAModal_CancelButton:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* -------- Responsive -------- */
+
+@media (max-width: 600px) {
+  .QAModal_Container {
+    width: 95%;
+    padding: var(--spacing-lg);
+    max-height: 90dvh;
+  }
+
+  .QAModal_Actions {
+    flex-direction: column-reverse;
+  }
+}

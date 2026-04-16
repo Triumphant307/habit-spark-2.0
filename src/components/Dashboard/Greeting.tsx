@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/Styles/Dashboard/Greeting.module.css";
 import layoutStyles from "@/Styles/Dashboard/Dashboard.module.css";
 import dayjs from "dayjs";
@@ -8,7 +8,7 @@ import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
 import { LuCalendar, LuPlus, LuBell, LuMenu } from "react-icons/lu";
 import ThemeToggle from "@/Theme/ThemeToggle";
-import Link from "next/link";
+import QuickAddModal from "./QuickAddModal";
 import { getTimeGreeting } from "@/utils/dateUtils";
 import { motion } from "framer-motion";
 import { toggleMobileMenu } from "@/core/state/user";
@@ -16,6 +16,7 @@ import { toggleMobileMenu } from "@/core/state/user";
 const Greeting: React.FC = () => {
   const s = useReactor(appState);
   const timeGreeting = getTimeGreeting();
+  const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
 
   const today = dayjs().format("YYYY-MM-DD");
   const remainingHabits = s.habits.filter(
@@ -55,12 +56,14 @@ const Greeting: React.FC = () => {
             </div>
 
             <div className={styles.Header_Actions}>
-              <Link href="/suggestion" style={{ textDecoration: "none" }}>
-                <button className={styles.Add_Button_Quick}>
-                  <LuPlus />
-                  <span>Add Habit</span>
-                </button>
-              </Link>
+              <button
+                className={styles.Add_Button_Quick}
+                onClick={() => setIsQuickAddOpen(true)}
+                aria-label="Quick add a new habit"
+              >
+                <LuPlus />
+                <span>Add Habit</span>
+              </button>
               <button
                 className={styles.Action_Button}
                 aria-label="View Notifications"
@@ -96,6 +99,11 @@ const Greeting: React.FC = () => {
           )}
         </motion.div>
       </div>
+
+      <QuickAddModal
+        isOpen={isQuickAddOpen}
+        onClose={() => setIsQuickAddOpen(false)}
+      />
     </>
   );
 };
