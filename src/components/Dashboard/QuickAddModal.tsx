@@ -3,14 +3,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "@/Styles/Dashboard/QuickAddModal.module.css";
-import { useRipple } from "@/Hooks/useRipple";
 import Input from "@/components/UI/Input";
+import Button from "@/components/UI/Button";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { LuPlus, LuX, LuSmile } from "react-icons/lu";
 import { FaExclamationCircle } from "react-icons/fa";
 import { addHabit } from "@/core/state/habits";
 import toast from "@/utils/toast";
+
+const HABIT_PRESETS = [
+  { title: "Drink Water", icon: "💧" },
+  { title: "Read 10 Pages", icon: "📚" },
+  { title: "Meditation", icon: "🧘" },
+  { title: "Morning Walk", icon: "🚶" },
+  { title: "Coding", icon: "💻" },
+  { title: "No Sugar", icon: "🚫" },
+  { title: "Workout", icon: "🏋️" },
+];
 
 interface QuickAddModalProps {
   isOpen: boolean;
@@ -25,23 +35,17 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
   const [icon, setIcon] = useState("");
   const [error, setError] = useState("");
   const [showPicker, setShowPicker] = useState(false);
-  const createRipple = useRipple();
 
-  // Sync dialog open/close state with the native <dialog> element
   useEffect(() => {
     if (isOpen && dialogRef.current) {
       dialogRef.current.showModal();
       document.body.style.overflow = "hidden";
     } else if (dialogRef.current) {
       dialogRef.current.close();
-      document.body.style.overflow = "";
+      document.body.style.overflow = "unset";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, [isOpen]);
 
-  // Reset form fields whenever the modal is closed
   useEffect(() => {
     if (!isOpen) {
       setTitle("");
@@ -52,23 +56,8 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  // Close emoji picker on outside click
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        pickerRef.current &&
-        !pickerRef.current.contains(event.target as Node)
-      ) {
-        setShowPicker(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [showPicker]);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     const trimmedTitle = title.trim();
 
     if (trimmedTitle.length < 3) {
@@ -76,23 +65,13 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
       return;
     }
     if (!icon) {
-      setError("Please select an emoji icon.");
-      return;
-    }
-    if (target < 1 || target > 365) {
-      setError("Streak target must be between 1 and 365 days.");
+      setError("Please select an icon.");
       return;
     }
 
     addHabit({ title: trimmedTitle, icon, target });
-
-    toast.success(`"${trimmedTitle}" habit created! 🎉`);
+    toast.success(`"${trimmedTitle}" spark ignited! ✨`);
     onClose();
-  };
-
-  const handleEmojiSelect = (emoji: { native: string }) => {
-    setIcon(emoji.native);
-    setShowPicker(false);
   };
 
   return (
@@ -100,116 +79,122 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
       ref={dialogRef}
       className={styles.QAModal_Container}
       onClose={onClose}
-      onCancel={onClose}
-      aria-labelledby="qa-modal-title"
     >
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: -16 }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: -16 }}
-            transition={{ duration: 0.28, ease: "easeOut" }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+            className={styles.QAModal_Wrapper}
           >
-            <form onSubmit={handleSubmit} className={styles.QAModal_Form}>
-              <h2 id="qa-modal-title" className={styles.QAModal_Title}>
-                <LuPlus className={styles.QAModal_TitleIcon} />
-                New Habit
-              </h2>
+            <div className={styles.Header}>
+              <h2 className={styles.Title}>New Spark</h2>
+              <button className={styles.Close_Button} onClick={onClose}>
+                <LuX />
+              </button>
+            </div>
 
-              {/* Title input — uses shared Input component */}
+            {/* Quick Start Presets */}
+            <div className={styles.Presets_Container}>
+              <p className={styles.Presets_Label}>Quick Start</p>
+              <div className={styles.Presets_List}>
+                {HABIT_PRESETS.map((preset, idx) => (
+                  <motion.button
+                    key={preset.title}
+                    type="button"
+                    className={styles.Preset_Chip}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    onClick={() => {
+                      setTitle(preset.title);
+                      setIcon(preset.icon);
+                    }}
+                  >
+                    <span>{preset.icon}</span> {preset.title}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className={styles.Form}>
               <Input
                 label="Habit Title"
-                type="text"
                 value={title}
                 onChange={(e) => {
                   setTitle(e.target.value);
                   setError("");
                 }}
                 autoFocus
-                maxLength={60}
               />
 
-              {/* Target input — uses shared Input component */}
               <Input
-                label="Streak Target (days)"
+                label="Daily Target (Days)"
                 type="number"
                 value={target}
-                onChange={(e) => {
-                  setTarget(Number(e.target.value));
-                  setError("");
-                }}
+                onChange={(e) => setTarget(Number(e.target.value))}
                 min={1}
-                max={365}
+                required
               />
 
-              {/* Emoji icon picker */}
-              <div className={styles.QAModal_PickerContainer}>
-                <label htmlFor="qa-icon" className={styles.QAModal_InputLabel}>
-                  Habit Icon
-                </label>
-                <button
-                  id="qa-icon"
+              <div className={styles.Picker_Section}>
+                <label className={styles.Picker_Label}>Visual Identity</label>
+                <motion.button
                   type="button"
-                  className={styles.QAModal_IconPreview}
+                  className={styles.Icon_Preview}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setShowPicker(!showPicker)}
-                  onPointerDown={(e) => createRipple(e)}
-                  aria-label={
-                    icon
-                      ? `Selected emoji: ${icon}. Click to change`
-                      : "Choose an emoji icon for your habit"
-                  }
-                  aria-expanded={showPicker}
-                  title={icon ? `Selected: ${icon}` : "Choose Icon"}
                 >
-                  {icon ? (
-                    <span className={styles.QAModal_SelectedEmoji}>{icon}</span>
-                  ) : (
-                    <div className={styles.QAModal_PlaceholderIcon}>
-                      <LuSmile />
-                      <small>Pick Icon</small>
-                    </div>
-                  )}
-                </button>
+                  <AnimatePresence mode="wait">
+                    {icon ? (
+                      <motion.span
+                        key={icon}
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className={styles.Selected_Icon}
+                      >
+                        {icon}
+                      </motion.span>
+                    ) : (
+                      <div className={styles.Placeholder_Icon}>
+                        <LuSmile />
+                        <span>Add Icon</span>
+                      </div>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
 
                 {showPicker && (
-                  <div className={styles.QAModal_PickerWrapper} ref={pickerRef}>
-                    <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+                  <div className={styles.Emoji_Picker_Wrapper}>
+                    <Picker
+                      data={data}
+                      onEmojiSelect={(emoji: any) => {
+                        setIcon(emoji.native);
+                        setShowPicker(false);
+                      }}
+                      theme="dark"
+                    />
                   </div>
                 )}
               </div>
 
-              {/* Inline validation error */}
               {error && (
-                <div
-                  id="qa-modal-error"
-                  className={styles.QAModal_Error}
-                  role="alert"
-                >
+                <div className={styles.Error_Banner}>
                   <FaExclamationCircle />
                   <span>{error}</span>
                 </div>
               )}
 
-              {/* Actions */}
-              <div className={styles.QAModal_Actions}>
-                <button
-                  type="button"
-                  className={styles.QAModal_CancelButton}
-                  onClick={onClose}
-                  onPointerDown={(e) => createRipple(e)}
-                  aria-label="Cancel and close dialog"
-                >
-                  <LuX /> Cancel
-                </button>
-                <button
-                  type="submit"
-                  className={styles.QAModal_SaveButton}
-                  onPointerDown={(e) => createRipple(e)}
-                  aria-label="Create habit"
-                >
-                  <LuPlus /> Create Habit
-                </button>
+              <div className={styles.Actions}>
+                <Button variant="secondary" type="button" onClick={onClose}>
+                  Cancel
+                </Button>
+                <Button type="submit" showIcon icon={<LuPlus />}>
+                  Create Habit
+                </Button>
               </div>
             </form>
           </motion.div>

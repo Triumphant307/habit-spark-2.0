@@ -1,241 +1,233 @@
-/* =============================================
-   QuickAddModal — Dashboard "New Habit" dialog
-   Uses existing design tokens from globals.css
-   ============================================= */
-
 .QAModal_Container {
-  padding: var(--spacing-xl);
+  padding: 0;
   border: none;
-  border-radius: var(--shape-radius-xl);
-  /* True centering — avoids the left:35% anti-pattern */
-  margin: auto;
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
   inset: 0;
-  max-width: var(--width-container-narrow);
-  width: 90%;
-  background-color: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
-  -webkit-backdrop-filter: var(--effect-blur-glass);
-  box-shadow: var(--shadow-interaction-dialog);
-  overflow-y: auto;
-  z-index: var(--z-index-layer-overlay);
+  z-index: var(--z-index-layer-notification);
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.QAModal_Container[open] {
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .QAModal_Container::backdrop {
-  background: var(--color-surface-overlay-light);
-  backdrop-filter: var(--effect-blur-glass);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
 }
 
-/* -------- Form Layout -------- */
+.QAModal_Wrapper {
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-2xl);
+  width: 440px;
+  max-width: 90vw;
+  box-shadow: var(--shadow-interaction-dialog);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
 
-.QAModal_Form {
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.Close_Button {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: var(--color-text-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Close_Button:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+/* Presets Section */
+.Presets_Container {
+  width: 100%;
+  margin-bottom: var(--spacing-sm);
+}
+
+.Presets_Label {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.Presets_List {
+  display: flex;
+  gap: var(--spacing-sm);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-xs);
+  scrollbar-width: none; /* Hide scrollbar */
+}
+
+.Presets_List::-webkit-scrollbar {
+  display: none;
+}
+
+.Preset_Chip {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color-base);
+  border-radius: var(--shape-radius-full);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.Preset_Chip:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+  transform: translateY(-1px);
+}
+
+.Form {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-  align-items: center;
-  width: 100%;
 }
 
-/* -------- Title -------- */
-
-.QAModal_Title {
-  color: var(--color-text-primary);
+/* Picker Section */
+.Picker_Section {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-md);
-  font-size: var(--font-size-2xl);
-  margin-bottom: var(--spacing-md);
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
-.QAModal_TitleIcon {
-  color: var(--color-brand-primary);
-}
-
-/* -------- Emoji Icon Picker -------- */
-
-.QAModal_PickerContainer {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  margin: var(--spacing-sm) 0;
-}
-
-.QAModal_InputLabel {
-  display: block;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+.Picker_Label {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-sm);
-  text-align: center;
 }
 
-.QAModal_IconPreview {
-  position: relative;
+.Icon_Preview {
   width: 80px;
   height: 80px;
-  background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
+  background: rgba(255, 255, 255, 0.03);
   border: 2px dashed rgba(59, 130, 246, 0.3);
-  border-radius: var(--shape-radius-xl);
-  cursor: pointer;
-  transition: var(--animation-transition-smooth);
+  border-radius: var(--shape-radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
   margin: 0 auto;
-  overflow: hidden;
 }
 
-.QAModal_IconPreview:hover {
-  background: var(--color-surface-hover);
+.Icon_Preview:hover {
   border-color: var(--color-brand-primary);
+  background: rgba(59, 130, 246, 0.05);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-interaction-tiny);
 }
 
-.QAModal_SelectedEmoji {
-  font-size: var(--font-size-4xl);
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+.Selected_Icon {
+  font-size: 2.5rem;
 }
 
-.QAModal_PlaceholderIcon {
+.Placeholder_Icon {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   color: var(--color-text-muted);
-  font-size: var(--font-size-2xl);
 }
 
-.QAModal_PlaceholderIcon small {
-  font-size: var(--font-size-xs);
+.Placeholder_Icon span {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
-.QAModal_PickerWrapper {
+.Emoji_Picker_Wrapper {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: var(--z-index-layer-notification);
+  z-index: 10001;
+  box-shadow: var(--shadow-elevation-xl);
   border-radius: var(--shape-radius-lg);
-  box-shadow: var(--shadow-interaction-dialog);
-  animation: qaFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes qaFadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-/* -------- Validation Error Banner -------- */
-
-.QAModal_Error {
+/* Error Banner */
+.Error_Banner {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  color: var(--color-button-primary-text);
-  background: var(--gradient-surface-error);
-  padding: var(--spacing-md) var(--spacing-xl);
-  border-radius: var(--shape-radius-lg);
+  gap: var(--spacing-sm);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--shape-radius-md);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  margin-top: var(--spacing-lg);
-  box-shadow: var(--shadow-interaction-error);
-  width: 100%;
-  animation: qaShake 0.4s ease-in-out;
+  animation: shake 0.4s ease-in-out;
 }
 
-@keyframes qaShake {
+@keyframes shake {
   0%,
   100% {
     transform: translateX(0);
   }
-  20%,
-  60% {
+  25% {
     transform: translateX(-5px);
   }
-  40%,
-  80% {
+  75% {
     transform: translateX(5px);
   }
 }
 
-/* -------- Action Buttons -------- */
-
-.QAModal_Actions {
+.Actions {
   display: flex;
   gap: var(--spacing-md);
-  margin-top: var(--spacing-2xl);
-  width: 100%;
+  margin-top: var(--spacing-md);
 }
 
-/* Shared base for both buttons */
-.QAModal_CancelButton,
-.QAModal_SaveButton {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--shape-radius-md);
-  padding: var(--spacing-md) var(--spacing-xl);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-sm);
-  cursor: pointer;
-  transition: var(--animation-transition-smooth);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-}
-
-/* Neutral — no visual weight, secondary action */
-.QAModal_CancelButton {
-  background: transparent;
-  border: 1px solid var(--border-color-base);
-  color: var(--color-text-secondary);
-  box-shadow: none;
-}
-
-.QAModal_CancelButton:hover {
-  background: var(--color-surface-muted);
-  border-color: var(--color-text-secondary);
-  transform: translateY(-1px);
-}
-
-/* Brand gradient — primary action */
-.QAModal_SaveButton {
-  background: var(--gradient-surface-primary);
-  border: none;
-  color: var(--color-button-primary-text);
-  box-shadow: var(--shadow-interaction-primary);
-}
-
-.QAModal_SaveButton:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-interaction-hover);
-}
-
-.QAModal_SaveButton:active,
-.QAModal_CancelButton:active {
-  transform: translateY(0) scale(0.97);
-}
-
-/* -------- Responsive -------- */
-
-@media (max-width: 600px) {
-  .QAModal_Container {
-    width: 95%;
-    padding: var(--spacing-lg);
-    max-height: 90dvh;
-  }
-
-  .QAModal_Actions {
+@media (max-width: 480px) {
+  .Actions {
     flex-direction: column-reverse;
   }
 }
