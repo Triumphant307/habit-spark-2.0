@@ -2,65 +2,18 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: var(--gradient-background-page);
 }
 
-/* Outer wrapper no longer sticks the whole thing */
-.StickyHeader_Outer {
-  width: 100%;
-  z-index: var(--z-index-layer-header);
-}
-
-/* Only this section will stick */
-.TopBar_Sticky {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: var(--z-index-layer-header);
-  background: var(--color-surface-page); /* Match app background */
-  padding: var(--spacing-md) 0;
-}
-
-/* Subtle line when sticking */
-.TopBar_Sticky::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--border-color-base),
-    transparent
-  );
-  opacity: 0.15;
-}
-
-/* Inner centered containers */
-.Dashboard_Header,
 .Dashboard_Main {
+  padding: 0 var(--spacing-xl) var(--spacing-3xl);
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-}
-
-.Dashboard_Header {
-  padding: 0 var(--spacing-xl);
-}
-
-.Dashboard_Main {
-  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-3xl);
   flex: 1;
 }
 
 @media (max-width: 768px) {
-  .Dashboard_Header {
-    padding: 0 var(--spacing-md);
-  }
-
   .Dashboard_Main {
-    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-2xl);
+    padding: 0 var(--spacing-md) var(--spacing-2xl);
   }
 }

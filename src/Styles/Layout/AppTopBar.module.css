@@ -1,0 +1,118 @@
+.TopBar_Container {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-layer-header);
+  width: 100%;
+  background: var(--color-surface-page);
+  padding: var(--spacing-sm) 0;
+}
+
+.TopBar_Inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.TopBar_Inner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-color-base),
+    transparent
+  );
+  opacity: 0.15;
+}
+
+.TopBar_Left,
+.TopBar_Right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.Mobile_Menu_Button {
+  display: none;
+  background: var(--color-surface-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--shape-radius-sm);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Add_Button_Quick {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-lg);
+  height: 38px;
+  background: var(--gradient-surface-primary);
+  border: none;
+  border-radius: var(--shape-radius-sm);
+  color: white;
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Add_Button_Quick:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.Action_Button {
+  background: var(--color-surface-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--shape-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Action_Button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-brand-primary);
+}
+
+@media (max-width: 768px) {
+  .TopBar_Inner {
+    padding: 0 var(--spacing-md);
+  }
+
+  .Mobile_Menu_Button {
+    display: flex;
+  }
+
+  .Add_Button_Quick span {
+    display: none; /* Icon only on mobile to save space */
+  }
+
+  .Add_Button_Quick {
+    padding: 0;
+    width: 38px;
+    justify-content: center;
+  }
+}

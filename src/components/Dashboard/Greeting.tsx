@@ -2,10 +2,10 @@
 
 import React from "react";
 import styles from "@/Styles/Dashboard/Greeting.module.css";
-import layoutStyles from "@/Styles/Dashboard/Dashboard.module.css";
 import dayjs from "dayjs";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
+import { LuCalendar } from "react-icons/lu";
 import { getTimeGreeting } from "@/utils/dateUtils";
 import { motion } from "framer-motion";
 
@@ -28,13 +28,18 @@ const Greeting: React.FC = () => {
   };
 
   return (
-    <>
-      {/* Personalized welcome greeting */}
-      <div
-        className={layoutStyles.Dashboard_Header}
-        style={{ paddingTop: "var(--spacing-xl)" }}
+    <div className={styles.Greeting_Section}>
+      <motion.div
+        className={styles.Greeting_Container}
+        initial="hidden"
+        animate="visible"
+        variants={itemVariants}
       >
-        <motion.div initial="hidden" animate="visible" variants={itemVariants}>
+        <div className={styles.Greeting_Info}>
+          <div className={styles.Greeting_Date}>
+            <LuCalendar size={14} />
+            {dayjs().format("dddd, MMMM D")}
+          </div>
           <h1 className={styles.Greeting_Main}>
             {timeGreeting},{" "}
             <span className={styles.Greeting_Nickname}>{s.user.nickname}</span>!
@@ -50,9 +55,9 @@ const Greeting: React.FC = () => {
               🌱 Ready to start your first habit?
             </div>
           )}
-        </motion.div>
-      </div>
-    </>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
