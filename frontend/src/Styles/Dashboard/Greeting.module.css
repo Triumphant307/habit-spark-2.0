@@ -1,9 +1,15 @@
+.Greeting_Section {
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .Greeting_Container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: var(--spacing-xs);
   width: 100%;
-  gap: var(--spacing-md);
 }
 
 .Greeting_Info {
@@ -12,63 +18,12 @@
   gap: var(--spacing-xs);
 }
 
-.Header_Actions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding-top: var(--spacing-xs);
-}
-
-.Action_Button {
-  background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
-  -webkit-backdrop-filter: var(--effect-blur-glass);
-  border: var(--border-glass-light);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--shape-radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-primary);
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.Action_Button:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--color-brand-primary);
-  transform: translateY(-2px);
-}
-
-.Add_Button_Quick {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: 0 var(--spacing-lg);
-  height: 40px;
-  background: var(--gradient-surface-primary);
-  border: none;
-  border-radius: var(--shape-radius-sm);
-  color: white;
-  font-weight: 700;
-  font-size: var(--font-size-sm);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.Add_Button_Quick:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-interaction-primary);
-}
-
 .Greeting_Main {
   font-size: 2.25rem;
   font-weight: 800;
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .Greeting_Nickname {
@@ -79,77 +34,33 @@
 }
 
 .Greeting_Date {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
-  font-weight: 500;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .Greeting_Summary {
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-sm);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   background: rgba(255, 255, 255, 0.03);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--shape-radius-md);
+  padding: 6px 16px;
+  border-radius: var(--shape-radius-full);
   border: 1px solid var(--border-color-base);
   width: fit-content;
 }
 
-.Mobile_Menu_Button {
-  display: none;
-  background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
-  -webkit-backdrop-filter: var(--effect-blur-glass);
-  border: var(--border-glass-light);
-  color: var(--color-text-primary);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--shape-radius-sm);
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
 @media (max-width: 768px) {
-  .Mobile_Menu_Button {
-    display: flex;
-  }
-
-  .Greeting_Info {
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .Greeting_Date {
-    font-size: var(--font-size-sm);
-  }
-
   .Greeting_Main {
-    width: 100%;
-    margin-top: var(--spacing-xs);
     font-size: 1.75rem;
   }
-}
 
-@media (max-width: 600px) {
-  .Greeting_Container {
-    flex-direction: column-reverse;
-    align-items: stretch;
-  }
-
-  .Header_Actions {
-    justify-content: space-between;
-    margin-bottom: var(--spacing-md);
-  }
-
-  .Add_Button_Quick {
-    flex: 1;
-    justify-content: center;
+  .Greeting_Section {
+    padding: var(--spacing-lg) var(--spacing-md);
   }
 }
