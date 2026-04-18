@@ -7,13 +7,20 @@ import style from "@/Styles/Tracker/TrackerCard.module.css";
 import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useEffect } from "react";
 import { Habit } from "@/core/types/habit";
-import { reorderHabits, completeHabit } from "@/core/state/habits";
+import {
+  reorderHabits,
+  completeHabit,
+  updateHabit,
+  deleteHabit,
+} from "@/core/state/habits";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
-import { LuFlame } from "react-icons/lu";
+import { LuFlame, LuMoveVertical, LuPencil, LuTrash2 } from "react-icons/lu";
 import dayjs from "dayjs";
 import toast from "@/utils/toast";
 import confetti from "canvas-confetti";
 import logger from "@/utils/logger";
+import EditDialog from "./EditDialog";
+import DeleteDialog from "./DeleteDialog";
 
 interface TrackerCardProps {
   habits: Habit[];
@@ -22,14 +29,30 @@ interface TrackerCardProps {
 const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
   const [habits, setHabits] = useState(initialHabits);
   const [isDragging, setIsDragging] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [editingHabit, setEditingHabit] = useState<Habit | null>(null);
+  const [deletingHabitId, setDeletingHabitId] = useState<string | null>(null);
+
   const draggedItem = useRef<Habit | null>(null);
   const draggedIdx = useRef<number | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const createRipple = useRipple();
   const today = dayjs().format("YYYY-MM-DD");
 
   useEffect(() => {
     setHabits(initialHabits);
   }, [initialHabits]);
+
+  // Close menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setActiveMenu(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [activeMenu]);
 
   const handleDragStart = (index: number) => {
     draggedIdx.current = index;
@@ -86,78 +109,142 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
   };
 
   return (
-    <section aria-label="Your habits list" className={style.TrackerCard_Grid}>
-      <AnimatePresence>
-        {habits.map((habit, index) => {
-          const progress = Math.round((habit.streak / habit.target) * 100);
-          const isCompletedToday = habit.history.includes(today);
+    <>
+      <section aria-label="Your habits list" className={style.TrackerCard_Grid}>
+        <AnimatePresence>
+          {habits.map((habit, index) => {
+            const progress = Math.round((habit.streak / habit.target) * 100);
+            const isCompletedToday = habit.history.includes(today);
 
-          return (
-            <motion.div
-              key={habit.id || `habit-${index}`}
-              className={`${style.TrackerCard_Container} ${
-                isDragging ? style.isDragging : ""
-              } ${isCompletedToday ? style.isCompleted : ""}`}
-              draggable
-              onDragStart={() => handleDragStart(index)}
-              onDragOver={() => handleDragOver(index)}
-              onDragEnd={handleDragEnd}
-              layout // This makes the reordering animation smooth
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              whileHover={{ x: 4 }}
-              transition={{ duration: 0.2 }}
-              role="listitem"
-            >
-              <div className={style.TrackerCard_DragHandle}>
-                <FaGripVertical />
-              </div>
-
-              <div className={style.TrackerCard_IconWrapper}>{habit.icon}</div>
-
-              <Link
-                href={`/habit/${habit.slug}`}
-                className={style.TrackerCard_Content}
-                onPointerDown={(e) => createRipple(e)}
+            return (
+              <motion.div
+                key={habit.id || `habit-${index}`}
+                className={`${style.TrackerCard_Container} ${
+                  isDragging ? style.isDragging : ""
+                } ${isCompletedToday ? style.isCompleted : ""}`}
+                draggable
+                onDragStart={() => handleDragStart(index)}
+                onDragOver={() => handleDragOver(index)}
+                onDragEnd={handleDragEnd}
+                layout
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.2 }}
+                role="listitem"
               >
-                <div className={style.TrackerCard_Header}>
-                  <h3 className={style.TrackerCard_Title}>{habit.title}</h3>
-                  <span className={style.TrackerCard_Streak}>
-                    <LuFlame
-                      size={12}
-                      style={{
-                        marginRight: "4px",
-                        color: isCompletedToday
-                          ? "var(--color-text-muted)"
-                          : "#f97316",
-                      }}
-                    />
-                    {habit.streak}
-                  </span>
+                <div className={style.TrackerCard_DragHandle}>
+                  <FaGripVertical />
                 </div>
-                <div className={style.TrackerCard_ProgressWrapper}>
-                  <LinearProgressBar progress={progress} />
-                </div>
-              </Link>
 
-              <motion.button
-                className={`${style.TrackerCard_CompleteButton} ${
-                  isCompletedToday ? style.isCompleted : ""
-                }`}
-                onClick={(e) => handleQuickComplete(e, habit)}
-                onPointerDown={(e) => createRipple(e)}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
-                title={isCompletedToday ? "Completed today" : "Spark habit"}
-              >
-                <FaCheck />
-              </motion.button>
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
-    </section>
+                <div className={style.TrackerCard_IconWrapper}>
+                  {habit.icon}
+                </div>
+
+                <Link
+                  href={`/habit/${habit.slug}`}
+                  className={style.TrackerCard_Content}
+                  onPointerDown={(e) => createRipple(e)}
+                >
+                  <div className={style.TrackerCard_Header}>
+                    <h3 className={style.TrackerCard_Title}>{habit.title}</h3>
+                    <span className={style.TrackerCard_Streak}>
+                      <LuFlame
+                        size={12}
+                        style={{
+                          marginRight: "4px",
+                          color: isCompletedToday
+                            ? "var(--color-text-muted)"
+                            : "#f97316",
+                        }}
+                      />
+                      {habit.streak}
+                    </span>
+                  </div>
+                  <div className={style.TrackerCard_ProgressWrapper}>
+                    <LinearProgressBar progress={progress} />
+                  </div>
+                </Link>
+
+                <div className={style.TrackerCard_Actions}>
+                  <motion.button
+                    className={`${style.TrackerCard_CompleteButton} ${
+                      isCompletedToday ? style.isCompleted : ""
+                    }`}
+                    onClick={(e) => handleQuickComplete(e, habit)}
+                    onPointerDown={(e) => createRipple(e)}
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.9 }}
+                    title={isCompletedToday ? "Completed today" : "Spark habit"}
+                  >
+                    <FaCheck />
+                  </motion.button>
+
+                  <div className={style.Menu_Wrapper}>
+                    <button
+                      className={style.More_Button}
+                      onClick={() =>
+                        setActiveMenu(activeMenu === habit.id ? null : habit.id)
+                      }
+                      aria-label="More options"
+                    >
+                      <LuMoveVertical />
+                    </button>
+
+                    <AnimatePresence>
+                      {activeMenu === habit.id && (
+                        <motion.div
+                          ref={menuRef}
+                          className={style.Dropdown_Menu}
+                          initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                        >
+                          <button
+                            onClick={() => {
+                              setEditingHabit(habit);
+                              setActiveMenu(null);
+                            }}
+                          >
+                            <LuPencil size={14} /> Edit Spark
+                          </button>
+                          <button
+                            className={style.Delete_Option}
+                            onClick={() => {
+                              setDeletingHabitId(habit.id);
+                              setActiveMenu(null);
+                            }}
+                          >
+                            <LuTrash2 size={14} /> Delete
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </section>
+
+      <EditDialog
+        isOpen={!!editingHabit}
+        habit={editingHabit}
+        onClose={() => setEditingHabit(null)}
+        onSave={(id, fields) => updateHabit(id, fields)}
+      />
+
+      <DeleteDialog
+        isOpen={!!deletingHabitId}
+        onClose={() => setDeletingHabitId(null)}
+        onConfirm={() => {
+          if (deletingHabitId) deleteHabit(deletingHabitId);
+          setDeletingHabitId(null);
+        }}
+      />
+    </>
   );
 };
 

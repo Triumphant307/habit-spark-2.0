@@ -18,15 +18,9 @@
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: grab;
-  overflow: hidden;
+  /* overflow: hidden;  <-- REMOVED: This was clipping the dropdown menu */
   box-shadow: var(--shadow-elevation-sm);
-  border-left: 4px solid var(--color-brand-primary); /* Consistent Brand Accent */
-}
-
-.TrackerCard_Container:hover {
-  transform: translateX(4px);
-  border-left-color: var(--color-brand-indigo);
-  box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15); /* Soft brand glow */
+  border-left: 4px solid var(--color-brand-primary);
 }
 
 /* Rim Light Effect */
@@ -39,16 +33,17 @@
   height: 1px;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0) 0%,
+    transparent,
     rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0) 100%
+    transparent
   );
+  pointer-events: none;
 }
 
 .TrackerCard_Container:hover {
   transform: translateX(4px);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-elevation-md);
+  border-left-color: var(--color-brand-indigo);
+  box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
 }
 
 .TrackerCard_Container.isDragging {
@@ -60,9 +55,7 @@
 .TrackerCard_Container.isCompleted {
   opacity: 0.6;
   filter: grayscale(0.2);
-  border-left-color: var(
-    --color-text-muted
-  ); /* De-emphasize the spark border */
+  border-left-color: var(--color-text-muted);
 }
 
 .TrackerCard_Container.isCompleted:hover {
@@ -92,6 +85,7 @@
   justify-content: center;
   font-size: 1.5rem;
   flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .TrackerCard_Content {
@@ -157,6 +151,85 @@
   border-color: transparent;
   color: white;
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.TrackerCard_Actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.Menu_Wrapper {
+  position: relative;
+  z-index: 10; /* Ensure the menu sits above other content */
+}
+
+.More_Button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.More_Button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+}
+
+.Dropdown_Menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--color-surface-card);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--shape-radius-md);
+  padding: var(--spacing-xs);
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  box-shadow: var(--shadow-interaction-dialog);
+  z-index: 100;
+}
+
+.Dropdown_Menu button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  border-radius: var(--shape-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.Dropdown_Menu button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+}
+
+.Dropdown_Menu .Delete_Option {
+  color: #ef4444;
+}
+
+.Dropdown_Menu .Delete_Option:hover {
+  background: rgba(239, 68, 68, 0.1);
 }
 
 @media (max-width: 1200px) {
