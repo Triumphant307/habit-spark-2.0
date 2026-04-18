@@ -12,6 +12,7 @@ import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
 import Link from "next/link";
+import { useState } from "react";
 import { Habit } from "@/core/types/habit";
 import { slugify } from "@/utils/slugify";
 import { generateId } from "@/utils/generateId";
@@ -25,6 +26,7 @@ interface AnimatedTipCardProps {
 const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
   const lastAddedHabitId = useRef<string | null>(null);
+  const [isOptimisticAdded, setIsOptimisticAdded] = useState(false);
 
   const s = useReactor(appState);
   const createRipple = useRipple();
@@ -39,10 +41,15 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   );
 
   const handleAdd = () => {
+    // 1. Instant UI Feedback (Disable button immediately)
+    setIsOptimisticAdded(true);
+
     logger.info("Adding habit from suggestion", {
       title: displayTitle,
       icon: displayIcon,
     });
+
+    // 2. Global State Update (Sia Reactor)
     const createdHabit = addHabit({
       title: displayTitle,
       icon: displayIcon,
@@ -84,6 +91,9 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const handleUndo = (habitId?: string | null) => {
     if (!habitId) return;
 
+    // Reset local state so button becomes clickable again
+    setIsOptimisticAdded(false);
+
     deleteHabit(habitId);
 
     toast.info(`${displayTitle.trim()} ${displayIcon} removed!`);
@@ -108,6 +118,9 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
       { toastId: `fav-${tip.id}` },
     );
   };
+
+  // Final State: Combination of local and global
+  const isButtonDisabled = alreadyAdded || isOptimisticAdded;
 
   return (
     <motion.div
@@ -147,11 +160,11 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
       <button
         className={styles.SuggestionCard_ActionButton}
         onClick={handleAdd}
-        disabled={alreadyAdded}
+        disabled={isButtonDisabled}
         onPointerDown={(e) => createRipple(e)}
-        title={alreadyAdded ? "Already added" : "Add to habits"}
+        title={isButtonDisabled ? "Already added" : "Add to habits"}
       >
-        {alreadyAdded ? "Added ✅" : "Add Habit"}
+        {isButtonDisabled ? "Added ✅" : "Add Habit"}
       </button>
     </motion.div>
   );

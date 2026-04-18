@@ -203,6 +203,7 @@
   align-items: center;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
 }
 
 .SuggestionCard_ViewToggle button {
