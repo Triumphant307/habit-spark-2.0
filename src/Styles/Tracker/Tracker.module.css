@@ -1,158 +1,106 @@
 .Tracker {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-4xl);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-height: 100%;
-  padding: var(--spacing-7xl); /* Roughly 50px */
+  gap: var(--spacing-xl);
+}
+
+.Tracker_Header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
 .Tracker_Title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-semibold);
+  font-size: 2.25rem;
+  font-weight: 800;
   color: var(--color-text-primary);
-  margin-bottom: var(--spacing-2xl);
-  text-align: center;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.Tracker_Subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+/* Category Filter Bar */
+.Filter_Bar {
+  display: flex;
+  gap: var(--spacing-sm);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-xs);
+  scrollbar-width: none;
+}
+
+.Filter_Bar::-webkit-scrollbar {
+  display: none;
+}
+
+.Filter_Pill {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color-base);
+  border-radius: var(--shape-radius-full);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.Filter_Pill:hover {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: var(--color-brand-primary);
+}
+
+.Filter_Pill.Active {
+  background: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .Tracker_NoResults {
   text-align: center;
-  padding: var(--spacing-4xl) var(--spacing-2xl);
-  color: var(--color-text-primary);
-  border-radius: var(--shape-radius-xl);
-  background-color: var(--color-surface-card);
-  max-width: 500px; /* Custom width remains literal or add token if used elsewhere */
-  margin: var(--spacing-5xl) auto;
-  box-shadow: var(--shadow-elevation-md);
-  transition: var(--animation-transition-base);
-}
-
-.Tracker_NoResults:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-interaction-card-soft);
+  padding: var(--spacing-4xl) var(--spacing-xl);
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  border: 1px dashed var(--border-color-base);
+  border-radius: var(--shape-radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
 .Tracker_SuggestButton {
-  margin-top: var(--spacing-2xl);
-  display: inline-block;
-  padding: var(--spacing-md) var(--spacing-xl);
-  background-color: var(--color-button-primary-background);
-  color: var(--color-button-primary-text);
-  border-radius: var(--shape-radius-md);
+  background: var(--gradient-surface-primary);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--shape-radius-sm);
   text-decoration: none;
-  font-weight: var(--font-weight-medium);
-  transition: var(--animation-transition-base);
+  font-weight: 700;
+  display: inline-block;
+  transition: all 0.2s ease;
 }
 
 .Tracker_SuggestButton:hover {
-  background-color: var(--color-brand-indigo);
-  transform: scale(1.03);
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: var(--shadow-interaction-primary);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .Tracker {
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-3xl);
+  }
+
   .Tracker_Title {
-    font-size: var(--font-size-2xl);
-  }
-
-  .Tracker_NoResults {
-    padding: var(--spacing-3xl) var(--spacing-lg);
-    margin: var(--spacing-3xl) var(--spacing-lg);
-  }
-
-  .Tracker_SuggestButton {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-/* ===== Skeleton Loading Styles ===== */
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.Tracker_SearchSkeleton,
-.Tracker_CardSkeleton {
-  background: var(--color-surface-card);
-  border-radius: var(--shape-radius-lg);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
-  box-shadow: var(--shadow-elevation-md);
-}
-
-.Tracker_SearchSkeleton {
-  max-width: var(--width-container-standard);
-  width: 100%;
-  margin: 0 auto var(--spacing-2xl);
-}
-
-.Tracker_SkeletonGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--spacing-2xl);
-  width: 100%;
-  max-width: var(--width-container-page);
-}
-
-.Tracker_SkeletonBar,
-.Tracker_SkeletonTitle,
-.Tracker_SkeletonText {
-  background: linear-gradient(
-    90deg,
-    var(--color-surface-muted) 0%,
-    var(--color-surface-hover) 50%,
-    var(--color-surface-muted) 100%
-  );
-  background-size: 2000px 100%;
-  animation: shimmer 2s infinite linear;
-  border-radius: var(--shape-radius-sm);
-}
-
-.Tracker_SkeletonBar {
-  height: 48px;
-  width: 100%;
-}
-
-.Tracker_SkeletonTitle {
-  height: 24px;
-  width: 70%;
-  margin-bottom: var(--spacing-md);
-}
-
-.Tracker_SkeletonText {
-  height: 16px;
-  width: 90%;
-  margin-bottom: var(--spacing-sm);
-}
-
-.Tracker_SkeletonText:last-child {
-  width: 60%;
-}
-
-/* Dark mode skeleton styles */
-html.dark .Tracker_SkeletonBar,
-html.dark .Tracker_SkeletonTitle,
-html.dark .Tracker_SkeletonText {
-  background: linear-gradient(
-    90deg,
-    var(--color-surface-muted) 0%,
-    var(--color-surface-hover) 50%,
-    var(--color-surface-muted) 100%
-  );
-  background-size: 2000px 100%;
-}
-
-@media (max-width: 600px) {
-  .Tracker_SkeletonGrid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-  }
-
-  .Tracker_SearchSkeleton {
-    margin-bottom: var(--spacing-lg);
+    font-size: 1.75rem;
   }
 }
