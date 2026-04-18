@@ -5,6 +5,8 @@ import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
 import Sidebar from "./Sidebar";
 import AppTopBar from "./AppTopBar";
+import Header from "./Header";
+import Footer from "./Footer";
 import { usePathname } from "next/navigation";
 
 interface LayoutClientProps {
@@ -37,6 +39,7 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
           paddingLeft: isAppPage ? paddingLeft : "0px",
         }}
       >
+        {!isAppPage && <Header />}
         {isAppPage && <AppTopBar />}
 
         <main
@@ -47,6 +50,8 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
         >
           {children}
         </main>
+
+        {!isAppPage && <Footer />}
       </div>
 
       <style jsx>{`
