@@ -158,8 +158,8 @@ const HabitDetails = () => {
         habit={habit}
         isOpen={isEditOpen}
         onClose={() => setIsEditOpen(false)}
-        onSave={(updatedData) => {
-          updateHabit(habit.id as string, updatedData);
+        onSave={(id, fields) => {
+          updateHabit(id, fields);
           toast.success("Habit updated successfully");
         }}
       />
