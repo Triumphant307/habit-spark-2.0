@@ -4,7 +4,7 @@ import styles from "@/Styles/Tracker/Tracker.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import TrackerCard from "./TrackerCard";
-import Search from "@/components/Suggestion/Search";
+import Search from "@/components/UI/Search";
 import { useState, useRef } from "react";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";

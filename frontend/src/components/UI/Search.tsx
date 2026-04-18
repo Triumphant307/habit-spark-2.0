@@ -1,17 +1,21 @@
 "use client";
-import styles from "@/Styles/Suggestion/SearchBar.module.css";
+
 import React, { useRef } from "react";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import styles from "@/Styles/UI/Search.module.css";
+import { LuSearch, LuX } from "react-icons/lu";
 
 interface SearchProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  resultRef: React.RefObject<HTMLDivElement | null>;
+  resultRef?: React.RefObject<HTMLDivElement | null>;
+  placeholder?: string;
 }
+
 const Search: React.FC<SearchProps> = ({
   searchQuery,
   setSearchQuery,
   resultRef,
+  placeholder = "Search for a spark...",
 }) => {
   const handleClear = () => setSearchQuery("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -28,14 +32,14 @@ const Search: React.FC<SearchProps> = ({
 
   return (
     <div className={styles.SearchBar_Container}>
-      <FaSearch className={styles.SearchBar_Icon} aria-hidden="true" />
+      <LuSearch className={styles.SearchBar_Icon} aria-hidden="true" />
       <input
         id="habit-search"
         name="habit-search"
         type="text"
         ref={inputRef}
         onKeyDown={handleKeyDown}
-        placeholder="Search for a habit..."
+        placeholder={placeholder}
         className={styles.SearchBar_Input}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
@@ -48,7 +52,7 @@ const Search: React.FC<SearchProps> = ({
           className={styles.SearchBar_ClearButton}
           aria-label="Clear search"
         >
-          <FaTimes title="clear" aria-hidden="true" />
+          <LuX title="clear" aria-hidden="true" />
         </button>
       )}
     </div>
