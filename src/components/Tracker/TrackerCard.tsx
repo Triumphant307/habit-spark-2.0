@@ -121,7 +121,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                 key={habit.id || `habit-${index}`}
                 className={`${style.TrackerCard_Container} ${
                   isDragging ? style.isDragging : ""
-                } ${isCompletedToday ? style.isCompleted : ""}`}
+                } ${isCompletedToday ? style.isCompleted : ""} ${activeMenu === habit.id ? style.isActive : ""}`}
                 draggable
                 onDragStart={() => handleDragStart(index)}
                 onDragOver={() => handleDragOver(index)}
@@ -187,6 +187,9 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                       onClick={() =>
                         setActiveMenu(activeMenu === habit.id ? null : habit.id)
                       }
+                      onPointerDown={(e) => {
+                        e.stopPropagation();
+                      }}
                       aria-label="More options"
                     >
                       <LuMoveVertical />
@@ -200,9 +203,14 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                           initial={{ opacity: 0, scale: 0.95, y: 10 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                          // THE FIX: Stop drag and drop from starting when interacting with the menu
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <button
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
                               setEditingHabit(habit);
                               setActiveMenu(null);
                             }}
@@ -211,7 +219,9 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                           </button>
                           <button
                             className={style.Delete_Option}
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
                               setDeletingHabitId(habit.id);
                               setActiveMenu(null);
                             }}

@@ -18,7 +18,7 @@
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: grab;
-  /* overflow: hidden;  <-- REMOVED: This was clipping the dropdown menu */
+  /* overflow: hidden;   */
   box-shadow: var(--shadow-elevation-sm);
   border-left: 4px solid var(--color-brand-primary);
 }
@@ -50,6 +50,13 @@
   opacity: 0.5;
   cursor: grabbing;
   transform: scale(1.02);
+}
+
+.TrackerCard_Container.isActive {
+  z-index: 50; /* Elevate above all other cards */
+  transform: translateX(4px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-elevation-lg);
 }
 
 .TrackerCard_Container.isCompleted {
