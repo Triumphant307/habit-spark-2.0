@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { getTipsByCategory } from "@/utils/getTipsByCatergory";
 import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
-import Search from "@/components/Suggestion/Search";
+import Search from "@/components/UI/Search";
 import { ToastContainer, toast } from "react-toastify";
 import AnimatedTipCard from "@/components/Suggestion/AnimatedTipCard";
 import { FaThLarge, FaList } from "react-icons/fa";

@@ -1,42 +1,41 @@
 .SearchBar_Container {
   position: relative;
   display: flex;
-  justify-content: center;
-  margin: var(--spacing-2xl) 0;
+  align-items: center;
+  width: 100%;
 }
 
 .SearchBar_Input {
-  padding: var(--spacing-md) var(--spacing-4xl);
-  max-width: 400px;
+  padding: var(--spacing-lg) var(--spacing-4xl);
   width: 100%;
   border: 1px solid var(--border-color-base);
   border-radius: var(--shape-radius-lg);
-  background-color: var(--color-surface-pure-white);
+  background-color: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
   color: var(--color-text-primary);
   outline: none;
   transition: var(--animation-transition-smooth);
   box-shadow: var(--shadow-elevation-sm);
-}
-
-:global(.dark) .SearchBar_Input {
-  background-color: var(--color-surface-card);
-  border-color: var(--border-color-base);
+  font-size: var(--font-size-base);
 }
 
 .SearchBar_Input:focus {
   border-color: var(--color-brand-primary);
   box-shadow: var(--shadow-interaction-glow-violet);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .SearchBar_Icon {
   position: absolute;
   top: 50%;
-  left: var(--spacing-md);
+  left: var(--spacing-lg);
   transform: translateY(-50%);
   color: var(--color-text-muted);
   pointer-events: none;
   display: flex;
   align-items: center;
+  font-size: 1.1rem;
 }
 
 .SearchBar_ClearButton {
@@ -44,25 +43,27 @@
   top: 50%;
   right: var(--spacing-md);
   transform: translateY(-50%);
-  background: none;
-  outline: none;
+  background: rgba(255, 255, 255, 0.05);
   border: none;
   color: var(--color-text-muted);
   cursor: pointer;
-  font-size: var(--font-size-base);
-  padding: var(--spacing-2xs);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
   transition: var(--animation-transition-fast);
 }
 
 .SearchBar_ClearButton:hover {
-  color: var(--color-status-error);
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
 }
 
 @media (max-width: 480px) {
   .SearchBar_Input {
-    padding-left: var(--spacing-3xl);
-    padding-right: var(--spacing-3xl);
+    padding: var(--spacing-md) var(--spacing-3xl);
+    font-size: var(--font-size-sm);
   }
 }
