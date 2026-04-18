@@ -12,11 +12,7 @@ import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
 import Link from "next/link";
-import { useState } from "react";
-import { Habit } from "@/core/types/habit";
-import { slugify } from "@/utils/slugify";
-import { generateId } from "@/utils/generateId";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface AnimatedTipCardProps {
   tip: Tip;
@@ -26,10 +22,23 @@ interface AnimatedTipCardProps {
 const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
   const lastAddedHabitId = useRef<string | null>(null);
-  const [isOptimisticAdded, setIsOptimisticAdded] = useState(false);
 
   const s = useReactor(appState);
   const createRipple = useRipple();
+
+  // Initialization: Decision made by global state
+  const isCurrentlyFavorite = (s.suggestions.favorites || []).some(
+    (fav) => fav.id === tip.id,
+  );
+
+  const [isOptimisticAdded, setIsOptimisticAdded] = useState(false);
+  const [isOptimisticFavorite, setIsOptimisticFavorite] =
+    useState(isCurrentlyFavorite);
+
+  // Sync Layer: Ensures local state matches global truth if changed externally
+  useEffect(() => {
+    setIsOptimisticFavorite(isCurrentlyFavorite);
+  }, [isCurrentlyFavorite]);
 
   const displayIcon =
     typeof tip.icon === "string" ? tip.icon : String(tip.icon ?? "");
@@ -41,7 +50,6 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   );
 
   const handleAdd = () => {
-    // 1. Instant UI Feedback (Disable button immediately)
     setIsOptimisticAdded(true);
 
     logger.info("Adding habit from suggestion", {
@@ -49,7 +57,6 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
       icon: displayIcon,
     });
 
-    // 2. Global State Update (Sia Reactor)
     const createdHabit = addHabit({
       title: displayTitle,
       icon: displayIcon,
@@ -90,36 +97,35 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
 
   const handleUndo = (habitId?: string | null) => {
     if (!habitId) return;
-
-    // Reset local state so button becomes clickable again
     setIsOptimisticAdded(false);
-
     deleteHabit(habitId);
-
     toast.info(`${displayTitle.trim()} ${displayIcon} removed!`);
-    lastAddedHabitId.current = null; // clear it
+    lastAddedHabitId.current = null;
   };
 
   const toggleFavorite = () => {
-    const isFavorite = (s.suggestions.favorites || []).some(
-      (fav) => fav.id === tip.id,
-    );
-    if (isFavorite) {
+    // 1. Instant UI Flip
+    const newFavoriteState = !isOptimisticFavorite;
+    setIsOptimisticFavorite(newFavoriteState);
+
+    // 2. State Mutation
+    if (!newFavoriteState) {
       s.suggestions.favorites = (s.suggestions.favorites || []).filter(
         (fav) => fav.id !== tip.id,
       );
     } else {
       s.suggestions.favorites = [...(s.suggestions.favorites || []), tip];
     }
-    toast[isFavorite ? "info" : "success"](
+
+    // 3. Feedback
+    toast[newFavoriteState ? "success" : "info"](
       `${displayTitle} ${displayIcon} ${
-        isFavorite ? "removed from" : "added to"
+        newFavoriteState ? "added to" : "removed from"
       } Favorites!`,
       { toastId: `fav-${tip.id}` },
     );
   };
 
-  // Final State: Combination of local and global
   const isButtonDisabled = alreadyAdded || isOptimisticAdded;
 
   return (
@@ -142,13 +148,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
         className={styles.SuggestionCard_HeartButton}
         onClick={toggleFavorite}
       >
-        <FaHeart
-          color={
-            (s.suggestions.favorites || []).some((fav) => fav.id === tip.id)
-              ? "red"
-              : "gray"
-          }
-        />
+        <FaHeart color={isOptimisticFavorite ? "#ef4444" : "#94a3b8"} />
       </button>
 
       <span className={styles.SuggestionCard_Icon} style={{ fontSize: "2rem" }}>
