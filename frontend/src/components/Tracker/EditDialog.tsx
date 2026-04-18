@@ -1,23 +1,22 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "@/Styles/Tracker/EditDialog.module.css";
-import { useRipple } from "@/Hooks/useRipple";
+import Input from "@/components/UI/Input";
+import Button from "@/components/UI/Button";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-import { FaCheck, FaTimes, FaEdit, FaSmile } from "react-icons/fa";
-
-interface Habit {
-  title: string;
-  target: number;
-  icon: string;
-}
+import { LuX, LuSave, LuSmile, LuType, LuTarget } from "react-icons/lu";
+import { Habit } from "@/core/types/habit";
 
 interface EditDialogProps {
   isOpen: boolean;
-  habit: Habit;
+  habit: Habit | null;
   onClose: () => void;
-  onSave: (updateHabit: Habit) => void;
+  onSave: (id: string, updatedFields: Partial<Habit>) => void;
 }
+
 const EditDialog: React.FC<EditDialogProps> = ({
   isOpen,
   habit,
@@ -26,30 +25,28 @@ const EditDialog: React.FC<EditDialogProps> = ({
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [title, setTitle] = useState("");
-  const [target, setTarget] = useState(1);
+  const [target, setTarget] = useState(30);
   const [icon, setIcon] = useState("");
-  const [error, setError] = useState("");
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef<HTMLDivElement | null>(null);
 
-  const createRipple = useRipple();
+  useEffect(() => {
+    if (habit) {
+      setTitle(habit.title);
+      setTarget(habit.target);
+      setIcon(habit.icon);
+    }
+  }, [habit]);
 
   useEffect(() => {
-    if (isOpen && dialogRef?.current) {
+    if (isOpen && dialogRef.current) {
       dialogRef.current.showModal();
       document.body.style.overflow = "hidden";
     } else if (dialogRef.current) {
       dialogRef.current.close();
-      document.body.style.overflow = "";
+      document.body.style.overflow = "unset";
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    if (!habit) return;
-    setTitle(habit.title);
-    setTarget(habit.target);
-    setIcon(habit.icon);
-  }, [habit]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -60,30 +57,15 @@ const EditDialog: React.FC<EditDialogProps> = ({
         setShowPicker(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showPicker]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (title.trim() === "" || icon.trim() === "") {
-      setError("Please enter a title and select an icon.");
-      return;
-    } else if (title.length < 3) {
-      setError("Title must be at least 3 characters long.");
-      return;
-    } else if (icon.length < 1) {
-      setError("Please select an icon.");
-      return;
-    } else if (target < 1) {
-      setError("Target must be at least 1.");
-      return;
-    }
-    onSave({
-      ...habit,
+    if (!habit) return;
+
+    onSave(habit.id, {
       title,
       target: Number(target),
       icon,
@@ -91,134 +73,87 @@ const EditDialog: React.FC<EditDialogProps> = ({
     onClose();
   };
 
-  const handleEmojiSelect = (emoji: { native: string }) => {
-    setIcon(emoji.native); // Set the selected emoji as the icon
-    setShowPicker(false); // Optionally close the picker
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTarget(Number(e.target.value));
-  };
-
   return (
-    <>
-      <dialog
-        className={styles.EditDialog_Container}
-        onClose={onClose}
-        onCancel={onClose}
-        ref={dialogRef}
-        aria-labelledby="edit-dialog-title"
-      >
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: -20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <form onSubmit={handleSubmit} className={styles.EditDialog_Form}>
-                <h2 id="edit-dialog-title" className={styles.EditDialog_Title}>
-                  <FaEdit className={styles.EditDialog_TitleIcon} /> Edit Habit
-                </h2>
+    <dialog
+      ref={dialogRef}
+      className={styles.EditDialog_Container}
+      onClose={onClose}
+    >
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className={styles.EditDialog_Wrapper}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          >
+            <div className={styles.Header}>
+              <h2 className={styles.Title}>Edit Spark</h2>
+              <button className={styles.Close_Button} onClick={onClose}>
+                <LuX />
+              </button>
+            </div>
 
-                <div className={styles.EditDialog_FloatingInput}>
-                  <input
-                    type="text"
-                    id="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                    placeholder=" "
-                    autoFocus
-                  />
-                  <label htmlFor="title">Habit Title</label>
-                </div>
+            <form onSubmit={handleSubmit} className={styles.Form}>
+              <Input
+                label="Habit Title"
+                icon={<LuType />}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
 
-                <div className={styles.EditDialog_FloatingInput}>
-                  <input
-                    id="target"
-                    type="number"
-                    value={target}
-                    onChange={handleChange}
-                    min={1}
-                    required
-                    placeholder=" "
-                    className={styles.EditDialog_InputField}
-                  />
-                  <label htmlFor="target">Habit Target:</label>
-                </div>
+              <Input
+                label="Daily Target (Days)"
+                type="number"
+                icon={<LuTarget />}
+                value={target}
+                onChange={(e) => setTarget(Number(e.target.value))}
+                min={1}
+                required
+              />
 
-                <div className={styles.EditDialog_PickerContainer}>
-                  <label
-                    htmlFor="edit-habit-icon"
-                    className={styles.EditDialog_InputLabel}
-                  >
-                    Habit Icon
-                  </label>
-                  <button
-                    id="edit-habit-icon"
-                    className={styles.EditDialog_IconPreview}
-                    type="button"
-                    onPointerDown={(e) => createRipple(e)}
-                    onClick={() => setShowPicker(!showPicker)}
-                    title={icon ? `Selected: ${icon}` : "Choose Habit Icon"}
-                    aria-label={
-                      icon
-                        ? `Selected emoji: ${icon}. Click to change`
-                        : "Choose an emoji icon for your habit"
-                    }
-                    aria-expanded={showPicker}
-                  >
-                    {icon ? (
-                      <span className={styles.EditDialog_SelectedEmoji}>
-                        {icon}
-                      </span>
-                    ) : (
-                      <div className={styles.EditDialog_PlaceholderIcon}>
-                        <FaSmile />
-                        <small>Add Icon</small>
-                      </div>
-                    )}
-                  </button>
-                  {showPicker && (
-                    <div
-                      className={styles.EditDialog_PickerWrapper}
-                      ref={pickerRef}
-                    >
-                      <Picker data={data} onEmojiSelect={handleEmojiSelect} />
-                    </div>
-                  )}
-                </div>
-                {error && (
-                  <div className={styles.EditDialog_Error}>{error}</div>
+              <div className={styles.Picker_Section}>
+                <label className={styles.Picker_Label}>Visual Identity</label>
+                <button
+                  type="button"
+                  className={styles.Icon_Preview}
+                  onClick={() => setShowPicker(!showPicker)}
+                >
+                  <span className={styles.Selected_Icon}>{icon}</span>
+                  <div className={styles.Icon_Overlay}>
+                    <LuSmile />
+                    <span>Change</span>
+                  </div>
+                </button>
+
+                {showPicker && (
+                  <div className={styles.Emoji_Picker_Wrapper} ref={pickerRef}>
+                    <Picker
+                      data={data}
+                      onEmojiSelect={(emoji: any) => {
+                        setIcon(emoji.native);
+                        setShowPicker(false);
+                      }}
+                      theme="dark"
+                    />
+                  </div>
                 )}
-                <div className={styles.EditDialog_Actions}>
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    onPointerDown={(e) => createRipple(e)}
-                    title="Cancel Edit"
-                    aria-label="Cancel editing and close dialog"
-                  >
-                    <FaTimes /> Cancel
-                  </button>
+              </div>
 
-                  <button
-                    onPointerDown={(e) => createRipple(e)}
-                    type="submit"
-                    title="Save Edit"
-                    aria-label="Save changes to habit"
-                  >
-                    <FaCheck /> Save
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </dialog>
-    </>
+              <div className={styles.Actions}>
+                <Button variant="secondary" type="button" onClick={onClose}>
+                  Cancel
+                </Button>
+                <Button type="submit" showIcon icon={<LuSave />}>
+                  Save Changes
+                </Button>
+              </div>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </dialog>
   );
 };
 
