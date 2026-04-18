@@ -97,7 +97,6 @@
   justify-content: center;
   font-size: 1.5rem;
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .TrackerCard_Content {

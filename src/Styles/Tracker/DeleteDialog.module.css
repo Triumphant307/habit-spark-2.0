@@ -1,124 +1,101 @@
 .DeleteDialog_Container {
-  position: fixed;
-  top: 40%;
-  left: 35%; /* Note: This left 35% seems non-centered, might want 50% if possible, but keeping for now */
-  transform: translate(-50%, -50%);
-  padding: var(--spacing-2xl);
+  padding: 0;
   border: none;
-  border-radius: var(--shape-radius-xl);
-  max-width: var(--width-container-narrow);
-  width: 90%;
-  background-color: var(--color-surface-card);
-  box-shadow: var(--shadow-interaction-dialog);
-  text-align: center;
-  z-index: var(--z-index-layer-overlay);
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-layer-notification);
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
 }
 
-.DeleteDialog_Container h2 {
-  color: var(--color-text-primary);
-  margin: 0;
-  font-size: var(--font-size-2xl);
-}
-
-.DeleteDialog_Container p {
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-  margin-bottom: var(--spacing-2xl);
+.DeleteDialog_Container[open] {
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .DeleteDialog_Container::backdrop {
-  background: var(--color-surface-overlay-light);
-  backdrop-filter: var(--effect-blur-glass);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
 }
 
-.DeleteDialog_Header {
+.DeleteDialog_Wrapper {
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: 1px solid rgba(239, 68, 68, 0.2); /* Reddish glass border */
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-2xl);
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 20px 50px rgba(239, 68, 68, 0.15); /* Red shadow for warning */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  text-align: center;
+}
+
+.Header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-sm);
 }
 
-.DeleteDialog_Icon {
-  font-size: var(--font-size-5xl);
-  color: var(--color-status-warning-alt);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.DeleteDialog_Actions {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-md);
-}
-
-.DeleteDialog_Actions button {
-  position: relative;
-  overflow: hidden;
-  padding: var(--spacing-md) var(--spacing-2xl);
-  border-radius: var(--shape-radius-lg);
-  border: none;
-  cursor: pointer;
-  color: var(--color-button-primary-text);
-  font-weight: var(--font-weight-semibold);
+.Warning_Icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  transition: var(--animation-transition-smooth);
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
 }
 
-.DeleteDialog_CancelButton {
-  background: var(--gradient-surface-primary);
-  box-shadow: var(--shadow-interaction-primary);
+.Title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0;
 }
 
-.DeleteDialog_CancelButton:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-interaction-hover);
+.Subtitle {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  margin: 0;
 }
 
-.DeleteDialog_ConfirmButton {
-  background: var(--gradient-surface-error);
-  box-shadow: var(--shadow-interaction-error);
+.Actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
 }
 
-.DeleteDialog_ConfirmButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+/* Specific red button for confirmation */
+.Confirm_Button {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%) !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
 }
 
-.DeleteDialog_Actions button:active {
-  transform: translateY(0) scale(0.95);
+.Confirm_Button:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4) !important;
 }
 
-@media (max-width: 600px) {
-  .DeleteDialog_Container {
-    top: 35%;
-    left: 50%; /* Adjusted to 50% for centering on mobile */
-    width: 95%;
-    padding: var(--spacing-xl);
-  }
-
-  .DeleteDialog_Actions {
+@media (max-width: 480px) {
+  .Actions {
     flex-direction: column-reverse;
-  }
-
-  .DeleteDialog_Actions button {
-    width: 100%;
-    justify-content: center;
   }
 }

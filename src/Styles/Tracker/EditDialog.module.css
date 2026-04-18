@@ -1,205 +1,169 @@
 .EditDialog_Container {
-  padding: var(--spacing-xl);
+  padding: 0;
   border: none;
-  border-radius: var(--shape-radius-md);
-  margin: auto;
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
   inset: 0;
-  max-width: var(--width-container-narrow);
-  width: 90%;
-  background-color: var(--color-surface-card);
-  box-shadow: var(--shadow-interaction-dialog);
-  overflow-y: auto;
-  z-index: var(--z-index-layer-overlay);
+  z-index: var(--z-index-layer-notification);
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.EditDialog_Container[open] {
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .EditDialog_Container::backdrop {
-  background: var(--color-surface-overlay-light);
-  backdrop-filter: var(--effect-blur-glass);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
 }
 
-.EditDialog_Title {
+.EditDialog_Wrapper {
+  background: var(--color-surface-card);
+  backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
+  border: var(--border-glass-light);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-2xl);
+  width: 440px;
+  max-width: 90vw;
+  box-shadow: var(--shadow-interaction-dialog);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Title {
+  font-size: 1.5rem;
+  font-weight: 800;
   color: var(--color-text-primary);
+  margin: 0;
+}
+
+.Close_Button {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: var(--color-text-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-md);
-  font-size: var(--font-size-2xl);
-  margin-bottom: var(--spacing-xl);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.EditDialog_TitleIcon {
-  color: var(--color-brand-primary);
+.Close_Button:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
 }
 
-.EditDialog_Form {
+.Form {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-  align-items: center;
-  width: 100%;
 }
 
-.EditDialog_FloatingInput {
-  position: relative;
-  width: 100%;
-  margin-top: var(--spacing-lg);
-}
-
-.EditDialog_FloatingInput input {
-  width: 100%;
-  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm)
-    var(--spacing-md);
-  font-size: var(--font-size-base);
-  border: 1px solid var(--border-color-base);
-  border-radius: var(--shape-radius-sm);
-  color: var(--color-text-primary);
-  background: transparent;
-  outline: none;
-}
-
-.EditDialog_FloatingInput input:focus {
-  border-color: var(--color-brand-primary);
-}
-
-.EditDialog_FloatingInput label {
-  position: absolute;
-  top: 50%;
-  left: var(--spacing-md);
-  transform: translateY(-50%);
-  color: var(--color-text-muted);
-  background-color: var(--color-surface-card);
-  padding: 0 var(--spacing-2xs);
-  transition: var(--animation-transition-fast);
-  pointer-events: none;
-}
-
-.EditDialog_FloatingInput input:focus + label,
-.EditDialog_FloatingInput input:not(:placeholder-shown) + label {
-  top: 0;
-  left: var(--spacing-sm);
-  font-size: var(--font-size-xs);
-  color: var(--color-brand-primary);
-}
-
-.EditDialog_Actions {
+/* Picker Section */
+.Picker_Section {
   display: flex;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-3xl);
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
-.EditDialog_Actions button {
-  position: relative;
-  overflow: hidden;
-  border: none;
-  border-radius: var(--shape-radius-md);
-  padding: var(--spacing-md) var(--spacing-xl);
-  color: var(--color-button-primary-text);
-  background: var(--gradient-surface-primary);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-sm);
-  cursor: pointer;
-  transition: var(--animation-transition-smooth);
-  box-shadow: var(--shadow-interaction-primary);
-}
-
-.EditDialog_Actions button:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-interaction-hover);
-}
-
-.EditDialog_InputLabel {
-  display: block;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+.Picker_Label {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-sm);
-  text-align: center;
 }
 
-.EditDialog_IconPreview {
+.Icon_Preview {
   position: relative;
   width: 80px;
   height: 80px;
-  background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
+  background: rgba(255, 255, 255, 0.03);
   border: 2px dashed rgba(59, 130, 246, 0.3);
-  border-radius: var(--shape-radius-xl);
-  cursor: pointer;
-  transition: var(--animation-transition-smooth);
+  border-radius: var(--shape-radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
   margin: 0 auto;
   overflow: hidden;
 }
 
-.EditDialog_IconPreview:hover {
-  background: var(--color-surface-hover);
+.Icon_Preview:hover {
   border-color: var(--color-brand-primary);
+  background: rgba(59, 130, 246, 0.05);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-interaction-tiny);
 }
 
-.EditDialog_SelectedEmoji {
-  font-size: var(--font-size-4xl);
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.EditDialog_PlaceholderIcon {
+.Icon_Overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 4px;
-  color: var(--color-text-muted);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  font-size: 1.2rem;
 }
 
-.EditDialog_PlaceholderIcon svg {
-  font-size: var(--font-size-2xl);
+.Icon_Overlay span {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.EditDialog_PickerWrapper {
+.Icon_Preview:hover .Icon_Overlay {
+  opacity: 1;
+}
+
+.Selected_Icon {
+  font-size: 2.5rem;
+}
+
+.Emoji_Picker_Wrapper {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: var(--z-index-layer-notification);
+  z-index: 10001;
+  box-shadow: var(--shadow-elevation-xl);
   border-radius: var(--shape-radius-lg);
-  box-shadow: var(--shadow-interaction-dialog);
-  animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.EditDialog_InputField {
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: 1px solid var(--border-color-base);
-  border-radius: var(--shape-radius-2xs);
-  font-size: var(--font-size-base);
-  width: 250px;
-  margin-bottom: var(--spacing-md);
-  box-shadow: var(--shadow-elevation-sm);
-  transition: var(--animation-transition-fast);
-}
-
-.EditDialog_Error {
-  color: var(--color-status-error);
-  font-size: var(--font-size-sm);
+.Actions {
+  display: flex;
+  gap: var(--spacing-md);
   margin-top: var(--spacing-md);
 }
 
-.EditDialog_PickerContainer {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  margin: var(--spacing-sm) 0;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+@media (max-width: 480px) {
+  .Actions {
+    flex-direction: column-reverse;
   }
 }
