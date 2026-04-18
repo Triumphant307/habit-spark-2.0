@@ -166,7 +166,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-xs);
-  border-radius: var(--shape-radius-circle);
+  border-radius: 50%;
   transition: var(--animation-transition-fast);
 }
 
