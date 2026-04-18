@@ -1,22 +1,20 @@
 "use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { getTipsByCategory } from "@/utils/getTipsByCatergory";
 import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import Search from "@/components/UI/Search";
-import { ToastContainer, toast } from "react-toastify";
 import AnimatedTipCard from "@/components/Suggestion/AnimatedTipCard";
 import { FaThLarge, FaList } from "react-icons/fa";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
 import { useRipple } from "@/Hooks/useRipple";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 
 const SuggestionCard: React.FC = () => {
   const s = useReactor(appState);
   const [searchQuery, setSearchQuery] = useState<string>("");
-
   const resultRef = useRef(null);
-  const createRipple = useRipple();
 
   const categories = [
     "All",
@@ -26,6 +24,12 @@ const SuggestionCard: React.FC = () => {
     "Productivity",
     "Favorites",
   ];
+
+  // Optimization: Calculate once at the top level
+  const favoriteCount = useMemo(
+    () => (s.suggestions.favorites || []).length,
+    [s.suggestions.favorites],
+  );
 
   const filteredTips =
     s.suggestions.filter === "Favorites"
@@ -87,18 +91,21 @@ const SuggestionCard: React.FC = () => {
             aria-pressed={s.suggestions.filter === category}
           >
             {category}
-            {category === "Favorites" &&
-              (s.suggestions.favorites || []).length > 0 && (
-                <span className={styles.SuggestionCard_Badge}>
-                  {(s.suggestions.favorites || []).length}
-                </span>
-              )}
+            {category === "Favorites" && favoriteCount > 0 && (
+              <span className={styles.SuggestionCard_Badge}>
+                {favoriteCount}
+              </span>
+            )}
           </button>
         ))}
       </div>
 
       <div
-        className={`${styles.SuggestionCard_Grid} ${s.suggestions.viewMode === "list" ? styles.SuggestionCard_Grid_List : ""}`}
+        className={`${styles.SuggestionCard_Grid} ${
+          s.suggestions.viewMode === "list"
+            ? styles.SuggestionCard_Grid_List
+            : ""
+        }`}
       >
         {filteredTips.length === 0 ? (
           <motion.div
@@ -118,7 +125,11 @@ const SuggestionCard: React.FC = () => {
                 ? "Your favorites list is empty"
                 : searchQuery
                   ? `No results for "${searchQuery}"`
-                  : `No ${s.suggestions.filter === "All" ? "suggestions" : s.suggestions.filter.toLowerCase() + " habits"} available`}
+                  : `No ${
+                      s.suggestions.filter === "All"
+                        ? "suggestions"
+                        : s.suggestions.filter.toLowerCase() + " habits"
+                    } available`}
             </p>
             <small>
               {s.suggestions.filter === "Favorites"
