@@ -120,7 +120,7 @@
   padding: 0 var(--spacing-xs);
   height: 18px;
   min-width: 18px;
-  border-radius: var(--shape-radius-circle);
+  border-radius: var(--shape-radius-full);
   margin-left: var(--spacing-xs);
   box-shadow: var(--shadow-interaction-tiny);
   transition: var(--animation-transition-fast);
