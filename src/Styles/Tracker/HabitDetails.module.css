@@ -1,244 +1,193 @@
 .HabitDetails {
-  max-width: var(--width-container-wide);
-  margin: var(--spacing-2xl) auto;
-  padding: var(--spacing-2xl);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-4xl);
   display: flex;
-  flex-direction: row;
-  gap: var(--spacing-2xl);
-  align-items: flex-start;
-  position: relative;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.HabitDetails_Header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 .HabitDetails_BackButton {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-lg);
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color-base);
+  border-radius: var(--shape-radius-full);
   color: var(--color-text-secondary);
   text-decoration: none;
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.02em;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--shape-radius-md);
-  background: rgba(59, 130, 246, 0.08); /* Brand tint */
-  transition: var(--animation-transition-smooth);
-  position: relative;
-  z-index: var(--z-index-layer-base);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .HabitDetails_BackButton:hover {
-  color: var(--color-brand-primary);
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
   transform: translateX(-4px);
 }
 
-.HabitDetails_Card {
-  flex: 1;
-  min-width: 0;
-  border-radius: var(--shape-radius-xl);
-  padding: var(--spacing-xl);
+/* Main Hero Card */
+.HabitDetails_HeroCard {
   background: var(--color-surface-card);
   backdrop-filter: var(--effect-blur-glass);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
-  box-shadow: var(--shadow-elevation-lg);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
   position: relative;
   overflow: hidden;
-  text-align: center;
-  transition: var(--animation-transition-smooth);
+  box-shadow: var(--shadow-elevation-md);
 }
 
-.HabitDetails_Card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-interaction-dialog);
+.HabitDetails_HeroCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-surface-primary);
 }
 
-.HabitDetails_Icon {
-  font-size: var(--font-size-4xl);
-  margin-bottom: var(--spacing-sm);
-  display: inline-block;
-  animation: iconFloat 3s ease-in-out infinite;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+.Hero_MainInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
 }
 
-@keyframes iconFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+.HabitDetails_IconWrapper {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--shape-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.Hero_Text {
+  flex: 1;
 }
 
 .HabitDetails_Title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  margin: var(--spacing-sm) 0 var(--spacing-md);
+  font-size: 2.5rem;
+  font-weight: 800;
   color: var(--color-text-primary);
+  margin: 0;
   letter-spacing: -0.02em;
-  line-height: 1.2;
 }
 
-.HabitDetails_Actions {
-  margin-top: var(--spacing-lg);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--spacing-sm);
+.HabitDetails_Category {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-brand-primary);
+  letter-spacing: 0.1em;
 }
 
-.HabitDetails_Actions button {
-  position: relative;
-  overflow: hidden;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  background: var(--gradient-surface-primary);
-  color: var(--color-button-primary-text);
-  border: none;
+/* Stats Grid */
+.HabitDetails_StatsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.Stat_Item {
+  background: rgba(255, 255, 255, 0.03);
+  padding: var(--spacing-lg);
   border-radius: var(--shape-radius-md);
-  cursor: pointer;
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.02em;
-  transition: var(--animation-transition-smooth);
-  box-shadow: var(--shadow-interaction-primary);
-}
-
-.HabitDetails_Actions button:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-interaction-hover);
-}
-
-.HabitDetails_DeleteActions {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--spacing-lg);
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-}
-
-.HabitDetails_DeleteButton {
-  background: var(--gradient-surface-error);
-  color: var(--color-button-primary-text);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--shape-radius-md);
-  cursor: pointer;
-  transition: var(--animation-transition-smooth);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.02em;
-  box-shadow: var(--shadow-interaction-error);
-  position: relative;
-  overflow: hidden;
-}
-
-.HabitDetails_DeleteButton:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
-}
-
-.HabitDetails_History {
-  flex: 1;
-  min-width: 280px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-xl);
+  gap: 4px;
+}
+
+.Stat_Label {
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.Stat_Value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* History & Calendar */
+.HabitDetails_HistorySection {
   background: var(--color-surface-card);
   backdrop-filter: var(--effect-blur-glass);
-  border-radius: var(--shape-radius-xl);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
-  box-shadow: var(--shadow-elevation-lg);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  transition: var(--animation-transition-smooth);
+  border-radius: var(--shape-radius-xl);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-elevation-sm);
 }
 
-.HabitDetails_History:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-interaction-dialog);
-}
-
-.HabitDetails_HistoryTitle {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-md);
+.Section_Title {
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--color-text-primary);
-  letter-spacing: -0.01em;
+  margin-bottom: var(--spacing-xl);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xs);
-}
-
-.HabitDetails_Highlight {
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-  font-weight: var(--font-weight-semibold);
-  border-radius: var(--shape-radius-md);
-  padding: var(--spacing-xs) var(--spacing-md);
-  display: inline-block;
-  color: #047857;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
-  transition: var(--animation-transition-fast);
-}
-
-.HabitDetails_Highlight:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-.HabitDetails_Stats {
-  margin-top: var(--spacing-lg);
-}
-
-.HabitDetails_Stats p {
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-md);
-  font-size: var(--font-size-base);
-  line-height: 1.6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: var(--spacing-sm);
+}
+
+/* Action Area */
+.HabitDetails_ActionArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: var(--spacing-md);
+}
+
+.Action_Group {
+  display: flex;
+  gap: var(--spacing-md);
 }
 
 @media (max-width: 768px) {
   .HabitDetails {
-    flex-direction: column;
-    padding: var(--spacing-lg);
-    margin: var(--spacing-lg) var(--spacing-md);
-    gap: var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-3xl);
   }
 
-  .HabitDetails_Card,
-  .HabitDetails_History {
-    flex: none;
-    width: 100%;
+  .Hero_MainInfo {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-md);
   }
 
   .HabitDetails_Title {
-    font-size: var(--font-size-xl);
+    font-size: 1.75rem;
   }
 
-  .HabitDetails_Actions,
-  .HabitDetails_DeleteActions {
+  .HabitDetails_ActionArea {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .Action_Group {
+    width: 100%;
     flex-direction: column;
   }
-
-  .HabitDetails_Actions button,
-  .HabitDetails_DeleteButton {
-    width: 100%;
-    padding: var(--spacing-md) var(--spacing-xl);
-  }
-}
-
-/* Accessibility Focus States */
-.HabitDetails_Actions button:focus-visible,
-.HabitDetails_DeleteButton:focus-visible,
-.HabitDetails_BackButton:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-interaction-glow-violet);
 }
