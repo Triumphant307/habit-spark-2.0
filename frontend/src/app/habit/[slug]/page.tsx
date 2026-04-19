@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import style from "@/Styles/Tracker/HabitDetails.module.css";
+import { motion, Variants } from "framer-motion";
+import styles from "@/Styles/Tracker/HabitDetails.module.css";
 import { useParams, useRouter } from "next/navigation";
 import HabitHistory from "@/components/Tracker/HabitHistory";
-import HabitAction from "@/components/Tracker/HabitAction";
-import HabitStat from "@/components/Tracker/HabitStat";
 import DeleteDialog from "@/components/Tracker/DeleteDialog";
 import EditDialog from "@/components/Tracker/EditDialog";
 import HabitNotFound from "@/components/Tracker/HabitNotFound";
@@ -25,20 +23,29 @@ import confetti from "canvas-confetti";
 import { notificationService } from "@/services/notificationService";
 import Link from "next/link";
 import dayjs from "dayjs";
+import {
+  LuArrowLeft,
+  LuCalendar,
+  LuCheck,
+  LuRotateCcw,
+  LuPencil,
+  LuTrash2,
+} from "react-icons/lu";
+import Button from "@/components/UI/Button";
 
 const HabitDetails = () => {
   const params = useParams();
   const router = useRouter();
 
-  // Ensure `slug` is a string
-  const slug = String(params?.slug);
+  // Type-safe slug extraction
+  const slug = Array.isArray(params?.slug)
+    ? params.slug[0]
+    : params?.slug || "";
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   const s = useReactor(appState);
-
-  // Use the helper to find habit by slug
   const habit = findHabitBySlug(slug);
 
   useEffect(() => {
@@ -64,104 +71,181 @@ const HabitDetails = () => {
 
   if (!habit) return <HabitNotFound />;
 
-  const progress = Math.round((habit.streak / habit.target) * 100);
+  const today = dayjs().format("YYYY-MM-DD");
+  const isCompletedToday = habit.history.includes(today);
+  const completionRate =
+    habit.history.length > 0
+      ? Math.round(
+          (habit.history.length /
+            (dayjs().diff(dayjs(habit.startDate), "day") + 1)) *
+            100,
+        )
+      : 0;
 
-  const handleDone = async () => {
-    const today = dayjs().format("YYYY-MM-DD");
-    if (habit.history.includes(today)) {
-      toast.info("Already done for today.");
+  const handleDone = () => {
+    if (isCompletedToday) {
+      toast.info("Already sparked for today!");
       return;
     }
 
     logger.info("Marking habit done", { id: habit.id, title: habit.title });
-    completeHabit(habit.id as string);
-    toast.success("Streak increased 🔥");
+    completeHabit(habit.id);
+    toast.success(`${habit.title} ignited! 🔥`);
+
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.7 },
+      colors: ["#3B82F6", "#6366F1"],
+    });
   };
 
   const handleReset = () => {
-    logger.info("Resetting habit streak", { id: habit.id, title: habit.title });
-    resetHabit(habit.id as string);
-    toast.info("Streak reset to 0. Keep going! 💪");
+    resetHabit(habit.id);
+    toast.info("Streak reset. A new beginning! 💪");
   };
 
-  const handleDeleteClick = () => setIsDialogOpen(true);
   const handleDelete = () => {
-    logger.info("Deleting habit", { id: habit.id, title: habit.title });
-    deleteHabit(habit.id as string);
-    toast.success("Habit deleted successfully! 🗑️");
+    deleteHabit(habit.id);
+    toast.success("Habit removed.");
     router.push("/tracker");
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.05,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" as const },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
   return (
     <motion.section
-      className={style.HabitDetails}
+      className={styles.HabitDetails}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.div variants={itemVariants}>
-        <Link
-          href="/tracker"
-          className={style.HabitDetails_BackButton}
-          title="Back to Tracker"
-        >
-          ← Back to Tracker
+      {/* 1. Header with Back Button */}
+      <motion.div
+        className={styles.HabitDetails_Header}
+        variants={itemVariants}
+      >
+        <Link href="/tracker" className={styles.HabitDetails_BackButton}>
+          <LuArrowLeft size={16} />
+          Back to Tracker
         </Link>
       </motion.div>
 
-      <motion.div className={style.HabitDetails_Card} variants={itemVariants}>
-        <span className={style.HabitDetails_Icon}>{habit.icon}</span>
-        <h2 className={style.HabitDetails_Title}>{habit.title}</h2>
+      {/* 2. Main Hero Card */}
+      <motion.div
+        className={styles.HabitDetails_HeroCard}
+        variants={itemVariants}
+      >
+        <div className={styles.Hero_MainInfo}>
+          <div className={styles.HabitDetails_IconWrapper}>{habit.icon}</div>
+          <div className={styles.Hero_Text}>
+            <span className={styles.HabitDetails_Category}>
+              {habit.category || "General"}
+            </span>
+            <h1 className={styles.HabitDetails_Title}>{habit.title}</h1>
+          </div>
+        </div>
 
-        <HabitStat habit={habit} progress={progress} style={style} />
-        <HabitAction
-          habit={habit}
-          handleDone={handleDone}
-          handleReset={handleReset}
-          handleDeleteClick={handleDeleteClick}
-          handleEditClick={() => setIsEditOpen(true)}
-          style={style}
-        />
+        {/* Stats Grid */}
+        <div className={styles.HabitDetails_StatsGrid}>
+          <div className={styles.Stat_Item}>
+            <span className={styles.Stat_Label}>Current Streak</span>
+            <span className={styles.Stat_Value}>{habit.streak} Days</span>
+          </div>
+          <div className={styles.Stat_Item}>
+            <span className={styles.Stat_Label}>Daily Target</span>
+            <span className={styles.Stat_Value}>{habit.target} Days</span>
+          </div>
+          <div className={styles.Stat_Item}>
+            <span className={styles.Stat_Label}>Completion Rate</span>
+            <span className={styles.Stat_Value}>{completionRate}%</span>
+          </div>
+        </div>
+
+        {/* Action Area */}
+        <div className={styles.HabitDetails_ActionArea}>
+          <div className={styles.Action_Group}>
+            <Button
+              onClick={handleDone}
+              disabled={isCompletedToday}
+              showIcon
+              icon={<LuCheck />}
+            >
+              {isCompletedToday ? "Completed Today" : "Mark as Done"}
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => setIsEditOpen(true)}
+              showIcon
+              icon={<LuPencil />}
+            >
+              Edit Spark
+            </Button>
+          </div>
+
+          <div className={styles.Action_Group}>
+            <Button
+              variant="secondary"
+              onClick={handleReset}
+              showIcon
+              icon={<LuRotateCcw />}
+            >
+              Reset
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => setIsDeleteDialogOpen(true)}
+              showIcon
+              icon={<LuTrash2 />}
+            >
+              Delete
+            </Button>
+          </div>
+        </div>
       </motion.div>
 
-      <motion.div variants={itemVariants}>
-        <HabitHistory habit={habit} style={style} />
+      {/* 3. History Visualization */}
+      <motion.div
+        className={styles.HabitDetails_HistorySection}
+        variants={itemVariants}
+      >
+        <h2 className={styles.Section_Title}>
+          <LuCalendar />
+          Habit History
+        </h2>
+        <HabitHistory habit={habit} style={styles} />
       </motion.div>
 
-      <DeleteDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        onConfirm={handleDelete}
-      />
-
+      {/* Dialogs */}
       <EditDialog
         habit={habit}
         isOpen={isEditOpen}
         onClose={() => setIsEditOpen(false)}
         onSave={(id, fields) => {
           updateHabit(id, fields);
-          toast.success("Habit updated successfully");
+          toast.success("Changes saved!");
         }}
+      />
+
+      <DeleteDialog
+        isOpen={isDeleteDialogOpen}
+        onClose={() => setIsDeleteDialogOpen(false)}
+        onConfirm={handleDelete}
       />
     </motion.section>
   );
