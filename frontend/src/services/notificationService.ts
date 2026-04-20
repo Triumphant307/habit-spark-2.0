@@ -1,3 +1,5 @@
+import { appState } from "@/core/state/app";
+
 /**
  * Native Browser Notification Service
  * Handles permission, scheduling, and displaying notifications
@@ -30,9 +32,7 @@ class NotificationService {
       console.warn("This browser does not support notifications");
       return false;
     }
-
     if (this.permission === "granted") return true;
-
     try {
       this.permission = await Notification.requestPermission();
       return this.permission === "granted";
@@ -57,33 +57,42 @@ class NotificationService {
    * Show a notification immediately
    */
   async show(options: NotificationOptions): Promise<void> {
-    if (!this.isGranted()) {
-      console.warn("Notification permission not granted");
-      return;
-    }
-
+    if (!this.isSupported())
+      return void console.warn("This browser does not support notifications");
+    if (!this.isGranted())
+      if (!(await this.requestPermission()))
+        return void console.warn("Notification permission not granted");
     try {
-      // If service worker is available, use it
-      if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
-        const registration = await navigator.serviceWorker.ready;
-        await registration.showNotification(options.title, {
-          body: options.body,
-          icon: options.icon || "/icons/icon-192x192.png",
-          badge: options.badge || "/icons/icon-96x96.png",
-          tag: options.tag,
-          data: options.data,
-          requireInteraction: options.requireInteraction,
-          vibrate: [100, 50, 100],
-        } as any);
-      } else {
-        // Fallback to regular notification
-        new Notification(options.title, {
-          body: options.body,
-          icon: options.icon || "/icons/icon-192x192.png",
-          tag: options.tag,
-          data: options.data,
-        });
-      }
+      const notificationPayload = {
+        body: options.body,
+        icon: options.icon || "/icons/icon-192x192.png",
+        badge: options.badge || "/icons/icon-96x96.png",
+        tag: options.tag,
+        data: options.data,
+        requireInteraction: options.requireInteraction,
+        vibrate: options.vibrate ?? [100, 50, 100],
+      };
+      // Preferred path: Service Worker notifications.
+      if ("serviceWorker" in navigator)
+        try {
+          let registration =
+            (await navigator.serviceWorker.getRegistration()) ||
+            (await navigator.serviceWorker.register("/sw.js"));
+          registration = registration.active
+            ? registration
+            : await navigator.serviceWorker.ready;
+          await registration.showNotification(
+            options.title,
+            notificationPayload as NotificationOptions,
+          );
+          return;
+        } catch (error) {
+          console.warn("SW notification failed, falling back:", error);
+        }
+      new Notification(
+        options.title,
+        notificationPayload as NotificationOptions,
+      ); // Last-resort fallback when SW notification path is unavailable.
     } catch (error) {
       console.error("Error showing notification:", error);
     }
@@ -99,28 +108,19 @@ class NotificationService {
     time: string,
   ): void {
     const [hours, minutes] = time.split(":").map(Number);
-
     const now = new Date();
     const scheduledTime = new Date();
     scheduledTime.setHours(hours, minutes, 0, 0);
-
     // If time has passed today, schedule for tomorrow
-    if (scheduledTime <= now) {
+    if (scheduledTime <= now)
       scheduledTime.setDate(scheduledTime.getDate() + 1);
-    }
-
     const timeUntilNotification = scheduledTime.getTime() - now.getTime();
-
-    // Store in localStorage for persistence
-    const reminders = this.getScheduledReminders();
-    reminders[habitId] = {
+    appState.scheduledReminders[habitId] = {
       habitTitle,
       habitIcon,
       time,
       nextScheduled: scheduledTime.toISOString(),
     };
-    localStorage.setItem("scheduledReminders", JSON.stringify(reminders));
-
     // Schedule the notification
     setTimeout(() => {
       this.show({
@@ -130,7 +130,6 @@ class NotificationService {
         data: { habitId, type: "daily-reminder" },
         requireInteraction: true,
       });
-
       // Reschedule for tomorrow
       this.scheduleDailyReminder(habitId, habitTitle, habitIcon, time);
     }, timeUntilNotification);
@@ -140,38 +139,25 @@ class NotificationService {
    * Cancel a scheduled reminder
    */
   cancelReminder(habitId: string): void {
-    const reminders = this.getScheduledReminders();
-    delete reminders[habitId];
-    localStorage.setItem("scheduledReminders", JSON.stringify(reminders));
-  }
-
-  /**
-   * Get all scheduled reminders
-   */
-  private getScheduledReminders(): Record<string, any> {
-    try {
-      const stored = localStorage.getItem("scheduledReminders");
-      return stored ? JSON.parse(stored) : {};
-    } catch {
-      return {};
-    }
+    delete appState.scheduledReminders[habitId];
   }
 
   /**
    * Restore scheduled reminders on app load
    */
   restoreScheduledReminders(habits: any[]): void {
-    const reminders = this.getScheduledReminders();
-
     habits.forEach((habit) => {
-      if (habit.reminderEnabled && habit.reminderTime && reminders[habit.id]) {
+      if (
+        habit.reminderEnabled &&
+        habit.reminderTime &&
+        appState.scheduledReminders[habit.id]
+      )
         this.scheduleDailyReminder(
           habit.id,
           habit.title,
           habit.icon,
           habit.reminderTime,
         );
-      }
     });
   }
 
@@ -185,7 +171,6 @@ class NotificationService {
   ): void {
     let title = "";
     let body = "";
-
     if (streak === 7) {
       title = "🔥 One Week Strong!";
       body = `You've maintained ${habitIcon} ${habitTitle} for 7 days!`;
@@ -199,15 +184,13 @@ class NotificationService {
       title = `🎉 ${streak} Day Streak!`;
       body = `Amazing consistency with ${habitIcon} ${habitTitle}!`;
     }
-
-    if (title) {
+    if (title)
       this.show({
         title,
         body,
         tag: "streak-milestone",
         requireInteraction: true,
       });
-    }
   }
 
   /**

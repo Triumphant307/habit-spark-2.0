@@ -1,12 +1,20 @@
 /**
  * HabitSpark Service Worker
  * Enables PWA install capability and basic caching
+ * Merged with TVP caching strategy:
+ * - documents: network-first
+ * - other cacheable assets: stale-while-revalidate (cache-first with refresh)
  */
 
-const CACHE_NAME = "habitspark-v1";
+const CACHE_NAME = "habitspark-v2";
 const OFFLINE_URL = "/";
-
-// Assets to cache immediately on install
+const ORIGIN_WHITELIST = [
+  location.origin,
+  "https://fonts.googleapis.com",
+  "https://fonts.gstatic.com",
+  "https://cdn.jsdelivr.net",
+  "https://unpkg.com",
+];
 const PRECACHE_ASSETS = [
   "/",
   "/tracker",
@@ -14,75 +22,100 @@ const PRECACHE_ASSETS = [
   "/manifest.json",
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png",
-];
+]; // Assets to cache immediately on install
 
-// Install event - precache essential assets
+async function preCache() {
+  const cache = await caches.open(CACHE_NAME);
+  await Promise.all(
+    PRECACHE_ASSETS.map((url) =>
+      cache.add(url).catch((e) => {
+        console.error("[SW] Failed to precache:", url, e);
+      }),
+    ),
+  );
+}
+
+function isCacheable(request) {
+  if (request.method !== "GET") return false;
+  if (!request.url.startsWith("http")) return false;
+  const url = new URL(request.url);
+  if (!ORIGIN_WHITELIST.includes(url.origin)) return false;
+  if (url.pathname.startsWith("/api/")) return false;
+  return true;
+}
+
+async function cacheFirstWithRefresh(request) {
+  try {
+    const fetchResponsePromise = fetch(request).then(async (networkResponse) => {
+      if (networkResponse.ok || networkResponse.status === 0) {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(request, networkResponse.clone());
+      }
+      return networkResponse;
+    });
+    return (await caches.match(request)) || (await fetchResponsePromise);
+  } catch (e) {
+    console.error("[SW] cacheFirstWithRefresh failed:", e);
+    return (await caches.match(request)) || Response.error();
+  }
+}
+
+async function networkFirst(request) {
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok || networkResponse.status === 0) {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (e) {
+    console.error("[SW] networkFirst failed:", e);
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    if (request.mode === "navigate") {
+      const offline = await caches.match(OFFLINE_URL);
+      if (offline) return offline;
+    }
+    return Response.error();
+  }
+}
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    (async () => {
       console.log("[SW] Precaching app shell");
-      return cache.addAll(PRECACHE_ASSETS);
-    }),
+      await preCache();
+      await self.skipWaiting();
+    })(),
   );
-  // Activate immediately
-  self.skipWaiting();
 });
 
-// Activate event - clean up old caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log("[SW] Deleting old cache:", cacheName);
-            return caches.delete(cacheName);
-          }
-        }),
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(
+        keys
+          .filter((key) => key !== CACHE_NAME)
+          .map((key) => {
+            console.log("[SW] Deleting old cache:", key);
+            return caches.delete(key);
+          }),
       );
-    }),
+      await self.clients.claim();
+    })(),
   );
-  // Take control immediately
-  self.clients.claim();
 });
 
-// Fetch event - network first, fallback to cache
+// Fetch event - network first for documents, stale-while-revalidate for other cacheable assets
 self.addEventListener("fetch", (event) => {
-  // Skip non-GET requests
-  if (event.request.method !== "GET") return;
-
-  // Skip chrome-extension and other non-http requests
-  if (!event.request.url.startsWith("http")) return;
-
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Clone the response before caching
-        const responseClone = response.clone();
-
-        // Cache successful responses
-        if (response.status === 200) {
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-        }
-
-        return response;
-      })
-      .catch(() => {
-        // Network failed, try cache
-        return caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
-          }
-          // Return offline page for navigation requests
-          if (event.request.mode === "navigate") {
-            return caches.match(OFFLINE_URL);
-          }
-          return new Response("Offline", { status: 503 });
-        });
-      }),
-  );
+  if (!isCacheable(event.request)) return;
+  // event.respondWith(
+  //   (event.request.destination === "document"
+  //     ? networkFirst
+  //     : cacheFirstWithRefresh)(event.request),
+  // );
+  event.respondWith((event.request.destination !== "image" ? networkFirst : cacheFirstWithRefresh)(event.request)); // during dev
 });
 
 // Handle push notifications (for future use)
