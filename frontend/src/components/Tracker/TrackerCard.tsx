@@ -21,27 +21,28 @@ import confetti from "canvas-confetti";
 import logger from "@/utils/logger";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appState } from "@/core/state/app";
 
 interface TrackerCardProps {
-  habits: Habit[];
+  habits: Habit[]; // Still takes props for filtering (e.g., Search or Top 6)
 }
 
-const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
-  const [habits, setHabits] = useState(initialHabits);
+const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [editingHabit, setEditingHabit] = useState<Habit | null>(null);
   const [deletingHabitId, setDeletingHabitId] = useState<string | null>(null);
+
+  // We assign the reactor to 's' so the component explicitly subscribes to changes.
+  // This ensures that when habits are updated anywhere, this list re-renders.
+  useReactor(appState);
 
   const draggedItem = useRef<Habit | null>(null);
   const draggedIdx = useRef<number | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const createRipple = useRipple();
   const today = dayjs().format("YYYY-MM-DD");
-
-  useEffect(() => {
-    setHabits(initialHabits);
-  }, [initialHabits]);
 
   // Close menu on outside click
   useEffect(() => {
@@ -64,15 +65,16 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
     if (draggedIdx.current === null) return;
     if (draggedIdx.current === index) return;
 
-    const newHabits = [...habits];
-    newHabits.splice(draggedIdx.current, 1);
-    newHabits.splice(index, 0, draggedItem.current as Habit);
+    // Mutate the array directly - Reactor will handle the UI update
+    const movingItem = habits[draggedIdx.current];
+    habits.splice(draggedIdx.current, 1);
+    habits.splice(index, 0, movingItem);
     draggedIdx.current = index;
-    setHabits(newHabits);
   };
 
   const handleDragEnd = () => {
     logger.info("Habits reordered", { count: habits.length });
+    // Persist the new order to global state and localStorage
     reorderHabits(habits.map((h) => h.id));
     draggedItem.current = null;
     draggedIdx.current = null;
@@ -121,7 +123,9 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                 key={habit.id || `habit-${index}`}
                 className={`${style.TrackerCard_Container} ${
                   isDragging ? style.isDragging : ""
-                } ${isCompletedToday ? style.isCompleted : ""} ${activeMenu === habit.id ? style.isActive : ""}`}
+                } ${isCompletedToday ? style.isCompleted : ""} ${
+                  activeMenu === habit.id ? style.isActive : ""
+                }`}
                 draggable
                 onDragStart={() => handleDragStart(index)}
                 onDragOver={() => handleDragOver(index)}
@@ -203,7 +207,6 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits: initialHabits }) => {
                           initial={{ opacity: 0, scale: 0.95, y: 10 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                          // THE FIX: Stop drag and drop from starting when interacting with the menu
                           onMouseDown={(e) => e.stopPropagation()}
                           onClick={(e) => e.stopPropagation()}
                         >
