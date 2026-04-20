@@ -8,13 +8,7 @@ import HabitHistory from "@/components/Tracker/HabitHistory";
 import DeleteDialog from "@/components/Tracker/DeleteDialog";
 import EditDialog from "@/components/Tracker/EditDialog";
 import HabitNotFound from "@/components/Tracker/HabitNotFound";
-import {
-  resetHabit,
-  updateHabit,
-  deleteHabit,
-  completeHabit,
-  findHabitBySlug,
-} from "@/core/state/habits";
+import { resetHabit, updateHabit, deleteHabit, completeHabit, findHabitBySlug } from "@/core/state/habits";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
 import toast from "@/utils/toast";
@@ -23,14 +17,7 @@ import confetti from "canvas-confetti";
 import { notificationService } from "@/services/notificationService";
 import Link from "next/link";
 import dayjs from "dayjs";
-import {
-  LuArrowLeft,
-  LuCalendar,
-  LuCheck,
-  LuRotateCcw,
-  LuPencil,
-  LuTrash2,
-} from "react-icons/lu";
+import { LuArrowLeft, LuCalendar, LuCheck, LuRotateCcw, LuPencil, LuTrash2 } from "react-icons/lu";
 import Button from "@/components/UI/Button";
 
 const HabitDetails = () => {
@@ -38,9 +25,7 @@ const HabitDetails = () => {
   const router = useRouter();
 
   // Type-safe slug extraction
-  const slug = Array.isArray(params?.slug)
-    ? params.slug[0]
-    : params?.slug || "";
+  const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug || "";
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -61,11 +46,7 @@ const HabitDetails = () => {
     if (milestoneStreak.includes(habit.streak) && !alreadyCongratulated) {
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
       toast.success(`🎉 Amazing! You've hit a ${habit.streak}-day streak!`);
-      notificationService.showStreakMilestone(
-        habit.title,
-        habit.icon,
-        habit.streak,
-      );
+      notificationService.showStreakMilestone(habit.title, habit.icon, habit.streak);
     }
   }, [habit]);
 
@@ -75,11 +56,7 @@ const HabitDetails = () => {
   const isCompletedToday = habit.history.includes(today);
   const completionRate =
     habit.history.length > 0
-      ? Math.round(
-          (habit.history.length /
-            (dayjs().diff(dayjs(habit.startDate), "day") + 1)) *
-            100,
-        )
+      ? Math.round((habit.history.length / (dayjs().diff(dayjs(habit.startDate), "day") + 1)) * 100)
       : 0;
 
   const handleDone = () => {
@@ -129,17 +106,9 @@ const HabitDetails = () => {
   };
 
   return (
-    <motion.section
-      className={styles.HabitDetails}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <motion.section className={styles.HabitDetails} variants={containerVariants} initial="hidden" animate="visible">
       {/* 1. Header with Back Button */}
-      <motion.div
-        className={styles.HabitDetails_Header}
-        variants={itemVariants}
-      >
+      <motion.div className={styles.HabitDetails_Header} variants={itemVariants}>
         <Link href="/tracker" className={styles.HabitDetails_BackButton}>
           <LuArrowLeft size={16} />
           Back to Tracker
@@ -147,16 +116,11 @@ const HabitDetails = () => {
       </motion.div>
 
       {/* 2. Main Hero Card */}
-      <motion.div
-        className={styles.HabitDetails_HeroCard}
-        variants={itemVariants}
-      >
+      <motion.div className={styles.HabitDetails_HeroCard} variants={itemVariants}>
         <div className={styles.Hero_MainInfo}>
           <div className={styles.HabitDetails_IconWrapper}>{habit.icon}</div>
           <div className={styles.Hero_Text}>
-            <span className={styles.HabitDetails_Category}>
-              {habit.category || "General"}
-            </span>
+            <span className={styles.HabitDetails_Category}>{habit.category || "General"}</span>
             <h1 className={styles.HabitDetails_Title}>{habit.title}</h1>
           </div>
         </div>
@@ -180,39 +144,19 @@ const HabitDetails = () => {
         {/* Action Area */}
         <div className={styles.HabitDetails_ActionArea}>
           <div className={styles.Action_Group}>
-            <Button
-              onClick={handleDone}
-              disabled={isCompletedToday}
-              showIcon
-              icon={<LuCheck />}
-            >
+            <Button onClick={handleDone} disabled={isCompletedToday} showIcon icon={<LuCheck />}>
               {isCompletedToday ? "Completed Today" : "Mark as Done"}
             </Button>
-            <Button
-              variant="secondary"
-              onClick={() => setIsEditOpen(true)}
-              showIcon
-              icon={<LuPencil />}
-            >
+            <Button variant="secondary" onClick={() => setIsEditOpen(true)} showIcon icon={<LuPencil />}>
               Edit Spark
             </Button>
           </div>
 
           <div className={styles.Action_Group}>
-            <Button
-              variant="secondary"
-              onClick={handleReset}
-              showIcon
-              icon={<LuRotateCcw />}
-            >
+            <Button variant="secondary" onClick={handleReset} showIcon icon={<LuRotateCcw />}>
               Reset
             </Button>
-            <Button
-              variant="secondary"
-              onClick={() => setIsDeleteDialogOpen(true)}
-              showIcon
-              icon={<LuTrash2 />}
-            >
+            <Button variant="secondary" onClick={() => setIsDeleteDialogOpen(true)} showIcon icon={<LuTrash2 />}>
               Delete
             </Button>
           </div>
@@ -220,10 +164,7 @@ const HabitDetails = () => {
       </motion.div>
 
       {/* 3. History Visualization */}
-      <motion.div
-        className={styles.HabitDetails_HistorySection}
-        variants={itemVariants}
-      >
+      <motion.div className={styles.HabitDetails_HistorySection} variants={itemVariants}>
         <h2 className={styles.Section_Title}>
           <LuCalendar />
           Habit History
@@ -242,11 +183,7 @@ const HabitDetails = () => {
         }}
       />
 
-      <DeleteDialog
-        isOpen={isDeleteDialogOpen}
-        onClose={() => setIsDeleteDialogOpen(false)}
-        onConfirm={handleDelete}
-      />
+      <DeleteDialog isOpen={isDeleteDialogOpen} onClose={() => setIsDeleteDialogOpen(false)} onConfirm={handleDelete} />
     </motion.section>
   );
 };

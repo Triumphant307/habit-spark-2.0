@@ -38,12 +38,7 @@ const MotivationHub: React.FC = () => {
   };
 
   return (
-    <motion.section
-      className={styles.Motivation_Card}
-      initial="hidden"
-      animate="visible"
-      variants={itemVariants}
-    >
+    <motion.section className={styles.Motivation_Card} initial="hidden" animate="visible" variants={itemVariants}>
       <div className={styles.Header}>
         <span className={styles.Title}>
           <LuSparkles /> Daily Spark
@@ -68,9 +63,7 @@ const MotivationHub: React.FC = () => {
           transition={{ duration: 0.2 }}
         >
           <p className={styles.Quote_Text}>{s.user.motivation.quote}</p>
-          <span className={styles.Quote_Author}>
-            {s.user.motivation.author}
-          </span>
+          <span className={styles.Quote_Author}>{s.user.motivation.author}</span>
         </motion.div>
       </AnimatePresence>
     </motion.section>

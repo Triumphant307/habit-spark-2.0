@@ -25,41 +25,24 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
           <React.Fragment key={name}>
             <div className={styles.Step}>
               <motion.div
-                className={`${styles.StepDot} ${
-                  isActive ? styles.Active : isCompleted ? styles.Completed : ""
-                }`}
+                className={`${styles.StepDot} ${isActive ? styles.Active : isCompleted ? styles.Completed : ""}`}
                 initial={false}
                 animate={{
                   scale: isActive ? 1.2 : 1,
-                  backgroundColor:
-                    isCompleted || isActive
-                      ? "var(--color-brand-primary)"
-                      : "var(--color-border-light)",
+                  backgroundColor: isCompleted || isActive ? "var(--color-brand-primary)" : "var(--color-border-light)",
                 }}
                 transition={{ duration: 0.2 }}
               >
                 {isCompleted && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className={styles.Checkmark}
-                  >
+                  <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className={styles.Checkmark}>
                     ✓
                   </motion.span>
                 )}
               </motion.div>
-              <span
-                className={`${styles.StepLabel} ${isActive ? styles.Active : ""}`}
-              >
-                {name}
-              </span>
+              <span className={`${styles.StepLabel} ${isActive ? styles.Active : ""}`}>{name}</span>
             </div>
             {index < stepNames.length - 1 && (
-              <div
-                className={`${styles.StepLine} ${
-                  index < currentStep ? styles.Completed : ""
-                }`}
-              />
+              <div className={`${styles.StepLine} ${index < currentStep ? styles.Completed : ""}`} />
             )}
           </React.Fragment>
         );

@@ -37,12 +37,7 @@ const ActiveHabits: React.FC = () => {
   };
 
   return (
-    <motion.div
-      className={styles.Habits_Section}
-      initial="hidden"
-      animate="visible"
-      variants={itemVariants}
-    >
+    <motion.div className={styles.Habits_Section} initial="hidden" animate="visible" variants={itemVariants}>
       <div className={styles.Section_Header}>
         <h2 className={styles.Section_Title}>Your Top Sparks</h2>
         <div className={styles.Header_Actions}>
@@ -56,8 +51,7 @@ const ActiveHabits: React.FC = () => {
                   fontSize: "0.75rem",
                 }}
               >
-                View All{" "}
-                <LuArrowRight size={14} style={{ marginLeft: "4px" }} />
+                View All <LuArrowRight size={14} style={{ marginLeft: "4px" }} />
               </Button>
             </Link>
           )}
@@ -67,10 +61,7 @@ const ActiveHabits: React.FC = () => {
       {s.habits.length === 0 ? (
         <div className={styles.Habits_Empty}>
           <div className={styles.Empty_Icon}>🌱</div>
-          <p className={styles.Empty_Text}>
-            Every great journey starts with a single spark. Ready to ignite
-            yours?
-          </p>
+          <p className={styles.Empty_Text}>Every great journey starts with a single spark. Ready to ignite yours?</p>
           <Link href="/suggestion">
             <Button showIcon>Browse Suggestions</Button>
           </Link>

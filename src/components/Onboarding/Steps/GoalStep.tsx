@@ -38,18 +38,14 @@ export const GoalStep: React.FC = () => {
     >
       <div className={styles.Header}>
         <h2 className={styles.Title}>What's your focus?</h2>
-        <p className={styles.Subtitle}>
-          Choose the areas you want to prioritize (Select all that apply)
-        </p>
+        <p className={styles.Subtitle}>Choose the areas you want to prioritize (Select all that apply)</p>
       </div>
 
       <div className={styles.GoalGrid}>
         {GOAL_OPTIONS.map((option, index) => (
           <motion.button
             key={option.value}
-            className={`${styles.GoalCard} ${
-              formData.goals.includes(option.value) ? styles.Selected : ""
-            }`}
+            className={`${styles.GoalCard} ${formData.goals.includes(option.value) ? styles.Selected : ""}`}
             onClick={() => handleSelect(option.value)}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -68,11 +64,7 @@ export const GoalStep: React.FC = () => {
         <Button onClick={prevStep} variant="secondary">
           Back
         </Button>
-        <Button
-          onClick={handleContinue}
-          disabled={formData.goals.length === 0}
-          showIcon
-        >
+        <Button onClick={handleContinue} disabled={formData.goals.length === 0} showIcon>
           Continue
         </Button>
       </div>

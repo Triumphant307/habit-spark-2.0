@@ -7,8 +7,7 @@ import { notificationService } from "@/services/notificationService";
 import styles from "@/Styles/PWA/NotificationSettings.module.css";
 
 export default function NotificationSettings() {
-  const [permission, setPermission] =
-    useState<NotificationPermission>("default");
+  const [permission, setPermission] = useState<NotificationPermission>("default");
   const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
@@ -76,11 +75,7 @@ export default function NotificationSettings() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
             >
-              <button
-                className={styles.Notification_CloseButton}
-                onClick={handleDismiss}
-                aria-label="Close"
-              >
+              <button className={styles.Notification_CloseButton} onClick={handleDismiss} aria-label="Close">
                 <FaTimes />
               </button>
 
@@ -88,13 +83,10 @@ export default function NotificationSettings() {
                 <FaBell className={styles.Notification_BellIcon} />
               </div>
 
-              <h3 className={styles.Notification_Title}>
-                Enable Habit Reminders?
-              </h3>
+              <h3 className={styles.Notification_Title}>Enable Habit Reminders?</h3>
 
               <p className={styles.Notification_Description}>
-                Get notified at your chosen times to stay on track with your
-                habits.
+                Get notified at your chosen times to stay on track with your habits.
               </p>
 
               <ul className={styles.Notification_FeatureList}>
@@ -110,16 +102,10 @@ export default function NotificationSettings() {
               </ul>
 
               <div className={styles.Notification_Actions}>
-                <button
-                  className={styles.Notification_EnableButton}
-                  onClick={handleEnableNotifications}
-                >
+                <button className={styles.Notification_EnableButton} onClick={handleEnableNotifications}>
                   <FaBell /> Enable Notifications
                 </button>
-                <button
-                  className={styles.Notification_LaterButton}
-                  onClick={handleDismiss}
-                >
+                <button className={styles.Notification_LaterButton} onClick={handleDismiss}>
                   Maybe Later
                 </button>
               </div>

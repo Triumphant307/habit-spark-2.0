@@ -96,12 +96,7 @@ const Heatmap: React.FC = () => {
 
           {/* The Actual Grid */}
           <div className={styles.Grid_Wrapper}>
-            <motion.div
-              className={styles.Grid}
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
+            <motion.div className={styles.Grid} variants={containerVariants} initial="hidden" animate="visible">
               {data.map((day) => {
                 const level = getLevel(day.count);
                 return (
@@ -111,8 +106,7 @@ const Heatmap: React.FC = () => {
                     variants={cellVariants}
                   >
                     <div className={styles.Tooltip}>
-                      <strong>{day.count} sparks</strong> on{" "}
-                      {dayjs(day.date).format("MMM D")}
+                      <strong>{day.count} sparks</strong> on {dayjs(day.date).format("MMM D")}
                     </div>
                   </motion.div>
                 );

@@ -35,8 +35,7 @@ const Sidebar: React.FC = () => {
   const pathname = usePathname();
 
   // Logic: Show labels if mobile menu is open OR if desktop sidebar is NOT collapsed
-  const showLabels =
-    s.user.preferences.mobileMenuOpen || !s.user.preferences.sidebarCollapsed;
+  const showLabels = s.user.preferences.mobileMenuOpen || !s.user.preferences.sidebarCollapsed;
 
   useEffect(() => {
     if (s.user.preferences.mobileMenuOpen) {
@@ -86,11 +85,7 @@ const Sidebar: React.FC = () => {
           </AnimatePresence>
           <button
             className={styles.Toggle_Button}
-            onClick={() =>
-              s.user.preferences.mobileMenuOpen
-                ? toggleMobileMenu()
-                : toggleSidebar()
-            }
+            onClick={() => (s.user.preferences.mobileMenuOpen ? toggleMobileMenu() : toggleSidebar())}
             aria-label="Toggle Navigation"
           >
             {s.user.preferences.mobileMenuOpen ? (

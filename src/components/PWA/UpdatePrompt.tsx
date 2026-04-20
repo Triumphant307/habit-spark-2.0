@@ -61,8 +61,7 @@ export default function UpdatePrompt() {
     // Check if running as installed PWA
     const isStandalone =
       window.matchMedia("(display-mode: standalone)").matches ||
-      (window.navigator as Navigator & { standalone?: boolean }).standalone ===
-        true;
+      (window.navigator as Navigator & { standalone?: boolean }).standalone === true;
 
     setIsPWA(isStandalone);
 
@@ -80,8 +79,7 @@ export default function UpdatePrompt() {
 
     // Check if update requires reinstall
     if (REQUIRES_REINSTALL) {
-      const needsReinstall =
-        compareVersions(storedVersion, REINSTALL_FROM_VERSION) < 0;
+      const needsReinstall = compareVersions(storedVersion, REINSTALL_FROM_VERSION) < 0;
 
       // Don't show if already dismissed this version
       if (needsReinstall && dismissed !== APP_VERSION) {
@@ -106,9 +104,7 @@ export default function UpdatePrompt() {
       if ("serviceWorker" in navigator) {
         // Wait for all service workers to unregister
         const registrations = await navigator.serviceWorker.getRegistrations();
-        await Promise.all(
-          registrations.map((registration) => registration.unregister()),
-        );
+        await Promise.all(registrations.map((registration) => registration.unregister()));
 
         // Wait for all caches to be deleted
         const cacheNames = await caches.keys();
@@ -144,12 +140,7 @@ export default function UpdatePrompt() {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
         >
-          <button
-            type="button"
-            title="Dismiss"
-            className={styles.UpdatePrompt_CloseButton}
-            onClick={handleDismiss}
-          >
+          <button type="button" title="Dismiss" className={styles.UpdatePrompt_CloseButton} onClick={handleDismiss}>
             <FaTimes />
           </button>
 
@@ -173,16 +164,10 @@ export default function UpdatePrompt() {
           )}
 
           <div className={styles.UpdatePrompt_Actions}>
-            <button
-              className={styles.UpdatePrompt_UpdateButton}
-              onClick={handleReinstall}
-            >
+            <button className={styles.UpdatePrompt_UpdateButton} onClick={handleReinstall}>
               <FaDownload /> Reinstall App
             </button>
-            <button
-              className={styles.UpdatePrompt_LaterButton}
-              onClick={handleDismiss}
-            >
+            <button className={styles.UpdatePrompt_LaterButton} onClick={handleDismiss}>
               Maybe Later
             </button>
           </div>

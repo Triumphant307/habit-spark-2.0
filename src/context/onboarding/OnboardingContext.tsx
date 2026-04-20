@@ -15,20 +15,15 @@ interface OnboardingContextType {
   handleComplete: () => Promise<void>;
 }
 
-const OnboardingContext = createContext<OnboardingContextType | undefined>(
-  undefined,
-);
+const OnboardingContext = createContext<OnboardingContextType | undefined>(undefined);
 
 export const useOnboarding = () => {
   const context = useContext(OnboardingContext);
-  if (!context)
-    throw new Error("useOnboarding must be used within an OnboardingProvider");
+  if (!context) throw new Error("useOnboarding must be used within an OnboardingProvider");
   return context;
 };
 
-export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
   const [step, setStep] = useState<OnboardingStep>(1);
   const totalSteps = 5;
@@ -39,12 +34,8 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({
     frequency: "Daily",
   });
 
-  const nextStep = () =>
-    setStep((prev) =>
-      prev < totalSteps ? ((prev + 1) as OnboardingStep) : prev,
-    );
-  const prevStep = () =>
-    setStep((prev) => (prev > 1 ? ((prev - 1) as OnboardingStep) : prev));
+  const nextStep = () => setStep((prev) => (prev < totalSteps ? ((prev + 1) as OnboardingStep) : prev));
+  const prevStep = () => setStep((prev) => (prev > 1 ? ((prev - 1) as OnboardingStep) : prev));
 
   const updateFormData = (updates: Partial<OnboardingData>) => {
     setFormData((prev) => ({ ...prev, ...updates }));

@@ -18,8 +18,4 @@ export const REINSTALL_FROM_VERSION = "0.0.0";
 export const REINSTALL_MESSAGE =
   "A new version of HabitSpark is available with improved icons and features. For the best experience, please reinstall the app from your browser.";
 
-export const WHATS_NEW = [
-  "New app icon design",
-  "Improved offline support",
-  "Better performance",
-];
+export const WHATS_NEW = ["New app icon design", "Improved offline support", "Better performance"];

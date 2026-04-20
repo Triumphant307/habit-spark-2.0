@@ -35,11 +35,7 @@
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-extra-bold, 800);
   margin-bottom: var(--spacing-lg);
-  background: linear-gradient(
-    135deg,
-    var(--color-text-primary),
-    var(--color-text-secondary)
-  );
+  background: linear-gradient(135deg, var(--color-text-primary), var(--color-text-secondary));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

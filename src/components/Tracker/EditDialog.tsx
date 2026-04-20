@@ -17,12 +17,7 @@ interface EditDialogProps {
   onSave: (id: string, updatedFields: Partial<Habit>) => void;
 }
 
-const EditDialog: React.FC<EditDialogProps> = ({
-  isOpen,
-  habit,
-  onClose,
-  onSave,
-}) => {
+const EditDialog: React.FC<EditDialogProps> = ({ isOpen, habit, onClose, onSave }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [title, setTitle] = useState("");
   const [target, setTarget] = useState(30);
@@ -50,10 +45,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        pickerRef.current &&
-        !pickerRef.current.contains(event.target as Node)
-      ) {
+      if (pickerRef.current && !pickerRef.current.contains(event.target as Node)) {
         setShowPicker(false);
       }
     };
@@ -74,11 +66,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   };
 
   return (
-    <dialog
-      ref={dialogRef}
-      className={styles.EditDialog_Container}
-      onClose={onClose}
-    >
+    <dialog ref={dialogRef} className={styles.EditDialog_Container} onClose={onClose}>
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -115,11 +103,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
 
               <div className={styles.Picker_Section}>
                 <label className={styles.Picker_Label}>Visual Identity</label>
-                <button
-                  type="button"
-                  className={styles.Icon_Preview}
-                  onClick={() => setShowPicker(!showPicker)}
-                >
+                <button type="button" className={styles.Icon_Preview} onClick={() => setShowPicker(!showPicker)}>
                   <span className={styles.Selected_Icon}>{icon}</span>
                   <div className={styles.Icon_Overlay}>
                     <LuSmile />

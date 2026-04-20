@@ -19,12 +19,7 @@ const Home: React.FC = () => {
 
         <HighlightsBar />
 
-        <motion.div
-          id="features"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <motion.div id="features" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
           <FeaturedHighlight />
         </motion.div>
 

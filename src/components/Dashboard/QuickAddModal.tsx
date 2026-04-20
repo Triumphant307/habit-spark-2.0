@@ -75,11 +75,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <dialog
-      ref={dialogRef}
-      className={styles.QAModal_Container}
-      onClose={onClose}
-    >
+    <dialog ref={dialogRef} className={styles.QAModal_Container} onClose={onClose}>
       <AnimatePresence>
         {isOpen && (
           <motion.div

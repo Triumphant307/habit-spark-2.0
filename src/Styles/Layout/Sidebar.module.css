@@ -113,9 +113,7 @@
     border-radius: 0 var(--shape-radius-lg) var(--shape-radius-lg) 0;
     width: 280px !important;
     left: -280px; /* Hidden by default */
-    background: var(
-      --color-surface-page
-    ); /* More solid on mobile for readability */
+    background: var(--color-surface-page); /* More solid on mobile for readability */
   }
 
   .Sidebar_Container.Mobile_Open {

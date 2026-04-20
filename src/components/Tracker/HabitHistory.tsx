@@ -16,11 +16,7 @@ interface HabitHistoryProps {
 const HabitHistory: React.FC<HabitHistoryProps> = ({ habit }) => {
   const today = dayjs();
 
-  const renderDay = (
-    date: Dayjs,
-    _selectedDates: Array<Dayjs | null>,
-    pickersDayProps: PickersDayProps,
-  ) => {
+  const renderDay = (date: Dayjs, _selectedDates: Array<Dayjs | null>, pickersDayProps: PickersDayProps) => {
     const dateStr = date.format("YYYY-MM-DD");
     const isFuture = date.isAfter(today, "day");
 
@@ -38,10 +34,7 @@ const HabitHistory: React.FC<HabitHistoryProps> = ({ habit }) => {
         color: "white !important",
         boxShadow: "0 4px 10px rgba(59, 130, 246, 0.3)",
       });
-    } else if (
-      !isFuture &&
-      date.isAfter(dayjs(habit.startDate).subtract(1, "day"))
-    ) {
+    } else if (!isFuture && date.isAfter(dayjs(habit.startDate).subtract(1, "day"))) {
       // Missed day
       Object.assign(customStyles, {
         background: "rgba(239, 68, 68, 0.1) !important",
