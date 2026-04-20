@@ -9,6 +9,13 @@ export interface Tip {
   [key: string]: unknown;
 }
 
+export interface Reminder {
+  habitTitle: string;
+  habitIcon: string;
+  time: string;
+  nextScheduled: string;
+}
+
 export interface AppState {
   theme: "light" | "dark" | undefined;
   user: {
@@ -32,4 +39,5 @@ export interface AppState {
     viewMode: "grid" | "list";
     favorites: Tip[];
   };
+  scheduledReminders: Record<string, Reminder>;
 }

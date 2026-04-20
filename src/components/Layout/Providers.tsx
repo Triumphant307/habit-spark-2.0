@@ -1,6 +1,5 @@
 "use client";
 
-import { ToastContainer, Slide } from "react-toastify";
 import NextTopLoader from "nextjs-toploader";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import NotificationInitializer from "@/components/PWA/NotificationInitializer";
@@ -28,20 +27,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
         crawlSpeed={200}
         initialPosition={0.08}
         showAtBottom={false}
-      />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        closeOnClick
-        pauseOnHover
-        draggable
-        limit={3}
-        newestOnTop
-        theme="dark"
-        transition={Slide}
-        toastClassName="custom-toast"
-        progressClassName="custom-progress"
       />
       <ErrorBoundary>{children}</ErrorBoundary>
     </>

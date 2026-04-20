@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRocket, FaTimes, FaDownload } from "react-icons/fa";
+import { persistor } from "@/core/state/app";
 import {
   APP_VERSION,
   REQUIRES_REINSTALL,
@@ -11,7 +12,6 @@ import {
   WHATS_NEW,
 } from "@/config/version";
 import styles from "@/Styles/PWA/UpdatePrompt.module.css";
-import { safeLocalStorage } from "@/utils/safeLocalStorage";
 
 const VERSION_KEY = "habitspark_installed_version";
 const DISMISSED_KEY = "habitspark_update_dismissed";
@@ -53,7 +53,7 @@ export default function UpdatePrompt() {
 
   useEffect(() => {
     // Check if localStorage is available
-    if (!safeLocalStorage.isAvailable()) {
+    if ("undefined" === typeof localStorage) {
       console.warn("localStorage not available, update prompt disabled");
       return;
     }
@@ -69,12 +69,12 @@ export default function UpdatePrompt() {
     // Only show for PWA users
     if (!isStandalone) return;
 
-    const storedVersion = safeLocalStorage.getItem(VERSION_KEY);
-    const dismissed = safeLocalStorage.getItem(DISMISSED_KEY);
+    const storedVersion = persistor.get<string>(VERSION_KEY);
+    const dismissed = persistor.get<string>(DISMISSED_KEY);
 
     // First time install - save version
     if (!storedVersion) {
-      safeLocalStorage.setItem(VERSION_KEY, APP_VERSION);
+      persistor.set(VERSION_KEY, APP_VERSION);
       return;
     }
 
@@ -91,12 +91,12 @@ export default function UpdatePrompt() {
 
     // Update stored version if newer
     if (compareVersions(APP_VERSION, storedVersion) > 0) {
-      safeLocalStorage.setItem(VERSION_KEY, APP_VERSION);
+      persistor.set(VERSION_KEY, APP_VERSION);
     }
   }, []);
 
   const handleDismiss = () => {
-    safeLocalStorage.setItem(DISMISSED_KEY, APP_VERSION);
+    persistor.set(DISMISSED_KEY, APP_VERSION);
     setShowPrompt(false);
   };
 
@@ -116,8 +116,8 @@ export default function UpdatePrompt() {
       }
 
       // Clear version tracking (safe to do now)
-      safeLocalStorage.removeItem(VERSION_KEY);
-      safeLocalStorage.removeItem(DISMISSED_KEY);
+      persistor.remove(VERSION_KEY);
+      persistor.remove(DISMISSED_KEY);
 
       // Reload to trigger fresh install prompt
       window.location.reload();
@@ -145,6 +145,8 @@ export default function UpdatePrompt() {
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
         >
           <button
+            type="button"
+            title="Dismiss"
             className={styles.UpdatePrompt_CloseButton}
             onClick={handleDismiss}
           >
