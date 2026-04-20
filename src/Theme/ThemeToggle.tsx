@@ -2,7 +2,7 @@
 import React from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import styles from "@/Styles/Layout/ThemeToggle.module.css";
-import { useEffect, useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
 
@@ -35,7 +35,7 @@ const ThemeToggle = React.memo((): React.JSX.Element | null => {
   const isDark = s.theme === "dark";
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
@@ -43,7 +43,7 @@ const ThemeToggle = React.memo((): React.JSX.Element | null => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (mounted) document.documentElement.classList.toggle("dark", isDark);
   }, [isDark, mounted]);
 
