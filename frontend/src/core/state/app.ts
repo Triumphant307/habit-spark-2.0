@@ -1,5 +1,5 @@
 import { reactive } from "sia-reactor";
-import { PersistPlugin, TimeTravelPlugin } from "sia-reactor/plugins";
+import { PersistModule, TimeTravelModule } from "sia-reactor/modules";
 import type { AppState } from "@/core/types/app";
 
 const defaultState: AppState = {
@@ -27,11 +27,12 @@ const defaultState: AppState = {
   },
 };
 
+export const time = new TimeTravelModule();
+export const persist = new PersistModule({
+  key: "HABIT_SPARK",
+  throttle: 2500,
+}).attach(time.state, "timeTravel");
 export const appState = reactive(defaultState);
-export const time = new TimeTravelPlugin();
-time.state.plugIn(
-  new PersistPlugin({ key: "appStateTimeTravel", throttle: 2500 }),
-);
-appState
-  .plugIn(new PersistPlugin({ key: "appState", throttle: 2500 }))
-  .plugIn(time);
+
+// Application Modules Setup
+appState.use(persist, "app").use(time);

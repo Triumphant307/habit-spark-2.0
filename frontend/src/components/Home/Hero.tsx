@@ -136,7 +136,7 @@ const Hero: React.FC = () => {
         </motion.div>
 
         <motion.h1 className={styles.Home_Title} variants={itemVariants}>
-          Welcome to {isReturning ? "Back" : ""} <br />
+          Welcome {isReturning ? "Back" : ""} to <br />
           <span className={styles.Home_TitleAccent}>HabitSpark</span>
         </motion.h1>
         <motion.p className={styles.Home_Description} variants={itemVariants}>
