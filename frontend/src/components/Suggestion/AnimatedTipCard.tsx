@@ -28,27 +28,20 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const createRipple = useRipple();
 
   // Initialization: Decision made by global state
-  const isCurrentlyFavorite = (s.suggestions.favorites || []).some(
-    (fav) => fav.id === tip.id,
-  );
+  const isCurrentlyFavorite = (s.suggestions.favorites || []).some((fav) => fav.id === tip.id);
 
   const [isOptimisticAdded, setIsOptimisticAdded] = useState(false);
-  const [isOptimisticFavorite, setIsOptimisticFavorite] =
-    useState(isCurrentlyFavorite);
+  const [isOptimisticFavorite, setIsOptimisticFavorite] = useState(isCurrentlyFavorite);
 
   // Sync Layer: Ensures local state matches global truth if changed externally
   useEffect(() => {
     setIsOptimisticFavorite(isCurrentlyFavorite);
   }, [isCurrentlyFavorite]);
 
-  const displayIcon =
-    typeof tip.icon === "string" ? tip.icon : String(tip.icon ?? "");
-  const displayTitle =
-    typeof tip.title === "string" ? tip.title : String(tip.title ?? "");
+  const displayIcon = typeof tip.icon === "string" ? tip.icon : String(tip.icon ?? "");
+  const displayTitle = typeof tip.title === "string" ? tip.title : String(tip.title ?? "");
 
-  const alreadyAdded = s.habits.some(
-    (h) => h.title.toLowerCase() === displayTitle.toLowerCase(),
-  );
+  const alreadyAdded = s.habits.some((h) => h.title.toLowerCase() === displayTitle.toLowerCase());
 
   const handleAdd = () => {
     setIsOptimisticAdded(true);
@@ -99,18 +92,14 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
 
     // 2. State Mutation
     if (!newFavoriteState) {
-      s.suggestions.favorites = (s.suggestions.favorites || []).filter(
-        (fav) => fav.id !== tip.id,
-      );
+      s.suggestions.favorites = (s.suggestions.favorites || []).filter((fav) => fav.id !== tip.id);
     } else {
       s.suggestions.favorites = [...(s.suggestions.favorites || []), tip];
     }
 
     // 3. Feedback
     toast[newFavoriteState ? "success" : "info"](
-      `${displayTitle} ${displayIcon} ${
-        newFavoriteState ? "added to" : "removed from"
-      } Favorites!`,
+      `${displayTitle} ${displayIcon} ${newFavoriteState ? "added to" : "removed from"} Favorites!`,
       { tag: `fav-${tip.id}` },
     );
   };
@@ -123,9 +112,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
       layout
       key={tip.id}
       className={`${styles.SuggestionCard_Container} ${
-        viewMode === "list"
-          ? styles.SuggestionCard_ListView
-          : styles.SuggestionCard_GridView
+        viewMode === "list" ? styles.SuggestionCard_ListView : styles.SuggestionCard_GridView
       }`}
       style={{ textAlign: "center" }}
       initial={{ opacity: 0, scale: 0.9 }}

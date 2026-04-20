@@ -12,20 +12,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      children,
-      isLoading = false,
-      showIcon = false,
-      icon,
-      variant = "primary",
-      className,
-      ...props
-    },
-    ref,
-  ) => {
-    const variantClass =
-      variant === "secondary" ? styles.Secondary : styles.Primary;
+  ({ children, isLoading = false, showIcon = false, icon, variant = "primary", className, ...props }, ref) => {
+    const variantClass = variant === "secondary" ? styles.Secondary : styles.Primary;
 
     return (
       <button

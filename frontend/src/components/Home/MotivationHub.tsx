@@ -43,9 +43,7 @@ const MotivationHub = () => {
   const fetchRandomQuote = async (): Promise<Quote | null> => {
     try {
       const response = await fetch(
-        `https://api.allorigins.win/get?url=${encodeURIComponent(
-          "https://zenquotes.io/api/random",
-        )}`,
+        `https://api.allorigins.win/get?url=${encodeURIComponent("https://zenquotes.io/api/random")}`,
       );
 
       if (!response.ok) return null;
@@ -75,9 +73,7 @@ const MotivationHub = () => {
       if (newQuote) {
         setActiveQuote(newQuote);
       } else {
-        const currentIndex = fallBackQuotes.findIndex(
-          (q) => q.q === activeQuote.q,
-        );
+        const currentIndex = fallBackQuotes.findIndex((q) => q.q === activeQuote.q);
         const nextIndex = (currentIndex + 1) % fallBackQuotes.length;
         setActiveQuote(fallBackQuotes[nextIndex]);
       }
@@ -117,9 +113,7 @@ const MotivationHub = () => {
 
         <div className={styles.ContentSide}>
           <h2 className={styles.Title}>Fuel Your Journey</h2>
-          <p className={styles.Subtitle}>
-            Daily sparks of wisdom to keep your habits burning bright.
-          </p>
+          <p className={styles.Subtitle}>Daily sparks of wisdom to keep your habits burning bright.</p>
 
           <div className={styles.QuoteWrapper}>
             <AnimatePresence mode="wait">
@@ -131,9 +125,7 @@ const MotivationHub = () => {
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                  <blockquote className={styles.QuoteText}>
-                    “{activeQuote.q}”
-                  </blockquote>
+                  <blockquote className={styles.QuoteText}>“{activeQuote.q}”</blockquote>
                   <cite className={styles.QuoteAuthor}>— {activeQuote.a}</cite>
                 </motion.div>
               )}
@@ -141,16 +133,10 @@ const MotivationHub = () => {
           </div>
 
           <div className={styles.Actions}>
-            <button
-              className={styles.RefreshButton}
-              onClick={() => rotateQuote(true)}
-              disabled={isFetchingQuote}
-            >
+            <button className={styles.RefreshButton} onClick={() => rotateQuote(true)} disabled={isFetchingQuote}>
               <LuSparkles
                 style={{
-                  animation: isFetchingQuote
-                    ? "spin 1s linear infinite"
-                    : "none",
+                  animation: isFetchingQuote ? "spin 1s linear infinite" : "none",
                 }}
               />
               {isFetchingQuote ? "Fetching Spark..." : "New Spark"}

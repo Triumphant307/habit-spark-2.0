@@ -8,11 +8,9 @@ import Input, { InputProps } from "@/components/UI/Input";
  * This ensures backward compatibility while promoting the use of the
  * generic Input component throughout the app.
  */
-const AuthInput = React.forwardRef<HTMLInputElement, InputProps>(
-  (props, ref) => {
-    return <Input ref={ref} {...props} />;
-  },
-);
+const AuthInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  return <Input ref={ref} {...props} />;
+});
 
 AuthInput.displayName = "AuthInput";
 

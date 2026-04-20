@@ -20,8 +20,7 @@ class NotificationService {
   private permission: NotificationPermission = "default";
 
   constructor() {
-    if (typeof window !== "undefined" && "Notification" in window)
-      this.permission = Notification.permission;
+    if (typeof window !== "undefined" && "Notification" in window) this.permission = Notification.permission;
   }
 
   /**
@@ -57,11 +56,9 @@ class NotificationService {
    * Show a notification immediately
    */
   async show(options: NotificationOptions): Promise<void> {
-    if (!this.isSupported())
-      return void console.warn("This browser does not support notifications");
+    if (!this.isSupported()) return void console.warn("This browser does not support notifications");
     if (!this.isGranted())
-      if (!(await this.requestPermission()))
-        return void console.warn("Notification permission not granted");
+      if (!(await this.requestPermission())) return void console.warn("Notification permission not granted");
     try {
       const notificationPayload = {
         body: options.body,
@@ -76,23 +73,14 @@ class NotificationService {
       if ("serviceWorker" in navigator)
         try {
           let registration =
-            (await navigator.serviceWorker.getRegistration()) ||
-            (await navigator.serviceWorker.register("/sw.js"));
-          registration = registration.active
-            ? registration
-            : await navigator.serviceWorker.ready;
-          await registration.showNotification(
-            options.title,
-            notificationPayload as NotificationOptions,
-          );
+            (await navigator.serviceWorker.getRegistration()) || (await navigator.serviceWorker.register("/sw.js"));
+          registration = registration.active ? registration : await navigator.serviceWorker.ready;
+          await registration.showNotification(options.title, notificationPayload as NotificationOptions);
           return;
         } catch (error) {
           console.warn("SW notification failed, falling back:", error);
         }
-      new Notification(
-        options.title,
-        notificationPayload as NotificationOptions,
-      ); // Last-resort fallback when SW notification path is unavailable.
+      new Notification(options.title, notificationPayload as NotificationOptions); // Last-resort fallback when SW notification path is unavailable.
     } catch (error) {
       console.error("Error showing notification:", error);
     }
@@ -101,19 +89,13 @@ class NotificationService {
   /**
    * Schedule a daily reminder at a specific time
    */
-  scheduleDailyReminder(
-    habitId: string,
-    habitTitle: string,
-    habitIcon: string,
-    time: string,
-  ): void {
+  scheduleDailyReminder(habitId: string, habitTitle: string, habitIcon: string, time: string): void {
     const [hours, minutes] = time.split(":").map(Number);
     const now = new Date();
     const scheduledTime = new Date();
     scheduledTime.setHours(hours, minutes, 0, 0);
     // If time has passed today, schedule for tomorrow
-    if (scheduledTime <= now)
-      scheduledTime.setDate(scheduledTime.getDate() + 1);
+    if (scheduledTime <= now) scheduledTime.setDate(scheduledTime.getDate() + 1);
     const timeUntilNotification = scheduledTime.getTime() - now.getTime();
     appState.scheduledReminders[habitId] = {
       habitTitle,
@@ -147,28 +129,15 @@ class NotificationService {
    */
   restoreScheduledReminders(habits: any[]): void {
     habits.forEach((habit) => {
-      if (
-        habit.reminderEnabled &&
-        habit.reminderTime &&
-        appState.scheduledReminders[habit.id]
-      )
-        this.scheduleDailyReminder(
-          habit.id,
-          habit.title,
-          habit.icon,
-          habit.reminderTime,
-        );
+      if (habit.reminderEnabled && habit.reminderTime && appState.scheduledReminders[habit.id])
+        this.scheduleDailyReminder(habit.id, habit.title, habit.icon, habit.reminderTime);
     });
   }
 
   /**
    * Show streak milestone notification
    */
-  showStreakMilestone(
-    habitTitle: string,
-    habitIcon: string,
-    streak: number,
-  ): void {
+  showStreakMilestone(habitTitle: string, habitIcon: string, streak: number): void {
     let title = "";
     let body = "";
     if (streak === 7) {
@@ -196,11 +165,7 @@ class NotificationService {
   /**
    * Show streak at risk notification
    */
-  showStreakAtRisk(
-    habitTitle: string,
-    habitIcon: string,
-    streak: number,
-  ): void {
+  showStreakAtRisk(habitTitle: string, habitIcon: string, streak: number): void {
     this.show({
       title: "⚠️ Don't Break Your Streak!",
       body: `${habitIcon} ${habitTitle} streak of ${streak} days is at risk!`,

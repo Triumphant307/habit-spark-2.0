@@ -84,10 +84,7 @@ const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   // Smooth scroll handler
-  const handleScrollTo = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    id: string,
-  ) => {
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     if (pathname === "/") {
       e.preventDefault();
       const element = document.getElementById(id);
@@ -117,11 +114,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header
-      className={`${Style.Header_Container} ${
-        isScrolled ? Style.Header_ContainerScrolled : ""
-      }`}
-    >
+    <header className={`${Style.Header_Container} ${isScrolled ? Style.Header_ContainerScrolled : ""}`}>
       <div className={Style.Header_Left}>
         <button
           className={`${Style.Header_Hamburger} ${isMenuOpen ? Style.open : ""}`}
@@ -140,15 +133,10 @@ const Header: React.FC = () => {
         </Link>
       </div>
 
-      <nav
-        className={`${Style.Header_Nav} ${isMenuOpen ? Style.open : ""}`}
-        ref={navRef}
-      >
+      <nav className={`${Style.Header_Nav} ${isMenuOpen ? Style.open : ""}`} ref={navRef}>
         <ul className={Style.Header_NavList}>
           {navItems.map((item) => {
-            const isActive = item.id
-              ? activeSection === item.id && pathname === "/"
-              : pathname === item.href;
+            const isActive = item.id ? activeSection === item.id && pathname === "/" : pathname === item.href;
 
             return (
               <li key={item.label} className={Style.Header_Nav_item}>

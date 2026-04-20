@@ -20,11 +20,7 @@ const BackToTop = () => {
   return (
     <>
       {showButton && (
-        <button
-          className={styles.BackToTop_Button}
-          onClick={scrollToTop}
-          aria-label="Back to Top"
-        >
+        <button className={styles.BackToTop_Button} onClick={scrollToTop} aria-label="Back to Top">
           <FaArrowUp />
         </button>
       )}

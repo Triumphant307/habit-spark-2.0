@@ -16,16 +16,8 @@
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(
-      circle at 20% 30%,
-      var(--color-brand-primary-light, rgba(59, 130, 246, 0.15)),
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      var(--color-status-success-light, rgba(16, 185, 129, 0.15)),
-      transparent 40%
-    );
+    radial-gradient(circle at 20% 30%, var(--color-brand-primary-light, rgba(59, 130, 246, 0.15)), transparent 40%),
+    radial-gradient(circle at 80% 70%, var(--color-status-success-light, rgba(16, 185, 129, 0.15)), transparent 40%);
   filter: blur(80px);
   animation: aurora 20s infinite alternate ease-in-out;
 }
@@ -66,11 +58,7 @@
 }
 
 .Home_TitleAccent {
-  background: linear-gradient(
-    135deg,
-    var(--color-brand-primary) 0%,
-    var(--color-status-success) 100%
-  );
+  background: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-status-success) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -102,12 +90,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.5s ease;
 }
 
@@ -235,16 +218,8 @@
 
   .Home_Background {
     background:
-      radial-gradient(
-        circle at 20% 30%,
-        var(--color-brand-primary-light, rgba(59, 130, 246, 0.25)),
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 80% 70%,
-        var(--color-status-success-light, rgba(16, 185, 129, 0.25)),
-        transparent 50%
-      );
+      radial-gradient(circle at 20% 30%, var(--color-brand-primary-light, rgba(59, 130, 246, 0.25)), transparent 50%),
+      radial-gradient(circle at 80% 70%, var(--color-status-success-light, rgba(16, 185, 129, 0.25)), transparent 50%);
     filter: blur(60px);
   }
 }

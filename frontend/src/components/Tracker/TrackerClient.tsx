@@ -20,11 +20,8 @@ export default function TrackerClient() {
 
   // Advanced Filtering: Category + Search
   const filteredHabits = s.habits.filter((habit) => {
-    const matchesSearch = habit.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "All" || habit.category === selectedCategory;
+    const matchesSearch = habit.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || habit.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -49,12 +46,7 @@ export default function TrackerClient() {
   };
 
   return (
-    <motion.section
-      className={styles.Tracker}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <motion.section className={styles.Tracker} variants={containerVariants} initial="hidden" animate="visible">
       {/* 1. Premium Header */}
       <motion.header className={styles.Tracker_Header} variants={itemVariants}>
         <h1 className={styles.Tracker_Title}>Your Sparks</h1>
@@ -67,20 +59,14 @@ export default function TrackerClient() {
       {/* 2. Tools: Search & Filter Bar */}
       <motion.div className={styles.Tracker_Tools} variants={itemVariants}>
         <div style={{ marginBottom: "var(--spacing-md)" }}>
-          <Search
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            resultRef={resultRef}
-          />
+          <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} resultRef={resultRef} />
         </div>
 
         <div className={styles.Filter_Bar}>
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
-              className={`${styles.Filter_Pill} ${
-                selectedCategory === cat ? styles.Active : ""
-              }`}
+              className={`${styles.Filter_Pill} ${selectedCategory === cat ? styles.Active : ""}`}
               onClick={() => setSelectedCategory(cat)}
             >
               {cat}
@@ -100,9 +86,7 @@ export default function TrackerClient() {
             exit={{ opacity: 0, scale: 0.95 }}
             variants={itemVariants}
           >
-            <span style={{ fontSize: "3rem" }}>
-              {searchQuery ? "🔍" : "🌱"}
-            </span>
+            <span style={{ fontSize: "3rem" }}>{searchQuery ? "🔍" : "🌱"}</span>
             <p className={styles.Empty_Text}>
               {searchQuery
                 ? `No sparks found in "${selectedCategory}" matching "${searchQuery}"`
@@ -121,10 +105,7 @@ export default function TrackerClient() {
                   Reset Filters
                 </button>
               ) : (
-                <Link
-                  href="/suggestion"
-                  className={styles.Tracker_SuggestButton}
-                >
+                <Link href="/suggestion" className={styles.Tracker_SuggestButton}>
                   Explore Suggestions
                 </Link>
               )}

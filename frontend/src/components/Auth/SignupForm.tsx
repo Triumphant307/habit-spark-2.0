@@ -33,11 +33,7 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <form
-      className={styles.Auth_Form}
-      onSubmit={handleSubmit(onSubmit)}
-      noValidate
-    >
+    <form className={styles.Auth_Form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <header className={styles.Auth_FormHeader}>
         <h1 className={styles.Auth_FormTitle}>Create Account</h1>
         <p className={styles.Auth_FormSubtitle}>Join HabitSpark today</p>
@@ -81,12 +77,9 @@ const SignupForm: React.FC = () => {
 
         <div className={styles.Auth_CheckboxWrapper}>
           <AuthCheckbox {...register("terms")}>
-            I agree to the <a href="/terms">Terms of Service</a> and{" "}
-            <a href="/privacy">Privacy Policy</a>
+            I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>
           </AuthCheckbox>
-          {errors.terms && (
-            <p className={styles.Auth_CheckboxError}>{errors.terms.message}</p>
-          )}
+          {errors.terms && <p className={styles.Auth_CheckboxError}>{errors.terms.message}</p>}
         </div>
 
         <AuthButton type="submit" isLoading={isSubmitting}>

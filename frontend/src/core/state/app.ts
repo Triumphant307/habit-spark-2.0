@@ -1,9 +1,5 @@
 import { reactive } from "sia-reactor";
-import {
-  PersistModule,
-  TimeTravelModule,
-  LocalStorageAdapter,
-} from "sia-reactor/modules";
+import { PersistModule, TimeTravelModule, LocalStorageAdapter } from "sia-reactor/modules";
 import type { AppState } from "@/core/types/app";
 
 const defaultState: AppState = {

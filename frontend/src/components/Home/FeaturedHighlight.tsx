@@ -11,12 +11,7 @@ const FeaturedHighlight = () => {
   const features = [
     {
       id: 1,
-      icon: (
-        <LuCheck
-          className={styles.FeatureIcon}
-          style={{ color: "var(--color-brand-primary)" }}
-        />
-      ),
+      icon: <LuCheck className={styles.FeatureIcon} style={{ color: "var(--color-brand-primary)" }} />,
       title: "Track Daily Progress",
       description:
         "Easily monitor your daily habits and see how you're improving over time. Visualize your journey with intuitive daily logs.",
@@ -25,12 +20,7 @@ const FeaturedHighlight = () => {
     },
     {
       id: 2,
-      icon: (
-        <LuSparkles
-          className={styles.FeatureIcon}
-          style={{ color: "var(--color-status-warning)" }}
-        />
-      ),
+      icon: <LuSparkles className={styles.FeatureIcon} style={{ color: "var(--color-status-warning)" }} />,
       title: "Get Personalized Suggestions",
       description:
         "Receive tailored recommendations based on your preferences to help you build better habits that actually stick.",
@@ -39,12 +29,7 @@ const FeaturedHighlight = () => {
     },
     {
       id: 3,
-      icon: (
-        <LuTrendingUp
-          className={styles.FeatureIcon}
-          style={{ color: "var(--color-status-success)" }}
-        />
-      ),
+      icon: <LuTrendingUp className={styles.FeatureIcon} style={{ color: "var(--color-status-success)" }} />,
       title: "Visualize Your Success",
       description:
         "Transform raw data into beautiful, insightful graphs and statistics that motivate you to stay consistent.",
@@ -65,19 +50,10 @@ const FeaturedHighlight = () => {
     <section className={styles.FeaturedHighlight_Section}>
       {features.map((feature, index) => (
         <div key={feature.id} className={styles.FeatureRow}>
-          <div
-            className={styles.TextContent}
-            data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
-          >
-            <span className={styles.FeaturedHighlight_Icon}>
-              {feature.icon}
-            </span>
-            <h2 className={styles.FeaturedHighlight_FeatureTitle}>
-              {feature.title}
-            </h2>
-            <p className={styles.FeaturedHighlight_Description}>
-              {feature.description}
-            </p>
+          <div className={styles.TextContent} data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}>
+            <span className={styles.FeaturedHighlight_Icon}>{feature.icon}</span>
+            <h2 className={styles.FeaturedHighlight_FeatureTitle}>{feature.title}</h2>
+            <p className={styles.FeaturedHighlight_Description}>{feature.description}</p>
           </div>
 
           <div

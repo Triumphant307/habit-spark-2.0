@@ -7,12 +7,7 @@ import style from "@/Styles/Tracker/TrackerCard.module.css";
 import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useEffect } from "react";
 import { Habit } from "@/core/types/habit";
-import {
-  reorderHabits,
-  completeHabit,
-  updateHabit,
-  deleteHabit,
-} from "@/core/state/habits";
+import { reorderHabits, completeHabit, updateHabit, deleteHabit } from "@/core/state/habits";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
 import { LuFlame, LuMoveVertical, LuPencil, LuTrash2 } from "react-icons/lu";
 import dayjs from "dayjs";
@@ -123,9 +118,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                 key={habit.id || `habit-${index}`}
                 className={`${style.TrackerCard_Container} ${
                   isDragging ? style.isDragging : ""
-                } ${isCompletedToday ? style.isCompleted : ""} ${
-                  activeMenu === habit.id ? style.isActive : ""
-                }`}
+                } ${isCompletedToday ? style.isCompleted : ""} ${activeMenu === habit.id ? style.isActive : ""}`}
                 draggable
                 onDragStart={() => handleDragStart(index)}
                 onDragOver={() => handleDragOver(index)}
@@ -142,9 +135,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                   <FaGripVertical />
                 </div>
 
-                <div className={style.TrackerCard_IconWrapper}>
-                  {habit.icon}
-                </div>
+                <div className={style.TrackerCard_IconWrapper}>{habit.icon}</div>
 
                 <Link
                   href={`/habit/${habit.slug}`}
@@ -158,9 +149,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                         size={12}
                         style={{
                           marginRight: "4px",
-                          color: isCompletedToday
-                            ? "var(--color-text-muted)"
-                            : "#f97316",
+                          color: isCompletedToday ? "var(--color-text-muted)" : "#f97316",
                         }}
                       />
                       {habit.streak}
@@ -173,9 +162,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
 
                 <div className={style.TrackerCard_Actions}>
                   <motion.button
-                    className={`${style.TrackerCard_CompleteButton} ${
-                      isCompletedToday ? style.isCompleted : ""
-                    }`}
+                    className={`${style.TrackerCard_CompleteButton} ${isCompletedToday ? style.isCompleted : ""}`}
                     onClick={(e) => handleQuickComplete(e, habit)}
                     onPointerDown={(e) => createRipple(e)}
                     whileHover={{ scale: 1.15 }}
@@ -188,9 +175,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                   <div className={style.Menu_Wrapper}>
                     <button
                       className={style.More_Button}
-                      onClick={() =>
-                        setActiveMenu(activeMenu === habit.id ? null : habit.id)
-                      }
+                      onClick={() => setActiveMenu(activeMenu === habit.id ? null : habit.id)}
                       onPointerDown={(e) => {
                         e.stopPropagation();
                       }}

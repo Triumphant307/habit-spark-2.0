@@ -11,12 +11,7 @@ export type OnboardingGoal =
   | "fitness"
   | "creativity";
 
-export type OnboardingFrequency =
-  | "Daily"
-  | "Weekly"
-  | "Custom"
-  | "daily"
-  | "weekdays";
+export type OnboardingFrequency = "Daily" | "Weekly" | "Custom" | "daily" | "weekdays";
 
 export interface OnboardingData {
   /** User's name/nickname */
@@ -41,10 +36,7 @@ export const GOAL_OPTIONS: {
   { value: "Other", label: "Other", icon: "✨" },
 ];
 
-export const SUGGESTED_HABITS: Record<
-  string,
-  { title: string; icon: string }[]
-> = {
+export const SUGGESTED_HABITS: Record<string, { title: string; icon: string }[]> = {
   Health: [
     { title: "Drink 8 glasses of water", icon: "💧" },
     { title: "Eat a healthy breakfast", icon: "🥣" },

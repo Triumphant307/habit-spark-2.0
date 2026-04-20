@@ -40,8 +40,7 @@ export const updateNickname = (nickname: string) => {
  * Toggles the sidebar collapse state
  */
 export const toggleSidebar = () => {
-  appState.user.preferences.sidebarCollapsed =
-    !appState.user.preferences.sidebarCollapsed;
+  appState.user.preferences.sidebarCollapsed = !appState.user.preferences.sidebarCollapsed;
 };
 
 /**
@@ -49,7 +48,5 @@ export const toggleSidebar = () => {
  */
 export const toggleMobileMenu = (forceState?: boolean) => {
   appState.user.preferences.mobileMenuOpen =
-    forceState !== undefined
-      ? forceState
-      : !appState.user.preferences.mobileMenuOpen;
+    forceState !== undefined ? forceState : !appState.user.preferences.mobileMenuOpen;
 };

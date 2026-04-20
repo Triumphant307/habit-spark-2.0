@@ -9,10 +9,7 @@ interface LinearProgressBarProps {
   className?: string;
 }
 
-const LinearProgressBar: React.FC<LinearProgressBarProps> = ({
-  progress,
-  className,
-}) => {
+const LinearProgressBar: React.FC<LinearProgressBarProps> = ({ progress, className }) => {
   const clampedProgress = Math.min(Math.max(progress, 0), 100);
 
   return (
@@ -28,9 +25,7 @@ const LinearProgressBar: React.FC<LinearProgressBarProps> = ({
           restDelta: 0.001,
         }}
       >
-        {clampedProgress > 0 && clampedProgress < 100 && (
-          <div className={styles.ProgressBar_Spark} />
-        )}
+        {clampedProgress > 0 && clampedProgress < 100 && <div className={styles.ProgressBar_Spark} />}
       </motion.div>
     </div>
   );

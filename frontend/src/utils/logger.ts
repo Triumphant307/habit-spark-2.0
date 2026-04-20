@@ -24,9 +24,7 @@ const LOG_LEVELS: Record<LogLevel, number> = {
 };
 
 const config: LoggerConfig = {
-  enabled:
-    process.env.NODE_ENV !== "production" ||
-    process.env.NEXT_PUBLIC_DEBUG === "true",
+  enabled: process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_DEBUG === "true",
   minLevel: process.env.NODE_ENV === "production" ? "warn" : "debug",
   prefix: "[HabitSpark]",
 };

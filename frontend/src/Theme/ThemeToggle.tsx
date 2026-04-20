@@ -16,10 +16,7 @@ export function toggleWithSweep(
   document.startViewTransition(toggle).ready.then(() => {
     document.documentElement.animate(
       {
-        clipPath: [
-          sweepForwards ? `inset(0 99.9% 0 0)` : `inset(0 0 0 99.9%)`,
-          `inset(0 0 0 0)`,
-        ],
+        clipPath: [sweepForwards ? `inset(0 99.9% 0 0)` : `inset(0 0 0 99.9%)`, `inset(0 0 0 0)`],
       },
       {
         duration: 350,
@@ -36,9 +33,7 @@ const ThemeToggle = React.memo((): React.JSX.Element | null => {
   const [mounted, setMounted] = useState(false);
 
   useLayoutEffect(() => {
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     if (s.theme === undefined) s.theme = prefersDark ? "dark" : "light";
     setMounted(true);
   }, []);
@@ -66,14 +61,7 @@ const ThemeToggle = React.memo((): React.JSX.Element | null => {
 
       <span className={styles.ThemeToggle_Knob}>
         <span className={styles.ThemeToggle_KnobIcon}>
-          {isDark ? (
-            <FaMoon size={14} />
-          ) : (
-            <FaSun
-              size={14}
-              style={{ color: "var(--color-status-sun-icon)" }}
-            />
-          )}
+          {isDark ? <FaMoon size={14} /> : <FaSun size={14} style={{ color: "var(--color-status-sun-icon)" }} />}
         </span>
       </span>
     </button>

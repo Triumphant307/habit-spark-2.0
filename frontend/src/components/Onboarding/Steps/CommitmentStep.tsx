@@ -43,16 +43,10 @@ const CommitmentStep: React.FC = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-    >
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
       <header className={styles.Header}>
         <h1 className={styles.Title}>The Commitment 🤝</h1>
-        <p className={styles.Subtitle}>
-          How often do you want to show up for this habit?
-        </p>
+        <p className={styles.Subtitle}>How often do you want to show up for this habit?</p>
       </header>
 
       <div className={commStyles.FrequencyGrid}>
@@ -60,9 +54,7 @@ const CommitmentStep: React.FC = () => {
           <button
             key={opt.type}
             type="button"
-            className={`${commStyles.Option} ${
-              formData.frequency === opt.type ? commStyles.ActiveOption : ""
-            }`}
+            className={`${commStyles.Option} ${formData.frequency === opt.type ? commStyles.ActiveOption : ""}`}
             onClick={() => handleSelect(opt.type)}
           >
             <div className={commStyles.OptionIcon}>{opt.icon}</div>
@@ -74,10 +66,7 @@ const CommitmentStep: React.FC = () => {
         ))}
       </div>
 
-      <div
-        className={styles.ActionGroup}
-        style={{ marginTop: "var(--spacing-xl)" }}
-      >
+      <div className={styles.ActionGroup} style={{ marginTop: "var(--spacing-xl)" }}>
         <button className={styles.BackButton} onClick={prevStep}>
           Back
         </button>

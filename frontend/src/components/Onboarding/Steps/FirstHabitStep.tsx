@@ -29,16 +29,10 @@ const FirstHabitStep: React.FC = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-    >
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
       <header className={styles.Header}>
         <h1 className={styles.Title}>Start Your Spark ✨</h1>
-        <p className={styles.Subtitle}>
-          Let's set your first habit. Pick a suggestion or create your own.
-        </p>
+        <p className={styles.Subtitle}>Let's set your first habit. Pick a suggestion or create your own.</p>
       </header>
 
       <Input
@@ -54,9 +48,7 @@ const FirstHabitStep: React.FC = () => {
           <button
             key={s}
             type="button"
-            className={`${chipStyles.Chip} ${
-              formData.firstHabit === s ? chipStyles.ActiveChip : ""
-            }`}
+            className={`${chipStyles.Chip} ${formData.firstHabit === s ? chipStyles.ActiveChip : ""}`}
             onClick={() => updateFormData({ firstHabit: s })}
           >
             {s}
@@ -64,18 +56,11 @@ const FirstHabitStep: React.FC = () => {
         ))}
       </div>
 
-      <div
-        className={styles.ActionGroup}
-        style={{ marginTop: "var(--spacing-xl)" }}
-      >
+      <div className={styles.ActionGroup} style={{ marginTop: "var(--spacing-xl)" }}>
         <button className={styles.BackButton} onClick={prevStep}>
           Back
         </button>
-        <Button
-          onClick={handleContinue}
-          disabled={formData.firstHabit.trim().length < 2}
-          showIcon
-        >
+        <Button onClick={handleContinue} disabled={formData.firstHabit.trim().length < 2} showIcon>
           Continue
         </Button>
       </div>

@@ -56,7 +56,7 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
         </main>
 
         {!isAppPage && <Footer />}
-        
+
         <TimeTravelOverlay time={time} color="#3b82f6" />
       </div>
 

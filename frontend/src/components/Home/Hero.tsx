@@ -5,18 +5,8 @@ import { useRipple } from "@/Hooks/useRipple";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import {
-  containerVariants,
-  badgeVariants,
-  itemVariants,
-} from "./HomeAnimations";
-import {
-  LuZap,
-  LuTrendingUp,
-  LuTarget,
-  LuCloudSun,
-  LuGift,
-} from "react-icons/lu";
+import { containerVariants, badgeVariants, itemVariants } from "./HomeAnimations";
+import { LuZap, LuTrendingUp, LuTarget, LuCloudSun, LuGift } from "react-icons/lu";
 
 const Hero: React.FC = () => {
   const createRipple = useRipple();
@@ -28,12 +18,7 @@ const Hero: React.FC = () => {
   }, []);
   return (
     <>
-      <motion.div
-        className={styles.Hero_section}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
+      <motion.div className={styles.Hero_section} variants={containerVariants} initial="hidden" animate="visible">
         {/* Floating Badges */}
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge1}`}
@@ -48,11 +33,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          <LuZap
-            className={styles.Home_BadgeIcon}
-            style={{ color: "var(--color-status-warning)" }}
-          />{" "}
-          Track Smart
+          <LuZap className={styles.Home_BadgeIcon} style={{ color: "var(--color-status-warning)" }} /> Track Smart
         </motion.div>
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge2}`}
@@ -67,11 +48,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          Grow Fast{" "}
-          <LuTrendingUp
-            className={styles.Home_BadgeIcon}
-            style={{ color: "var(--color-status-success)" }}
-          />
+          Grow Fast <LuTrendingUp className={styles.Home_BadgeIcon} style={{ color: "var(--color-status-success)" }} />
         </motion.div>
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge3}`}
@@ -87,11 +64,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          <LuTarget
-            className={styles.Home_BadgeIcon}
-            style={{ color: "var(--color-status-error)" }}
-          />{" "}
-          Goal Driven
+          <LuTarget className={styles.Home_BadgeIcon} style={{ color: "var(--color-status-error)" }} /> Goal Driven
         </motion.div>
         <motion.div
           className={`${styles.Home_Badge} ${styles.Home_Badge4}`}
@@ -107,11 +80,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          Cloud Sync{" "}
-          <LuCloudSun
-            className={styles.Home_BadgeIcon}
-            style={{ color: "var(--color-brand-primary)" }}
-          />
+          Cloud Sync <LuCloudSun className={styles.Home_BadgeIcon} style={{ color: "var(--color-brand-primary)" }} />
         </motion.div>
 
         <motion.div
@@ -128,11 +97,7 @@ const Hero: React.FC = () => {
             },
           }}
         >
-          100% Free{" "}
-          <LuGift
-            className={styles.Home_BadgeIcon}
-            style={{ color: "var(--color-brand-violet)" }}
-          />
+          100% Free <LuGift className={styles.Home_BadgeIcon} style={{ color: "var(--color-brand-violet)" }} />
         </motion.div>
 
         <motion.h1 className={styles.Home_Title} variants={itemVariants}>
@@ -146,10 +111,7 @@ const Hero: React.FC = () => {
         </motion.p>
         <motion.div className={styles.Home_CTA} variants={itemVariants}>
           <Link href="/signup" className={styles.home__button_link}>
-            <button
-              onPointerDown={(e) => createRipple(e)}
-              className={styles.Home_HeroButton}
-            >
+            <button onPointerDown={(e) => createRipple(e)} className={styles.Home_HeroButton}>
               {isReturning ? "Sign Up - It's Free!" : "Sign Up - It's Free!"}
             </button>
           </Link>

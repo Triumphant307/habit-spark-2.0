@@ -17,8 +17,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "HabitSpark - Smart Habit Tracker",
-  description:
-    "Build better habits with daily tracking, personalized suggestions, and progress insights.",
+  description: "Build better habits with daily tracking, personalized suggestions, and progress insights.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -34,11 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

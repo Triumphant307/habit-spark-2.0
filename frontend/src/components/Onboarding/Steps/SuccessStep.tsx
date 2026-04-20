@@ -23,9 +23,7 @@ const SuccessStep: React.FC = () => {
 
       <header className={styles.Header}>
         <h1 className={styles.Title}>You're all set, {formData.nickname}!</h1>
-        <p className={styles.Subtitle}>
-          Your first spark is ready to be ignited. Let's make it a habit.
-        </p>
+        <p className={styles.Subtitle}>Your first spark is ready to be ignited. Let's make it a habit.</p>
       </header>
 
       <div className={successStyles.Summary}>
@@ -36,11 +34,7 @@ const SuccessStep: React.FC = () => {
         </div>
       </div>
 
-      <Button
-        onClick={handleComplete}
-        style={{ width: "100%", marginTop: "var(--spacing-xl)" }}
-        showIcon
-      >
+      <Button onClick={handleComplete} style={{ width: "100%", marginTop: "var(--spacing-xl)" }} showIcon>
         Go to Dashboard
       </Button>
     </motion.div>

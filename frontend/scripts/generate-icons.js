@@ -100,12 +100,8 @@ async function generateIcons() {
         });
       }
 
-      await pipeline
-        .png({ quality: 90 })
-        .toFile(path.join(OUTPUT_DIR, icon.name));
-      console.log(
-        `✅ ${icon.name.padEnd(30)} ${icon.size}x${icon.size}${icon.maskable ? " (maskable)" : ""}`,
-      );
+      await pipeline.png({ quality: 90 }).toFile(path.join(OUTPUT_DIR, icon.name));
+      console.log(`✅ ${icon.name.padEnd(30)} ${icon.size}x${icon.size}${icon.maskable ? " (maskable)" : ""}`);
       successCount++;
     } catch (error) {
       console.error(`❌ ${icon.name.padEnd(30)} Error: ${error.message}`);
@@ -114,9 +110,7 @@ async function generateIcons() {
   }
 
   console.log("\n================================");
-  console.log(
-    `🎉 Complete! ${successCount} icons generated, ${errorCount} errors`,
-  );
+  console.log(`🎉 Complete! ${successCount} icons generated, ${errorCount} errors`);
   console.log(`📁 Icons saved to: ${OUTPUT_DIR}`);
 
   if (errorCount === 0) {

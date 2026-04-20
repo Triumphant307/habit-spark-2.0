@@ -47,11 +47,7 @@ const Search: React.FC<SearchProps> = ({
         autoComplete="off"
       />
       {searchQuery && (
-        <button
-          onClick={handleClear}
-          className={styles.SearchBar_ClearButton}
-          aria-label="Clear search"
-        >
+        <button onClick={handleClear} className={styles.SearchBar_ClearButton} aria-label="Clear search">
           <LuX title="clear" aria-hidden="true" />
         </button>
       )}

@@ -15,11 +15,7 @@ const AppTopBar: React.FC = () => {
       <div className={styles.TopBar_Container}>
         <div className={styles.TopBar_Inner}>
           <div className={styles.TopBar_Left}>
-            <button
-              className={styles.Mobile_Menu_Button}
-              onClick={() => toggleMobileMenu()}
-              aria-label="Open Menu"
-            >
+            <button className={styles.Mobile_Menu_Button} onClick={() => toggleMobileMenu()} aria-label="Open Menu">
               <LuMenu />
             </button>
           </div>
@@ -33,10 +29,7 @@ const AppTopBar: React.FC = () => {
               <LuPlus />
               <span>Add Habit</span>
             </button>
-            <button
-              className={styles.Action_Button}
-              aria-label="View Notifications"
-            >
+            <button className={styles.Action_Button} aria-label="View Notifications">
               <LuBell />
             </button>
             <ThemeToggle />
@@ -44,10 +37,7 @@ const AppTopBar: React.FC = () => {
         </div>
       </div>
 
-      <QuickAddModal
-        isOpen={isQuickAddOpen}
-        onClose={() => setIsQuickAddOpen(false)}
-      />
+      <QuickAddModal isOpen={isQuickAddOpen} onClose={() => setIsQuickAddOpen(false)} />
     </>
   );
 };

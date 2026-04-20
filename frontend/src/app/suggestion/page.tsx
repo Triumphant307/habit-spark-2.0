@@ -9,9 +9,7 @@ const Suggestions = () => {
     <div className={styles.Suggestion_Container}>
       <header className={styles.Header_Section}>
         <h1 className={styles.Suggestion_Title}>Discover Your Next Habit</h1>
-        <p className={styles.Suggestion_Subtitle}>
-          Browse our curated collection of sparks to ignite your journey.
-        </p>
+        <p className={styles.Suggestion_Subtitle}>Browse our curated collection of sparks to ignite your journey.</p>
       </header>
 
       <SuggestionCard />
