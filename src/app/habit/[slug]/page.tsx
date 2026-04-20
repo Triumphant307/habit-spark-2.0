@@ -8,9 +8,9 @@ import HabitHistory from "@/components/Tracker/HabitHistory";
 import DeleteDialog from "@/components/Tracker/DeleteDialog";
 import EditDialog from "@/components/Tracker/EditDialog";
 import HabitNotFound from "@/components/Tracker/HabitNotFound";
-import { resetHabit, updateHabit, deleteHabit, completeHabit, findHabitBySlug } from "@/core/state/habits";
+import { resetHabit, updateHabit, deleteHabit, completeHabit, findHabitBySlug } from "@/core/store/habits";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
 import confetti from "canvas-confetti";
@@ -30,7 +30,7 @@ const HabitDetails = () => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const habit = findHabitBySlug(slug);
 
   useEffect(() => {

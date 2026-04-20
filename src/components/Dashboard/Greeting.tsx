@@ -4,13 +4,13 @@ import React from "react";
 import styles from "@/Styles/Dashboard/Greeting.module.css";
 import dayjs from "dayjs";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 import { LuCalendar } from "react-icons/lu";
 import { getTimeGreeting } from "@/utils/dateUtils";
 import { motion } from "framer-motion";
 
 const Greeting: React.FC = () => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const timeGreeting = getTimeGreeting();
 
   const today = dayjs().format("YYYY-MM-DD");

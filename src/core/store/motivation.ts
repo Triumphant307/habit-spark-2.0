@@ -1,4 +1,4 @@
-import { appState } from "./app";
+import { appStore } from "./app";
 import quotes from "../../data/quotes.json";
 import dayjs from "dayjs";
 
@@ -8,11 +8,11 @@ import dayjs from "dayjs";
  */
 export const refreshMotivation = (force = false) => {
   const today = dayjs().format("YYYY-MM-DD");
-  const lastUpdated = appState.user.motivation.lastUpdated;
+  const lastUpdated = appStore.user.motivation.lastUpdated;
   if (lastUpdated !== today || force) {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const selectedQuote = quotes[randomIndex];
-    appState.user.motivation = {
+    appStore.user.motivation = {
       quote: selectedQuote.q,
       author: selectedQuote.a,
       lastUpdated: today,

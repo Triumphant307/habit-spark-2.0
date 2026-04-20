@@ -3,8 +3,8 @@
 import React, { useEffect } from "react";
 import styles from "@/Styles/Layout/Sidebar.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
-import { toggleSidebar, toggleMobileMenu } from "@/core/state/user";
+import { appStore } from "@/core/store/app";
+import { toggleSidebar, toggleMobileMenu } from "@/core/store/user";
 import {
   LuLayoutDashboard,
   LuListTodo,
@@ -31,7 +31,7 @@ const footerItems = [
 ];
 
 const Sidebar: React.FC = () => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const pathname = usePathname();
 
   // Logic: Show labels if mobile menu is open OR if desktop sidebar is NOT collapsed
