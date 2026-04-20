@@ -2,14 +2,14 @@
 
 import React from "react";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 import Sidebar from "./Sidebar";
 import AppTopBar from "./AppTopBar";
 import Header from "./Header";
 import Footer from "./Footer";
 import { usePathname } from "next/navigation";
 import { TimeTravelOverlay } from "sia-reactor/adapters/react";
-import { time } from "../../core/state/app";
+import { time } from "../../core/store/app";
 
 import "sia-reactor/styles/time-travel-overlay.css";
 
@@ -18,7 +18,7 @@ interface LayoutClientProps {
 }
 
 const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const isCollapsed = s.user.preferences.sidebarCollapsed;
   const pathname = usePathname();
 

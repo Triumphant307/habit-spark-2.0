@@ -3,8 +3,8 @@
 import React, { useEffect } from "react";
 import styles from "@/Styles/Dashboard/MotivationHub.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
-import { refreshMotivation } from "@/core/state/motivation";
+import { appStore } from "@/core/store/app";
+import { refreshMotivation } from "@/core/store/motivation";
 import { LuSparkles, LuRefreshCw } from "react-icons/lu";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -15,7 +15,7 @@ interface MotivationData {
 }
 
 const MotivationHub: React.FC = () => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
 
   // Initial refresh logic (only if empty or new day)
   useEffect(() => {

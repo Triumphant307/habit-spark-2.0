@@ -3,13 +3,13 @@
 import React, { useMemo } from "react";
 import styles from "@/Styles/Dashboard/Heatmap.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 import { getHeatmapData } from "@/utils/dateUtils";
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 
 const Heatmap: React.FC = () => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const data = useMemo(() => getHeatmapData(s.habits), [s.habits]);
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

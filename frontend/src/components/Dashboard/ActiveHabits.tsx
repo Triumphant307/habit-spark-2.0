@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "@/Styles/Dashboard/ActiveHabits.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 import { Habit } from "@/core/types/habit";
 import TrackerCard from "../Tracker/TrackerCard";
 import Link from "next/link";
@@ -13,7 +13,7 @@ import { LuArrowRight } from "react-icons/lu";
 import dayjs from "dayjs";
 
 const ActiveHabits: React.FC = () => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const today = dayjs().format("YYYY-MM-DD");
 
   const topHabits = [...s.habits]

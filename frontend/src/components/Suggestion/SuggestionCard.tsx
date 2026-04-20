@@ -7,12 +7,12 @@ import Search from "@/components/UI/Search";
 import AnimatedTipCard from "@/components/Suggestion/AnimatedTipCard";
 import { FaThLarge, FaList } from "react-icons/fa";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useMemo } from "react";
 
 const SuggestionCard: React.FC = () => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const resultRef = useRef(null);
 

@@ -4,7 +4,7 @@ import { FaSun, FaMoon } from "react-icons/fa";
 import styles from "@/Styles/Layout/ThemeToggle.module.css";
 import { useState, useLayoutEffect } from "react";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 
 // View transition with bi-directional horizontal sweep animation for switching states in the document, eg. theme
 export function toggleWithSweep(
@@ -28,7 +28,7 @@ export function toggleWithSweep(
 }
 
 const ThemeToggle = React.memo((): React.JSX.Element | null => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const isDark = s.theme === "dark";
   const [mounted, setMounted] = useState(false);
 

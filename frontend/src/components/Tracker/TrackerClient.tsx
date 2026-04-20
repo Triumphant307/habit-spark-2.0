@@ -7,13 +7,13 @@ import TrackerCard from "./TrackerCard";
 import Search from "@/components/UI/Search";
 import { useState, useRef } from "react";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 import { GOAL_OPTIONS } from "@/types/onboarding";
 
 const CATEGORIES = ["All", ...GOAL_OPTIONS.map((opt) => opt.value)];
 
 export default function TrackerClient() {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const resultRef = useRef<HTMLDivElement | null>(null);

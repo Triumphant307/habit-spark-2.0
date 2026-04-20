@@ -3,13 +3,13 @@
 import React from "react";
 import styles from "@/Styles/Dashboard/StatsOverview.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 import { LuFlame, LuZap, LuTrophy } from "react-icons/lu";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 
 const StatsOverview: React.FC = () => {
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const today = dayjs().format("YYYY-MM-DD");
 
   // 1. Calculate Best Streak

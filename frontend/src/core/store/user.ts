@@ -1,4 +1,4 @@
-import { appState } from "./app";
+import { appStore } from "./app";
 import { OnboardingData } from "@/types/onboarding";
 import logger from "@/utils/logger";
 
@@ -7,9 +7,9 @@ import logger from "@/utils/logger";
  */
 export const completeOnboarding = (data: OnboardingData) => {
   try {
-    appState.user.nickname = data.nickname;
-    appState.user.goals = data.goals;
-    appState.user.completedOnboarding = true;
+    appStore.user.nickname = data.nickname;
+    appStore.user.goals = data.goals;
+    appStore.user.completedOnboarding = true;
     const newHabit = {
       id: String(Date.now()),
       title: data.firstHabit,
@@ -20,7 +20,7 @@ export const completeOnboarding = (data: OnboardingData) => {
       history: [],
       startDate: new Date().toISOString().split("T")[0],
     };
-    appState.habits.push(newHabit);
+    appStore.habits.push(newHabit);
     logger.info("Onboarding completed", { nickname: data.nickname });
     return true;
   } catch (error) {
@@ -33,20 +33,20 @@ export const completeOnboarding = (data: OnboardingData) => {
  * Updates only the user's nickname
  */
 export const updateNickname = (nickname: string) => {
-  appState.user.nickname = nickname;
+  appStore.user.nickname = nickname;
 };
 
 /**
  * Toggles the sidebar collapse state
  */
 export const toggleSidebar = () => {
-  appState.user.preferences.sidebarCollapsed = !appState.user.preferences.sidebarCollapsed;
+  appStore.user.preferences.sidebarCollapsed = !appStore.user.preferences.sidebarCollapsed;
 };
 
 /**
  * Toggles the mobile menu (hamburger) state
  */
 export const toggleMobileMenu = (forceState?: boolean) => {
-  appState.user.preferences.mobileMenuOpen =
-    forceState !== undefined ? forceState : !appState.user.preferences.mobileMenuOpen;
+  appStore.user.preferences.mobileMenuOpen =
+    forceState !== undefined ? forceState : !appStore.user.preferences.mobileMenuOpen;
 };

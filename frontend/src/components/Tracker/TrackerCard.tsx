@@ -7,7 +7,7 @@ import style from "@/Styles/Tracker/TrackerCard.module.css";
 import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useEffect } from "react";
 import { Habit } from "@/core/types/habit";
-import { reorderHabits, completeHabit, updateHabit, deleteHabit } from "@/core/state/habits";
+import { reorderHabits, completeHabit, updateHabit, deleteHabit } from "@/core/store/habits";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
 import { LuFlame, LuMoveVertical, LuPencil, LuTrash2 } from "react-icons/lu";
 import dayjs from "dayjs";
@@ -17,7 +17,7 @@ import logger from "@/utils/logger";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 
 interface TrackerCardProps {
   habits: Habit[]; // Still takes props for filtering (e.g., Search or Top 6)
@@ -31,7 +31,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
 
   // We assign the reactor to 's' so the component explicitly subscribes to changes.
   // This ensures that when habits are updated anywhere, this list re-renders.
-  useReactor(appState);
+  useReactor(appStore);
 
   const draggedItem = useRef<Habit | null>(null);
   const draggedIdx = useRef<number | null>(null);
