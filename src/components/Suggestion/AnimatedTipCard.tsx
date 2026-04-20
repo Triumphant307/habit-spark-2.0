@@ -11,8 +11,8 @@ import { useRipple } from "@/Hooks/useRipple";
 import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
-import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 interface AnimatedTipCardProps {
   tip: Tip;
@@ -22,6 +22,7 @@ interface AnimatedTipCardProps {
 const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
   const lastAddedHabitId = useRef<string | null>(null);
+  const router = useRouter();
 
   const s = useReactor(appState);
   const createRipple = useRipple();
@@ -66,40 +67,28 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
 
     lastAddedHabitId.current = createdHabit.id;
 
-    toast.success(
-      <span>
-        {`${displayTitle.trim()} ${displayIcon} added! `}
-        <Link
-          href="/tracker"
-          style={{ color: "#4caf50", textDecoration: "underline" }}
-        >
-          Go to Tracker
-        </Link>
-        <button
-          style={{
-            marginLeft: 10,
-            background: "none",
-            border: "none",
-            color: "#1976d2",
-            cursor: "pointer",
-            textDecoration: "underline",
-            padding: 0,
-            fontSize: "inherit",
-          }}
-          onPointerDown={(e) => createRipple(e)}
-          onClick={() => handleUndo(createdHabit.id)}
-        >
-          Undo
-        </button>
-      </span>,
-    );
+    toast.success(`${displayTitle.trim()} ${displayIcon} added!`, {
+      id: createdHabit.id,
+      tag: `suggestion-added-${createdHabit.id}`,
+      autoClose: 7000,
+      actions: {
+        "Go to Tracker": () => {
+          toast.dismiss(createdHabit.id);
+          router.push("/tracker");
+        },
+        Undo: () => handleUndo(createdHabit.id),
+      },
+    });
   };
 
   const handleUndo = (habitId?: string | null) => {
     if (!habitId) return;
     setIsOptimisticAdded(false);
     deleteHabit(habitId);
-    toast.info(`${displayTitle.trim()} ${displayIcon} removed!`);
+    toast.info(habitId, {
+      render: `${displayTitle.trim()} ${displayIcon} removed!`,
+      actions: false,
+    });
     lastAddedHabitId.current = null;
   };
 
@@ -122,7 +111,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
       `${displayTitle} ${displayIcon} ${
         newFavoriteState ? "added to" : "removed from"
       } Favorites!`,
-      { toastId: `fav-${tip.id}` },
+      { tag: `fav-${tip.id}` },
     );
   };
 
@@ -145,15 +134,15 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
       <button
+        type="button"
+        title="Toggle favorite"
         className={styles.SuggestionCard_HeartButton}
         onClick={toggleFavorite}
       >
         <FaHeart color={isOptimisticFavorite ? "#ef4444" : "#94a3b8"} />
       </button>
 
-      <span className={styles.SuggestionCard_Icon} style={{ fontSize: "2rem" }}>
-        {displayIcon}
-      </span>
+      <span className={styles.SuggestionCard_Icon}>{displayIcon}</span>
 
       <h3>{displayTitle}</h3>
 
