@@ -82,6 +82,7 @@ const SuggestionCard: React.FC = () => {
           <button
             key={category}
             type="button"
+            title={`Filter by ${category}`}
             onClick={() => (s.suggestions.filter = category)}
             className={
               s.suggestions.filter === category
