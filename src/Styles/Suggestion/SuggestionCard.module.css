@@ -260,20 +260,41 @@
 @media (max-width: 768px) {
   .SuggestionCard_Grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-lg);
   }
 
   .SuggestionCard_ActionButton {
     width: 100%;
+    padding: var(--spacing-md) var(--spacing-sm); /* Taller for better tap target */
+    font-size: var(--font-size-xs); /* Prevents wrapping on narrow phones */
   }
 
   .SuggestionCard_ListView {
     flex-direction: column !important;
     align-items: center;
     text-align: center;
+    padding: var(--spacing-lg);
+  }
+
+  .SuggestionCard_ListView h3 {
+    text-align: center;
+    font-size: var(--font-size-lg);
   }
 
   .SuggestionCard_ListView .SuggestionCard_ActionButton {
     width: 100%;
     margin-left: 0;
+    margin-top: var(--spacing-sm);
+  }
+
+  .SuggestionCard_Icon {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 380px) {
+  .SuggestionCard_Grid {
+    grid-template-columns: 1fr; /* Single column on very small devices */
   }
 }
