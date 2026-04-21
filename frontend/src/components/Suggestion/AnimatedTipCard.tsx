@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { LuPlus, LuCheck } from "react-icons/lu";
 import { useReactor } from "sia-reactor/adapters/react";
-import { appState } from "@/core/state/app";
-import { addHabit, deleteHabit } from "@/core/state/habits";
+import { appStore } from "@/core/store/app";
+import { addHabit, deleteHabit } from "@/core/store/habits";
 import { useRipple } from "@/Hooks/useRipple";
 import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import toast from "@/utils/toast";
@@ -26,7 +26,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const lastAddedHabitId = useRef<string | null>(null);
   const router = useRouter();
 
-  const s = useReactor(appState);
+  const s = useReactor(appStore);
   const createRipple = useRipple();
 
   // Initialization: Decision made by global state

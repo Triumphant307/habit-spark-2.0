@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { OnboardingData, OnboardingStep } from "@/types/onboarding";
 import { useRouter } from "next/navigation";
-import { completeOnboarding } from "@/core/state/user";
+import { completeOnboarding } from "@/core/store/user";
 
 interface OnboardingContextType {
   formData: OnboardingData;

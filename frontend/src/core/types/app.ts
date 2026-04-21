@@ -16,7 +16,7 @@ export interface Reminder {
   nextScheduled: string;
 }
 
-export interface AppState {
+export interface AppStore {
   theme: "light" | "dark" | undefined;
   user: {
     visitedHome: boolean;
