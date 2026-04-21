@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { Tip } from "@/core/types/app";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
+import { LuPlus, LuCheck } from "react-icons/lu";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appState } from "@/core/state/app";
 import { addHabit, deleteHabit } from "@/core/state/habits";
@@ -13,6 +14,7 @@ import toast from "@/utils/toast";
 import logger from "@/utils/logger";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Button from "@/components/UI/Button";
 
 interface AnimatedTipCardProps {
   tip: Tip;
@@ -133,15 +135,17 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
 
       <h3>{displayTitle}</h3>
 
-      <button
+      <Button
         className={styles.SuggestionCard_ActionButton}
         onClick={handleAdd}
         disabled={isButtonDisabled}
         onPointerDown={(e) => createRipple(e)}
         title={isButtonDisabled ? "Already added" : "Add to habits"}
+        showIcon
+        icon={isButtonDisabled ? <LuCheck /> : <LuPlus />}
       >
-        {isButtonDisabled ? "Added ✅" : "Add Habit"}
-      </button>
+        {isButtonDisabled ? "Added" : "Add Habit"}
+      </Button>
     </motion.div>
   );
 };
