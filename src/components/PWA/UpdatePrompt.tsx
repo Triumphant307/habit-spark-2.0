@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRocket, FaTimes, FaDownload } from "react-icons/fa";
-import { persistor } from "@/core/state/app";
+import { persistor } from "@/core/store/app";
 import {
   APP_VERSION,
   REQUIRES_REINSTALL,

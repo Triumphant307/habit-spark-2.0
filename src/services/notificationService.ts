@@ -1,4 +1,4 @@
-import { appState } from "@/core/state/app";
+import { appStore } from "@/core/store/app";
 
 /**
  * Native Browser Notification Service
@@ -97,7 +97,7 @@ class NotificationService {
     // If time has passed today, schedule for tomorrow
     if (scheduledTime <= now) scheduledTime.setDate(scheduledTime.getDate() + 1);
     const timeUntilNotification = scheduledTime.getTime() - now.getTime();
-    appState.scheduledReminders[habitId] = {
+    appStore.scheduledReminders[habitId] = {
       habitTitle,
       habitIcon,
       time,
@@ -121,7 +121,7 @@ class NotificationService {
    * Cancel a scheduled reminder
    */
   cancelReminder(habitId: string): void {
-    delete appState.scheduledReminders[habitId];
+    delete appStore.scheduledReminders[habitId];
   }
 
   /**
@@ -129,7 +129,7 @@ class NotificationService {
    */
   restoreScheduledReminders(habits: any[]): void {
     habits.forEach((habit) => {
-      if (habit.reminderEnabled && habit.reminderTime && appState.scheduledReminders[habit.id])
+      if (habit.reminderEnabled && habit.reminderTime && appStore.scheduledReminders[habit.id])
         this.scheduleDailyReminder(habit.id, habit.title, habit.icon, habit.reminderTime);
     });
   }

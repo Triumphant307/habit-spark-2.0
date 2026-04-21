@@ -9,7 +9,7 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { LuPlus, LuX, LuSmile } from "react-icons/lu";
 import { FaExclamationCircle } from "react-icons/fa";
-import { addHabit } from "@/core/state/habits";
+import { addHabit } from "@/core/store/habits";
 import toast from "@/utils/toast";
 
 const HABIT_PRESETS = [

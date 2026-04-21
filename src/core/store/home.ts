@@ -1,9 +1,9 @@
-import { appState } from "./app";
+import { appStore } from "./app";
 
 export const trackHomeVisit = (): boolean => {
-  if (!appState.user.visitedHome) {
+  if (!appStore.user.visitedHome) {
     console.log("First time home visit");
-    appState.user.visitedHome = true;
+    appStore.user.visitedHome = true;
     return false;
   }
   console.log("Welcome back!");
