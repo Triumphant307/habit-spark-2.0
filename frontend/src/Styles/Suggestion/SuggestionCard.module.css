@@ -3,6 +3,8 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--spacing-xl);
   margin-top: var(--spacing-3xl);
+  /* Ensure all items in a row have equal height */
+  align-items: stretch;
 }
 
 @media (min-width: 1024px) {
@@ -25,14 +27,20 @@
   border-radius: var(--shape-radius-md);
   box-shadow: var(--shadow-elevation-sm);
   transition: var(--animation-transition-smooth);
+  /* THE FIX: Vertical alignment */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .SuggestionCard_Container h3 {
   font-weight: var(--font-weight-normal);
   text-align: center;
   font-size: var(--font-size-xl);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
   color: var(--color-text-primary);
+  /* THE FIX: Push button to bottom by taking up all available space */
+  flex: 1;
 }
 
 .SuggestionCard_Container:hover {
@@ -54,14 +62,20 @@
   letter-spacing: 0.02em;
   transition: var(--animation-transition-smooth);
   box-shadow: var(--shadow-interaction-primary);
+  /* THE FIX: Ensure consistent width */
+  width: 100%;
 }
 
 .SuggestionCard_ActionButton:disabled {
-  background: var(--color-surface-muted);
+  background: var(--color-surface-muted) !important;
+  color: var(--color-text-muted) !important;
   cursor: not-allowed;
   opacity: 0.6;
+  filter: grayscale(1);
+  box-shadow: none !important;
+  transform: none !important;
+  border: 1px solid var(--border-color-base);
   pointer-events: none;
-  box-shadow: none;
 }
 
 .SuggestionCard_ActionButton:hover:not(:disabled) {
@@ -168,6 +182,8 @@
   padding: var(--spacing-xs);
   border-radius: 50%;
   transition: var(--animation-transition-fast);
+  /* Keep at top right */
+  align-self: flex-end;
 }
 
 .SuggestionCard_HeartButton:hover {
@@ -179,6 +195,7 @@
 .SuggestionCard_ListView {
   width: 100%;
   display: flex;
+  flex-direction: row !important; /* Force horizontal in list mode */
   align-items: center;
   gap: var(--spacing-lg);
   text-align: left;
@@ -186,11 +203,18 @@
 }
 
 .SuggestionCard_ListView .SuggestionCard_Icon {
+  margin-bottom: 0;
   font-size: var(--font-size-4xl);
+}
+
+.SuggestionCard_ListView h3 {
+  margin-bottom: 0;
+  text-align: left;
 }
 
 .SuggestionCard_ListView .SuggestionCard_ActionButton {
   margin-left: auto;
+  width: auto; /* Shrink to fit in list mode */
 }
 
 .SuggestionCard_GridView {
@@ -243,12 +267,13 @@
   }
 
   .SuggestionCard_ListView {
-    flex-direction: column;
+    flex-direction: column !important;
     align-items: center;
     text-align: center;
   }
 
   .SuggestionCard_ListView .SuggestionCard_ActionButton {
     width: 100%;
+    margin-left: 0;
   }
 }
