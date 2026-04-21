@@ -17,7 +17,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <UpdatePrompt />
       <NotificationSettings />
       <NextTopLoader
-        color="#22c55e"
+        color="#3b82f6"
         height={3}
         showSpinner={false}
         speed={500}
