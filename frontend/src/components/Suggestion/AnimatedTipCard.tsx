@@ -2,13 +2,13 @@
 
 import { useInView } from "react-intersection-observer";
 import { Tip } from "@/core/types/app";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { LuPlus, LuCheck } from "react-icons/lu";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";
 import { addHabit, deleteHabit } from "@/core/store/habits";
-import { useRipple } from "@/Hooks/useRipple";
+import { rippleHandler } from "@t007/utils/hooks/vanilla";
 import styles from "@/Styles/Suggestion/SuggestionCard.module.css";
 import toast from "@/utils/toast";
 import logger from "@/utils/logger";
@@ -25,9 +25,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
   const lastAddedHabitId = useRef<string | null>(null);
   const router = useRouter();
-
   const s = useReactor(appStore);
-  const createRipple = useRipple();
 
   // Initialization: Decision made by global state
   const isCurrentlyFavorite = (s.suggestions.favorites || []).some((fav) => fav.id === tip.id);
@@ -56,19 +54,20 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
     const createdHabit = addHabit({
       title: displayTitle,
       icon: displayIcon,
+      category: tip.category,
       target: 30,
       history: (tip.history as string[]) ?? [],
     });
 
     lastAddedHabitId.current = createdHabit.id;
 
-    toast.success(`${displayTitle.trim()} ${displayIcon} added!`, {
-      id: createdHabit.id,
-      tag: `suggestion-added-${createdHabit.id}`,
+    toast.success(`${displayTitle.trim()} added!`, {
+      id: `${createdHabit.id}Add`,
+      icon: displayIcon,
       autoClose: 7000,
       actions: {
         "Go to Tracker": () => {
-          toast.dismiss(createdHabit.id);
+          toast.dismiss(`${createdHabit.id}Add`);
           router.push("/tracker");
         },
         Undo: () => handleUndo(createdHabit.id),
@@ -80,8 +79,9 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
     if (!habitId) return;
     setIsOptimisticAdded(false);
     deleteHabit(habitId);
-    toast.info(habitId, {
-      render: `${displayTitle.trim()} ${displayIcon} removed!`,
+    toast.info(`${displayTitle.trim()} removed!`, {
+      id: `${habitId}Add`,
+      icon: displayIcon,
       actions: false,
     });
     lastAddedHabitId.current = null;
@@ -91,18 +91,16 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
     // 1. Instant UI Flip
     const newFavoriteState = !isOptimisticFavorite;
     setIsOptimisticFavorite(newFavoriteState);
-
     // 2. State Mutation
     if (!newFavoriteState) {
       s.suggestions.favorites = (s.suggestions.favorites || []).filter((fav) => fav.id !== tip.id);
     } else {
       s.suggestions.favorites = [...(s.suggestions.favorites || []), tip];
     }
-
     // 3. Feedback
     toast[newFavoriteState ? "success" : "info"](
-      `${displayTitle} ${displayIcon} ${newFavoriteState ? "added to" : "removed from"} Favorites!`,
-      { tag: `fav-${tip.id}` },
+      `${displayTitle} ${newFavoriteState ? "added to" : "removed from"} Favorites!`,
+      { id: `${tip.id} Favorite`, icon: displayIcon },
     );
   };
 
@@ -111,8 +109,6 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   return (
     <motion.div
       ref={ref}
-      layout
-      key={tip.id}
       className={`${styles.SuggestionCard_Container} ${
         viewMode === "list" ? styles.SuggestionCard_ListView : styles.SuggestionCard_GridView
       }`}
@@ -139,7 +135,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
         className={styles.SuggestionCard_ActionButton}
         onClick={handleAdd}
         disabled={isButtonDisabled}
-        onPointerDown={(e) => createRipple(e)}
+        onPointerDown={(e) => rippleHandler(e)}
         title={isButtonDisabled ? "Already added" : "Add to habits"}
         showIcon
         icon={isButtonDisabled ? <LuCheck /> : <LuPlus />}

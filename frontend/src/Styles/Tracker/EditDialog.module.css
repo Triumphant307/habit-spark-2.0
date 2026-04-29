@@ -2,15 +2,10 @@
   padding: 0;
   border: none;
   background: transparent;
-  width: 100vw;
-  height: 100vh;
-  max-width: 100%;
-  max-height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   inset: 0;
+  margin: auto;
+  border-radius: var(--shape-radius-xl);
   z-index: var(--z-index-layer-notification);
   overflow: hidden;
   pointer-events: none;
@@ -24,15 +19,16 @@
 
 .EditDialog_Container::backdrop {
   background: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 
 .EditDialog_Wrapper {
   background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);
+  backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
-  border-radius: var(--shape-radius-xl);
+  border-radius: inherit;
   padding: var(--spacing-2xl);
   width: 440px;
   max-width: 90vw;

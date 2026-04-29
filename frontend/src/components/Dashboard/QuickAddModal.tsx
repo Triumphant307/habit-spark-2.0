@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "@/Styles/Dashboard/QuickAddModal.module.css";
-import Input from "@/components/UI/Input";
+import Input, { useFormManager } from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -11,6 +11,7 @@ import { LuPlus, LuX, LuSmile } from "react-icons/lu";
 import { FaExclamationCircle } from "react-icons/fa";
 import { addHabit } from "@/core/store/habits";
 import toast from "@/utils/toast";
+import { useArrowNavigation, useFocusTrap } from "@t007/utils/hooks/react";
 
 const HABIT_PRESETS = [
   { title: "Drink Water", icon: "💧" },
@@ -36,6 +37,9 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
   const [error, setError] = useState("");
   const [showPicker, setShowPicker] = useState(false);
 
+  useFocusTrap(dialogRef, { enabled: isOpen });
+  useArrowNavigation(dialogRef, { enabled: isOpen, rovingTab: false });
+
   useEffect(() => {
     if (isOpen && dialogRef.current) {
       dialogRef.current.showModal();
@@ -56,7 +60,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { handleSubmit } = useFormManager((e: React.FormEvent) => {
     e.preventDefault();
     const trimmedTitle = title.trim();
 
@@ -70,12 +74,12 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
     }
 
     addHabit({ title: trimmedTitle, icon, target });
-    toast.success(`"${trimmedTitle}" spark ignited! ✨`);
+    toast.success(`"${trimmedTitle}" spark ignited!`, { icon: "✨", tag: `${trimmedTitle}Spark` });
     onClose();
-  };
+  });
 
   return (
-    <dialog ref={dialogRef} className={styles.QAModal_Container} onClose={onClose}>
+    <dialog ref={dialogRef} className={styles.QAModal_Container} onClose={onClose} closedby="any">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -115,15 +119,17 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className={styles.Form}>
+            <form noValidate onSubmit={handleSubmit} className={styles.Form}>
               <Input
+                autoFocus
                 label="Habit Title"
                 value={title}
                 onChange={(e) => {
                   setTitle(e.target.value);
                   setError("");
                 }}
-                autoFocus
+                required
+                minLength={3}
               />
 
               <Input
@@ -185,10 +191,10 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
               )}
 
               <div className={styles.Actions}>
-                <Button variant="secondary" type="button" onClick={onClose}>
+                <Button data-autofocus data-arrow-item variant="secondary" type="button" onClick={onClose}>
                   Cancel
                 </Button>
-                <Button type="submit" showIcon icon={<LuPlus />}>
+                <Button data-arrow-item type="submit" showIcon icon={<LuPlus />}>
                   Create Habit
                 </Button>
               </div>

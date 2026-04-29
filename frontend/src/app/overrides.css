@@ -1,0 +1,176 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-page);
+  background-size: cover;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  scrollbar-color: var(--color-brand-primary) transparent;
+  scrollbar-width: thin;
+}
+
+*::selection,
+.highlight {
+  background-color: rgb(from var(--color-brand-primary) r g b / 0.25);
+  color: currentColor;
+}
+
+*:is(:focus-visible, .focus-outline:focus) {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 1px;
+}
+
+main {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* overrides for view transition */
+::view-transition-new(root),
+::view-transition-old(root) {
+  animation: none !important;
+}
+
+/* t007 ripple + scroll assist theme mapping */
+:root {
+  --t007-scroll-assist-opacity: 0.35;
+}
+
+html.dark {
+  --t007-ripple-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== T007 Input Presets (HabitSpark tokens) ===== */
+:root {
+  --t007-input-height: 2.8rem;
+  --t007-input-font-size: 0.9rem;
+  --t007-input-padding: 0.9rem;
+  --t007-input-p-meter-color-weak: var(--color-status-error);
+  --t007-input-p-meter-color-fair: var(--color-status-warning);
+  --t007-input-p-meter-color-strong: var(--color-status-success);
+  --t007-input-checkbox-background: transparent;
+  --t007-input-checkbox-checked-background: var(--gradient-surface-primary);
+  --t007-input-checkbox-checked-border-color: transparent;
+  --t007-input-checkmark-width: 1.5px;
+  --t007-input-checkbox-border-radius: 4px;
+  --t007-input-checkbox-border-color: var(--border-color-base);
+}
+
+.t007-input-field {
+  --t007-input-color: var(--color-text-secondary);
+  --t007-input-focused-color: var(--color-brand-primary);
+  --t007-input-disabled-color: var(--color-text-muted);
+  --t007-input-border-radius: var(--shape-radius-sm);
+  --t007-input-checkbox-font-size: var(--font-size-xs);
+  --t007-input-checkbox-gap: var(--spacing-sm);
+  --t007-input-checkbox-size: 0.9rem;
+}
+
+html.dark .t007-input-field {
+  --t007-input-error-color: var(--t007-input-dark-error-color);
+}
+
+.t007-input-checkbox-label a {
+  color: var(--color-brand-primary);
+  font-weight: 600;
+}
+.t007-input-checkbox-label a:not(:hover) {
+  text-decoration: none;
+}
+
+/* ===== T007 Toast Presets (HabitSpark tokens) ===== */
+.t007-toast {
+  --t007-toast-type-color: var(--color-text-primary);
+  --t007-toast-background: var(--color-surface-card);
+  --t007-toast-success-color: var(--color-status-success);
+  --t007-toast-error-color: var(--color-status-error);
+  --t007-toast-warning-color: var(--color-status-warning);
+  --t007-toast-box-shadow: var(--shadow-elevation-lg);
+  --t007-toast-action-button-color: var(--color-text-primary);
+  --t007-toast-action-button-active-color: var(--color-button-primary-text);
+  --t007-toast-action-button-background: rgb(from var(--color-surface-hover) r g b / 0.55);
+  --t007-toast-action-button-active-background: rgb(from var(--color-button-primary-background) r g b / 0.92);
+  --t007-toast-x-color: var(--color-text-secondary);
+}
+
+.t007-toast-container {
+  --t007-toast-unit: 0.9rem;
+  --t007-toast-width: calc(var(--t007-toast-unit) * 25);
+  --t007-toast-min-height: 3.25rem;
+  --t007-toast-progress-height: calc(var(--t007-toast-unit) / 6);
+  --t007-toast-icon-width: calc(var(--t007-toast-unit) * 1.25);
+  --t007-toast-icon-height: calc(var(--t007-toast-unit) * 1.25);
+  --t007-toast-x-size: calc(var(--t007-toast-unit) * 1.5);
+}
+
+.react-calendar__tile.highlight {
+  background-color: var(--color-status-success) !important;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+}
+
+.react-calendar {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--color-brand-primary);
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+#nprogress .spinner {
+  display: none; /* optional spinner (if you want to hide it) */
+}
+
+@media (max-width: 600px) {
+  .t007-toast-container {
+    --t007-toast-unit: 0.95rem;
+    --t007-toast-container-margin-top: 16px;
+    --t007-toast-container-margin-bottom: 16px;
+    --t007-toast-container-margin-left: 16px;
+    --t007-toast-container-margin-right: 16px;
+  }
+
+  .react-calendar {
+    width: 100%;
+    font-size: 0.75rem;
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}

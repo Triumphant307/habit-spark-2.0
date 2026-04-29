@@ -113,7 +113,7 @@ export default function TrackerClient() {
           </motion.div>
         ) : (
           <motion.div key="habit-list" variants={itemVariants}>
-            <TrackerCard habits={filteredHabits} />
+            <TrackerCard visibleHabits={filteredHabits} query={searchQuery} />
           </motion.div>
         )}
       </AnimatePresence>

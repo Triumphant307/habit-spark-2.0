@@ -2,6 +2,7 @@ import { appStore } from "./app";
 import type { Habit } from "@/core/types/habit";
 import { generateId } from "@/utils/generateId";
 import { slugify } from "@/utils/slugify";
+import { fanout } from "sia-reactor/utils";
 import dayjs from "dayjs";
 
 /**
@@ -17,6 +18,7 @@ export const addHabit = (habit: Partial<Habit>): Habit => {
     target: habit.target ?? 30,
     streak: habit.streak ?? 0,
     history: habit.history ?? [],
+    category: habit.category,
     startDate: habit.startDate ?? dayjs().format("YYYY-MM-DD"),
   };
   appStore.habits.push(newHabit);
@@ -27,7 +29,7 @@ export const addHabit = (habit: Partial<Habit>): Habit => {
  * Updates an existing habit by ID (internal)
  */
 export const updateHabit = (id: string, updatedFields: Partial<Habit>) => {
-  const idx = appStore.habits.findIndex((h: Habit) => h.id === id);
+  const idx = appStore.habits.findIndex((h) => h.id === id);
   if (idx !== -1) Object.assign(appStore.habits[idx], updatedFields);
 };
 
@@ -35,7 +37,7 @@ export const updateHabit = (id: string, updatedFields: Partial<Habit>) => {
  * Deletes a habit by ID (internal)
  */
 export const deleteHabit = (id: string) => {
-  const idx = appStore.habits.findIndex((h: Habit) => h.id === id);
+  const idx = appStore.habits.findIndex((h) => h.id === id);
   if (idx !== -1) appStore.habits.splice(idx, 1);
 };
 
@@ -50,29 +52,29 @@ export const resetHabit = (id: string) => {
  * Marks a habit as completed for today (by ID)
  */
 export const completeHabit = (id: string): boolean => {
-  const idx = appStore.habits.findIndex((h: Habit) => h.id === id);
+  const idx = appStore.habits.findIndex((h) => h.id === id);
   if (idx === -1) return false;
-  const habit = appStore.habits[idx];
   const today = dayjs().format("YYYY-MM-DD");
-  if (habit.history.includes(today)) return false;
-  (appStore.habits[idx] as Habit).streak++;
-  (appStore.habits[idx] as Habit).history.push(today);
+  if (appStore.habits[idx].history.includes(today)) return false;
+  appStore.habits[idx].streak++;
+  appStore.habits[idx].history.push(today);
   return true;
 };
 
 /**
- * Reorder habits by ID array
+ * Reorder habits by ID
  */
-export const reorderHabits = (habitIds: string[]) => {
-  const reordered = habitIds
-    .map((id) => appStore.habits.find((h: Habit) => h.id === id))
-    .filter((h): h is Habit => h !== undefined);
-  appStore.habits.splice(0, appStore.habits.length, ...reordered);
+export const reorderByIds = (draggedId: string, targetId: string) => {
+  const from = appStore.habits.findIndex((x) => x.id === draggedId),
+    to = appStore.habits.findIndex((x) => x.id === targetId);
+  if (from === -1 || to === -1) return;
+  const [item] = appStore.habits.splice(from, 1);
+  appStore.habits.splice(to, 0, item);
 };
 
 /**
  * Helper to find a habit by slug (for URLs)
  */
 export const findHabitBySlug = (slug: string): Habit | undefined => {
-  return appStore.habits.find((h: Habit) => h.slug === slug);
+  return appStore.habits.find((h) => h.slug === slug);
 };

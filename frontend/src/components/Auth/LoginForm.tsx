@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "@/Styles/Auth/AuthForm.module.css";
 import { LuMail, LuLock } from "react-icons/lu";
-import AuthInput from "./UI/AuthInput";
+import Input, { useFormManager } from "@/components/UI/Input";
 import AuthButton from "./UI/AuthButton";
 import SocialAuth from "./SocialAuth";
 import AuthDivider from "./UI/AuthDivider";
@@ -14,13 +14,9 @@ import { zodResolver as hookFormResolver } from "@hookform/resolvers/zod";
 const LoginForm: React.FC = () => {
   const {
     register,
-    handleSubmit,
+    handleSubmit: rhfHandleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>({
-    resolver: hookFormResolver(loginSchema),
-    mode: "onBlur",
-  });
-
+  } = useForm<LoginFormValues>({ resolver: hookFormResolver(loginSchema), mode: "onBlur" });
   const onSubmit = async (data: LoginFormValues) => {
     try {
       // Simulate API call
@@ -30,9 +26,10 @@ const LoginForm: React.FC = () => {
       console.error("Login failed:", error);
     }
   };
+  const { handleSubmit } = useFormManager((e) => rhfHandleSubmit(onSubmit)(e));
 
   return (
-    <form className={styles.Auth_Form} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form noValidate className={styles.Auth_Form} onSubmit={handleSubmit}>
       <header className={styles.Auth_FormHeader}>
         <h1 className={styles.Auth_FormTitle}>Welcome Back</h1>
         <p className={styles.Auth_FormSubtitle}>Please login to your account</p>
@@ -42,22 +39,23 @@ const LoginForm: React.FC = () => {
         <SocialAuth />
         <AuthDivider />
 
-        <AuthInput
+        <Input
           label="Email Address"
           type="email"
           icon={<LuMail />}
           {...register("email")}
-          error={errors.email?.message}
           required
+          error={errors.email?.message}
         />
 
-        <AuthInput
+        <Input
           label="Password"
           type="password"
           icon={<LuLock />}
           {...register("password")}
-          error={errors.password?.message}
           required
+          minLength={8}
+          error={errors.password?.message}
         />
 
         <a href="/forgot-password" className={styles.Auth_ForgotPassword}>

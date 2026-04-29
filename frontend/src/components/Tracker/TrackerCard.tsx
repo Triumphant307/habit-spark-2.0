@@ -4,75 +4,68 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import LinearProgressBar from "@/components/UI/LinearProgressBar";
 import style from "@/Styles/Tracker/TrackerCard.module.css";
-import { useRipple } from "@/Hooks/useRipple";
-import React, { useState, useRef, useEffect } from "react";
+import { rippleHandler } from "@t007/utils/hooks/vanilla";
+import React, { useState, useRef } from "react";
 import { Habit } from "@/core/types/habit";
-import { reorderHabits, completeHabit, updateHabit, deleteHabit } from "@/core/store/habits";
+import { completeHabit, updateHabit, deleteHabit, reorderByIds } from "@/core/store/habits";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
-import { LuFlame, LuMoveVertical, LuPencil, LuTrash2 } from "react-icons/lu";
+import { LuFlame } from "react-icons/lu";
 import dayjs from "dayjs";
 import toast from "@/utils/toast";
 import confetti from "canvas-confetti";
 import logger from "@/utils/logger";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
+import TrackerMenu from "./TrackerMenu";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";
+import { useScrollAssist } from "@t007/utils/hooks/react";
+import { HighlightText } from "@t007/utils/components/react";
+
+const TrackerTitle: React.FC<{ title: string; query: string }> = ({ title, query }) => {
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  useScrollAssist(titleRef, { vertical: false });
+  return (
+    <div className={style.TrackerCard_TitleSlot}>
+      <h3 tabIndex={-1} ref={titleRef} className={`${style.TrackerCard_Title}`}>
+        <HighlightText query={query}>{title}</HighlightText>
+      </h3>
+    </div>
+  );
+};
 
 interface TrackerCardProps {
-  habits: Habit[]; // Still takes props for filtering (e.g., Search or Top 6)
+  visibleHabits: Habit[]; // Still takes props for filtering (e.g., Search or Top 6)
+  query?: string;
 }
 
-const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
+const TrackerCard: React.FC<TrackerCardProps> = ({ visibleHabits, query = "" }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [editingHabit, setEditingHabit] = useState<Habit | null>(null);
   const [deletingHabitId, setDeletingHabitId] = useState<string | null>(null);
-
-  // We assign the reactor to 's' so the component explicitly subscribes to changes.
-  // This ensures that when habits are updated anywhere, this list re-renders.
-  useReactor(appStore);
-
   const draggedItem = useRef<Habit | null>(null);
   const draggedIdx = useRef<number | null>(null);
-  const menuRef = useRef<HTMLDivElement | null>(null);
-  const createRipple = useRipple();
   const today = dayjs().format("YYYY-MM-DD");
 
-  // Close menu on outside click
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setActiveMenu(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [activeMenu]);
+  useReactor(appStore); // This ensures that when habits are updated anywhere, this list re-renders.
 
   const handleDragStart = (index: number) => {
     draggedIdx.current = index;
-    draggedItem.current = habits[index];
+    draggedItem.current = visibleHabits[index];
     setIsDragging(true);
   };
 
   const handleDragOver = (index: number) => {
-    if (draggedIdx.current === null) return;
-    if (draggedIdx.current === index) return;
-
-    // Mutate the array directly - Reactor will handle the UI update
-    const movingItem = habits[draggedIdx.current];
-    habits.splice(draggedIdx.current, 1);
-    habits.splice(index, 0, movingItem);
+    if (draggedIdx.current === null || draggedIdx.current === index) return;
+    const movingItem = visibleHabits[draggedIdx.current];
     draggedIdx.current = index;
+    reorderByIds(movingItem.id, visibleHabits[index].id);
   };
 
   const handleDragEnd = () => {
-    logger.info("Habits reordered", { count: habits.length });
-    // Persist the new order to global state and localStorage
-    reorderHabits(habits.map((h) => h.id));
-    draggedItem.current = null;
-    draggedIdx.current = null;
+    logger.info("Habits reordered", { count: visibleHabits.length });
+    draggedItem.current = draggedIdx.current = null;
     setIsDragging(false);
   };
 
@@ -83,7 +76,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
     const isCompletedToday = habit.history.includes(today);
 
     if (isCompletedToday) {
-      toast.info("Already sparked for today!");
+      toast.info("AlreadySpark for today!", { icon: habit.icon, tag: `${habit.id}Spark` });
       return;
     }
 
@@ -94,14 +87,9 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
       const x = (rect.left + rect.width / 2) / window.innerWidth;
       const y = (rect.top + rect.height / 2) / window.innerHeight;
 
-      confetti({
-        origin: { x, y },
-        particleCount: 40,
-        spread: 50,
-        colors: ["#3B82F6", "#6366F1"],
-      });
+      confetti({ origin: { x, y }, particleCount: 40, spread: 50, colors: ["#3B82F6", "#6366F1"] });
 
-      toast.success(`${habit.title} ignited!`);
+      toast.success(`${habit.title} ignited!`, { icon: habit.icon, tag: `${habit.id}Spark` });
     }
   };
 
@@ -109,7 +97,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
     <>
       <section aria-label="Your habits list" className={style.TrackerCard_Grid}>
         <AnimatePresence>
-          {habits.map((habit, index) => {
+          {visibleHabits.map((habit, index) => {
             const progress = Math.round((habit.streak / habit.target) * 100);
             const isCompletedToday = habit.history.includes(today);
 
@@ -137,13 +125,9 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
 
                 <div className={style.TrackerCard_IconWrapper}>{habit.icon}</div>
 
-                <Link
-                  href={`/habit/${habit.slug}`}
-                  className={style.TrackerCard_Content}
-                  onPointerDown={(e) => createRipple(e)}
-                >
+                <Link href={`/habit/${habit.slug}`} className={style.TrackerCard_Content} onPointerDown={rippleHandler}>
                   <div className={style.TrackerCard_Header}>
-                    <h3 className={style.TrackerCard_Title}>{habit.title}</h3>
+                    <TrackerTitle title={habit.title} query={query} />
                     <span className={style.TrackerCard_Streak}>
                       <LuFlame
                         size={12}
@@ -164,7 +148,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                   <motion.button
                     className={`${style.TrackerCard_CompleteButton} ${isCompletedToday ? style.isCompleted : ""}`}
                     onClick={(e) => handleQuickComplete(e, habit)}
-                    onPointerDown={(e) => createRipple(e)}
+                    onPointerDown={rippleHandler}
                     whileHover={{ scale: 1.15 }}
                     whileTap={{ scale: 0.9 }}
                     title={isCompletedToday ? "Completed today" : "Spark habit"}
@@ -172,54 +156,13 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ habits }) => {
                     <FaCheck />
                   </motion.button>
 
-                  <div className={style.Menu_Wrapper}>
-                    <button
-                      className={style.More_Button}
-                      onClick={() => setActiveMenu(activeMenu === habit.id ? null : habit.id)}
-                      onPointerDown={(e) => {
-                        e.stopPropagation();
-                      }}
-                      aria-label="More options"
-                    >
-                      <LuMoveVertical />
-                    </button>
-
-                    <AnimatePresence>
-                      {activeMenu === habit.id && (
-                        <motion.div
-                          ref={menuRef}
-                          className={style.Dropdown_Menu}
-                          initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                          onMouseDown={(e) => e.stopPropagation()}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setEditingHabit(habit);
-                              setActiveMenu(null);
-                            }}
-                          >
-                            <LuPencil size={14} /> Edit Spark
-                          </button>
-                          <button
-                            className={style.Delete_Option}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setDeletingHabitId(habit.id);
-                              setActiveMenu(null);
-                            }}
-                          >
-                            <LuTrash2 size={14} /> Delete
-                          </button>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                  <TrackerMenu
+                    isOpen={activeMenu === habit.id}
+                    onToggle={() => setActiveMenu(activeMenu === habit.id ? null : habit.id)}
+                    onClose={() => setActiveMenu(null)}
+                    onEdit={() => setEditingHabit(habit)}
+                    onDelete={() => setDeletingHabitId(habit.id)}
+                  />
                 </div>
               </motion.div>
             );

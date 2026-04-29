@@ -1,5 +1,3 @@
-"use client";
-
 import { storageKey } from "@/core/store/app";
 
 export function ThemeInitializer() {
@@ -7,14 +5,12 @@ export function ThemeInitializer() {
     <script
       dangerouslySetInnerHTML={{
         __html: `
-          (function() {
+          (function(theme) {
             try {
-              var theme = localStorage.getItem('${storageKey}');
               theme = theme ? JSON.parse(theme).app.theme : undefined;
-              var isDark = theme !== undefined ? theme === "dark" : window.matchMedia('(prefers-color-scheme: dark)').matches;
-              document.documentElement.classList.toggle('dark', isDark);
+              document.documentElement.classList.toggle('dark', theme !== undefined ? theme === "dark" : window.matchMedia('(prefers-color-scheme: dark)').matches);
             } catch(e) {}
-          })();
+          })(localStorage.getItem('${storageKey}'));
         `,
       }}
     />

@@ -23,16 +23,6 @@
     },
     "types": ["react"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/app/tracker/page.tsx",
-    "src/app/layout.jsx",
-    "src/app/page.jsx",
-    "src/components/Ripple.tsx",
-    ".next/dev/types/**/*.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

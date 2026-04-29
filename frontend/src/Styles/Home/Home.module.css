@@ -145,6 +145,7 @@
   position: absolute;
   padding: var(--spacing-sm) var(--spacing-xl);
   background: var(--color-surface-card);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
   backdrop-filter: var(--effect-blur-glass);
   border: 1px solid var(--border-color-base);
   border-radius: var(--shape-radius-lg);

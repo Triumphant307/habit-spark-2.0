@@ -8,23 +8,13 @@ import { refreshMotivation } from "@/core/store/motivation";
 import { LuSparkles, LuRefreshCw } from "react-icons/lu";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface MotivationData {
-  quote: string;
-  author: string;
-  lastUpdated: string | null;
-}
-
 const MotivationHub: React.FC = () => {
   const s = useReactor(appStore);
 
   // Initial refresh logic (only if empty or new day)
-  useEffect(() => {
-    refreshMotivation();
-  }, []);
+  useEffect(() => void refreshMotivation(), []);
 
-  const handleManualRefresh = () => {
-    refreshMotivation(true); // Force a new random tip
-  };
+  const handleManualRefresh = () => refreshMotivation(true); // Force a new random tip
 
   if (!s.user.motivation) return null; // Prevent crash if state is not yet ready
 

@@ -1,7 +1,7 @@
 .Motivation_Card {
   background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);
+  backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
   border-radius: var(--shape-radius-lg);
   padding: var(--spacing-xl);

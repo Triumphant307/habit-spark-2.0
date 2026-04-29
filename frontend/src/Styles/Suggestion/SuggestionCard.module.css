@@ -26,7 +26,10 @@
   padding: var(--spacing-lg);
   border-radius: var(--shape-radius-md);
   box-shadow: var(--shadow-elevation-sm);
-  transition: var(--animation-transition-smooth);
+  transition:
+    box-shadow 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease;
   /* THE FIX: Vertical alignment */
   display: flex;
   flex-direction: column;
@@ -62,8 +65,8 @@
   letter-spacing: 0.02em;
   transition: var(--animation-transition-smooth);
   box-shadow: var(--shadow-interaction-primary);
-  /* THE FIX: Ensure consistent width */
-  width: 100%;
+  transition-property: transform, box-shadow, background-color, color, opacity, filter;
+  width: 100%; /* THE FIX: Ensure consistent width */
 }
 
 .SuggestionCard_ActionButton:disabled {
@@ -188,6 +191,7 @@
 
 .SuggestionCard_HeartButton:hover {
   background-color: var(--color-glass-background);
+  -webkit-backdrop-filter: var(--effect-blur-md);
   backdrop-filter: var(--effect-blur-md);
   box-shadow: var(--shadow-interaction-hover);
 }

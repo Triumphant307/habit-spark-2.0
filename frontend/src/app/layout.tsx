@@ -3,6 +3,9 @@ import { ThemeInitializer } from "@/components/Core/ThemeInitializer";
 import LayoutClient from "@/components/Layout/LayoutClient";
 
 import "./globals.css";
+import '@t007/utils/styles/ripple.css';
+import "@t007/utils/styles/scroll-assist.css";
+import "./overrides.css";
 import "aos/dist/aos.css";
 
 import type { Metadata, Viewport } from "next";

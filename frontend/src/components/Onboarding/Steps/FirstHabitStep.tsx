@@ -41,6 +41,7 @@ const FirstHabitStep: React.FC = () => {
         onChange={(e) => updateFormData({ firstHabit: e.target.value })}
         icon={<LuSparkle />}
         placeholder="e.g. Read for 15 mins"
+        minLength={3}
       />
 
       <div className={chipStyles.ChipGroup}>

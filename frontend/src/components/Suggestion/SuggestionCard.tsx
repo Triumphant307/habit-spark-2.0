@@ -8,14 +8,12 @@ import AnimatedTipCard from "@/components/Suggestion/AnimatedTipCard";
 import { FaThLarge, FaList } from "react-icons/fa";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";
-import { useRipple } from "@/Hooks/useRipple";
 import React, { useState, useRef, useMemo } from "react";
 
 const SuggestionCard: React.FC = () => {
   const s = useReactor(appStore);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const resultRef = useRef(null);
-
   const categories = ["All", "Health", "Wellness", "Learning", "Productivity", "Favorites"];
 
   // Optimization: Calculate once at the top level
@@ -102,7 +100,7 @@ const SuggestionCard: React.FC = () => {
             </small>
           </motion.div>
         ) : (
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {filteredTips.map((tip) => (
               <AnimatedTipCard
                 key={`${s.suggestions.filter}-${tip.id || tip.title}`}

@@ -30,14 +30,11 @@ const defaultStore: AppStore = {
 
 export const storageKey = "HABIT_SPARK";
 export const persistor = new LocalStorageAdapter<AppStore>({ key: storageKey });
-export const time = new TimeTravelModule({
-  blacklist: ["user.goals", "habits", "suggestions.favorites"],
-});
-export const persist = new PersistModule({
-  key: storageKey,
-  throttle: 2500,
-  adapter: persistor,
-}).attach(time.state, "timeTravel");
+export const time = new TimeTravelModule({ blacklist: ["user.goals", "habits", "suggestions.favorites"] });
+export const persist = new PersistModule({ key: storageKey, throttle: 2500, adapter: persistor }).attach(
+  time.state,
+  "timeTravel",
+);
 export const appStore = reactive(defaultStore);
 
 // Application Modules Setup
