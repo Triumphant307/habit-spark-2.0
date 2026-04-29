@@ -2,6 +2,7 @@
   position: fixed;
   inset: 0;
   background: var(--color-surface-overlay);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
   backdrop-filter: var(--effect-blur-glass);
   display: flex;
   align-items: center;

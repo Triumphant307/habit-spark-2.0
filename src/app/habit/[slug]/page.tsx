@@ -30,7 +30,7 @@ const HabitDetails = () => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  const s = useReactor(appStore);
+  useReactor(appStore);
   const habit = findHabitBySlug(slug);
 
   useEffect(() => {
@@ -39,13 +39,16 @@ const HabitDetails = () => {
     const alreadyCongratulated = habit.streak > habit.target;
     if (habit.streak === habit.target && !alreadyCongratulated) {
       confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
-      toast.success("🎉 Congratulations! You've reached your target!");
+      toast.success("Congratulations! You've reached your target!", { icon: habit.icon, tag: `${habit.id}Target` });
     }
 
     const milestoneStreak = [7, 30, 100];
     if (milestoneStreak.includes(habit.streak) && !alreadyCongratulated) {
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
-      toast.success(`🎉 Amazing! You've hit a ${habit.streak}-day streak!`);
+      toast.success(`Amazing! You've hit a ${habit.streak}-day streak!`, {
+        icon: habit.icon,
+        tag: `${habit.id}Streak`,
+      });
       notificationService.showStreakMilestone(habit.title, habit.icon, habit.streak);
     }
   }, [habit]);
@@ -61,13 +64,13 @@ const HabitDetails = () => {
 
   const handleDone = () => {
     if (isCompletedToday) {
-      toast.info("Already sparked for today!");
+      toast.info("Already sparked for today!", { icon: habit.icon, tag: `${habit.id}Spark` });
       return;
     }
 
     logger.info("Marking habit done", { id: habit.id, title: habit.title });
     completeHabit(habit.id);
-    toast.success(`${habit.title} ignited! 🔥`);
+    toast.success(`${habit.title} ignited!`, { icon: habit.icon, tag: `${habit.id}Spark` });
 
     confetti({
       particleCount: 80,
@@ -79,12 +82,12 @@ const HabitDetails = () => {
 
   const handleReset = () => {
     resetHabit(habit.id);
-    toast.info("Streak reset. A new beginning! 💪");
+    toast.info("Streak reset. A new beginning!", { icon: habit.icon, tag: `${habit.id}Reset` });
   };
 
   const handleDelete = () => {
     deleteHabit(habit.id);
-    toast.success("Habit removed.");
+    toast.success(`${habit.title} removed.`, { icon: habit.icon, tag: `${habit.id}Remove` });
     router.push("/tracker");
   };
 
@@ -179,7 +182,7 @@ const HabitDetails = () => {
         onClose={() => setIsEditOpen(false)}
         onSave={(id, fields) => {
           updateHabit(id, fields);
-          toast.success("Changes saved!");
+          toast.success("Changes saved!", { icon: habit.icon, tag: `${habit.id}Update` });
         }}
       />
 

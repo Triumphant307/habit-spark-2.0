@@ -1,4 +1,5 @@
 import { appStore } from "./app";
+import { fanout } from "sia-reactor/utils";
 import quotes from "../../data/quotes.json";
 import dayjs from "dayjs";
 
@@ -12,11 +13,7 @@ export const refreshMotivation = (force = false) => {
   if (lastUpdated !== today || force) {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const selectedQuote = quotes[randomIndex];
-    appStore.user.motivation = {
-      quote: selectedQuote.q,
-      author: selectedQuote.a,
-      lastUpdated: today,
-    };
+    fanout(appStore.user.motivation, { quote: selectedQuote.q, author: selectedQuote.a, lastUpdated: today });
     return true;
   }
   return false;

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import styles from "@/Styles/Tracker/DeleteDialog.module.css";
 import Button from "@/components/UI/Button";
 import { LuTriangleAlert, LuTrash2, LuX } from "react-icons/lu";
+import { useFocusTrap, useArrowNavigation } from "@t007/utils/hooks/react";
 
 interface DeleteDialogProp {
   isOpen: boolean;
@@ -14,6 +15,9 @@ interface DeleteDialogProp {
 
 const DeleteDialog: React.FC<DeleteDialogProp> = ({ isOpen, onClose, onConfirm }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useFocusTrap(dialogRef, { enabled: isOpen });
+  useArrowNavigation(dialogRef, { enabled: isOpen, rovingTab: false });
 
   useEffect(() => {
     if (isOpen && dialogRef.current) {
@@ -26,7 +30,7 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({ isOpen, onClose, onConfirm }
   }, [isOpen]);
 
   return (
-    <dialog ref={dialogRef} className={styles.DeleteDialog_Container} onClose={onClose}>
+    <dialog ref={dialogRef} className={styles.DeleteDialog_Container} onClose={onClose} closedby="any">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -46,10 +50,16 @@ const DeleteDialog: React.FC<DeleteDialogProp> = ({ isOpen, onClose, onConfirm }
             </div>
 
             <div className={styles.Actions}>
-              <Button variant="secondary" onClick={onClose}>
+              <Button data-autofocus data-arrow-item variant="secondary" onClick={onClose}>
                 Keep Habit
               </Button>
-              <Button onClick={onConfirm} className={styles.Confirm_Button} showIcon icon={<LuTrash2 />}>
+              <Button
+                data-arrow-item
+                onClick={onConfirm}
+                className={styles.Confirm_Button}
+                showIcon
+                icon={<LuTrash2 />}
+              >
                 Delete
               </Button>
             </div>

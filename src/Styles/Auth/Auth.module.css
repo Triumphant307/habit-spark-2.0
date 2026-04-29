@@ -56,8 +56,8 @@
 .Auth_Card {
   width: 400px;
   background-color: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);
+  backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
   border-radius: var(--shape-radius-xl);
   padding: var(--spacing-xl) var(--spacing-3xl);

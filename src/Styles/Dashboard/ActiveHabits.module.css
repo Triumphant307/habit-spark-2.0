@@ -34,8 +34,8 @@
   text-align: center;
   padding: var(--spacing-4xl) var(--spacing-xl);
   background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);
+  backdrop-filter: var(--effect-blur-glass);
   border: 1px dashed var(--border-color-base);
   border-radius: var(--shape-radius-lg);
   display: flex;

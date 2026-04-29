@@ -4,7 +4,6 @@ import React from "react";
 import styles from "@/Styles/Dashboard/ActiveHabits.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";
-import { Habit } from "@/core/types/habit";
 import TrackerCard from "../Tracker/TrackerCard";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -16,7 +15,7 @@ const ActiveHabits: React.FC = () => {
   const s = useReactor(appStore);
   const today = dayjs().format("YYYY-MM-DD");
 
-  const topHabits = [...s.habits]
+  const topHabits = s.habits
     .sort((a, b) => {
       const aDone = a.history.includes(today);
       const bDone = b.history.includes(today);
@@ -67,7 +66,7 @@ const ActiveHabits: React.FC = () => {
           </Link>
         </div>
       ) : (
-        <TrackerCard habits={topHabits} />
+        <TrackerCard visibleHabits={topHabits} />
       )}
     </motion.div>
   );

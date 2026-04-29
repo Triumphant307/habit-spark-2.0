@@ -14,6 +14,7 @@
   padding: var(--spacing-4xl) var(--spacing-2xl);
   border-radius: var(--shape-radius-xl);
   background: var(--color-surface-card);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
   backdrop-filter: var(--effect-blur-glass);
   box-shadow: var(--shadow-elevation-md);
   border: 1px solid var(--border-color-muted, rgba(255, 255, 255, 0.1));

@@ -11,6 +11,7 @@
   max-width: 100%;
   border-radius: var(--shape-radius-xl);
   background-color: var(--color-glass-background);
+  -webkit-backdrop-filter: var(--effect-blur-glass);
   backdrop-filter: var(--effect-blur-glass);
   box-shadow:
     var(--shadow-elevation-md),
@@ -20,6 +21,8 @@
 }
 
 .Header_ContainerScrolled {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   box-shadow: var(--shadow-interaction-dialog);
   transform: translateY(0);
   opacity: 1;

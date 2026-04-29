@@ -39,13 +39,13 @@ const Footer: React.FC = () => {
       </ul>
 
       <div className={styles.Footer_Socials}>
-        <a href="https://github.com/Triumphant307" target="_blank" rel="noreferrer">
+        <a href="https://github.com/Triumphant307" target="_blank" rel="noopener">
           <FaGithub />
         </a>
-        <a href="https://x.com/UsuangbonT" target="_blank" rel="noreferrer">
+        <a href="https://x.com/UsuangbonT" target="_blank" rel="noopener">
           <FaTwitter />
         </a>
-        <a href="https://www.linkedin.com/in/usuangbon-triumphant/" target="_blank" rel="noreferrer">
+        <a href="https://www.linkedin.com/in/usuangbon-triumphant/" target="_blank" rel="noopener">
           <FaLinkedin />
         </a>
       </div>

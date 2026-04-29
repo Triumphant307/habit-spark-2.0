@@ -1,7 +1,7 @@
 "use client";
 import styles from "@/Styles/Home/Home.module.css";
 import { trackHomeVisit } from "@/core/store/home";
-import { useRipple } from "@/Hooks/useRipple";
+import { rippleHandler } from "@t007/utils/hooks/vanilla";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -9,7 +9,6 @@ import { containerVariants, badgeVariants, itemVariants } from "./HomeAnimations
 import { LuZap, LuTrendingUp, LuTarget, LuCloudSun, LuGift } from "react-icons/lu";
 
 const Hero: React.FC = () => {
-  const createRipple = useRipple();
   const [isReturning, setIsReturning] = useState<boolean>(false);
 
   useEffect(() => {
@@ -111,7 +110,7 @@ const Hero: React.FC = () => {
         </motion.p>
         <motion.div className={styles.Home_CTA} variants={itemVariants}>
           <Link href="/signup" className={styles.home__button_link}>
-            <button onPointerDown={(e) => createRipple(e)} className={styles.Home_HeroButton}>
+            <button onPointerDown={rippleHandler} className={styles.Home_HeroButton}>
               {isReturning ? "Sign Up - It's Free!" : "Sign Up - It's Free!"}
             </button>
           </Link>

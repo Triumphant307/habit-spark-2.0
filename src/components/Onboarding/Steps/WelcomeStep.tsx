@@ -32,6 +32,7 @@ const WelcomeStep: React.FC = () => {
         onChange={(e) => updateFormData({ nickname: e.target.value })}
         icon={<LuUser />}
         placeholder="e.g. Sparky"
+        minLength={2}
       />
 
       <div style={{ marginTop: "var(--spacing-xl)" }}>

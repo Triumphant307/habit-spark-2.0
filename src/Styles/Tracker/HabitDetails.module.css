@@ -39,8 +39,8 @@
 /* Main Hero Card */
 .HabitDetails_HeroCard {
   background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);
+  backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
   border-radius: var(--shape-radius-xl);
   padding: var(--spacing-2xl);
@@ -133,8 +133,8 @@
 /* History & Calendar */
 .HabitDetails_HistorySection {
   background: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);
+  backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
   border-radius: var(--shape-radius-xl);
   padding: var(--spacing-2xl);

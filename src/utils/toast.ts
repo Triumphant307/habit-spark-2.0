@@ -8,7 +8,7 @@ export const toast = toaster(
     // closeOnClick: true,
     pauseOnHover: true,
     dragToClose: true,
-    maxToasts: 3,
+    limit: 3,
     newestOnTop: true,
     animation: "slide",
     // closeButton: true,

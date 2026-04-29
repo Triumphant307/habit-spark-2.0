@@ -11,8 +11,8 @@
   border: 1px solid var(--border-color-base);
   border-radius: var(--shape-radius-lg);
   background-color: var(--color-surface-card);
-  backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);
+  backdrop-filter: var(--effect-blur-glass);
   color: var(--color-text-primary);
   outline: none;
   transition: var(--animation-transition-smooth);

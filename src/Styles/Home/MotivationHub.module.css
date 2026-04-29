@@ -7,8 +7,8 @@
 
 .MotivationHub_Card {
   background: var(--color-glass-background);
-  backdrop-filter: var(--effect-blur-glass);
   -webkit-backdrop-filter: var(--effect-blur-glass);
+  backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
   border-radius: var(--shape-radius-xl);
   padding: var(--spacing-5xl);
