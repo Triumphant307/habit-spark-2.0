@@ -9,7 +9,7 @@ export type InputProps = T007InputProps & {
   icon?: React.ReactNode;
 };
 
-const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(({ label, icon, error, ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>(({ label, icon, error, ...props }, ref) => {
   return (
     <T007Input
       ref={ref}
@@ -23,11 +23,7 @@ const InputComponent = React.forwardRef<HTMLInputElement, InputProps>(({ label, 
     />
   );
 });
-InputComponent.displayName = "Input";
-
-
-import dynamic from 'next/dynamic';
-const Input = dynamic(() => Promise.resolve(InputComponent), { ssr: false });
+Input.displayName = "Input";
 
 export default Input;
 

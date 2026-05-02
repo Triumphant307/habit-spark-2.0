@@ -161,10 +161,7 @@ html.dark .t007-input-field {
 @media (max-width: 600px) {
   .t007-toast-container {
     --t007-toast-unit: 0.95rem;
-    --t007-toast-container-margin-top: 16px;
-    --t007-toast-container-margin-bottom: 16px;
-    --t007-toast-container-margin-left: 16px;
-    --t007-toast-container-margin-right: 16px;
+    --t007-toast-container-margin: 16px;
   }
 
   .react-calendar {
