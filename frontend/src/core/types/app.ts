@@ -1,7 +1,9 @@
 import type { Habit } from "@/core/types/habit";
+import type { AuthState } from "@/core/types/auth";
 
 export interface AppStore {
   theme: "light" | "dark" | undefined;
+  auth: AuthState;
   user: {
     visitedHome: boolean;
     nickname: string;
