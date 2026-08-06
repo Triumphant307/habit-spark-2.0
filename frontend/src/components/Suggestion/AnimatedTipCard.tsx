@@ -31,6 +31,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
   const isCurrentlyFavorite = (s.suggestions.favorites || []).some((fav) => fav.id === tip.id);
 
   const [isOptimisticAdded, setIsOptimisticAdded] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const [isOptimisticFavorite, setIsOptimisticFavorite] = useState(isCurrentlyFavorite);
 
   // Sync Layer: Ensures local state matches global truth if changed externally
@@ -43,36 +44,43 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
 
   const alreadyAdded = s.habits.some((h) => h.title.toLowerCase() === displayTitle.toLowerCase());
 
-  const handleAdd = () => {
-    setIsOptimisticAdded(true);
+  const handleAdd = async () => {
+    setIsAdding(true);
 
     logger.info("Adding habit from suggestion", {
       title: displayTitle,
       icon: displayIcon,
     });
 
-    const createdHabit = addHabit({
-      title: displayTitle,
-      icon: displayIcon,
-      category: tip.category,
-      target: 30,
-      history: (tip.history as string[]) ?? [],
-    });
+    try {
+      const createdHabit = await addHabit({
+        title: displayTitle,
+        icon: displayIcon,
+        category: tip.category,
+        target: 30,
+        history: (tip.history as string[]) ?? [],
+      });
 
-    lastAddedHabitId.current = createdHabit.id;
+      lastAddedHabitId.current = createdHabit.id;
+      setIsOptimisticAdded(true);
 
-    toast.success(`${displayTitle.trim()} added!`, {
-      id: `${createdHabit.id}Add`,
-      icon: displayIcon,
-      autoClose: 7000,
-      actions: {
-        "Go to Tracker": () => {
-          toast.dismiss(`${createdHabit.id}Add`);
-          router.push("/tracker");
+      toast.success(`${displayTitle.trim()} added!`, {
+        id: `${createdHabit.id}Add`,
+        icon: displayIcon,
+        autoClose: 7000,
+        actions: {
+          "Go to Tracker": () => {
+            toast.dismiss(`${createdHabit.id}Add`);
+            router.push("/tracker");
+          },
+          Undo: () => handleUndo(createdHabit.id),
         },
-        Undo: () => handleUndo(createdHabit.id),
-      },
-    });
+      });
+    } catch (error) {
+      // Error handled in store
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   const handleUndo = (habitId?: string | null) => {
@@ -138,6 +146,7 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
         onPointerDown={(e) => rippleHandler(e)}
         title={isButtonDisabled ? "Already added" : "Add to habits"}
         showIcon
+        isLoading={isAdding}
         icon={isButtonDisabled ? <LuCheck /> : <LuPlus />}
       >
         {isButtonDisabled ? "Added" : "Add Habit"}

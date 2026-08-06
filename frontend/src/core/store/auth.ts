@@ -4,6 +4,7 @@ import { loginApi, signupApi, logoutApi, getMeApi, refreshApi } from "@/services
 import type { AuthUser, ApiErrorResponse } from "@/core/types/auth";
 import { AxiosError } from "axios";
 import logger from "@/utils/logger";
+import { fetchHabitsAction } from "./habits";
 
 /**
  * Extracts a user-friendly error message from an API error.
@@ -39,6 +40,9 @@ export const loginAction = async (data: { email: string; password: string }): Pr
     appStore.auth.isAuthenticated = true;
     appStore.auth.isLoading = false;
 
+    // Fetch user data
+    await fetchHabitsAction();
+
     logger.info("User logged in", { userId: response.user.id });
     return response.user;
   } catch (error) {
@@ -73,6 +77,9 @@ export const signupAction = async (data: {
     appStore.auth.isAuthenticated = true;
     appStore.auth.isLoading = false;
 
+    // Fetch user data
+    await fetchHabitsAction();
+
     logger.info("User signed up", { userId: response.user.id });
     return response.user;
   } catch (error) {
@@ -98,6 +105,7 @@ export const logoutAction = async (): Promise<void> => {
     appStore.auth.user = null;
     appStore.auth.isAuthenticated = false;
     appStore.auth.isLoading = false;
+    appStore.habits = [];
   }
 };
 
@@ -122,6 +130,9 @@ export const checkAuthAction = async (): Promise<void> => {
 
     appStore.auth.user = meResponse.user;
     appStore.auth.isAuthenticated = true;
+
+    // Fetch user data
+    await fetchHabitsAction();
   } catch {
     // No valid session — this is expected for unauthenticated users
     setAccessToken(null);

@@ -36,6 +36,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
   const [icon, setIcon] = useState("");
   const [error, setError] = useState("");
   const [showPicker, setShowPicker] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useFocusTrap(dialogRef, { enabled: isOpen });
   useArrowNavigation(dialogRef, { enabled: isOpen, rovingTab: false });
@@ -57,10 +58,11 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
       setIcon("");
       setError("");
       setShowPicker(false);
+      setIsSubmitting(false);
     }
   }, [isOpen]);
 
-  const { handleSubmit } = useFormManager((e: React.FormEvent) => {
+  const { handleSubmit } = useFormManager(async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmedTitle = title.trim();
 
@@ -73,9 +75,16 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    addHabit({ title: trimmedTitle, icon, target });
-    toast.success(`"${trimmedTitle}" spark ignited!`, { icon: "✨", tag: `${trimmedTitle}Spark` });
-    onClose();
+    try {
+      setIsSubmitting(true);
+      await addHabit({ title: trimmedTitle, icon, target });
+      toast.success(`"${trimmedTitle}" spark ignited!`, { icon: "✨", tag: `${trimmedTitle}Spark` });
+      onClose();
+    } catch (err) {
+      // Error is handled in the store
+    } finally {
+      setIsSubmitting(false);
+    }
   });
 
   return (
@@ -194,7 +203,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
                 <Button data-autofocus data-arrow-item variant="secondary" type="button" onClick={onClose}>
                   Cancel
                 </Button>
-                <Button data-arrow-item type="submit" showIcon icon={<LuPlus />}>
+                <Button data-arrow-item type="submit" showIcon icon={<LuPlus />} isLoading={isSubmitting}>
                   Create Habit
                 </Button>
               </div>
