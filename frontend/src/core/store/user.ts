@@ -1,15 +1,30 @@
 import { appStore } from "./app";
 import { OnboardingData } from "@/types/onboarding";
 import logger from "@/utils/logger";
+import { onboardingApi } from "@/services/userApi";
+import toast from "@/utils/toast";
 
 /**
  * Updates the user's profile based on onboarding data
  */
-export const completeOnboarding = (data: OnboardingData) => {
+export const completeOnboarding = async (data: OnboardingData): Promise<boolean> => {
   try {
+    // 1. Save to backend
+    await onboardingApi({
+      goal: data.goals[0] || "Other",
+      commitment: data.frequency,
+      firstHabit: {
+        title: data.firstHabit,
+        target: 30,
+        icon: "✨",
+      },
+    });
+
+    // 2. Update local state
     appStore.user.nickname = data.nickname;
     appStore.user.goals = data.goals;
     appStore.user.completedOnboarding = true;
+    
     const newHabit = {
       id: String(Date.now()),
       title: data.firstHabit,
@@ -21,10 +36,12 @@ export const completeOnboarding = (data: OnboardingData) => {
       startDate: new Date().toISOString().split("T")[0],
     };
     appStore.habits.push(newHabit);
+    
     logger.info("Onboarding completed", { nickname: data.nickname });
     return true;
   } catch (error) {
     logger.error("Failed to complete onboarding", error);
+    toast.error("Failed to save your progress. Please try again.");
     return false;
   }
 };
