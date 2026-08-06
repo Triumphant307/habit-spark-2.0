@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import styles from "@/Styles/Onboarding/Onboarding.module.css";
 import successStyles from "@/Styles/Onboarding/SuccessStep.module.css";
@@ -10,6 +10,13 @@ import { useOnboarding } from "@/context/onboarding/OnboardingContext";
 
 const SuccessStep: React.FC = () => {
   const { formData, handleComplete } = useOnboarding();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onComplete = async () => {
+    setIsLoading(true);
+    await handleComplete();
+    setIsLoading(false);
+  };
 
   return (
     <motion.div
@@ -34,7 +41,7 @@ const SuccessStep: React.FC = () => {
         </div>
       </div>
 
-      <Button onClick={handleComplete} style={{ width: "100%", marginTop: "var(--spacing-xl)" }} showIcon>
+      <Button onClick={onComplete} isLoading={isLoading} style={{ width: "100%", marginTop: "var(--spacing-xl)" }} showIcon>
         Go to Dashboard
       </Button>
     </motion.div>
