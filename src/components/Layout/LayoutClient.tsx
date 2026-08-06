@@ -4,6 +4,7 @@ import React from "react";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";
 import Sidebar from "./Sidebar";
+import AuthGuard from "@/components/Auth/AuthGuard";
 import AppTopBar from "./AppTopBar";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -52,7 +53,7 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
             paddingBottom: isAppPage ? "100px" : "0px",
           }}
         >
-          {children}
+          <AuthGuard>{children}</AuthGuard>
         </main>
 
         {!isAppPage && <Footer />}

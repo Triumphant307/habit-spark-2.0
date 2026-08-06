@@ -10,22 +10,34 @@ import AuthDivider from "./UI/AuthDivider";
 import { useForm } from "react-hook-form";
 import { signupSchema, type SignupFormValues } from "@/utils/authValidation";
 import { zodResolver as hookFormResolver } from "@hookform/resolvers/zod";
+import { signupAction } from "@/core/store/auth";
+import toast from "@/utils/toast";
+import { useRouter } from "next/navigation";
 
 const SignupForm: React.FC = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit: rhfHandleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<SignupFormValues>({ resolver: hookFormResolver(signupSchema), mode: "onBlur" });
+
   const onSubmit = async (data: SignupFormValues) => {
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Form successfully submitted:", data);
+      await signupAction({
+        fullName: data.fullName,
+        email: data.email,
+        password: data.password,
+      });
+      toast.success("Account created successfully!");
+      router.push("/onboarding");
     } catch (error) {
-      console.error("Signup failed:", error);
+      const message = error instanceof Error ? error.message : "Signup failed";
+      toast.error(message);
     }
   };
+
   const { handleSubmit } = useFormManager((e) => rhfHandleSubmit(onSubmit)(e));
 
   return (
@@ -107,3 +119,4 @@ const SignupForm: React.FC = () => {
 };
 
 export default SignupForm;
+

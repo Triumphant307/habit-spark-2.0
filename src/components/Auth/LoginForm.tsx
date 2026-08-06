@@ -10,22 +10,34 @@ import AuthDivider from "./UI/AuthDivider";
 import { useForm } from "react-hook-form";
 import { loginSchema, type LoginFormValues } from "@/utils/authValidation";
 import { zodResolver as hookFormResolver } from "@hookform/resolvers/zod";
+import { loginAction } from "@/core/store/auth";
+import toast from "@/utils/toast";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginForm: React.FC = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const {
     register,
     handleSubmit: rhfHandleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({ resolver: hookFormResolver(loginSchema), mode: "onBlur" });
+
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Form successfully submitted:", data);
+      await loginAction(data);
+      toast.success("Welcome back!");
+
+      // Redirect to the intended page (from middleware) or dashboard
+      const redirect = searchParams.get("redirect") || "/dashboard";
+      router.push(redirect);
     } catch (error) {
-      console.error("Login failed:", error);
+      const message = error instanceof Error ? error.message : "Login failed";
+      toast.error(message);
     }
   };
+
   const { handleSubmit } = useFormManager((e) => rhfHandleSubmit(onSubmit)(e));
 
   return (
@@ -77,3 +89,4 @@ const LoginForm: React.FC = () => {
 };
 
 export default LoginForm;
+
