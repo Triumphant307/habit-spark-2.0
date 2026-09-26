@@ -36,7 +36,6 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
       <div
         className="App_Content"
         style={{
-          width: "100%",
           display: "flex",
           flexDirection: "column",
           transition: "padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -48,7 +47,6 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
 
         <main
           style={{
-            width: "100%",
             paddingBottom: isAppPage ? "100px" : "0px",
           }}
         >
