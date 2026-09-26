@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { LuPlus, LuCheck } from "react-icons/lu";
 import { useReactor } from "sia-reactor/adapters/react";
+import { toggleFavoriteAction } from "@/core/store/suggestions";
 import { appStore } from "@/core/store/app";
 import { addHabit, deleteHabit } from "@/core/store/habits";
 import { rippleHandler } from "@t007/utils/hooks/vanilla";
@@ -99,12 +100,10 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
     // 1. Instant UI Flip
     const newFavoriteState = !isOptimisticFavorite;
     setIsOptimisticFavorite(newFavoriteState);
-    // 2. State Mutation
-    if (!newFavoriteState) {
-      s.suggestions.favorites = (s.suggestions.favorites || []).filter((fav) => fav.id !== tip.id);
-    } else {
-      s.suggestions.favorites = [...(s.suggestions.favorites || []), tip];
-    }
+    
+    // 2. State Mutation and API sync
+    toggleFavoriteAction(tip);
+    
     // 3. Feedback
     toast[newFavoriteState ? "success" : "info"](
       `${displayTitle} ${newFavoriteState ? "added to" : "removed from"} Favorites!`,
