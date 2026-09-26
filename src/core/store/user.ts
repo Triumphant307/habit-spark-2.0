@@ -24,7 +24,7 @@ export const completeOnboarding = async (data: OnboardingData): Promise<boolean>
     appStore.user.nickname = data.nickname;
     appStore.user.goals = data.goals;
     appStore.user.completedOnboarding = true;
-    
+
     const newHabit = {
       id: String(Date.now()),
       title: data.firstHabit,
@@ -36,7 +36,7 @@ export const completeOnboarding = async (data: OnboardingData): Promise<boolean>
       startDate: new Date().toISOString().split("T")[0],
     };
     appStore.habits.push(newHabit);
-    
+
     logger.info("Onboarding completed", { nickname: data.nickname });
     return true;
   } catch (error) {

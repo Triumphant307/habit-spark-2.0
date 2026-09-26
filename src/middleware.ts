@@ -17,13 +17,11 @@ const AUTH_ROUTES = ["/login", "/signup"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   const hasRefreshToken = request.cookies.has("refreshToken");
 
   // Check if the current path matches a protected route
-  const isProtectedRoute = PROTECTED_ROUTES.some(
-    (route) => pathname === route || pathname.startsWith(`${route}/`),
-  );
+  const isProtectedRoute = PROTECTED_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
 
   // Check if the current path is an auth route
   const isAuthRoute = AUTH_ROUTES.some((route) => pathname === route);

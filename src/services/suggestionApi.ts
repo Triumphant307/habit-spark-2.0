@@ -27,9 +27,12 @@ export const fetchSuggestionsApi = async (params: FetchSuggestionsParams): Promi
   }
   if (params.q) filteredParams.q = params.q;
 
-  const response = await api.get<{ suggestions?: Tip[], tips?: Tip[], total?: number, hasMore?: boolean }>("/suggestions", {
-    params: filteredParams,
-  });
+  const response = await api.get<{ suggestions?: Tip[]; tips?: Tip[]; total?: number; hasMore?: boolean }>(
+    "/suggestions",
+    {
+      params: filteredParams,
+    },
+  );
 
   // Handle potential backend structure variations
   return {

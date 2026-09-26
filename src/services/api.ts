@@ -107,11 +107,7 @@ api.interceptors.response.use(
 
     try {
       // Attempt to refresh the token
-      const { data } = await axios.post<RefreshResponse>(
-        `${API_BASE_URL}/auth/refresh`,
-        {},
-        { withCredentials: true },
-      );
+      const { data } = await axios.post<RefreshResponse>(`${API_BASE_URL}/auth/refresh`, {}, { withCredentials: true });
 
       const newToken = data.token;
       setAccessToken(newToken);

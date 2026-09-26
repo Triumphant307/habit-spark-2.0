@@ -100,10 +100,10 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
     // 1. Instant UI Flip
     const newFavoriteState = !isOptimisticFavorite;
     setIsOptimisticFavorite(newFavoriteState);
-    
+
     // 2. State Mutation and API sync
     toggleFavoriteAction(tip);
-    
+
     // 3. Feedback
     toast[newFavoriteState ? "success" : "info"](
       `${displayTitle} ${newFavoriteState ? "added to" : "removed from"} Favorites!`,

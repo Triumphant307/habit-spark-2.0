@@ -42,7 +42,7 @@ export const addHabit = async (habit: Partial<Habit>): Promise<Habit> => {
     };
 
     const createdHabit = await createHabitApi(newHabitData);
-    
+
     // Fallback if backend doesn't return full object
     const finalHabit: Habit = {
       id: createdHabit.id || generateId(),
@@ -95,7 +95,7 @@ export const deleteHabit = (id: string) => {
   if (idx === -1) return;
 
   const originalHabit = appStore.habits[idx];
-  
+
   // Optimistic delete
   appStore.habits.splice(idx, 1);
 

@@ -41,7 +41,12 @@ const SuccessStep: React.FC = () => {
         </div>
       </div>
 
-      <Button onClick={onComplete} isLoading={isLoading} style={{ width: "100%", marginTop: "var(--spacing-xl)" }} showIcon>
+      <Button
+        onClick={onComplete}
+        isLoading={isLoading}
+        style={{ width: "100%", marginTop: "var(--spacing-xl)" }}
+        showIcon
+      >
         Go to Dashboard
       </Button>
     </motion.div>
