@@ -48,10 +48,7 @@
   margin-top: var(--spacing-sm);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  background: rgba(255, 255, 255, 0.03);
   padding: 6px 16px;
-  border-radius: var(--shape-radius-full);
-  border: 1px solid var(--border-color-base);
   width: fit-content;
 }
 
