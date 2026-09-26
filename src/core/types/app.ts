@@ -20,6 +20,11 @@ export interface AppStore {
     filter: string;
     viewMode: "grid" | "list";
     favorites: Tip[];
+    tips: Tip[];
+    categories: string[];
+    currentPage: number;
+    hasMore: boolean;
+    isLoading: boolean;
   };
   scheduledReminders: Record<string, Reminder>;
 }

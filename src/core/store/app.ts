@@ -29,6 +29,11 @@ const defaultStore: AppStore = {
     filter: "All",
     viewMode: "grid",
     favorites: [],
+    tips: [],
+    categories: ["All", "Health", "Wellness", "Learning", "Productivity", "Favorites"],
+    currentPage: 1,
+    hasMore: true,
+    isLoading: false,
   },
   scheduledReminders: {},
 };
