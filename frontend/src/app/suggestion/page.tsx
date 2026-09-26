@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import styles from "@/Styles/Suggestion/Suggestion.module.css";
+import styles from "./Suggestion.module.css";
 import SuggestionCard from "@/components/Suggestion/SuggestionCard";
 
 const Suggestions = () => {

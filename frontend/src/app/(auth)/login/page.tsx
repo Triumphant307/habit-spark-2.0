@@ -1,11 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 import AuthCard from "@/components/Auth/AuthCard";
 import LoginForm from "@/components/Auth/LoginForm";
 const LoginPage: React.FC = () => {
   return (
     <div>
       <AuthCard>
-        <LoginForm />
+        <Suspense fallback={<div>Loading...</div>}>
+          <LoginForm />
+        </Suspense>
       </AuthCard>
     </div>
   );

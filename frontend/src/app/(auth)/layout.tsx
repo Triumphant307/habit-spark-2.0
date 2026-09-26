@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import styles from "@/Styles/Auth/Auth.module.css";
+import styles from "./Auth.module.css";
 import { motion } from "framer-motion";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {

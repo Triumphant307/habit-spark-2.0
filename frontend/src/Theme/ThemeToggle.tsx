@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
-import styles from "@/Styles/Layout/ThemeToggle.module.css";
+import styles from "./ThemeToggle.module.css";
 import { useState, useLayoutEffect } from "react";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";

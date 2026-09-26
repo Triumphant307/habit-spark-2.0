@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/Styles/Home/Home.module.css";
+import styles from "./Home.module.css";
 import FeaturedHighlight from "@/components/Home/FeaturedHighlight";
 import { motion } from "framer-motion";
 import Hero from "@/components/Home/Hero";

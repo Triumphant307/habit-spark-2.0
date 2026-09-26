@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
-import styles from "@/Styles/Tracker/HabitDetails.module.css";
+import styles from "./HabitDetails.module.css";
 import { useParams, useRouter } from "next/navigation";
 import HabitHistory from "@/components/Tracker/HabitHistory";
 import DeleteDialog from "@/components/Tracker/DeleteDialog";
