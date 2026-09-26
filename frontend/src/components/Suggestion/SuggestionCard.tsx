@@ -17,7 +17,8 @@ const SuggestionCard: React.FC = () => {
 
   // Fetch categories on mount
   useEffect(() => {
-    if (s.suggestions.categories.length <= 6) { // Only fetch if we just have the defaults
+    if (s.suggestions.categories.length <= 6) {
+      // Only fetch if we just have the defaults
       fetchCategoriesAction();
     }
   }, [s.suggestions.categories.length]);
@@ -94,7 +95,7 @@ const SuggestionCard: React.FC = () => {
       </div>
 
       {s.suggestions.isLoading && filteredTips.length === 0 ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
+        <div style={{ display: "flex", justifyContent: "center", padding: "3rem", color: "var(--text-secondary)" }}>
           <FaSpinner className="spin" size={30} />
         </div>
       ) : (
@@ -147,19 +148,19 @@ const SuggestionCard: React.FC = () => {
 
       {/* Load More Button */}
       {s.suggestions.filter !== "Favorites" && s.suggestions.hasMore && filteredTips.length > 0 && (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-          <button 
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}>
+          <button
             onClick={handleLoadMore}
             disabled={s.suggestions.isLoading}
             style={{
-              padding: '0.8rem 2rem',
-              borderRadius: '2rem',
-              border: 'none',
-              background: 'var(--primary)',
-              color: 'white',
-              cursor: s.suggestions.isLoading ? 'not-allowed' : 'pointer',
+              padding: "0.8rem 2rem",
+              borderRadius: "2rem",
+              border: "none",
+              background: "var(--primary)",
+              color: "white",
+              cursor: s.suggestions.isLoading ? "not-allowed" : "pointer",
               fontWeight: 600,
-              opacity: s.suggestions.isLoading ? 0.7 : 1
+              opacity: s.suggestions.isLoading ? 0.7 : 1,
             }}
           >
             {s.suggestions.isLoading ? <FaSpinner className="spin" /> : "Load More"}

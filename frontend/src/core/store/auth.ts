@@ -59,11 +59,7 @@ export const loginAction = async (data: { email: string; password: string }): Pr
  *
  * @throws Error with the backend's error message on failure
  */
-export const signupAction = async (data: {
-  fullName: string;
-  email: string;
-  password: string;
-}): Promise<AuthUser> => {
+export const signupAction = async (data: { fullName: string; email: string; password: string }): Promise<AuthUser> => {
   try {
     const response = await signupApi({
       email: data.email,

@@ -9,10 +9,9 @@ import AppTopBar from "./AppTopBar";
 import Header from "./Header";
 import Footer from "./Footer";
 import { usePathname } from "next/navigation";
-import { TimeTravelConsole } from "sia-reactor/adapters/react";
 import { time } from "../../core/store/app";
 
-import "sia-reactor/styles/time-travel-console.css";
+// import "sia-reactor/styles/time-travel-console.css";
 
 interface LayoutClientProps {
   children: React.ReactNode;
@@ -53,12 +52,12 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
             paddingBottom: isAppPage ? "100px" : "0px",
           }}
         >
-          <AuthGuard>{children}</AuthGuard>
+          {children}
         </main>
 
         {!isAppPage && <Footer />}
 
-        <TimeTravelConsole time={time} color="#3b82f6" />
+        {/* <TimeTravelOverlay time={time} color="#3b82f6" /> */}
       </div>
 
       <style jsx>{`

@@ -1,5 +1,10 @@
 import { appStore } from "./app";
-import { fetchSuggestionsApi, toggleFavoriteApi, fetchSuggestionCategoriesApi, FetchSuggestionsParams } from "@/services/suggestionApi";
+import {
+  fetchSuggestionsApi,
+  toggleFavoriteApi,
+  fetchSuggestionCategoriesApi,
+  FetchSuggestionsParams,
+} from "@/services/suggestionApi";
 import logger from "@/utils/logger";
 import toast from "@/utils/toast";
 import type { Tip } from "@/core/types/app";
@@ -12,7 +17,7 @@ import type { Tip } from "@/core/types/app";
 export const fetchSuggestionsAction = async (resetCache = true, params: FetchSuggestionsParams = {}) => {
   try {
     appStore.suggestions.isLoading = true;
-    
+
     if (resetCache) {
       appStore.suggestions.currentPage = 1;
       params.page = 1;
@@ -27,7 +32,7 @@ export const fetchSuggestionsAction = async (resetCache = true, params: FetchSug
     } else {
       appStore.suggestions.tips.push(...tips);
     }
-    
+
     appStore.suggestions.currentPage = params.page;
     appStore.suggestions.hasMore = hasMore;
   } catch (error) {
@@ -48,14 +53,14 @@ export const toggleFavoriteAction = async (tip: Tip) => {
   // Optimistic UI update
   if (isCurrentlyFavorite) {
     appStore.suggestions.favorites = appStore.suggestions.favorites.filter((fav) => fav.id !== tip.id);
-    
+
     // Also remove from tips array if we are currently viewing the Favorites filter
     if (appStore.suggestions.filter === "Favorites") {
       appStore.suggestions.tips = appStore.suggestions.tips.filter((t) => t.id !== tip.id);
     }
   } else {
     appStore.suggestions.favorites.push(tip);
-    
+
     // Also add to tips array if we are currently viewing the Favorites filter
     if (appStore.suggestions.filter === "Favorites") {
       appStore.suggestions.tips.push(tip);
@@ -66,7 +71,7 @@ export const toggleFavoriteAction = async (tip: Tip) => {
   toggleFavoriteApi(String(tip.id), !isCurrentlyFavorite).catch((error) => {
     logger.error("Failed to toggle favorite", { error });
     toast.error("Failed to save favorite.");
-    
+
     // Rollback
     appStore.suggestions.favorites = originalFavorites;
     if (appStore.suggestions.filter === "Favorites") {

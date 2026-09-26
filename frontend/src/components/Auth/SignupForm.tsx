@@ -74,6 +74,7 @@ const SignupForm: React.FC = () => {
           label="Password"
           type="password"
           icon={<LuLock />}
+          passwordMeter={true}
           {...register("password")}
           required
           minLength={8}
@@ -119,4 +120,3 @@ const SignupForm: React.FC = () => {
 };
 
 export default SignupForm;
-

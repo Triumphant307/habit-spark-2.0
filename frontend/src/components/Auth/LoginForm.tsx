@@ -66,7 +66,6 @@ const LoginForm: React.FC = () => {
           icon={<LuLock />}
           {...register("password")}
           required
-          minLength={8}
           error={errors.password?.message}
         />
 
@@ -89,4 +88,3 @@ const LoginForm: React.FC = () => {
 };
 
 export default LoginForm;
-
