@@ -43,7 +43,7 @@ export const persistor = new LocalStorageAdapter<AppStore>({ key: storageKey });
 export const time = new TimeTravelModule({ blacklist: ["auth", "user.goals", "habits", "suggestions.favorites"] });
 export const persist = new PersistModule({ key: storageKey, throttle: 2500, adapter: persistor }).attach(
   time.state,
-  "timeTravel",
+  "timeTravel.state",
 );
 export const appStore = reactive(defaultStore);
 
@@ -52,7 +52,5 @@ appStore.use(persist, "app").use(time);
 
 if (process.env.NODE_ENV !== "production" && "undefined" !== typeof window) {
   const w = window as any;
-  w.time = time;
-  w.persist = persist;
-  w.appStore = appStore;
+  ((w.time = time), (w.persist = persist), (w.appStore = appStore));
 }
