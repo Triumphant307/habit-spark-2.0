@@ -104,7 +104,7 @@ html.dark .t007-input-field {
 
 /* ===== T007 Toast Presets (HabitSpark tokens) ===== */
 .t007-toast {
-  --t007-toast-type-color: var(--color-text-primary);
+  --t007-toast-color: var(--color-text-primary);
   --t007-toast-background: var(--color-surface-card);
   --t007-toast-success-color: var(--color-status-success);
   --t007-toast-error-color: var(--color-status-error);
