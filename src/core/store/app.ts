@@ -4,6 +4,11 @@ import type { AppStore } from "@/core/types/app";
 
 const defaultStore: AppStore = {
   theme: undefined,
+  auth: {
+    user: null,
+    isAuthenticated: false,
+    isLoading: true,
+  },
   user: {
     visitedHome: false,
     nickname: "",
@@ -24,13 +29,18 @@ const defaultStore: AppStore = {
     filter: "All",
     viewMode: "grid",
     favorites: [],
+    tips: [],
+    categories: ["All", "Health", "Wellness", "Learning", "Productivity", "Favorites"],
+    currentPage: 1,
+    hasMore: true,
+    isLoading: false,
   },
   scheduledReminders: {},
 };
 
 export const storageKey = "HABIT_SPARK";
 export const persistor = new LocalStorageAdapter<AppStore>({ key: storageKey });
-export const time = new TimeTravelModule({ blacklist: ["user.goals", "habits", "suggestions.favorites"] });
+export const time = new TimeTravelModule({ blacklist: ["auth", "user.goals", "habits", "suggestions.favorites"] });
 export const persist = new PersistModule({ key: storageKey, throttle: 2500, adapter: persistor }).attach(
   time.state,
   "timeTravel.state",

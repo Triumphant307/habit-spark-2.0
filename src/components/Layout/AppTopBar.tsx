@@ -5,7 +5,8 @@ import styles from "@/Styles/Layout/AppTopBar.module.css";
 import { LuPlus, LuBell, LuMenu } from "react-icons/lu";
 import ThemeToggle from "@/Theme/ThemeToggle";
 import { toggleMobileMenu } from "@/core/store/user";
-import QuickAddModal from "../Dashboard/QuickAddModal";
+import dynamic from "next/dynamic";
+const QuickAddModal = dynamic(() => import("../Dashboard/QuickAddModal"), { ssr: false });
 
 const AppTopBar: React.FC = () => {
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
