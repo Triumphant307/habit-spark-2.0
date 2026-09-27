@@ -42,7 +42,7 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   };
 
   const handleComplete = async () => {
-    const success = completeOnboarding(formData);
+    const success = await completeOnboarding(formData);
     if (success) router.push("/dashboard");
   };
 
