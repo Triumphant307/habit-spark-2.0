@@ -44,9 +44,24 @@ npm run dev
 
 ---
 
-## Sparse Checkout (backend developers)
+## Sparse Checkout (Partial Clones)
 
-Clone only the `backend/` folder — no frontend files on disk:
+You can clone only the part of the stack you need using Git sparse-checkout.
+
+### Frontend Developers
+Clone only the `frontend/` folder:
+
+```bash
+git clone --no-checkout git@github.com:Triumphant307/habit-spark-2.0.git habit-spark
+cd habit-spark
+git sparse-checkout init --cone
+git sparse-checkout set frontend
+git checkout main
+cd frontend && npm install && npm run dev
+```
+
+### Backend Developers
+Clone only the `backend/` folder:
 
 ```bash
 git clone --no-checkout git@github.com:Triumphant307/habit-spark-2.0.git habit-spark
@@ -80,3 +95,4 @@ cd backend && npm install && npm run dev
 |---|---|
 | Frontend | `github.com/Triumphant307/habit-spark-2.0` |
 | Backend | `github.com/Triumphant307/habit-spark_backend` |
+
