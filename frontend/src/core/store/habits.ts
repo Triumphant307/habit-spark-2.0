@@ -142,10 +142,13 @@ export const completeHabit = (id: string): boolean => {
   const today = dayjs().format("YYYY-MM-DD");
   if (appStore.habits[idx].history.includes(today)) return false;
 
+  // Snapshot for rollback
+  const originalHistory = appStore.habits[idx].history;
+
   // Optimistic update — immutable spread so the reference changes and
   // any reactive subscriber depending on reference equality is notified.
   appStore.habits[idx].streak++;
-  appStore.habits[idx].history = [...appStore.habits[idx].history, today];
+  appStore.habits[idx].history = [...originalHistory, today];
 
   // Fire and forget
   completeHabitApi(id, today).catch((error) => {
