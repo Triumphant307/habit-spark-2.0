@@ -1,0 +1,30 @@
+# ── Dependencies (each app manages its own, fully isolated) ──────────────────
+frontend/node_modules/
+backend/node_modules/
+
+# ── Frontend build output ─────────────────────────────────────────────────────
+frontend/.next/
+frontend/out/
+frontend/.vercel/
+
+# ── Backend build output ──────────────────────────────────────────────────────
+backend/dist/
+
+# ── Environment files ─────────────────────────────────────────────────────────
+frontend/.env.local
+frontend/.env*.local
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# ── Prisma generated client ───────────────────────────────────────────────────
+backend/prisma/generated/
+
+# ── OS / Editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*

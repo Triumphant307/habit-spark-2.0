@@ -1,0 +1,18 @@
+{
+  "name": "habit-spark",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo for habit-spark — Next.js frontend and Express/Prisma backend",
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend",
+    "lint:frontend": "npm run lint --prefix frontend",
+    "lint:backend": "npm run lint --prefix backend",
+    "format:frontend": "npm run format --prefix frontend",
+    "format:backend": "npm run format --prefix backend",
+    "test:backend": "npm run test --prefix backend",
+    "install:all": "npm install --prefix frontend && npm install --prefix backend"
+  }
+}
