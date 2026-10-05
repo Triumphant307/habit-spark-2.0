@@ -11,3 +11,9 @@ npm-debug.log*
 
 # Note: App-specific ignores (node_modules, build outputs, environment files) 
 # are handled directly by frontend/.gitignore and backend/.gitignore
+
+# ── AI Agents ─────────────────────────────────────────────────────────────────
+.claude/
+.gemini/
+GEMINI.md
+CLAUDE.md
