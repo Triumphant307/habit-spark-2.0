@@ -1,0 +1,162 @@
+/* src/components/NotificationModal/NotificationModal.module.css */
+
+.Modal_Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 80px 24px 24px 24px;
+}
+
+.Modal_Content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+   backdrop-filter: blur(6px);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  max-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.Modal_Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.Modal_Header h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.Close_Button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.Close_Button:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.Notification_List {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.Empty_State {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.Notification_Item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.Notification_Item:hover {
+  background: var(--surface-hover);
+}
+
+.Notification_Item:last-child {
+  border-bottom: none;
+}
+
+.Unread {
+  background: var(--surface-hover);
+}
+
+.Notification_Icon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2px;
+}
+
+.Icon_Info {
+  color: #3b82f6;
+}
+
+.Icon_Success {
+  color: #10b981;
+}
+
+.Icon_Warning {
+  color: #f59e0b;
+}
+
+.Icon_Update {
+  color: #8b5cf6;
+}
+
+.Notification_Body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.Notification_Body h4 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.Notification_Body p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+.Time {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.Unread_Dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  position: absolute;
+  right: 20px;
+  top: 24px;
+}
+
+@media (max-width: 768px) {
+  .Modal_Overlay {
+    padding: 60px 16px 16px 16px;
+    justify-content: center;
+  }
+}

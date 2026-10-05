@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styles from "./AppTopBar.module.css";
 import { LuPlus, LuBell, LuMenu } from "react-icons/lu";
 import ThemeToggle from "@/Theme/ThemeToggle";
-import { toggleMobileMenu } from "@/core/store/user";
+import { toggleMobileMenu, toggleNotificationModal } from "@/core/store/user";
 import dynamic from "next/dynamic";
 const QuickAddModal = dynamic(() => import("../../Dashboard/QuickAddModal"), { ssr: false });
 
@@ -30,7 +30,11 @@ const AppTopBar: React.FC = () => {
               <LuPlus />
               <span>Add Habit</span>
             </button>
-            <button className={styles.Action_Button} aria-label="View Notifications">
+            <button
+              className={styles.Action_Button}
+              aria-label="View Notifications"
+              onClick={() => toggleNotificationModal(true)}
+            >
               <LuBell />
             </button>
             <ThemeToggle />

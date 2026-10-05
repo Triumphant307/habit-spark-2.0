@@ -17,6 +17,7 @@ const defaultStore: AppStore = {
     preferences: {
       sidebarCollapsed: false,
       mobileMenuOpen: false,
+      notificationModalOpen: false,
     },
     motivation: {
       quote: "Every great journey starts with a single spark.",
@@ -36,6 +37,16 @@ const defaultStore: AppStore = {
     isLoading: false,
   },
   scheduledReminders: {},
+  notifications: [
+    {
+      id: "1",
+      title: "Welcome to HabitSpark! ✨",
+      message: "Start building your first habit today. You've got this!",
+      date: new Date().toISOString(),
+      isRead: false,
+      type: "info",
+    }
+  ],
 };
 
 export const storageKey = "HABIT_SPARK";

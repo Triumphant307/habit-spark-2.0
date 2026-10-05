@@ -67,3 +67,21 @@ export const toggleMobileMenu = (forceState?: boolean) => {
   appStore.user.preferences.mobileMenuOpen =
     forceState !== undefined ? forceState : !appStore.user.preferences.mobileMenuOpen;
 };
+
+/**
+ * Toggles the notification modal state
+ */
+export const toggleNotificationModal = (forceState?: boolean) => {
+  appStore.user.preferences.notificationModalOpen =
+    forceState !== undefined ? forceState : !appStore.user.preferences.notificationModalOpen;
+};
+
+/**
+ * Marks a notification as read
+ */
+export const markNotificationAsRead = (id: string) => {
+  const notification = appStore.notifications.find((n) => n.id === id);
+  if (notification) {
+    notification.isRead = true;
+  }
+};

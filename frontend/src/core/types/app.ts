@@ -12,6 +12,7 @@ export interface AppStore {
     preferences: {
       sidebarCollapsed: boolean;
       mobileMenuOpen: boolean;
+      notificationModalOpen: boolean;
     };
     motivation: Motivation;
   };
@@ -27,6 +28,16 @@ export interface AppStore {
     isLoading: boolean;
   };
   scheduledReminders: Record<string, Reminder>;
+  notifications: NotificationItem[];
+}
+
+export interface NotificationItem {
+  id: string;
+  title: string;
+  message: string;
+  date: string;
+  isRead: boolean;
+  type: "info" | "warning" | "success" | "update";
 }
 
 export interface Tip {

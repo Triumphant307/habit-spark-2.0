@@ -10,6 +10,7 @@ import Header from ".././Header";
 import Footer from ".././Footer";
 import { usePathname } from "next/navigation";
 import { time } from "../../../core/store/app";
+import NotificationModal from "@/components/NotificationModal/NotificationModal";
 
 // import "sia-reactor/styles/time-travel-console.css";
 
@@ -56,6 +57,7 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
         {!isAppPage && <Footer />}
 
         {/* <TimeTravelOverlay time={time} color="#3b82f6" /> */}
+        <NotificationModal />
       </div>
 
       <style jsx>{`

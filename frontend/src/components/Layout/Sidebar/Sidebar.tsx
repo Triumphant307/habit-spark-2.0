@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import styles from "./Sidebar.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";
-import { toggleSidebar, toggleMobileMenu } from "@/core/store/user";
+import { toggleSidebar, toggleMobileMenu, toggleNotificationModal } from "@/core/store/user";
 import {
   LuLayoutDashboard,
   LuListTodo,
@@ -129,30 +129,68 @@ const Sidebar: React.FC = () => {
         </nav>
 
         <div className={styles.Sidebar_Footer}>
-          {footerItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={styles.Nav_Item}
-              title={s.user.preferences.sidebarCollapsed ? item.label : ""}
-              onClick={closeMobileMenu}
-            >
-              <span className={styles.Nav_Icon}>{item.icon}</span>
-              <AnimatePresence mode="wait">
-                {showLabels && (
-                  <motion.span
-                    className={styles.Nav_Label}
-                    key={item.label}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    {item.label}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </Link>
-          ))}
+          {footerItems.map((item) => {
+            const isAction = item.href === "#";
+            
+            const content = (
+              <>
+                <span className={styles.Nav_Icon}>{item.icon}</span>
+                <AnimatePresence mode="wait">
+                  {showLabels && (
+                    <motion.span
+                      className={styles.Nav_Label}
+                      key={item.label}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      {item.label}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </>
+            );
+
+            const handleClick = (e: React.MouseEvent) => {
+              if (item.label === "Notifications") {
+                e.preventDefault();
+                toggleNotificationModal(true);
+              }
+              closeMobileMenu();
+            };
+
+            if (isAction) {
+              return (
+                <div
+                  key={item.label}
+                  role="button"
+                  tabIndex={0}
+                  className={styles.Nav_Item}
+                  title={s.user.preferences.sidebarCollapsed ? item.label : ""}
+                  onClick={handleClick}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      handleClick(e as any);
+                    }
+                  }}
+                >
+                  {content}
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={styles.Nav_Item}
+                title={s.user.preferences.sidebarCollapsed ? item.label : ""}
+                onClick={handleClick}
+              >
+                {content}
+              </Link>
+            );
+          })}
         </div>
       </aside>
     </>
