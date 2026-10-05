@@ -16,7 +16,7 @@ interface TrackerMenuProps {
 
 const TrackerMenu: React.FC<TrackerMenuProps> = ({ isOpen, onToggle, onClose, onEdit, onDelete }) => {
   const menuRef = useRef<HTMLDivElement | null>(null);
-  useOutsideClick(menuRef, { enabled: isOpen, onOutsideClick: onClose });
+  useOutsideClick(menuRef, { enabled: isOpen, onOutside: onClose });
   useArrowNavigation(menuRef, { enabled: isOpen, typeahead: true });
 
   return (
