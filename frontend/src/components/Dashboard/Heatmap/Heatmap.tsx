@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useMemo } from "react";
+// Note: `data` is intentionally not memoized — the reactive system re-renders
+// on state change, and memoizing on a proxy array reference misses deep mutations.
 import styles from "./Heatmap.module.css";
 import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";
@@ -10,7 +12,9 @@ import dayjs from "dayjs";
 
 const Heatmap: React.FC = () => {
   const s = useReactor(appStore);
-  const data = useMemo(() => getHeatmapData(s.habits), [s.habits]);
+  // Direct call — not memoized. The proxy array reference is stable even when
+  // nested history arrays mutate, so useMemo([s.habits]) would never recompute.
+  const data = getHeatmapData(s.habits);
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 

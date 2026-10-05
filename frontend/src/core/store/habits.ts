@@ -142,17 +142,18 @@ export const completeHabit = (id: string): boolean => {
   const today = dayjs().format("YYYY-MM-DD");
   if (appStore.habits[idx].history.includes(today)) return false;
 
-  // Optimistic update
+  // Optimistic update — immutable spread so the reference changes and
+  // any reactive subscriber depending on reference equality is notified.
   appStore.habits[idx].streak++;
-  appStore.habits[idx].history.push(today);
+  appStore.habits[idx].history = [...appStore.habits[idx].history, today];
 
   // Fire and forget
   completeHabitApi(id, today).catch((error) => {
     logger.error("Failed to complete habit", { error });
     toast.error("Failed to log completion.");
-    // Rollback
+    // Rollback to the original snapshot (safer than .pop())
     appStore.habits[idx].streak--;
-    appStore.habits[idx].history.pop();
+    appStore.habits[idx].history = originalHistory;
   });
 
   return true;
