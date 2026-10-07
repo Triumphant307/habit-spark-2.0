@@ -21,7 +21,6 @@
   /* THE FIX: Re-enabling overflow:hidden for mobile safety */
   overflow: hidden;
   box-shadow: var(--shadow-elevation-sm);
-  border-left: 4px solid var(--color-brand-primary);
   min-width: 0;
 }
 
@@ -39,7 +38,6 @@
 
 .TrackerCard_Container:hover {
   transform: translateX(4px);
-  border-left-color: var(--color-brand-indigo);
   box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
 }
 
@@ -61,7 +59,6 @@
 .TrackerCard_Container.isCompleted {
   opacity: 0.6;
   filter: grayscale(0.2);
-  border-left-color: var(--color-text-muted);
 }
 
 .TrackerCard_Container.isCompleted:hover {

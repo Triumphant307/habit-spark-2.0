@@ -40,6 +40,9 @@ export const loginAction = async (data: { email: string; password: string }): Pr
     appStore.auth.isAuthenticated = true;
     appStore.auth.isLoading = false;
 
+    // Set a dummy cookie for Next.js middleware since the actual refresh token is cross-domain
+    document.cookie = "isAuthenticated=true; path=/; max-age=604800";
+
     // Fetch user data
     await fetchHabitsAction();
 
@@ -73,6 +76,9 @@ export const signupAction = async (data: { fullName: string; email: string; pass
     appStore.auth.isAuthenticated = true;
     appStore.auth.isLoading = false;
 
+    // Set a dummy cookie for Next.js middleware since the actual refresh token is cross-domain
+    document.cookie = "isAuthenticated=true; path=/; max-age=604800";
+
     // Fetch user data
     await fetchHabitsAction();
 
@@ -102,6 +108,7 @@ export const logoutAction = async (): Promise<void> => {
     appStore.auth.isAuthenticated = false;
     appStore.auth.isLoading = false;
     appStore.habits = [];
+    document.cookie = "isAuthenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
 };
 
@@ -126,6 +133,7 @@ export const checkAuthAction = async (): Promise<void> => {
 
     appStore.auth.user = meResponse.user;
     appStore.auth.isAuthenticated = true;
+    document.cookie = "isAuthenticated=true; path=/; max-age=604800";
 
     // Fetch user data
     await fetchHabitsAction();
@@ -134,6 +142,7 @@ export const checkAuthAction = async (): Promise<void> => {
     setAccessToken(null);
     appStore.auth.user = null;
     appStore.auth.isAuthenticated = false;
+    document.cookie = "isAuthenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
   } finally {
     appStore.auth.isLoading = false;
   }

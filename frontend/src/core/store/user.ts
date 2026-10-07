@@ -11,12 +11,14 @@ export const completeOnboarding = async (data: OnboardingData): Promise<boolean>
   try {
     // 1. Save to backend
     await onboardingApi({
+      nickname: data.nickname,
       goal: data.goals[0] || "Other",
       commitment: data.frequency,
       firstHabit: {
         title: data.firstHabit,
         target: 30,
         icon: "✨",
+        category: "General",
       },
     });
 

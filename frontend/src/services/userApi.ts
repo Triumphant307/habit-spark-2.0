@@ -1,12 +1,14 @@
 import api from "./api";
 
 interface OnboardingPayload {
+  nickname: string;
   goal: string;
   commitment: string;
   firstHabit: {
     title: string;
     target: number;
     icon: string;
+    category: string;
   };
 }
 
