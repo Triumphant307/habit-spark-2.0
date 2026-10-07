@@ -44,28 +44,28 @@ describe('Suggestions API Integration Tests', () => {
         data: {
           title: 'Drink Water',
           description: 'Stay hydrated for energy',
-          category: 'Health',
+          category: 'Health', icon: '💧',
         },
       }),
       prisma.suggestion.create({
         data: {
           title: 'Morning Walk',
           description: 'Walk 10 mins daily',
-          category: 'Health',
+          category: 'Health', icon: '💧',
         },
       }),
       prisma.suggestion.create({
         data: {
           title: 'Read a Book',
           description: 'Read 5 pages before bed',
-          category: 'Productivity',
+          category: 'Productivity', icon: '📚',
         },
       }),
       prisma.suggestion.create({
         data: {
           title: 'Deep Breathing',
           description: 'Relax your mind',
-          category: 'Mindfulness',
+          category: 'Mindfulness', icon: '🧘‍♂️',
         },
       }),
     ]);
