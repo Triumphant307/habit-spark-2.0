@@ -10,7 +10,7 @@ import toast from "@/utils/toast";
 export const completeOnboarding = async (data: OnboardingData): Promise<boolean> => {
   try {
     // 1. Save to backend
-    await onboardingApi({
+    const result = await onboardingApi({
       nickname: data.nickname,
       goal: data.goals[0] || "Other",
       commitment: data.frequency,
@@ -28,7 +28,7 @@ export const completeOnboarding = async (data: OnboardingData): Promise<boolean>
     appStore.user.completedOnboarding = true;
 
     const newHabit = {
-      id: String(Date.now()),
+      id: result.firstHabit.id,
       title: data.firstHabit,
       slug: `${data.firstHabit.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`,
       icon: "✨",
