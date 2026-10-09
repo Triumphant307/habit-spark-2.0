@@ -68,6 +68,7 @@
   text-decoration: none;
   transition: all 0.2s ease;
   white-space: nowrap;
+  cursor: pointer;
   overflow: hidden;
 }
 
