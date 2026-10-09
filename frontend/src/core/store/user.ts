@@ -3,6 +3,7 @@ import { OnboardingData } from "@/types/onboarding";
 import logger from "@/utils/logger";
 import { onboardingApi } from "@/services/userApi";
 import toast from "@/utils/toast";
+import { fetchHabitsAction } from "./habits";
 
 /**
  * Updates the user's profile based on onboarding data
@@ -27,17 +28,8 @@ export const completeOnboarding = async (data: OnboardingData): Promise<boolean>
     appStore.user.goals = data.goals;
     appStore.user.completedOnboarding = true;
 
-    const newHabit = {
-      id: result.firstHabit.id,
-      title: data.firstHabit,
-      slug: `${data.firstHabit.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`,
-      icon: "✨",
-      streak: 0,
-      target: 30,
-      history: [],
-      startDate: new Date().toISOString().split("T")[0],
-    };
-    appStore.habits.push(newHabit);
+    // Fetch the real habits from the backend to ensure we have the exact DB IDs and slugs
+    await fetchHabitsAction();
 
     logger.info("Onboarding completed", { nickname: data.nickname });
     return true;
