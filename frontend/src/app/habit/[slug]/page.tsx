@@ -71,13 +71,6 @@ const HabitDetails = () => {
     logger.info("Marking habit done", { id: habit.id, title: habit.title });
     completeHabit(habit.id);
     toast.success(`${habit.title} ignited!`, { icon: habit.icon, tag: `${habit.id}Spark` });
-
-    confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.7 },
-      colors: ["#3B82F6", "#6366F1"],
-    });
   };
 
   const handleReset = () => {

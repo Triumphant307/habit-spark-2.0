@@ -9,7 +9,6 @@ import React, { useState, useRef } from "react";
 import { Habit } from "@/core/types/habit";
 import { completeHabit, updateHabit, deleteHabit, reorderByIds } from "@/core/store/habits";
 import { FaCheck, FaGripVertical } from "react-icons/fa";
-import { LuFlame } from "react-icons/lu";
 import dayjs from "dayjs";
 import toast from "@/utils/toast";
 import confetti from "canvas-confetti";
@@ -83,11 +82,16 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ visibleHabits, query = "" }) 
     const success = completeHabit(habit.id);
 
     if (success) {
-      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-      const x = (rect.left + rect.width / 2) / window.innerWidth;
-      const y = (rect.top + rect.height / 2) / window.innerHeight;
+      const newStreak = habit.streak + 1;
+      const isMilestone = [7, 30, 100].includes(newStreak) || newStreak === habit.target;
 
-      confetti({ origin: { x, y }, particleCount: 40, spread: 50, colors: ["#3B82F6", "#6366F1"] });
+      if (isMilestone) {
+        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+        const x = (rect.left + rect.width / 2) / window.innerWidth;
+        const y = (rect.top + rect.height / 2) / window.innerHeight;
+        
+        confetti({ origin: { x, y }, particleCount: 120, spread: 80, colors: ["#C89858", "#D7A96D", "#B58444"] });
+      }
 
       toast.success(`${habit.title} ignited!`, { icon: habit.icon, tag: `${habit.id}Spark` });
     }
@@ -129,13 +133,17 @@ const TrackerCard: React.FC<TrackerCardProps> = ({ visibleHabits, query = "" }) 
                   <div className={style.TrackerCard_Header}>
                     <TrackerTitle title={habit.title} query={query} />
                     <span className={style.TrackerCard_Streak}>
-                      <LuFlame
-                        size={12}
+                      <span
+                        role="img"
+                        aria-label="streak"
                         style={{
                           marginRight: "4px",
-                          color: isCompletedToday ? "var(--color-text-muted)" : "#f97316",
+                          fontSize: "0.85rem",
+                          lineHeight: 1,
                         }}
-                      />
+                      >
+                        🔥
+                      </span>
                       {habit.streak}
                     </span>
                   </div>
