@@ -14,10 +14,13 @@ import {
   LuChevronLeft,
   LuChevronRight,
   LuX,
+  LuLogOut,
 } from "react-icons/lu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+
+import { logoutAction } from "@/core/store/auth";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard", icon: <LuHouse /> },
@@ -28,6 +31,7 @@ const navItems = [
 const footerItems = [
   { label: "Notifications", href: "#", icon: <LuBell /> },
   { label: "Settings", href: "#", icon: <LuSettings /> },
+  { label: "Sign Out", href: "#", icon: <LuLogOut /> },
 ];
 
 const Sidebar: React.FC = () => {
@@ -155,6 +159,14 @@ const Sidebar: React.FC = () => {
               if (item.label === "Notifications") {
                 e.preventDefault();
                 toggleNotificationModal(true);
+              }
+              if (item.label === "Settings") {
+                e.preventDefault();
+                // toggleSettingsModal(true); // Soon
+              }
+              if (item.label === "Sign Out") {
+                e.preventDefault();
+                logoutAction();
               }
               closeMobileMenu();
             };
