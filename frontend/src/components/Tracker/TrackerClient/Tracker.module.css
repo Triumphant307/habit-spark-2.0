@@ -44,7 +44,7 @@
   padding: 8px 16px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-color-base);
-  border-radius: var(--shape-radius-full);
+  border-radius: var(--shape-radius-md);
   color: var(--color-text-secondary);
   font-size: var(--font-size-xs);
   font-weight: 600;

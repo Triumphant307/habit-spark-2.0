@@ -24,21 +24,9 @@
   min-width: 0;
 }
 
-/* Rim Light Effect */
-.TrackerCard_Container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15) 50%, transparent);
-  pointer-events: none;
-}
-
 .TrackerCard_Container:hover {
   transform: translateX(4px);
-  box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
+  box-shadow: var(--shadow-elevation-lg);
 }
 
 .TrackerCard_Container.isDragging {
@@ -167,10 +155,10 @@
 }
 
 .TrackerCard_CompleteButton.isCompleted {
-  background: var(--gradient-surface-primary);
+  background: var(--color-brand-primary);
   border-color: transparent;
   color: white;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  box-shadow: var(--shadow-interaction-primary);
 }
 
 .TrackerCard_Actions {

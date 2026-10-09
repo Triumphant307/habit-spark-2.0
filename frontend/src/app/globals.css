@@ -1,35 +1,37 @@
 :root {
-  /* Surface & Backgrounds */
-  --color-surface-page: #f5f7fa;
-  --color-surface-card: rgba(255, 255, 255, 0.8);
-  --color-surface-hover: #e0ebff;
-  --color-surface-pure-white: #ffffff;
-  --color-surface-pure-black: #000000;
-  --color-surface-overlay-light: rgba(0, 0, 0, 0.5);
-  --color-surface-overlay-dark: rgba(0, 0, 0, 0.6);
+  /* Surface & Backgrounds (Light Mode: Silk Cream) */
+  --color-surface-page: #FAF7F2;
+  --color-surface-card: #FFFFFF;
+  --color-surface-hover: #F2ECE0;
+  --color-surface-muted: #EAE3D4;
+  --color-surface-pure-white: #FFFFFF;
+  --color-surface-pure-black: #080606;
+  --color-surface-overlay-light: rgba(8, 6, 6, 0.4);
+  --color-surface-overlay-dark: rgba(8, 6, 6, 0.65);
 
   /* Typography */
-  --color-text-primary: #333333;
-  --color-text-secondary: #666666;
-  --color-text-muted: #999999;
+  --color-text-primary: #1E1B18;
+  --color-text-secondary: #5D564D;
+  --color-text-muted: #8E8578;
 
-  /* Brand Palette */
-  --color-brand-primary: #3b82f6;
-  --color-brand-indigo: #6366f1;
-  --color-brand-violet: #7c3aed;
+  /* Brand Palette (Saddle Gold) */
+  --color-brand-primary: #C89858;
+  --color-brand-primary-hover: #B58444;
+  --color-brand-indigo: #C89858;
+  --color-brand-violet: #B58444;
 
-  /* Status & Semantic */
-  --color-status-success: #10b981;
-  --color-status-warning: #f59e0b;
-  --color-status-error: #ef4444;
-  --color-status-error-hover: #dc2626;
-  --color-status-sun-icon: #facc15;
-  --color-status-warning-alt: #f1c40f;
+  /* Status & Semantic (Solid, high-contrast) */
+  --color-status-success: #2A6A45;
+  --color-status-warning: #C89858;
+  --color-status-error: #B93829;
+  --color-status-error-hover: #9E2D20;
+  --color-status-sun-icon: #C89858;
+  --color-status-warning-alt: #D4A366;
 
   /* Buttons */
   --color-button-primary-background: var(--color-brand-primary);
-  --color-button-primary-text: #ffffff;
-  --color-button-primary-hover: #1549f3d3;
+  --color-button-primary-text: #FFFFFF;
+  --color-button-primary-hover: var(--color-brand-primary-hover);
 
   /* Typography Scale */
   --font-size-xs: 0.75rem;
@@ -47,7 +49,7 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* Spacing Scale (based on 4px steps) */
+  /* Spacing Scale */
   --spacing-3xs: 0.125rem; /* 2px */
   --spacing-2xs: 0.25rem; /* 4px */
   --spacing-xs: 0.375rem; /* 6px */
@@ -62,55 +64,54 @@
   --spacing-6xl: 4rem; /* 64px */
   --spacing-7xl: 5rem; /* 80px */
 
-  /* Icon & Specific Brand Colors */
-  --color-icon-success: #22c55e;
-  --color-icon-error: #ef4444;
-  --color-icon-info: #3b82f6;
-  --color-icon-warning: #f59e0b;
-  --color-icon-sun: #facc15;
-  --color-icon-star: #f1c40f;
-  --color-icon-muted: #94a3b8;
+  /* Icon & Semantic Colors */
+  --color-icon-success: #2A6A45;
+  --color-icon-error: #B93829;
+  --color-icon-info: #C89858;
+  --color-icon-warning: #C89858;
+  --color-icon-sun: #C89858;
+  --color-icon-star: #C89858;
+  --color-icon-muted: #8E8578;
 
-  /* Specific Component Surface Colors */
-  --color-surface-muted: #e2e8f0;
-  --color-surface-success-intense: #059669;
+  /* Component Surface Colors */
+  --color-surface-success-intense: #2A6A45;
 
-  /* Gradients */
-  --gradient-surface-primary: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-indigo) 100%);
-  --gradient-surface-active: linear-gradient(135deg, #4f46e5 0%, var(--color-brand-violet) 100%);
-  --gradient-surface-error: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-  --gradient-surface-pwa: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-effect-shine: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  /* Zero Gradients: All mapped strictly to solid color tokens */
+  --gradient-surface-primary: var(--color-brand-primary);
+  --gradient-surface-active: var(--color-brand-primary-hover);
+  --gradient-surface-error: var(--color-status-error);
+  --gradient-surface-pwa: var(--color-brand-primary);
+  --gradient-effect-shine: transparent;
 
-  /* Elevation & Shadows */
-  --shadow-elevation-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-elevation-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-elevation-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-elevation-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* Elevation & Shadows (Natural Warm Tone, No Glow Bleed) */
+  --shadow-elevation-sm: 0 1px 3px 0 rgba(30, 27, 24, 0.05), 0 1px 2px 0 rgba(30, 27, 24, 0.03);
+  --shadow-elevation-md: 0 4px 6px -1px rgba(30, 27, 24, 0.06), 0 2px 4px -1px rgba(30, 27, 24, 0.04);
+  --shadow-elevation-lg: 0 10px 15px -3px rgba(30, 27, 24, 0.07), 0 4px 6px -2px rgba(30, 27, 24, 0.04);
+  --shadow-elevation-xl: 0 20px 25px -5px rgba(30, 27, 24, 0.08), 0 10px 10px -5px rgba(30, 27, 24, 0.03);
 
-  --shadow-interaction-primary: 0 4px 12px rgba(59, 130, 246, 0.3);
-  --shadow-interaction-hover: 0 8px 20px rgba(59, 130, 246, 0.4);
-  --shadow-interaction-error: 0 4px 12px rgba(231, 76, 60, 0.3);
-  --shadow-interaction-dialog: 0 20px 40px rgba(0, 0, 0, 0.3);
-  --shadow-interaction-pwa-modal: 0 20px 60px rgba(0, 0, 0, 0.3);
-  --shadow-interaction-pwa-button: 0 10px 30px rgba(102, 126, 234, 0.3);
-  --shadow-interaction-glow-violet: 0 0 0 3px rgba(124, 58, 237, 0.2);
-  --shadow-interaction-card-soft: 0 10px 20px rgba(0, 0, 0, 0.2);
-  --shadow-interaction-tiny: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-interaction-primary: 0 4px 12px rgba(200, 152, 88, 0.25);
+  --shadow-interaction-hover: 0 6px 16px rgba(200, 152, 88, 0.35);
+  --shadow-interaction-error: 0 4px 12px rgba(185, 56, 41, 0.25);
+  --shadow-interaction-dialog: 0 20px 40px rgba(8, 6, 6, 0.25);
+  --shadow-interaction-pwa-modal: 0 20px 50px rgba(8, 6, 6, 0.25);
+  --shadow-interaction-pwa-button: 0 8px 20px rgba(200, 152, 88, 0.25);
+  --shadow-interaction-glow-violet: 0 0 0 3px rgba(200, 152, 88, 0.2);
+  --shadow-interaction-card-soft: 0 4px 12px rgba(30, 27, 24, 0.05);
+  --shadow-interaction-tiny: 0 1px 3px rgba(30, 27, 24, 0.08);
 
   /* Borders & Shapes */
-  --border-color-base: #cccccc;
-  --border-glass-light: 1px solid rgba(255, 255, 255, 0.1);
+  --border-color-base: #E6DFD3;
+  --border-glass-light: 1px solid #E6DFD3;
   --shape-radius-sm: 6px;
   --shape-radius-md: 10px;
   --shape-radius-lg: 12px;
   --shape-radius-xl: 16px;
   --shape-radius-full: 50%;
 
-  /* Effects */
-  --effect-blur-md: blur(8px);
-  --effect-blur-glass: blur(16px) saturate(180%) brightness(1.2);
-  --color-glass-background: rgba(255, 255, 255, 0.25);
+  /* Effects: Solid surfaces without glassmorphism */
+  --effect-blur-md: none;
+  --effect-blur-glass: none;
+  --color-glass-background: var(--color-surface-card);
 
   /* Elevation, Stacking & Layers */
   --z-index-layer-negative: -1;
@@ -144,12 +145,8 @@
   --animation-transition-base: all 0.3s ease;
   --animation-transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Background Page Properties */
-  --gradient-background-page:
-    radial-gradient(at 0% 0%, hsla(210, 100%, 96%, 1) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(220, 100%, 96%, 1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, hsla(150, 100%, 96%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, hsla(200, 100%, 96%, 1) 0px, transparent 50%);
+  /* Solid Page Background (Zero Gradients) */
+  --gradient-background-page: none;
 
   /* Legacy Compatibility Aliases */
   --bg-page: var(--color-surface-page);
@@ -188,46 +185,58 @@
   --radius-lg: var(--shape-radius-lg);
   --radius-xl: var(--shape-radius-xl);
   --blur-background: var(--color-glass-background);
-  --bg-gradient: var(--gradient-background-page);
+  --bg-gradient: none;
 }
 
 html.dark body {
-  --color-surface-page: #0f172a;
-  --color-surface-card: rgba(30, 41, 59, 0.7);
-  --color-surface-hover: #334155;
-  --color-surface-muted: #1e293b;
+  /* Surfaces (Dark Mode: #080606 base) */
+  --color-surface-page: #080606;
+  --color-surface-card: #141110;
+  --color-surface-hover: #1E1A17;
+  --color-surface-muted: #181513;
   --color-surface-overlay-light: rgba(0, 0, 0, 0.7);
-  --color-surface-overlay-dark: rgba(0, 0, 0, 0.82);
+  --color-surface-overlay-dark: rgba(0, 0, 0, 0.85);
 
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
+  /* Typography */
+  --color-text-primary: #F7F4EE;
+  --color-text-secondary: #A89F93;
+  --color-text-muted: #6E665B;
 
-  --shadow-elevation-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
-  --shadow-elevation-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --shadow-elevation-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  /* Brand & Buttons in Dark Mode */
+  --color-brand-primary: #C89858;
+  --color-brand-primary-hover: #D7A96D;
+  --color-button-primary-background: #C89858;
+  --color-button-primary-text: #080606;
+  --color-button-primary-hover: #D7A96D;
 
-  --shadow-interaction-primary: 0 4px 12px rgba(0, 0, 0, 0.5);
-  --shadow-interaction-hover: 0 8px 20px rgba(0, 0, 0, 0.6);
-  --shadow-interaction-dialog: 0 20px 40px rgba(0, 0, 0, 0.6);
-  --shadow-interaction-pwa-modal: 0 20px 60px rgba(0, 0, 0, 0.6);
-  --shadow-interaction-pwa-button: 0 10px 30px rgba(0, 0, 0, 0.4);
-  --shadow-interaction-glow-violet: 0 0 0 3px rgba(124, 58, 237, 0.4);
-  --shadow-interaction-card-soft: 0 10px 20px rgba(0, 0, 0, 0.4);
-  --shadow-interaction-tiny: 0 2px 5px rgba(0, 0, 0, 0.3);
+  /* Status Colors in Dark Mode */
+  --color-status-success: #3E8E5B;
+  --color-status-warning: #C89858;
+  --color-status-error: #D94838;
+  --color-status-error-hover: #BF3627;
 
-  --border-color-base: #334155;
-  --border-glass-light: 1px solid rgba(255, 255, 255, 0.05);
+  /* Shadows in Dark Mode */
+  --shadow-elevation-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.6);
+  --shadow-elevation-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  --shadow-elevation-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
 
-  --color-glass-background: rgba(30, 41, 59, 0.45);
+  --shadow-interaction-primary: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-interaction-hover: 0 6px 16px rgba(0, 0, 0, 0.7);
+  --shadow-interaction-dialog: 0 20px 40px rgba(0, 0, 0, 0.8);
+  --shadow-interaction-pwa-modal: 0 20px 60px rgba(0, 0, 0, 0.8);
+  --shadow-interaction-pwa-button: 0 8px 24px rgba(200, 152, 88, 0.2);
+  --shadow-interaction-glow-violet: 0 0 0 3px rgba(200, 152, 88, 0.3);
+  --shadow-interaction-card-soft: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-interaction-tiny: 0 1px 3px rgba(0, 0, 0, 0.5);
 
-  --gradient-background-page:
-    radial-gradient(at 0% 0%, hsla(222, 47%, 11%, 1) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(240, 50%, 15%, 1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, hsla(260, 50%, 15%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, hsla(200, 50%, 10%, 1) 0px, transparent 50%);
+  /* Borders & Surfaces */
+  --border-color-base: #26211C;
+  --border-glass-light: 1px solid #26211C;
+  --color-glass-background: #141110;
 
+  /* Background Page (Solid) */
+  --gradient-background-page: none;
   background-color: var(--color-surface-page);
-  background-image: var(--gradient-background-page);
+  background-image: none;
   color: var(--color-text-primary);
 }

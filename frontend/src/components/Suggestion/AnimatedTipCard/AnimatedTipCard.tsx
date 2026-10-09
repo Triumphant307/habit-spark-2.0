@@ -148,7 +148,9 @@ const AnimatedTipCard: React.FC<AnimatedTipCardProps> = ({ tip, viewMode }) => {
         isLoading={isAdding}
         icon={isButtonDisabled ? <LuCheck /> : <LuPlus />}
       >
-        {isButtonDisabled ? "Added" : "Add Habit"}
+        <span className={styles.SuggestionCard_ButtonText}>
+          {isButtonDisabled ? "Added" : "Add Habit"}
+        </span>
       </Button>
     </motion.div>
   );

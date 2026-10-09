@@ -81,8 +81,8 @@
 
 /* Specific red button for confirmation */
 .Confirm_Button {
-  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%) !important;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+  background: var(--color-status-error) !important;
+  box-shadow: var(--shadow-interaction-error) !important;
 }
 
 .Confirm_Button:hover {

@@ -92,37 +92,44 @@
 
 .SuggestionCard_FilterContainer {
   display: flex;
-  gap: var(--spacing-md);
-  justify-content: center;
+  gap: var(--spacing-sm);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-xs);
   margin-bottom: var(--spacing-xl);
-  flex-wrap: wrap;
+  scrollbar-width: none;
+  max-width: 100%;
+  /* Removing width: 100% allows the container to shrink-wrap its children. 
+     The parent component's `align-items: center` will then automatically center the whole scrollable block! */
 }
 
-.SuggestionCard_FilterContainer button {
-  position: relative;
-  overflow: hidden;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: none;
+.SuggestionCard_FilterContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.SuggestionCard_FilterPill {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color-base);
   border-radius: var(--shape-radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
   cursor: pointer;
-  color: var(--color-button-primary-text);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-sm);
-  background: var(--gradient-surface-primary);
-  transition: var(--animation-transition-smooth);
-  box-shadow: var(--shadow-interaction-tiny);
-  opacity: 0.8;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
-.SuggestionCard_FilterContainer button:hover {
-  transform: translateY(-2px);
-  opacity: 1;
-  box-shadow: var(--shadow-interaction-hover);
+.SuggestionCard_FilterPill:hover {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: var(--color-brand-primary);
 }
 
 .SuggestionCard_Filter_Active {
-  background: var(--gradient-surface-active) !important;
-  box-shadow: var(--shadow-interaction-hover);
+  background: var(--color-brand-primary) !important;
+  border-color: var(--color-brand-primary) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
   opacity: 1 !important;
 }
 
@@ -203,22 +210,42 @@
   align-items: center;
   gap: var(--spacing-lg);
   text-align: left;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-md) var(--spacing-xl);
 }
 
 .SuggestionCard_ListView .SuggestionCard_Icon {
   margin-bottom: 0;
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-3xl);
+  order: 1;
+  flex-shrink: 0;
 }
 
 .SuggestionCard_ListView h3 {
   margin-bottom: 0;
   text-align: left;
+  flex: 1;
+  order: 2;
+  font-size: var(--font-size-lg);
+  min-width: 0;
+}
+
+.SuggestionCard_ListView .SuggestionCard_HeartButton {
+  align-self: center;
+  margin-left: auto;
+  order: 3;
+  flex-shrink: 0;
 }
 
 .SuggestionCard_ListView .SuggestionCard_ActionButton {
-  margin-left: auto;
+  margin-left: var(--spacing-sm);
   width: auto; /* Shrink to fit in list mode */
+  order: 4;
+  flex-shrink: 0;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.SuggestionCard_ButtonText {
+  display: inline;
 }
 
 .SuggestionCard_GridView {
@@ -234,66 +261,84 @@
   margin-top: var(--spacing-xl);
 }
 
-.SuggestionCard_ViewToggle button {
-  position: relative;
-  overflow: hidden;
-  background: var(--gradient-surface-primary);
-  color: var(--color-button-primary-text);
-  border: none;
-  border-radius: var(--shape-radius-md);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  font-size: var(--font-size-base);
-  cursor: pointer;
-  transition: var(--animation-transition-smooth);
-  box-shadow: var(--shadow-interaction-tiny);
-  opacity: 0.7;
-}
-
-.SuggestionCard_ViewToggle_Active {
-  background: var(--gradient-surface-active) !important;
-  box-shadow: var(--shadow-interaction-hover);
-  opacity: 1 !important;
-}
-
-.SuggestionCard_ViewToggle button:hover:not(.SuggestionCard_ViewToggle_Active) {
-  transform: translateY(-2px);
-  opacity: 0.9;
-  box-shadow: var(--shadow-interaction-hover);
-}
-
 @media (max-width: 768px) {
   .SuggestionCard_Grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: var(--spacing-lg);
   }
 
-  .SuggestionCard_ActionButton {
-    width: 100%;
-    padding: var(--spacing-md) var(--spacing-sm); /* Taller for better tap target */
-    font-size: var(--font-size-xs); /* Prevents wrapping on narrow phones */
+  .SuggestionCard_Grid_List {
+    grid-template-columns: 1fr !important;
+    gap: var(--spacing-md);
   }
 
+  .SuggestionCard_GridView .SuggestionCard_ActionButton {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+
+  /* LIST VIEW ON MOBILE: Stay horizontal as a true list */
   .SuggestionCard_ListView {
-    flex-direction: column !important;
-    align-items: center;
-    text-align: center;
-    padding: var(--spacing-lg);
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    text-align: left !important;
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .SuggestionCard_ListView .SuggestionCard_Icon {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    order: 1;
+    flex-shrink: 0;
   }
 
   .SuggestionCard_ListView h3 {
-    text-align: center;
-    font-size: var(--font-size-lg);
+    text-align: left !important;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 0;
+    order: 2;
+    word-break: break-word;
+  }
+
+  .SuggestionCard_ListView .SuggestionCard_HeartButton {
+    align-self: center;
+    margin-left: auto;
+    padding: 6px;
+    order: 3;
+    flex-shrink: 0;
+  }
+
+  /* Hide button text on mobile list view, leaving only the plus icon */
+  .SuggestionCard_ListView .SuggestionCard_ButtonText {
+    display: none !important;
   }
 
   .SuggestionCard_ListView .SuggestionCard_ActionButton {
-    width: 100%;
-    margin-left: 0;
-    margin-top: var(--spacing-sm);
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    padding: 0 !important;
+    border-radius: var(--shape-radius-md) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    order: 4;
+    flex-shrink: 0;
   }
 
-  .SuggestionCard_Icon {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--spacing-xs);
+  .SuggestionCard_ListView .SuggestionCard_ActionButton svg {
+    margin: 0 !important;
+    font-size: 1.15rem;
   }
 }
 
@@ -302,3 +347,4 @@
     grid-template-columns: 1fr; /* Single column on very small devices */
   }
 }
+

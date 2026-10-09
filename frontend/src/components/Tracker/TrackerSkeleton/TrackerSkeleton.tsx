@@ -4,7 +4,7 @@ export default function TrackerSkeleton() {
   return (
     <section className={styles.tracker}>
       <div className="tracker-page">
-        <h2 className={styles.title}>🎯 Your Habits</h2>
+        {/* <h2 className={styles.title}>🎯 Your Habits</h2> */}
       </div>
 
       {/* Search skeleton */}

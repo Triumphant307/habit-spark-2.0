@@ -59,7 +59,7 @@ const SuggestionCard: React.FC = () => {
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} resultRef={resultRef} />
       <div className={styles.SuggestionCard_ViewToggle}>
         <button
-          className={s.suggestions.viewMode === "grid" ? styles.SuggestionCard_ViewToggle_Active : ""}
+          className={`${styles.SuggestionCard_FilterPill} ${s.suggestions.viewMode === "grid" ? styles.SuggestionCard_Filter_Active : ""}`}
           onClick={() => (s.suggestions.viewMode = "grid")}
           aria-label="Grid View"
           title="Toggle grid"
@@ -67,7 +67,7 @@ const SuggestionCard: React.FC = () => {
           <FaThLarge />
         </button>
         <button
-          className={s.suggestions.viewMode === "list" ? styles.SuggestionCard_ViewToggle_Active : ""}
+          className={`${styles.SuggestionCard_FilterPill} ${s.suggestions.viewMode === "list" ? styles.SuggestionCard_Filter_Active : ""}`}
           onClick={() => (s.suggestions.viewMode = "list")}
           aria-label="List View"
           title="Toggle List"
@@ -83,7 +83,7 @@ const SuggestionCard: React.FC = () => {
             type="button"
             title={`Filter by ${category}`}
             onClick={() => (s.suggestions.filter = category)}
-            className={s.suggestions.filter === category ? styles.SuggestionCard_Filter_Active : ""}
+            className={`${styles.SuggestionCard_FilterPill} ${s.suggestions.filter === category ? styles.SuggestionCard_Filter_Active : ""}`}
             aria-pressed={s.suggestions.filter === category}
           >
             {category}
