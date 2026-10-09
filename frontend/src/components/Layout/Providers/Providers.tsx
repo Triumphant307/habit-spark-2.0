@@ -2,7 +2,6 @@
 
 import NextTopLoader from "nextjs-toploader";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import NotificationInitializer from "@/components/PWA/NotificationInitializer";
 import NotificationSettings from "@/components/PWA/NotificationSettings";
 import ServiceWorkerRegister from "@/components/PWA/ServiceWorkerRegister";
 import UpdatePrompt from "@/components/PWA/UpdatePrompt";
@@ -13,11 +12,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <>
       <SpeedInsights />
       <ServiceWorkerRegister />
-      <NotificationInitializer />
       <UpdatePrompt />
       <NotificationSettings />
       <NextTopLoader
-        color="#3b82f6"
+        color="#C89858"
         height={3}
         showSpinner={false}
         speed={500}
