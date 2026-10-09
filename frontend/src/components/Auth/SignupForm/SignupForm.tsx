@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import styles from "@/components/Auth/LoginForm/AuthForm.module.css";
+import styles from "./SignupForm.module.css";
 import { LuMail, LuLock, LuUser } from "react-icons/lu";
 import Input, { useFormManager } from "@/components/UI/Input";
 import AuthButton from ".././UI/AuthButton";
@@ -48,8 +48,8 @@ const SignupForm: React.FC = () => {
       </header>
 
       <div className={styles.Auth_FormGroup}>
-        <SocialAuth />
-        <AuthDivider />
+        {/* <SocialAuth /> */}
+        {/* <AuthDivider /> */}
 
         <Input
           label="Full Name"
@@ -92,7 +92,7 @@ const SignupForm: React.FC = () => {
           error={errors.confirmPassword?.message}
         />
 
-        <div className={styles.Auth_CheckboxWrapper}>
+        {/* <div className={styles.Auth_CheckboxWrapper}>
           <Input
             type="checkbox"
             label={
@@ -103,7 +103,7 @@ const SignupForm: React.FC = () => {
             {...register("terms")}
             error={errors.terms?.message}
           />
-        </div>
+        </div> */}
 
         <AuthButton type="submit" isLoading={isSubmitting}>
           Sign Up

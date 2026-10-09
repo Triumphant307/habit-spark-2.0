@@ -48,8 +48,8 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
           style={{
             width: "32px",
             height: "32px",
-            border: "3px solid rgba(59, 130, 246, 0.2)",
-            borderTopColor: "#3b82f6",
+            border: "3px solid rgba(200, 152, 88, 0.2)",
+            borderTopColor: "var(--color-brand-primary)",
             borderRadius: "50%",
             animation: "spin 0.8s linear infinite",
           }}

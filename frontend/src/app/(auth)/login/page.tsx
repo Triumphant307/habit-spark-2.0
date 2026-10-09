@@ -3,7 +3,7 @@ import AuthCard from "@/components/Auth/AuthCard";
 import LoginForm from "@/components/Auth/LoginForm";
 const LoginPage: React.FC = () => {
   return (
-    <div>
+    <div style={{ width: "100%", maxWidth: "100%", display: "flex", justifyContent: "center" }}>
       <AuthCard>
         <Suspense fallback={<div>Loading...</div>}>
           <LoginForm />

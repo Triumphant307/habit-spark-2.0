@@ -7,6 +7,8 @@
   background-image: var(--gradient-background-page);
   padding: var(--spacing-2xl) var(--spacing-lg);
   position: relative;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .Auth_Content {
@@ -55,13 +57,13 @@
 /* Glassmorphism Card Implementation */
 .Auth_Card {
   width: 400px;
+  max-width: 100%;
   background-color: var(--color-surface-card);
-  -webkit-backdrop-filter: var(--effect-blur-glass);
-  backdrop-filter: var(--effect-blur-glass);
-  border: var(--border-glass-light);
+  border: 1px solid var(--border-color-base);
   border-radius: var(--shape-radius-xl);
   padding: var(--spacing-xl) var(--spacing-3xl);
   box-shadow: var(--shadow-elevation-xl);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
@@ -109,7 +111,7 @@
 
 @media (max-width: 480px) {
   .Auth_Layout {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-sm);
   }
 
   .Auth_Logo_Text {
@@ -117,9 +119,9 @@
   }
 
   .Auth_Card {
-    padding: var(--spacing-4xl) var(--spacing-xl);
+    padding: var(--spacing-3xl) var(--spacing-md);
     border-radius: var(--shape-radius-lg);
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
   }
 }

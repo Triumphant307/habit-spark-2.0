@@ -41,15 +41,15 @@ const LoginForm: React.FC = () => {
   const { handleSubmit } = useFormManager((e) => rhfHandleSubmit(onSubmit)(e));
 
   return (
-    <form noValidate className={styles.Auth_Form} onSubmit={handleSubmit}>
+    <form noValidate className={styles.Auth_Form}  onSubmit={handleSubmit}>
       <header className={styles.Auth_FormHeader}>
         <h1 className={styles.Auth_FormTitle}>Welcome Back</h1>
         <p className={styles.Auth_FormSubtitle}>Please login to your account</p>
       </header>
 
       <div className={styles.Auth_FormGroup}>
-        <SocialAuth />
-        <AuthDivider />
+        {/* <SocialAuth /> */}
+        {/* <AuthDivider /> */}
 
         <Input
           label="Email Address"
@@ -69,9 +69,9 @@ const LoginForm: React.FC = () => {
           error={errors.password?.message}
         />
 
-        <a href="/forgot-password" className={styles.Auth_ForgotPassword}>
+        {/* <a href="/forgot-password" className={styles.Auth_ForgotPassword}>
           Forgot password?
-        </a>
+        </a> */}
 
         <AuthButton type="submit" isLoading={isSubmitting}>
           Login

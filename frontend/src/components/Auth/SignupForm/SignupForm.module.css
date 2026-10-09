@@ -4,20 +4,10 @@
   gap: var(--spacing-md);
   align-items: center;
   width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.Auth_Form :global(.t007-input-field) {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
 }
 
 .Auth_FormHeader {
   text-align: center;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .Auth_FormTitle {
@@ -38,8 +28,6 @@
   flex-direction: column;
   gap: var(--spacing-md);
   width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .Auth_FormFooter {
@@ -76,29 +64,14 @@
   text-decoration: underline;
 }
 
+.Auth_CheckboxWrapper {
+  width: 100%;
+}
+
 .Auth_CheckboxError {
   font-size: 0.75rem;
   color: #ef4444;
   margin-top: -0.5rem;
   margin-left: 2rem;
   font-weight: 500;
-}
-
-@media (max-width: 480px) {
-  .Auth_Form {
-    width: 100%;
-    max-width: 300px;
-    box-sizing: border-box;
-    padding: 0;
-    margin-top: var(--spacing-sm);
-    overflow: hidden;
-  }
-
-  .Auth_FormTitle {
-    font-size: 1.5rem;
-  }
-
-  .Auth_FormSubtitle {
-    font-size: var(--font-size-xs);
-  }
 }
