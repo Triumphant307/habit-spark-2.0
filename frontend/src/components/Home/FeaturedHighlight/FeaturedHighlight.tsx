@@ -4,6 +4,7 @@ import styles from "./FeaturedHighlight.module.css";
 import { useEffect } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css"; // Ensure AOS styles are imported
+import Image from "next/image";
 
 import { LuCheck, LuSparkles, LuTrendingUp } from "react-icons/lu";
 
@@ -27,15 +28,15 @@ const FeaturedHighlight = () => {
       href: "/suggestion",
       visualText: "🧠 AI Habit Insights",
     },
-    {
-      id: 3,
-      icon: <LuTrendingUp className={styles.FeatureIcon} style={{ color: "var(--color-status-success)" }} />,
-      title: "Visualize Your Success",
-      description:
-        "Transform raw data into beautiful, insightful graphs and statistics that motivate you to stay consistent.",
-      href: "/completed",
-      visualText: "🏆 Achievement Gallery",
-    },
+    // {
+    //   id: 3,
+    //   icon: <LuTrendingUp className={styles.FeatureIcon} style={{ color: "var(--color-status-success)" }} />,
+    //   title: "Visualize Your Success",
+    //   description:
+    //     "Transform raw data into beautiful, insightful graphs and statistics that motivate you to stay consistent.",
+    //   href: "/completed",
+    //   visualText: "🏆 Achievement Gallery",
+    // },
   ];
 
   useEffect(() => {
@@ -57,24 +58,60 @@ const FeaturedHighlight = () => {
           </div>
 
           <div
-            className={styles.VisualContent}
+            className={`${styles.VisualContent} ${
+              feature.id === 1 ? styles.HeatmapVisual : feature.id === 2 ? styles.SuggestionsVisual : ""
+            }`}
             data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}
             data-aos-delay="200"
           >
-            {/* 
-              This is a placeholder for actual screenshots or Lottie animations. 
-              The glass container styling currently handles the professional look. 
-            */}
-            <span
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: 600,
-                opacity: 0.5,
-                color: "var(--text-secondary)",
-              }}
-            >
-              {feature.visualText}
-            </span>
+            {feature.id === 1 ? (
+              <div className={styles.HeatmapWrapper}>
+                <Image
+                  src="/images/heatmap-light.png"
+                  alt="Consistency Heatmap - Light Mode"
+                  width={1024}
+                  height={179}
+                  className={`${styles.HeatmapImage} ${styles.HeatmapImageLight}`}
+                  priority
+                />
+                <Image
+                  src="/images/heatmap-dark.png"
+                  alt="Consistency Heatmap - Dark Mode"
+                  width={1024}
+                  height={172}
+                  className={`${styles.HeatmapImage} ${styles.HeatmapImageDark}`}
+                  priority
+                />
+              </div>
+            ) : feature.id === 2 ? (
+              <div className={styles.SuggestionsWrapper}>
+                <Image
+                  src="/images/suggestions-light.png"
+                  alt="Personalized Habit Suggestions - Light Mode"
+                  width={1024}
+                  height={454}
+                  className={`${styles.SuggestionsImage} ${styles.SuggestionsImageLight}`}
+                />
+                <Image
+                  src="/images/suggestions-dark.png"
+                  alt="Personalized Habit Suggestions - Dark Mode"
+                  width={1024}
+                  height={464}
+                  className={`${styles.SuggestionsImage} ${styles.SuggestionsImageDark}`}
+                />
+              </div>
+            ) : (
+              <span
+                style={{
+                  fontSize: "1.5rem",
+                  fontWeight: 600,
+                  opacity: 0.5,
+                  color: "var(--text-secondary)",
+                }}
+              >
+                {feature.visualText}
+              </span>
+            )}
           </div>
         </div>
       ))}

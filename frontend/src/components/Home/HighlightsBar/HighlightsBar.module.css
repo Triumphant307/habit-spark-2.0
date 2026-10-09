@@ -1,7 +1,7 @@
 .HighlightsContainer {
   width: 100%;
   max-width: 1000px;
-  margin: -2.8rem auto 4rem auto;
+  margin: 1.5rem auto 4rem auto;
   padding: 0 1.5rem;
   position: relative;
   z-index: 10;
@@ -16,6 +16,7 @@
   backdrop-filter: var(--effect-blur-glass);
   border: var(--border-glass-light);
   border-radius: 100px;
+  border: none;
   box-shadow: var(--shadow-elevation-lg);
   overflow: hidden;
   position: relative;
@@ -75,12 +76,19 @@
 
 @media (max-width: 768px) {
   .HighlightsContainer {
-    margin: -2rem auto 3rem auto;
+    margin: 2rem auto 3.5rem auto;
     max-width: 95%;
   }
 
   .CarouselTrack,
   .HighlightItemWrapper {
     gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .HighlightsContainer {
+    margin: 2.25rem auto 3.5rem auto;
+    padding: 0 1rem;
   }
 }

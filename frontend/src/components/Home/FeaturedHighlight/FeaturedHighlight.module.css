@@ -34,15 +34,110 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--color-glass-background);
-  -webkit-backdrop-filter: var(--effect-blur-glass);
-  backdrop-filter: var(--effect-blur-glass);
-  border: var(--border-glass-light);
-  border-radius: var(--radius-xl);
-  min-height: 400px;
-  box-shadow: var(--shadow-elevation-lg);
+  background: var(--color-surface-card);
+  border: 1px solid var(--border-color-base);
+  border-radius: var(--shape-radius-xl);
+  min-height: 320px;
+  box-shadow: var(--shadow-elevation-md);
   position: relative;
   overflow: hidden;
+  padding: var(--spacing-xl);
+}
+
+.HeatmapVisual {
+  min-height: auto;
+  padding: var(--spacing-md);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.HeatmapWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HeatmapImage {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: var(--shape-radius-xl);
+  border: 1px solid var(--border-color-base);
+  box-shadow: var(--shadow-elevation-lg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.HeatmapImage:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevation-xl);
+}
+
+.HeatmapImageLight {
+  display: block;
+}
+
+.HeatmapImageDark {
+  display: none;
+}
+
+:global(html.dark) .HeatmapImageLight {
+  display: none;
+}
+
+:global(html.dark) .HeatmapImageDark {
+  display: block;
+}
+
+.SuggestionsVisual {
+  min-height: auto;
+  padding: var(--spacing-md);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.SuggestionsWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SuggestionsImage {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: var(--shape-radius-xl);
+  border: 1px solid var(--border-color-base);
+  box-shadow: var(--shadow-elevation-lg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.SuggestionsImage:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevation-xl);
+}
+
+.SuggestionsImageLight {
+  display: block;
+}
+
+.SuggestionsImageDark {
+  display: none;
+}
+
+:global(html.dark) .SuggestionsImageLight {
+  display: none;
+}
+
+:global(html.dark) .SuggestionsImageDark {
+  display: block;
 }
 
 /* Feature styling */
@@ -94,6 +189,12 @@
   .VisualContent {
     width: 100%;
     min-height: 300px;
+  }
+
+  .VisualContent.HeatmapVisual,
+  .VisualContent.SuggestionsVisual {
+    min-height: auto;
+    padding: 0;
   }
 
   .FeaturedHighlight_FeatureTitle {
