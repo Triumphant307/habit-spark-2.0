@@ -45,7 +45,61 @@
 .Header_Right {
   display: flex;
   align-items: center;
+  gap: var(--spacing-md);
   justify-self: end;
+}
+
+.Header_AuthButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.Header_SignInLink {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--shape-radius-sm);
+  transition: var(--animation-transition-fast);
+  white-space: nowrap;
+}
+
+.Header_SignInLink:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-hover);
+}
+
+.Header_SignUpBtn {
+  background-color: var(--color-brand-primary);
+  color: var(--color-button-primary-text);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-xs) var(--spacing-lg);
+  border-radius: var(--shape-radius-sm);
+  border: 1px solid var(--color-brand-primary);
+  transition: var(--animation-transition-fast);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Header_SignUpBtn:hover {
+  background-color: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-elevation-sm);
+}
+
+.Header_SignUpBtn:active {
+  transform: translateY(0);
+}
+
+.Header_MobileAuth {
+  display: none;
 }
 
 .Header_NavList {
@@ -203,5 +257,43 @@
 
   .Header_Hamburger {
     display: flex;
+  }
+
+  .Header_Right {
+    gap: var(--spacing-xs);
+  }
+
+  .Header_Right .Header_SignInLink {
+    display: none;
+  }
+
+  .Header_Right .Header_SignUpBtn {
+    padding: var(--spacing-2xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+
+  .Header_MobileAuth {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    width: 100%;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color-base);
+    list-style: none;
+  }
+
+  .Header_MobileAuth .Header_SignInLink {
+    text-align: center;
+    border: 1px solid var(--border-color-base);
+    padding: var(--spacing-sm);
+    display: block;
+  }
+
+  .Header_MobileAuth .Header_SignUpBtn {
+    text-align: center;
+    padding: var(--spacing-sm);
+    display: flex;
+    justify-content: center;
   }
 }

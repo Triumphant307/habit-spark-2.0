@@ -28,12 +28,18 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
     // Only run the auth check once on initial mount
     if (!hasChecked.current) {
       hasChecked.current = true;
+      const hasAuthCookie = typeof document !== "undefined" && document.cookie.includes("isAuthenticated=true");
+      if (!hasAuthCookie) {
+        appStore.auth.isLoading = false;
+        return;
+      }
       checkAuthAction();
     }
   }, []);
 
-  // Show a minimal loading state while verifying the session
-  if (s.auth.isLoading) {
+  // Show a minimal loading state only while actively verifying an existing session
+  const hasAuthCookie = typeof document !== "undefined" && document.cookie.includes("isAuthenticated=true");
+  if (s.auth.isLoading && hasAuthCookie) {
     return (
       <div
         style={{

@@ -5,20 +5,12 @@ import ThemeToggle from "@/Theme/ThemeToggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
+import { useReactor } from "sia-reactor/adapters/react";
+import { appStore } from "@/core/store/app";
 
 const Header: React.FC = () => {
+  const s = useReactor(appStore);
   const pathname = usePathname();
-
-  // Hide header on Auth and Onboarding pages
-  if (
-    pathname === "/login" ||
-    pathname === "/signup" ||
-    pathname === "/onboarding" ||
-    pathname === "/dashboard" ||
-    pathname === "/tracker" ||
-    pathname === "/suggestion"
-  )
-    return null;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -112,6 +104,16 @@ const Header: React.FC = () => {
     { label: "Milestones", href: "/#achievements", id: "achievements" },
   ];
 
+  const hiddenRoutes = [
+    "/login",
+    "/signup",
+    "/onboarding",
+    "/dashboard",
+    "/tracker",
+    "/suggestion",
+  ];
+  if (hiddenRoutes.includes(pathname)) return null;
+
   return (
     <header className={`${Style.Header_Container} ${isScrolled ? Style.Header_ContainerScrolled : ""}`}>
       <div className={Style.Header_Left}>
@@ -149,10 +151,42 @@ const Header: React.FC = () => {
               </li>
             );
           })}
+          <li className={Style.Header_MobileAuth}>
+            {s.auth.isAuthenticated ? (
+              <Link href="/dashboard" className={Style.Header_SignUpBtn} onClick={() => setIsMenuOpen(false)}>
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link href="/login" className={Style.Header_SignInLink} onClick={() => setIsMenuOpen(false)}>
+                  Sign In
+                </Link>
+                <Link href="/signup" className={Style.Header_SignUpBtn} onClick={() => setIsMenuOpen(false)}>
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </li>
         </ul>
       </nav>
 
       <div className={Style.Header_Right}>
+        <div className={Style.Header_AuthButtons}>
+          {s.auth.isAuthenticated ? (
+            <Link href="/dashboard" className={Style.Header_SignUpBtn}>
+              Dashboard
+            </Link>
+          ) : (
+            <>
+              <Link href="/login" className={Style.Header_SignInLink}>
+                Sign In
+              </Link>
+              <Link href="/signup" className={Style.Header_SignUpBtn}>
+                Sign Up
+              </Link>
+            </>
+          )}
+        </div>
         <ThemeToggle />
       </div>
     </header>

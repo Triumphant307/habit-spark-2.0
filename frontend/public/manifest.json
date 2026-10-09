@@ -4,7 +4,7 @@
   "short_name": "HabitSpark",
   "description": "Build better habits with daily tracking, personalized suggestions, and progress insights. Your journey to self-improvement starts here.",
   "version": "2.0.0",
-  "start_url": "/tracker?utm_source=pwa&utm_medium=homescreen",
+  "start_url": "/dashboard?utm_source=pwa&utm_medium=homescreen",
   "scope": "/",
   "id": "/",
   "display": "standalone",

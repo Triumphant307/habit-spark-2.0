@@ -51,7 +51,7 @@ const LayoutClient: React.FC<LayoutClientProps> = ({ children }) => {
             paddingBottom: isAppPage ? "100px" : "0px",
           }}
         >
-          {children}
+          <AuthGuard>{children}</AuthGuard>
         </main>
 
         {!isAppPage && <Footer />}
