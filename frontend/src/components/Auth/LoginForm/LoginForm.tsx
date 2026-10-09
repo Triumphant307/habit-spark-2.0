@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
   const { handleSubmit } = useFormManager((e) => rhfHandleSubmit(onSubmit)(e));
 
   return (
-    <form noValidate className={styles.Auth_Form}  onSubmit={handleSubmit}>
+    <form noValidate className={styles.Auth_Form} onSubmit={handleSubmit}>
       <header className={styles.Auth_FormHeader}>
         <h1 className={styles.Auth_FormTitle}>Welcome Back</h1>
         <p className={styles.Auth_FormSubtitle}>Please login to your account</p>
