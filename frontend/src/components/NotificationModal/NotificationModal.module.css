@@ -16,7 +16,7 @@
 .Modal_Content {
   background: var(--surface);
   border: 1px solid var(--border);
-   backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   border-radius: 16px;
   width: 100%;
   max-width: 400px;

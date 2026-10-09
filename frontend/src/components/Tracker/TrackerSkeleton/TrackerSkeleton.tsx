@@ -3,9 +3,7 @@ import styles from "@/components/Tracker/TrackerClient/Tracker.module.css";
 export default function TrackerSkeleton() {
   return (
     <section className={styles.tracker}>
-      <div className="tracker-page">
-        {/* <h2 className={styles.title}>🎯 Your Habits</h2> */}
-      </div>
+      <div className="tracker-page">{/* <h2 className={styles.title}>🎯 Your Habits</h2> */}</div>
 
       {/* Search skeleton */}
       <div className={styles.searchSkeleton}>

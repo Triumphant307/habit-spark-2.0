@@ -13,5 +13,6 @@ interface OnboardingPayload {
 }
 
 export const onboardingApi = async (data: OnboardingPayload): Promise<any> => {
-  const response = await api.post("/user/onboarding", data); return response.data;
+  const response = await api.post("/user/onboarding", data);
+  return response.data;
 };

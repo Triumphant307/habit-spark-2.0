@@ -45,7 +45,7 @@ const defaultStore: AppStore = {
       date: new Date().toISOString(),
       isRead: false,
       type: "info",
-    }
+    },
   ],
 };
 

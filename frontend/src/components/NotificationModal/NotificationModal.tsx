@@ -70,28 +70,20 @@ const NotificationModal: React.FC = () => {
                 notifications.map((notification) => (
                   <div
                     key={notification.id}
-                    className={`${styles.Notification_Item} ${
-                      !notification.isRead ? styles.Unread : ""
-                    }`}
+                    className={`${styles.Notification_Item} ${!notification.isRead ? styles.Unread : ""}`}
                     onClick={() => {
                       if (!notification.isRead) {
                         markNotificationAsRead(notification.id);
                       }
                     }}
                   >
-                    <div className={styles.Notification_Icon}>
-                      {getIconForType(notification.type)}
-                    </div>
+                    <div className={styles.Notification_Icon}>{getIconForType(notification.type)}</div>
                     <div className={styles.Notification_Body}>
                       <h4>{notification.title}</h4>
                       <p>{notification.message}</p>
-                      <span className={styles.Time}>
-                        {dayjs(notification.date).fromNow()}
-                      </span>
+                      <span className={styles.Time}>{dayjs(notification.date).fromNow()}</span>
                     </div>
-                    {!notification.isRead && (
-                      <div className={styles.Unread_Dot} />
-                    )}
+                    {!notification.isRead && <div className={styles.Unread_Dot} />}
                   </div>
                 ))
               )}

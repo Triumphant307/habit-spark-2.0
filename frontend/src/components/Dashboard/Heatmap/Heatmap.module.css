@@ -135,11 +135,11 @@
 }
 
 :global(html.dark) .Level_0 {
-  background: #1A1614;
+  background: #1a1614;
 }
 
 .Level_1 {
-  background: #F3E6D0;
+  background: #f3e6d0;
 }
 
 :global(html.dark) .Level_1 {
@@ -147,15 +147,15 @@
 }
 
 .Level_2 {
-  background: #E4C79B;
+  background: #e4c79b;
 }
 
 :global(html.dark) .Level_2 {
-  background: #5E4221;
+  background: #5e4221;
 }
 
 .Level_3 {
-  background: #D5A967;
+  background: #d5a967;
 }
 
 :global(html.dark) .Level_3 {

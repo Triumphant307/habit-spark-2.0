@@ -18,13 +18,11 @@ const Hero: React.FC = () => {
   return (
     <>
       <motion.div className={styles.Hero_section} variants={containerVariants} initial="hidden" animate="visible">
-      
-
         <motion.h1 className={styles.Home_Title} variants={itemVariants}>
           Build Better Habits, <br className={styles.DesktopBreak} /> Live Better Life
         </motion.h1>
         <motion.p className={styles.Home_Description} variants={itemVariants}>
-         HabitSpark is a simple tracker that makes your consistency visible at a glance.
+          HabitSpark is a simple tracker that makes your consistency visible at a glance.
         </motion.p>
         <motion.div className={styles.Home_CTA} variants={itemVariants}>
           <Link href="/signup" className={styles.home__button_link}>

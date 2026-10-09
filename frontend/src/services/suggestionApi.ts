@@ -27,18 +27,24 @@ export const fetchSuggestionsApi = async (params: FetchSuggestionsParams): Promi
   }
   if (params.q) filteredParams.q = params.q;
 
-  const response = await api.get<{ suggestions?: Tip[]; tips?: Tip[]; total?: number; hasMore?: boolean; data?: Tip[]; meta?: { total: number; page: number; totalPages: number } }>(
-    "/suggestions",
-    {
-      params: filteredParams,
-    },
-  );
+  const response = await api.get<{
+    suggestions?: Tip[];
+    tips?: Tip[];
+    total?: number;
+    hasMore?: boolean;
+    data?: Tip[];
+    meta?: { total: number; page: number; totalPages: number };
+  }>("/suggestions", {
+    params: filteredParams,
+  });
 
   // Handle potential backend structure variations
   return {
     tips: response.data.data || response.data.suggestions || response.data.tips || [],
     total: response.data.meta?.total || response.data.total || 0,
-    hasMore: response.data.meta ? response.data.meta.page < response.data.meta.totalPages : (response.data.hasMore ?? false),
+    hasMore: response.data.meta
+      ? response.data.meta.page < response.data.meta.totalPages
+      : (response.data.hasMore ?? false),
   };
 };
 

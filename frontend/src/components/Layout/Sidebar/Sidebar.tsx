@@ -131,7 +131,7 @@ const Sidebar: React.FC = () => {
         <div className={styles.Sidebar_Footer}>
           {footerItems.map((item) => {
             const isAction = item.href === "#";
-            
+
             const content = (
               <>
                 <span className={styles.Nav_Icon}>{item.icon}</span>
