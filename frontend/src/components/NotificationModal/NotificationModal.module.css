@@ -102,7 +102,7 @@
 }
 
 .Icon_Info {
-  color: #3b82f6;
+  color: var(--color-brand-primary);
 }
 
 .Icon_Success {

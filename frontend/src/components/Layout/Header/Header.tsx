@@ -110,7 +110,6 @@ const Header: React.FC = () => {
     { label: "Overview", href: "/", id: "hero" },
     { label: "Features", href: "/#features", id: "features" },
     { label: "Milestones", href: "/#achievements", id: "achievements" },
-    { label: "Tracker", href: "/tracker" },
   ];
 
   return (

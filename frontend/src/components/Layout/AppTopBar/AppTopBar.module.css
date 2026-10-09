@@ -25,8 +25,8 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-color-base), transparent);
-  opacity: 0.15;
+  background: var(--border-color-base);
+  opacity: 0.8;
 }
 
 .TopBar_Left,

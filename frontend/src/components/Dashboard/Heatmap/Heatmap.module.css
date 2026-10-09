@@ -36,8 +36,8 @@
 }
 
 .LegendCell {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   border-radius: 2px;
 }
 
@@ -50,7 +50,7 @@
 
 .DayLabels {
   display: grid;
-  grid-template-rows: repeat(7, 10px); /* Match cell height */
+  grid-template-rows: repeat(7, 14px); /* Match cell height */
   gap: 2px; /* Match grid gap */
   padding-top: 1.25rem; /* Match Month Label height */
 }
@@ -82,7 +82,7 @@
 
 .MonthLabels {
   display: grid;
-  grid-template-columns: repeat(52, 10px);
+  grid-template-columns: repeat(52, 14px);
   gap: 2px;
   height: 1.25rem;
 }
@@ -99,8 +99,8 @@
 
 .Grid {
   display: grid;
-  grid-template-columns: repeat(52, 10px);
-  grid-template-rows: repeat(7, 10px);
+  grid-template-columns: repeat(52, 14px);
+  grid-template-rows: repeat(7, 14px);
   grid-auto-flow: column;
   gap: 2px;
   width: fit-content;
@@ -135,41 +135,39 @@
 }
 
 :global(html.dark) .Level_0 {
-  background: rgba(255, 255, 255, 0.05);
+  background: #1A1614;
 }
 
 .Level_1 {
-  background: #dbeafe; /* Default Light (Sky blue) */
+  background: #F3E6D0;
 }
 
 :global(html.dark) .Level_1 {
-  background: rgba(59, 130, 246, 0.2);
+  background: #332414;
 }
 
 .Level_2 {
-  background: #93c5fd; /* Default Light */
+  background: #E4C79B;
 }
 
 :global(html.dark) .Level_2 {
-  background: rgba(59, 130, 246, 0.5);
+  background: #5E4221;
 }
 
 .Level_3 {
-  background: #3b82f6; /* Default Light */
+  background: #D5A967;
 }
 
 :global(html.dark) .Level_3 {
-  background: rgba(59, 130, 246, 0.8);
+  background: #936934;
 }
 
 .Level_4 {
-  background: var(--color-brand-indigo);
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4); /* Default Light */
+  background: var(--color-brand-primary);
 }
 
 :global(html.dark) .Level_4 {
-  background: var(--color-brand-indigo);
-  box-shadow: 0 0 8px var(--color-brand-primary);
+  background: var(--color-brand-primary);
 }
 
 .Tooltip {

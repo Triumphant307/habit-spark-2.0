@@ -35,8 +35,7 @@ const StatsOverview: React.FC = () => {
     <motion.div className={styles.Stats_Grid} initial="hidden" animate="visible" variants={itemVariants}>
       <div className={styles.Stat_Card}>
         <div className={styles.Stat_Header}>
-          <span className={styles.Stat_Label}>Best Streak</span>
-          <LuFlame className={styles.Stat_Icon} />
+          <span className={styles.Stat_Label}>Best Streak</span>🔥
         </div>
         <span className={styles.Stat_Value}>{bestStreak} days</span>
         <span className={styles.Stat_Subtext}>Keep the momentum!</span>

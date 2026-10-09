@@ -6,7 +6,7 @@ import { useReactor } from "sia-reactor/adapters/react";
 import { appStore } from "@/core/store/app";
 import { toggleSidebar, toggleMobileMenu, toggleNotificationModal } from "@/core/store/user";
 import {
-  LuLayoutDashboard,
+  LuHouse,
   LuListTodo,
   LuSparkles,
   LuSettings,
@@ -20,7 +20,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
-  { label: "Dashboard", href: "/dashboard", icon: <LuLayoutDashboard /> },
+  { label: "Dashboard", href: "/dashboard", icon: <LuHouse /> },
   { label: "Full Tracker", href: "/tracker", icon: <LuListTodo /> },
   { label: "Suggestions", href: "/suggestion", icon: <LuSparkles /> },
 ];
